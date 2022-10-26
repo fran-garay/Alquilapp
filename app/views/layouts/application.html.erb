@@ -11,6 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container>
+       <div class="col-sm-3">
+          <%= render "application/left_sidebar" %>
+        </div>
+        <div class="col-sm-5 border border-top-0">
+          <%= yield %>
+        </div>
+    </div>
   </body>
 </html>
