@@ -1,25 +1,21 @@
-frozen_string_literal: true
+# frozen_string_literal: true
 
-class User::SessionsController < Devise::SessionsController
-  before_action :configure_sign_in_params, only: [:create]
+class Supervisors::SessionsController < Devise::SessionsController
+  # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   def new
-    puts("hola")
     super
   end
 
   # POST /resource/sign_in
   def create
-    puts("hola")
     super
   end
 
   # DELETE /resource/sign_out
   def destroy
     super
-    puts("HOLA")
-    redirect root
   end
 
   protected
@@ -28,4 +24,12 @@ class User::SessionsController < Devise::SessionsController
   def configure_sign_in_params
     devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   end
+
+  # def after_update_path_for(resource)
+  #   :supervisors_root
+  # end
+
+  # def after_destroy_path_for(resource)
+  #   render :supervisors_root
+  # end
 end
