@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   # post "/sign_out", to: "user#signout"
   as :admin do
-    get 'admins', :to => 'admins#index', :as => :admin_root # Rails 3
+    get 'admins', :to => 'admins#index', :as => :admins_root # Rails 3
   end
   as :supervisor do
     get 'supervisors', :to => 'supervisors#index', :as => :supervisors_root # Rails 3

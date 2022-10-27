@@ -29,6 +29,10 @@ class Supervisors::SessionsController < Devise::SessionsController
   #   :supervisors_root
   # end
 
+  def after_sign_out_path_for(resource)
+    :supervisors_root
+  end
+
   # def after_destroy_path_for(resource)
   #   render :supervisors_root
   # end

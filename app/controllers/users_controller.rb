@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   # end
   before_action :authenticate_user!
   def index
+    @user = current_user
     puts("ENTRO ACA")
   end
 end

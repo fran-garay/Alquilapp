@@ -1,6 +1,7 @@
 <div class="container">
-    <h1>Main usuarios<h1>
-    <h5>Bienvenido Usuario<h5>
+    <h1>Main usuarios</h1>
+    <h5>Bienvenido Usuario</h5>
+    <p>Mi email es: <%= @user.email %> </p>
     <%= button_to "Logout", destroy_user_session_path, method: :delete, class:"btn btn-info p-1"  %>
 </div>
 
