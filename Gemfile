@@ -5,8 +5,10 @@ ruby "3.1.2"
 
 # Nuestras Gemas
 gem "tzinfo-data"
-gem "bootstrap-sass"
+gem 'bootstrap', '~> 5.2.2'
 gem "pg"
+gem "devise"
+gem 'yarn'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3", ">= 7.0.3.1"
