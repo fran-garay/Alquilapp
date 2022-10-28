@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   as :supervisor do
     get 'supervisors', :to => 'supervisors#index', :as => :supervisors_root # Rails 3
   end
-  get 'supervisors/listar_usuarios', :to => 'supervisors#listar_usuarios'
+  get '/supervisors/listar_usuarios', :to => 'supervisors#listar_usuarios'
   root "users#index"
 end
