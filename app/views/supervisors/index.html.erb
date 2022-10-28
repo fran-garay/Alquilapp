@@ -1,6 +1,9 @@
 <div class="container">
-    <h1>Main sueprvisores</h1>
-    <h5>Bienvenido Supervisor</h5>
-    <%= button_to "Logout", destroy_supervisor_session_path, method: :delete, class:"btn btn-info p-1"  %>
+  <h1>Main sueprvisores</h1>
+  <h5>Bienvenido Supervisor</h5>
+  <div class="container d-flex justify-content-center">
+    <%= button_to "Logout", destroy_supervisor_session_path, method: :delete, class:"btn btn-info p-1 m-2"  %>
+    <%= button_to "Listar Usuarios", supervisors_listar_usuarios_path, method: :get, class:"btn btn-info p-1 m-2"  %>
+  </div>
 </div>
 
