@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'autos/listadoDeAutos'
   devise_for :supervisors, controllers: {
     sessions: 'supervisors/sessions'
   }
