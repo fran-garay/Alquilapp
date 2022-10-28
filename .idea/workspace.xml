@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45a8500a-e81d-41bc-a37c-9e8a0ac5a215" name="Changes" comment="Listo usuarios">
+    <list default="true" id="45a8500a-e81d-41bc-a37c-9e8a0ac5a215" name="Changes" comment="Listo usuarios y agrego botón al index de supervisores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/supervisors_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/supervisors_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/supervisors/_user.html.erb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/supervisors/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisors/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +177,7 @@
       <updated>1666806852545</updated>
       <workItem from="1666806853975" duration="3909000" />
       <workItem from="1666913153184" duration="1357000" />
-      <workItem from="1666922730005" duration="6038000" />
+      <workItem from="1666922730005" duration="7473000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1666810387545</created>
@@ -204,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666927981566</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Listo usuarios y agrego botón al index de supervisores">
+      <created>1666928904117</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666928904117</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +227,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="-" />
     <MESSAGE value="Listo usuarios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Listo usuarios" />
+    <MESSAGE value="Listo usuarios y agrego botón al index de supervisores" />
+    <option name="LAST_COMMIT_MESSAGE" value="Listo usuarios y agrego botón al index de supervisores" />
   </component>
 </project>
