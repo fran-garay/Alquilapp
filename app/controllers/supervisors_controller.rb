@@ -3,7 +3,11 @@ class SupervisorsController < ApplicationController
   def index
   end
 
-  def listar_users
+  def show
+
+  end
+
+  def listar_usuarios
     @users = User.all
   end
 

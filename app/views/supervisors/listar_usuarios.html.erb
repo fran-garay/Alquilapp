@@ -1,0 +1,18 @@
+<h1 class="h1 text-center">Usuarios registrados</h1>
+<div class="container-sm m-5">
+  <hr>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th class="fs-5">ID</th>
+        <th class="fs-5">eMail</th>
+      </tr>
+      <%-@users.each do |user|-%>
+        <tr>
+          <td style="font-size: 1rem"><%= user.id %></td>
+          <td style="font-size: 1rem"><%= user.email %></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div>

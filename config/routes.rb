@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   }
   resources :users
   resources :admins
-  resources :supervisors
+  resources :supervisors, only: [:index]
   # get 'main/home'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
   as :supervisor do
     get 'supervisors', :to => 'supervisors#index', :as => :supervisors_root # Rails 3
-    get 'supervisors/listar_usuarios', :to => 'supervisors#listar_usuarios'
   end
+  get 'supervisors/listar_usuarios', :to => 'supervisors#listar_usuarios'
   root "users#index"
 end

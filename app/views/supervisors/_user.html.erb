@@ -1,0 +1,33 @@
+<h1 class="h1">Usuarios registrados</h1>
+<hr>
+<%t = Tweet.all%>
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Reconocimientos</th>
+      <th colspan="3"></th>
+    </tr>
+    <%-@monsters.each do |m|-%>
+      <tr>
+        <td  style="font-size:1rem"><%= m.id %></td>
+        <td>
+          <% if t.where(monster_id: m.id).count == 0 %>
+            <button class="btn" style="font-size:1rem"><%= link_to m.name, new_tweet_path%></button>
+          <% else %>
+            <button class="btn" style="font-size:1rem"><%= link_to m.name, m%></button>
+          <% end %>
+        </td>
+        <td>
+          <% if t.where(monster_id:m.id).count > 1%>
+            <span class="badge bg-info text-wrap" style="font-family:'Verdana'">Twittero destacado</span>
+          <%end%>
+        </td>
+        <td>
+          <%= link_to "Eliminar", m, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"btn bg-danger text-white rounded-1 p-1", style:"font-family:'Verdana'; font-size:0.85em" %>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+</div>
