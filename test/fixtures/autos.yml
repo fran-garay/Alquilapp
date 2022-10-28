@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patente: MyString
+  porcentaje_combustible: 1.5
+  estado: MyString
+
+two:
+  patente: MyString
+  porcentaje_combustible: 1.5
+  estado: MyString
