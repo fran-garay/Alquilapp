@@ -35,12 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_022135) do
     t.string "modelo"
   end
 
-  create_table "movies", force: :cascade do |t|
-    t.string "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "supervisors", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
