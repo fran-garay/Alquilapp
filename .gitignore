@@ -36,3 +36,5 @@
 
 # Se ignora la configuraci[on de la bd local
 /config/database.yml
+
+.idea/workspace.xml
