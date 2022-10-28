@@ -41,9 +41,9 @@
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v7.0.4, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.8.1, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="autoprefixer-rails (v10.4.7.0, ruby-3.1.2-p20) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.18, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.13.0, ruby-3.1.2-p20) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bootstrap-sass (v3.4.1, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.3.20, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.37.1, ruby-3.1.2-p20) [gem]" level="application" />
@@ -51,7 +51,6 @@
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.10, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.6.3, ruby-3.1.2-p20) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="devise (v4.8.1, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.11.0, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.8.1, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.15.5, ruby-3.1.2-p20) [gem]" level="application" />
@@ -75,7 +74,6 @@
     <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.3.2, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.8, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.13.9, ruby-3.1.2-p20) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.4.4, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v5.0.0, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v5.6.5, ruby-3.1.2-p20) [gem]" level="application" />
@@ -89,7 +87,6 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.6.0, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="reline (v0.3.1, ruby-3.1.2-p20) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="responders (v3.0.1, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rexml (v3.2.5, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v2.3.2, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, ruby-3.1.2-p20) [gem]" level="application" />
@@ -103,7 +100,6 @@
     <orderEntry type="library" scope="PROVIDED" name="turbo-rails (v1.3.2, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.5, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo-data (v1.2022.5, ruby-3.1.2-p20) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.9, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.0, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webdrivers (v5.2.0, ruby-3.1.2-p20) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.9, ruby-3.1.2-p20) [gem]" level="application" />
@@ -190,11 +186,6 @@
         <option value="test_unit:plugin" />
         <option value="test_unit:scaffold" />
       </list>
-    </option>
-  </component>
-  <component name="RakeTasksCache">
-    <option name="myRootTask">
-      <RakeTaskImpl id="rake" />
     </option>
   </component>
 </module>
