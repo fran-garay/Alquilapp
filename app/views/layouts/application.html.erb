@@ -13,11 +13,25 @@
 
   <body>
     <% if notice != nil%>
-      <p class="alert alert-success container"><%= notice %></p>
+       <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     <%end%>
     <% if alert != nil%>
-      <p class="alert alert-danger container"><%= alert %></p>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     <%end%>
     <%= yield %>
   </body>
+
+  <script>
+    // delete myalert after 5 seconds
+    setTimeout(function() {
+      var element = document.getElementsByClassName("alert");
+      element[0].parentNode.removeChild(element[0]);
+    }, 5000);
+  </script>
 </html>
