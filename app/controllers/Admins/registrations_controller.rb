@@ -9,13 +9,13 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    logger.debug "CURRENT_ADMIN: #{current_admin}"
     super
   end
 
   # POST /resource
   def create
     super
+    notice = "Admin creado exitosamente"
   end
 
   # GET /resource/edit
@@ -56,18 +56,24 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    super(resource)
+    :admins_root
   end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    super(resource)
+    :admins_root
   end
 
   def check_if_admin
-    puts(current_admin == nil)
     if (current_admin == nil) || (!current_admin.is_admin)
       redirect_to :admins_root
     end
   end
+
+  def sign_up(resource_name, resource)
+    notice = "Admin created successfully"
+    true
+  end
+
+
 end

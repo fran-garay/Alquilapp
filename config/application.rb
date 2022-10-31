@@ -12,7 +12,10 @@ module Alquilapp
     config.load_defaults 7.0
 
     config.logger = Logger.new(STDOUT)
-    config.logger = Log4r::Logger.new("Application Log")
+
+
+    # config.i18n.load_path += Dir[Rails.root.join('locales', '*.{rb,yml}').to_s]
+    # config.i18n.default_locale = :'es'
 
     # Configuration for the application, engines, and railties goes here.
     #

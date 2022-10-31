@@ -28,7 +28,7 @@ class Admins::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
-    :admins_root
+    new_admin_session_path
   end
 
   def after_log_ing_path_for(resource)
