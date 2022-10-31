@@ -12,7 +12,7 @@
     <%= button_to "Listar Usuarios", admins_listar_usuarios_path, method: :get, class:"btn btn-info p-1 m-2"  %>
 
     <% if current_admin.is_admin? %>
-        <%= button_to "Agregar supervisores", root_path, method: :get, class:"btn btn-info p-1 m-2"  %>
+        <%= button_to "Agregar supervisores", "/admins/sign_up", method: :get, class:"btn btn-info p-1 m-2"  %>
     <% end %>
 
   </div>
