@@ -25,16 +25,19 @@
           <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <%end%>
-    <% if admin_signed_in? %>
-      <%= render "application/menu_admins" %>
-    <% elsif user_signed_in? %>
-      <%= render "application/menu_users" %>
-    <% end %>
-    <div class="container" style="margin-top:3vh">
-    <%= yield %>
+    <div class="d-flex flex-grow border border-success border-5">
+      <div class="d-flex border flex-grow border-danger">
+        <% if admin_signed_in? %>
+          <%= render "application/menu_admins" %>
+        <% elsif user_signed_in? %>
+          <%= render "application/menu_users" %>
+        <% end %>
+        <div class="container" style="margin-top:3vh">
+        <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
-
 
   <script>
     // delete myalert after 5 seconds
@@ -42,5 +45,17 @@
       var element = document.getElementsByClassName("alert");
       element[0].parentNode.removeChild(element[0]);
     }, 3000);
+
+    // hide and show navbar when button b is pressed
+    var b = document.getElementById("b");
+    var navbar = document.getElementById("nav");
+    b.addEventListener("click", function() {
+      if (navbar.style.display === "none") {
+        navbar.style.display = "block";
+      } else {
+        navbar.style.display = "none";
+      }
+    });
+
   </script>
 </html>
