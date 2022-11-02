@@ -31,6 +31,12 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <%# fields for first_name, last_name, phone, birth_date, is_admin %>
+  <div class="field">
+    <%= f.label :Nombre %><br />
+    <%= f.text_field :first_name, autocomplete: "COMPLETATE POR FAVO" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
