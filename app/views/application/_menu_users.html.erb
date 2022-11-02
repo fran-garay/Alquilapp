@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-warning">
   <div class="container-fluid">
     <%= link_to "Alquilapp", root_path, class:"navbar-brand" %>
+    <%# <a class="navbar-brand" href="#">Alquilapp</a> %>
+    <%# <%= button_to "Listar autos", autos_path,  %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,17 +12,16 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <%= link_to "Listar autos", "autos/listarAutos", class:"nav-link" %> <%# Ni idea pq no funca %>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Drop-down
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li> <%= link_to "Link 1", root_path, class:"dropdown-item" %> </li>
+            <li> <%= link_to "Link 2", root_path, class:"dropdown-item" %> </li>
           </ul>
         </li>
         <li class="nav-item">
