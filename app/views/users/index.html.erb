@@ -1,6 +1,6 @@
-<div style="font-size:3px">
+<div>
     <h1>Main usuarios</h1>
-    <h5>Bienvenido Usuario</h5>
+    <h5>Bienvenido, <%= current_user.first_name %>!</h5>
     <p>Mi email es: <%= @user.email %> </p>
     <%= button_to "Logout", destroy_user_session_path, method: :delete, class:"btn btn-info p-1"  %>
 </div>

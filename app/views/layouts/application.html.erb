@@ -27,14 +27,14 @@
           <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <%end%>
-          <% if admin_signed_in? %>
-            <%= render "application/menu_admins" %>
-          <% elsif user_signed_in? %>
-            <%= render "application/menu_users" %>
-          <% end %>
-          <div class="container" style="margin-top:3vh">
-          <%= yield %>
-        </div>
+    <% if admin_signed_in? %>
+      <%= render "application/menu_admins" %>
+    <% elsif user_signed_in? %>
+      <%= render "application/menu_users" %>
+    <% end %>
+    <div class="container" style="margin-top:3vh">
+      <%= yield %>
+    </div>
 
 
   </body>
