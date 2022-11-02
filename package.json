@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "bootstrap": "^5.2.2"
-  },
   "name": "alquilapp",
   "description": "This README would normally document whatever steps are necessary to get the\r application up and running.",
   "version": "1.0.0",
