@@ -46,7 +46,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :is_admin])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :is_admin, :first_name, :last_name, :phone, :birth_date])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -74,6 +74,5 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     notice = "Admin created successfully"
     true
   end
-
 
 end

@@ -4,8 +4,11 @@ class AdminsController < ApplicationController
   end
 
   def listar_usuarios
-    logger.debug "CURRENT_ADMIN: #{current_admin}"
     @users = User.all
+  end
+
+  def listar_supervisores
+    @supervisors = Admin.all.where(is_admin: false)
   end
 
   # def agregar_supervior

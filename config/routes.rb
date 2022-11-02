@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
 
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
+  get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'
 
   root "main#home"
   match "*path" => redirect("/"), via: [:get, :post]

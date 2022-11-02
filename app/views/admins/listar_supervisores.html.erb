@@ -1,0 +1,18 @@
+<h1 class="h1 text-center">Supervisores registrados</h1>
+<div class="container-sm m-5">
+  <hr>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th class="fs-5">ID</th>
+        <th class="fs-5">eMail</th>
+      </tr>
+      <%-@supervisors.each do |supervisor|-%>
+        <tr>
+          <td style="font-size: 1rem"><%= supervisor.first_name %> <%= supervisor.last_name %></td>
+          <td style="font-size: 1rem"><%= supervisor.email %></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div>

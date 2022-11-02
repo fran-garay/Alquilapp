@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>Sign up</h2>
+<div>
+  <h4>Sign up</h4>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "admins/shared/error_messages", resource: resource %>
@@ -22,14 +22,33 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
-    check box field named is admin in form
+    <div class="field">
+      <%= f.label :Nombre %><br />
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Apellido %><br />
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Numero_de_telefono %><br />
+      <%= f.number_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :fecha_de_nacimiento %><br />
+      <%= f.date_field :birth_date %>
+    </div>
+    <div><br/><div>
+
     <div class="field">
       <%= f.label "Es administrador", sytle:"margin-right:2px" %>
       <%= f.check_box :is_admin, style:"margin-top:2px" %>
     </div>
 
-
-
+    <hr>
 
     <div class="actions">
       <%= f.submit "Sign up" %>
