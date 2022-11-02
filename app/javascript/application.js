@@ -1,8 +1,9 @@
 
 //= require_tree .
 //= require_self
-//= require jquery
-//= require jquery_ujs
+//= require jquery3
+//= require popper
+//= require bootstrap
 
 import { Application } from "@hotwired/stimulus"
 
