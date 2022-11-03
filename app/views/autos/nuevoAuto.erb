@@ -33,6 +33,10 @@
       <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"] %>
     </p>
     <p>
+      <%= f.label :color %><br>
+      <%= f.color_field :color %>
+    </p>
+    <p>
       <%= f.submit %>
     </p>
   <%end%>

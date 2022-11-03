@@ -20,6 +20,7 @@
       <th class="text-center" style="width:15%;">TIPO DE COMBUSTIBLE</th>
       <th class="text-center" style="width:15%;">TIPO DE CAJA</th>
       <th class="text-center" style="width:15%;">COMBUSTIBLE</th>
+      <th class="text-center" style="width:2%;">COLOR</th>
       <th class="text-center" style="width:15%;">ESTADO</th>
       <th class="text-center" style="width:5%;">MODIFICAR</th>
     </tr>
@@ -32,8 +33,11 @@
         <td class="text-center"><%= auto.tipo_de_combustible %></td>
         <td class="text-center"><%= auto.tipo_de_caja %></td>
         <td class="text-center"><%= auto.porcentaje_combustible %></td>
+        set background color of table row to red
+        <td class="text-center" style="background-color: <%= auto.color %>;"></td>
         <td class="text-center"><%= auto.estado %></td>
         <td class="text-center"><%= link_to "Editar", root_path, :class => "btn btn-primary" %></td>
+        <%# <td class="text-center"><%= link_to "Editar", autos_editarAuto_path(auto.id), :class => "btn btn-primary" %></td> %>
       </tr>
     <% end %>
   </table> 

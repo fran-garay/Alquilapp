@@ -6,4 +6,5 @@ class Auto < ApplicationRecord
     validates :anio, presence: true
     validates :tipo_de_caja, presence: true
     validates :tipo_de_combustible, presence: true
+    validates :color, presence: true
 end
