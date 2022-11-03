@@ -10,6 +10,7 @@
     <div class="container d-flex justify-content-center">
     <%= button_to "Logout", destroy_admin_session_path, method: :delete, class:"btn btn-info p-1 m-2"  %>
     <%= button_to "Listar Usuarios", admins_listar_usuarios_path, method: :get, class:"btn btn-info p-1 m-2"  %>
+    <%= button_to "Listar Vehiculos", autos_listadoDeAutos_path, method: :get, class:"btn btn-info p-1 m-2"  %>
 
     <% if current_admin.is_admin? %>
         <%= button_to "Agregar supervisores", root_path, method: :get, class:"btn btn-info p-1 m-2"  %>
