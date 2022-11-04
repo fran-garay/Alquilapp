@@ -4,9 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
+
   # GET /resource/sign_up
   def new
     super
+    w = Wallet.create(user_id: current_user.id, saldo: 0, ultima_carga: 0, ultima_compra: 0)
+    w.save
   end
 
   # POST /resource
