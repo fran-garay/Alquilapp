@@ -7,13 +7,13 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions',
     registrations: 'admins/registrations',
     passwords: 'admins/passwords'
-  }
+  }, :path_prefix => 'my'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
   }
   resources :users
-  resources :admins, only: [:index]
+  resources :admins, only: [:index, :edit, :update]
   # resources :supervisors, only: [:index]
   # get 'main/home'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -32,6 +32,10 @@ Rails.application.routes.draw do
   as :user do
     get 'users', :to => 'users#index', :as => :users_root # Rails 3
   end
+
+  # get "admins/edit/:id", to: "admins/registrations#edit"
+  # put "admins/edit/:id", to: "admins/registrations#update"
+
 
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
   get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'

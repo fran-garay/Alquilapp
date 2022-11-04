@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :set_minimum_password_length, only: [:edit, :update]
   skip_before_action :require_no_authentication
   before_action :authenticate_admin!
   before_action :configure_sign_up_params, only: [:create]
@@ -26,6 +27,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
+    notice = "Admin actualizado exitosamente"
   end
 
   # DELETE /resource
@@ -51,7 +53,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :id, :is_admin, :first_name, :last_name, :phone, :birth_date])
   end
 
   # The path used after sign up.

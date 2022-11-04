@@ -11,6 +11,23 @@ class AdminsController < ApplicationController
     @supervisors = Admin.all.where(is_admin: false)
   end
 
+  # GET /resource/edit
+  def edit
+    logger.debug "Editando admin"
+    @admin = Admin.find(params[:id])
+  end
+
+  # PUT /resource
+  # def update
+  #   logger.debug "Actualizando admin"
+  #   @admin = Admin.find(params[:id])
+  #   if @admin.update(admin_params)
+  #     redirect_to admins_listar_supervisores_path, notice: "Supervisor actualizado exitosamente"
+  #   else
+  #     render :edit
+  #   end
+  # end
+
   # def agregar_supervior
   #   if (!current_admin.is_admin?)
   #     redirect_to admins_path
@@ -30,4 +47,8 @@ class AdminsController < ApplicationController
   # def admin_params
   #   params.require(:admin).permit(:email, :password, :password_confirmation)
   # end
+
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :id, :is_admin, :first_name, :last_name, :phone, :birth_date])
+  end
 end
