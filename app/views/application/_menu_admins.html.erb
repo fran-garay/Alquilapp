@@ -9,12 +9,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <%= link_to "Home", root_path, class:"nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Listar autos", "autos/listarAutos", class:"nav-link" %> <%# Ni idea pq no funca %>
+          <%= link_to "Listar autos", autos_listadoDeAutos_path, class:"nav-link" %> <%# Ni idea pq no funca %>
         </li>
-        <% if admin_signed_in? and current_admin.is_admin %>
+        <% if current_admin.is_admin %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Supervisores
@@ -26,7 +26,7 @@
         </li>
         <% end %>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"nav-link" %>
         </li>
       </ul>
       <form class="d-flex" role="search">

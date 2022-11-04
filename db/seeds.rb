@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 #Autos
+Auto.destroy_all
 Auto.create(patente:"ABC-123", porcentaje_combustible:86.45, estado:"Inhabilitado", modelo:"Ferrari LaFerrari", anio:2022,
      tipo_de_caja:"Manual", tipo_de_combustible:"Gasolina", color:"#FF0000")
 Auto.create(patente:"HTR-235", porcentaje_combustible:100, estado:"Disponible", modelo:"McLaren P1", anio:2015,
@@ -21,10 +22,12 @@ Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",
     tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#A8A560")
 
 #Usuarios
-User.create(email: "user@gmail.com", first_name: "Ruben", last_name: "User", password: "123456", 
+User.destroy_all
+Admin.destroy_all
+User.create(email: "user@gmail.com", first_name: "Ruben", last_name: "User", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)))
-Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456", 
+Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)
-Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456", 
+Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
 

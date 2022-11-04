@@ -1,20 +1,17 @@
 <h2>Edit <%= @admin.first_name%></h2>
-edit path for admin
 
-<%= resource %>
+<% resource = @admin %>
+<% resource_name = :admin %>
 
-
-<%= form_for(@admin, urL: registration_path(@admin) , method: :put, html: {class: "form-group"}) do |f| %>
-<%# <%= form_for(@admin, ) do |f| %> %>
+<%= form_for(resource, as: resource_name, url: "/admins/updateSupervisor/#{@admin.id}" , html: { method: :put }) do |f| %>
+  <%= render "admins/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-<%#
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <%# <div>Currently waiting confirmation for: <%= resource.unconfirmed_email </div> %>
-  <%# <% end %>
+
+
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />

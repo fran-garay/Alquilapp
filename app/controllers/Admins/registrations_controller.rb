@@ -30,6 +30,38 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     notice = "Admin actualizado exitosamente"
   end
 
+  # GET /resource/edit/:id
+  def editSupervisor
+    @admin = Admin.find(params[:id])
+    render "/admins/registrations/edit_supervisor"
+  end
+
+  # PUT /resource/updateSupervisor/:id
+  def updateSupervisor
+    @admin = Admin.find(params[:id])
+    logger.debug "ADMIN: #{@admin.inspect}"
+    parameters = admin_params
+
+     # If current password is not valid then don't update
+    if !@admin.valid_password?(parameters[:current_password])
+      @admin.errors.add(:current_password, "Contraseña inválida")
+      render "/admins/registrations/edit_supervisor"
+    else
+      # if password is blank then don't update it
+      if parameters[:password].blank?
+        parameters[:password] = parameters[:current_password]
+        parameters[:password_confirmation] = parameters[:current_password]
+      end
+      parameters.delete(:current_password)
+      if @admin.update(parameters)
+        redirect_to admins_path, notice: "Supervisor actualizado exitosamente"
+      else
+        render "/admins/registrations/edit_supervisor"
+      end
+    end
+  end
+
+
   # DELETE /resource
   def destroy
     super
@@ -45,6 +77,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def admin_params
+    params.require(:admin).permit(:email, :password, :password_confirmation, :is_admin, :first_name, :last_name, :phone, :birth_date, :current_password)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
