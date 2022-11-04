@@ -1,5 +1,7 @@
 <div>
-  <h4>Sign up</h4>
+  <h4>Sign up </h4>
+  <% logger.debug "DEBUG: #{resource.inspect}" %>
+   <% logger.debug "RESOURCE: #{resource}" %>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "admins/shared/error_messages", resource: resource %>
