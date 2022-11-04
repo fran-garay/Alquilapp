@@ -13,7 +13,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    #when succesfully created user create wallet for him
     super
     if @user.save
       @wallet = Wallet.new
