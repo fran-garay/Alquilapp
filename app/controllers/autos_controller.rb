@@ -11,7 +11,7 @@ class AutosController < ApplicationController
     @autos = @q.result(distinct: true)
   end
 
-  def nuevoAuto
+  def new
     @auto = Auto.new
   end
 

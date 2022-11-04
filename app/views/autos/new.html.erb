@@ -1,0 +1,58 @@
+<h1>Ingrese los datos del Nuevo Vehiculo</h1>
+
+<% auto = Auto.new %>
+<div style="padding-left: 20px">
+  <%= form_for (@auto) do |f| %>
+    <div class="form-group">
+      <%= f.label :patente, class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= f.text_field :patente , class:"form-control"%>
+      </div>
+    </div>
+    <p class="form-group">
+      <%= f.label :anio, "Año" %><br>
+      <div class="col-md-8">
+        <%= f.text_field :anio, class:"form-control"%>
+      </div>
+    </p>
+    <p class="form-group">
+      <%= f.label :modelo %><br>
+      <div class="col-md-8">
+        <%= f.text_field :modelo, class:"form-control"%>
+      </div>
+    </p>
+    <p class="form-group">
+      <%= f.label :tipo_de_caja %><br>
+      <div class="col-md-8">
+        <%= f.select :tipo_de_caja, ["Automatico", "Manual"],  class:"form-select"%>
+      </div>
+    </p>
+    <p class="form-group">
+      <%= f.label :tipo_de_combustible %><br>
+      <div class="col-md-8">
+        <%= f.select :tipo_de_combustible, ["Diesel", "Nafta", "Electrico"], class:"form-control"%>
+      </div>
+    </p>
+    <p class="form-group">
+      <%= f.label :porcentaje_combustible %><br>
+      <div class="col-md-8">
+        <%= f.number_field :porcentaje_combustible, in:0.0..100.0, step: 0.1, class:"form-control"%>
+      </div>
+    </p>
+    <p class="form-group">
+      <%= f.label :estado %><br>
+      <div class="col-md-8">
+        <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"], class:"form-select"%>
+      </div>
+    </p>
+    <p class="form-group">
+      <%= f.label :color %><br>
+      <div class="col-md-8">
+        <%= f.color_field :color, class:"form-control"%>
+      </div>
+    </p>
+    <p>
+      <%= f.submit, class:"btn btn-primary"%>
+    </p>
+  <%end%>
+</div>
