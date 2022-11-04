@@ -21,7 +21,10 @@ Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",
     tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#A8A560")
 
 #Usuarios
-User.create(email:"user@gmail.com", password:"123456")
-Admin.create(email:"supervisor@gmail.com", password:"123456", is_admin:false)
-Admin.create(email:"admin@gmail.com", password:"123456", is_admin:true)
+User.create(email: "user@gmail.com", first_name: "Ruben", last_name: "User", password: "123456", 
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)))
+Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456", 
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)
+Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456", 
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
 

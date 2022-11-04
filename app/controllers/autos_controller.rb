@@ -20,7 +20,7 @@ class AutosController < ApplicationController
     if @auto.save
       redirect_to autos_listadoDeAutos_path
     else
-      render :nuevoAuto
+      render :new
     end
   end
 
