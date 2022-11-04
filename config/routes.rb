@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords'
   }
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
   }
   resources :users
   resources :admins, only: [:index]
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   end
 
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
+  get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'
 
   root "main#home"
   match "*path" => redirect("/"), via: [:get, :post]

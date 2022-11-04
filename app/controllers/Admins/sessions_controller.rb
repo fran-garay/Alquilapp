@@ -2,6 +2,7 @@
 
 class Admins::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
+  before_action :check_if_user_logged_in, only: [:new, :create]
 
   # GET /resource/sign_in
   def new
@@ -28,10 +29,18 @@ class Admins::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
-    :admins_root
+    new_admin_session_path
   end
 
   def after_log_ing_path_for(resource)
     :admins_root
+  end
+
+  def check_if_user_logged_in
+    alert = "Ya hay un usuario logueado"
+    if user_signed_in?
+      redirect_to :users_root
+      flash[:alert] = "Ya hay un usuario logueado"
+    end
   end
 end
