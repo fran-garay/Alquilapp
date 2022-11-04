@@ -5,13 +5,11 @@
         <% name = "Supervisor" %>
     <% end %>
     <h1>Main <%= name %></h1>
-    <h5>Bienvenido <%= name %></h5>
+    <h5>Bienvenido, <%= current_admin.first_name %>!</h5>
     <p>Mi mail es <%= current_admin.email %></p>
     <br>
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-start">
     <%= button_to "Logout", destroy_admin_session_path, method: :delete, class:"btn btn-info p-1 m-2"  %>
-    <%= button_to "Listar Usuarios", admins_listar_usuarios_path, method: :get, class:"btn btn-info p-1 m-2"  %>
-    <%= button_to "Listar Vehiculos", autos_listadoDeAutos_path, method: :get, class:"btn btn-info p-1 m-2"  %>
 
   </div>
 </div>
