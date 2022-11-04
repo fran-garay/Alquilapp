@@ -8,9 +8,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super
-    w = Wallet.create(user_id: current_user.id, saldo: 0, ultima_carga: 0, ultima_compra: 0)
+    w = Wallet.create(user_id: current_user.id, saldo = 0)
     w.save
   end
+  
 
   # POST /resource
   def create

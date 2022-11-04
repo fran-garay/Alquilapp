@@ -39,6 +39,6 @@ Rails.application.routes.draw do
   root "main#home"
   match "*path" => redirect("/"), via: [:get, :post]
 
-  get '/wallet/:user_id', :to => 'wallets#mostrar_wallet'
+  get '/wallets/:user_id', :to => 'wallets#mostrar_wallet'
 
 end
