@@ -8,14 +8,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super
-    w = Wallet.create(user_id: current_user.id, saldo = 0)
-    w.save
   end
   
 
   # POST /resource
   def create
+    #when succesfully created user create wallet for him
     super
+    if @user.save
+      @wallet = Wallet.new
+      @wallet.user_id = @user.id
+      @wallet.saldo = 0
+      @wallet.ultima_carga = 0
+      @wallet.ultimo_gasto = 0
+      @wallet.save
+    end
   end
 
   # GET /resource/edit
