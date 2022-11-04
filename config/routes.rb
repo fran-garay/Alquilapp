@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions',
     registrations: 'admins/registrations',
     passwords: 'admins/passwords'
-  }, :path_prefix => 'my'
+  }
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
