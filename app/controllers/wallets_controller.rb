@@ -4,15 +4,17 @@ class WalletsController < ApplicationController
         @wallet = Wallet.find_by(user_id: params[:user_id])
     end 
 
-    def cargar_saldo 
+    def cargar_saldo
         @wallet = Wallet.find_by(user_id: params[:user_id])
-        @wallet.saldo = @wallet.saldo + params[:monto].to_i
+        p = wallet_params
+        logger.debug "Saldo: #{p[:ultima_carga]}"
+        @wallet.saldo = @wallet.saldo + p[:ultima_carga]
         @wallet.save
-        redirect_to mostrar_saldo_path
+        redirect_to "/wallets/#{params[:user_id]}"
     end
 
     def wallet_params
-        params.require(:wallet).permit(:user_id, :monto)
+        params.permit(:user_id, :ultima_carga)
     end
 
 end

@@ -64,6 +64,26 @@
           </div>
         </div>
 
+
+        <%= form_for(@wallet, as: :user, url: "/wallets/cargar_saldo/#{@wallet.user_id}/" , html: { method: :put }) do |form| %>
+        <div class="row m-4">
+          <div class="col-5">
+            <div class="form-outline">
+              <%= form.number_field :ultima_carga, class: "form-control" %>
+              <%= form.label "Monto" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <%= form.submit "Pagar", class: "btn btn-warning" %>
+        </div>
+        <% end %>
+
+
+
+<!--
         <div class="row m-4">
           <div class="input-group">
             <span class="input-group-text">$</span>
@@ -79,7 +99,11 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
         <button type="button" class="btn btn-warning">Pagar</button>
       </div>
+    </div> -->
 
-    </div>
+    
+
+
+
   </div>
 </div>
