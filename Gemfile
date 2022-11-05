@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-sass'
 gem 'jquery-ui-rails'
+gem 'geocoder'
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

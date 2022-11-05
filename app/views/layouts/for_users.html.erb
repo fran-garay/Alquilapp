@@ -14,21 +14,20 @@
 
 
   <body>
-    <% if notice != nil%>
-      <div class="alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
-          <%= notice %>
-          <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <%end%>
-    <% if alert != nil%>
-      <div class="alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert">
-          <%= alert %>
-          <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <%end%>
 
-    <div class="container">
+
+
+    <div class="d-flex flex-column border border-5 border-danger vh-100">
+
+      <%= render "users/partials/menu" %>
+
+
+    <div class="container z1" style="margin-top:1vh; flex-grow:1;">
       <%= yield %>
+    </div>
+
+    <%= render "users/partials/footer" %>
+
     </div>
 
   </body>
