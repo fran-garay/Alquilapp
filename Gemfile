@@ -13,7 +13,6 @@ gem 'ransack'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-sass'
-gem 'jquery-ui-rails'
 gem 'geocoder'
 
 
