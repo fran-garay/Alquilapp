@@ -5,6 +5,11 @@
 //= require popper
 //= require bootstrap
 
+import "jquery"
+import "jquery_ujs"
+import "popper"
+import "bootstrap"
+
 import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()

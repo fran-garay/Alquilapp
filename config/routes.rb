@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   get 'autos/listadoDeAutos'
+
+  devise_scope :admin do
+    get 'admins/editSupervisor/:id', to: 'admins/registrations#editSupervisor', as: 'editSupervisor'
+  end
+
+  devise_scope :admin do
+    put 'admins/updateSupervisor/:id', to: 'admins/registrations#updateSupervisor', as: 'updateSupervisor'
+  end
+
+  resources :autos, only: [:new, :create, :edit, :update]
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
   # }
@@ -14,24 +24,19 @@ Rails.application.routes.draw do
   }
   resources :users
   resources :admins, only: [:index]
-  # resources :supervisors, only: [:index]
-  # get 'main/home'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-  # post "/sign_out", to: "user#signout"
+
   as :admin do
     get 'admins', :to => 'admins#index', :as => :admins_root # Rails 3
   end
 
-  # as :supervisor do
-  #   get 'supervisors', :to => 'supervisors#index', :as => :supervisors_root # Rails 3
-  # end
-
   as :user do
     get 'users', :to => 'users#index', :as => :users_root # Rails 3
   end
+
+  # get "admins/edit/:id", to: "admins/registrations#edit"
+  # put "admins/edit/:id", to: "admins/registrations#update"
+
 
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
   get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'

@@ -1,16 +1,20 @@
 <h1 class="h1 text-center">Supervisores registrados</h1>
-<div class="container-sm m-5">
+<div class="container-sm">
   <hr>
   <div class="table-responsive">
     <table class="table">
       <tr>
-        <th class="fs-5">ID</th>
-        <th class="fs-5">eMail</th>
+        <th class="fs-5">Supervisores</th>
+        <%# <th class="fs-5">eMail</th> %>
       </tr>
       <%-@supervisors.each do |supervisor|-%>
         <tr>
           <td style="font-size: 1rem"><%= supervisor.first_name %> <%= supervisor.last_name %></td>
-          <td style="font-size: 1rem"><%= supervisor.email %></td>
+
+          <td style="font-size: 1rem">
+            <%= link_to "Editar", "/admins/editSupervisor/#{supervisor.id}", class: "btn btn-primary p-1" %>
+            <%# <%= link_to "Eliminar", "/admin/:id", method: delete class: "btn btn-danger p-1" %>
+          </td>
         </tr>
       <%end%>
     </table>
