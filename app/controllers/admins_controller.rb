@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  layout :layout_by_resource
   before_action :authenticate_admin!
   def index
   end
@@ -11,23 +12,21 @@ class AdminsController < ApplicationController
     @supervisors = Admin.all.where(is_admin: false)
   end
 
-  # def agregar_supervior
-  #   if (!current_admin.is_admin?)
-  #     redirect_to admins_path
-  #   @supervisor = Admin.new
-  # end
+  # GET /resource/edit
+  def edit
+    logger.debug "Editando admin"
+    @admin = Admin.find(params[:id])
+  end
 
-  # def crear_supervisor
-  #   @supervisor = Admin.new(admin_params)
-  #   @supervisor.is_admin = true
-  #   if @supervisor.save
-  #     redirect_to admins_path
-  #   else
-  #     render :agregar_supervisor
-  #   end
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :id, :is_admin, :first_name, :last_name, :phone, :birth_date])
+  end
 
-  # def admin_params
-  #   params.require(:admin).permit(:email, :password, :password_confirmation)
-  # end
+  def layout_by_resource
+    if admin_signed_in?
+      "for_admins"
+    else
+      "application"
+    end
+  end
 end

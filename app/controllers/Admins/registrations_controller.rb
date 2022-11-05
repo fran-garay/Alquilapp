@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :set_minimum_password_length, only: [:edit, :update]
   skip_before_action :require_no_authentication
   before_action :authenticate_admin!
   before_action :configure_sign_up_params, only: [:create]
@@ -26,7 +27,40 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
+    notice = "Admin actualizado exitosamente"
   end
+
+  # GET /resource/edit/:id
+  def editSupervisor
+    @admin = Admin.find(params[:id])
+    render "/admins/registrations/edit_supervisor"
+  end
+
+  # PUT /resource/updateSupervisor/:id
+  def updateSupervisor
+    @admin = Admin.find(params[:id])
+    logger.debug "ADMIN: #{@admin.inspect}"
+    parameters = admin_params
+
+     # If current password is not valid then don't update
+    if !@admin.valid_password?(parameters[:current_password])
+      @admin.errors.add(:current_password, "Contraseña inválida")
+      render "/admins/registrations/edit_supervisor"
+    else
+      # if password is blank then don't update it
+      if parameters[:password].blank?
+        parameters[:password] = parameters[:current_password]
+        parameters[:password_confirmation] = parameters[:current_password]
+      end
+      parameters.delete(:current_password)
+      if @admin.update(parameters)
+        redirect_to admins_path, notice: "Supervisor actualizado exitosamente"
+      else
+        render "/admins/registrations/edit_supervisor"
+      end
+    end
+  end
+
 
   # DELETE /resource
   def destroy
@@ -44,6 +78,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def admin_params
+    params.require(:admin).permit(:email, :password, :password_confirmation, :is_admin, :first_name, :last_name, :phone, :birth_date, :current_password)
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :is_admin, :first_name, :last_name, :phone, :birth_date])
@@ -51,7 +89,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :id, :is_admin, :first_name, :last_name, :phone, :birth_date])
   end
 
   # The path used after sign up.

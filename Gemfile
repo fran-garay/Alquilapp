@@ -9,10 +9,11 @@ gem 'bootstrap', '~> 5.2.2'
 gem "pg"
 gem "devise"
 gem 'yarn'
+gem 'ransack'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-sass'
-gem 'jquery-ui-rails'
+gem 'geocoder'
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
