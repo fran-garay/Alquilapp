@@ -28,6 +28,8 @@ User.create(email: "user@gmail.com", first_name: "Ruben", last_name: "User", pas
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)))
 Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)
+Admin.create(email:"super2@gmail.com", first_name: "Ernesto", last_name: "Flores", password: "123456",
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, is_handling_report: :true)
 Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
 

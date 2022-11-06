@@ -63,6 +63,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource/deleteSupervisor/:id
   def deleteSupervisor
+    logger.debug "Deleting supervisor"
     @admin = Admin.find(params[:id])
     # destroy admin only if he is not handling any report
     if  !current_admin.is_admin
@@ -70,9 +71,9 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     else
       if !@admin.is_handling_report
         @admin.destroy
-        redirect_to admins_path, notice: "Supervisor eliminado exitosamente"
+        redirect_to "/admins/listar_supervisores", notice: "Supervisor eliminado exitosamente"
       else
-        redirect_to admins_path, alert: "No se puede eliminar al supervisor porque está manejando un reporte"
+        redirect_to "/admins/listar_supervisores", alert: "No se puede eliminar a #{@admin.first_name} porque está manejando un reporte"
       end
     end
   end
