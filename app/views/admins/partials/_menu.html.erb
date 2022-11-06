@@ -12,7 +12,7 @@
           <%= link_to "Home", root_path, class:"nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Listar autos", autos_listadoDeAutos_path, class:"nav-link" %> <%# Ni idea pq no funca %>
+          <%= link_to "Listar autos", "/autos", class:"nav-link" %> <%# Ni idea pq no funca %>
         </li>
         <% if current_admin.is_admin %>
         <li class="nav-item dropdown">

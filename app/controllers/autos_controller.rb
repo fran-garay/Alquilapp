@@ -1,5 +1,7 @@
 class AutosController < ApplicationController
 
+  layout "for_admins"
+  before_action :authenticate_admin!
   before_action:set_search
 
   def set_search
@@ -18,7 +20,7 @@ class AutosController < ApplicationController
   def create
     @auto = Auto.new(auto_params)
     if @auto.save
-      redirect_to autos_listadoDeAutos_path
+      redirect_to autos_path
     else
       render :new
     end
@@ -31,7 +33,7 @@ class AutosController < ApplicationController
   def update
     @auto = Auto.find(params[:id])
     if @auto.update(auto_params)
-      redirect_to listadoDeAutos_path
+      redirect_to autos_path
     else
       render :edit
     end
@@ -40,28 +42,11 @@ class AutosController < ApplicationController
   def destroy
     @auto = Auto.find(params[:id])
     @auto.destroy
-    redirect_to listadoDeAutos_path
+    redirect_to autos_path
   end
 
   def auto_params
     params.require(:auto).permit(:patente, :modelo, :porcentaje_combustible, :estado, :anio, :tipo_de_caja, :tipo_de_combustible, :color)
-  end
-
-
-  # def listadoDeAutos
-  #   @autos = Auto.all.order(id: :desc)
-  # end
-
-  # def auto
-  #   @autos = Auto.find(params[:id])
-  # end
-
-  # def auto
-  #   @autos = Auto.find(params[:id])
-  # end
-
-  def new
-    @auto = Auto.new
   end
   
 end
