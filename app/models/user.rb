@@ -13,13 +13,13 @@ class User < ApplicationRecord
 
   def is_an_adult
     if birth_date.present? && birth_date > 17.years.ago
-      errors.add(:birth_date, "Debes tener al menos 17 años para registrarte")
+      errors.add(:birth_date, "es inválida, debes tener al menos 17 años para registrarte")
     end
   end
 
   def phone_only_contains_numbers
     if phone.present? && !phone.match?(/\A[+-]?\d+\z/)
-      errors.add(:phone, "El teléfono solo debe contener números")
+      errors.add(:phone, "solo debe contener números")
     end
   end
 end

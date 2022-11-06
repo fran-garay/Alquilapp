@@ -36,44 +36,20 @@
 
   <script>
 
-    // get user city bases on coordinates
-    function getCity(lat, lon) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var result = JSON.parse(this.responseText);
-          document.getElementById("myCity").innerHTML = "📍 " + removePartido(result.address.state_district);
-          var city = JSON.parse(this.responseText)["state_district"];
-        }
-      };
-      xhttp.open("GET", "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+lat+"&lon="+lon, true);
-      xhttp.send();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
     }
 
-    function removePartido(city){
-      if(city.includes("Partido de ")){
-        city = city.replace("Partido de ", "");
-      }
-      return city;
+    if (mm < 10) {
+      mm = '0' + mm;
     }
 
-    x = document.getElementById("myCity");
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      x.innerHTML = "No te puedo encontrar";
-    }
-
-
-    function showPosition(position) {
-      getCity(position.coords.latitude, position.coords.longitude);
-    }
-
-    // function getLocation() {
-
-    // }
-
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("max", today);
 
 
 
@@ -83,26 +59,6 @@
       element[0].parentNode.removeChild(element[0]);
     }, 3000);
 
-
-
-    // hide and show navbar when button b is pressed
-    var b = document.getElementById("b");
-    var navbar = document.getElementById("nav");
-    b.addEventListener("click", function() {
-      if (navbar.style.display === "none") {
-        navbar.style.display = "block";
-      } else {
-        navbar.style.display = "none";
-      }
-    });
-
-    function openNav() {
-      document.getElementById("myNav").style.width = "65%";
-    }
-
-    function closeNav() {
-      document.getElementById("myNav").style.width = "0%";
-    }
 
   </script>
 </html>
