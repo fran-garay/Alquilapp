@@ -13,7 +13,9 @@
 
           <td style="font-size: 1rem">
             <%= link_to "Editar", "/admins/editSupervisor/#{supervisor.id}", class: "btn btn-primary p-1" %>
-            <%# <%= link_to "Eliminar", "/admin/:id", method: delete class: "btn btn-danger p-1" %>
+          </td>
+          <td>
+            <%= link_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", html:{method: :delete}, class: "btn btn-danger p-1" %>
           </td>
         </tr>
       <%end%>

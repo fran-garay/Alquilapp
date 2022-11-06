@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     put 'admins/updateSupervisor/:id', to: 'admins/registrations#updateSupervisor', as: 'updateSupervisor'
   end
 
+  devise_scope :admin do
+    delete 'admins/deleteSupervisor/:id', to: 'admins/registrations#deleteSupervisor', as: 'deleteSupervisor'
+  end
+
   resources :autos, only: [:new, :create, :edit, :update]
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'

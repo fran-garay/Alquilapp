@@ -21,6 +21,11 @@
     <% end %>
   </div>
 
+    <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
   <%# fields for first_name, last_name, phone, birth_date, is_admin %>
   <div class="field">
     <%= f.label :Nombre %><br />
@@ -46,11 +51,6 @@
       <%= f.label "Es administrador", sytle:"margin-right:2px" %>
       <%= f.check_box :is_admin, style:"margin-top:2px" %>
     </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
 
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />

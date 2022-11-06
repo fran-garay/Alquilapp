@@ -11,8 +11,6 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-
-
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
@@ -20,6 +18,11 @@
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <%# fields for first_name, last_name, phone, birth_date, is_admin %>
@@ -46,11 +49,6 @@
   <div class="field mt-2 mb-2">
       <%= f.label "Es administrador", sytle:"margin-right:2px" %>
       <%= f.check_box :is_admin, style:"margin-top:2px" %>
-    </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="field">

@@ -7,6 +7,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :check_if_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :configure_account_update_params, only: [:update]
+  layout "for_admins"
 
   # GET /resource/sign_up
   def new
@@ -39,7 +40,6 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # PUT /resource/updateSupervisor/:id
   def updateSupervisor
     @admin = Admin.find(params[:id])
-    logger.debug "ADMIN: #{@admin.inspect}"
     parameters = admin_params
 
      # If current password is not valid then don't update
@@ -61,6 +61,21 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # DELETE /resource/deleteSupervisor/:id
+  def deleteSupervisor
+    @admin = Admin.find(params[:id])
+    # destroy admin only if he is not handling any report
+    if  !current_admin.is_admin
+      redirect_to admins_path
+    else
+      if !@admin.is_handling_report
+        @admin.destroy
+        redirect_to admins_path, notice: "Supervisor eliminado exitosamente"
+      else
+        redirect_to admins_path, alert: "No se puede eliminar al supervisor porque está manejando un reporte"
+      end
+    end
+  end
 
   # DELETE /resource
   def destroy
