@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  layout :layout_by_resource
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -58,5 +59,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     super(resource)
+  end
+
+  def layout_by_resource
+    if user_signed_in?
+      "for_users"
+    else
+      "application"
+    end
+  end
+
+  def after_update_path_for(resource)
+    # check if update was successful
+    logger.debug "ACTUALIZANDOOOOOOOOOOOOOOOOOOOOOOO"
+    if resource.errors.empty?
+      user_path(resource)
+    else
+      render :edit
+    end
   end
 end
