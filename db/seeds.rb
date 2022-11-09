@@ -21,6 +21,12 @@ Auto.create(patente:"KJH-123", porcentaje_combustible:50.2, estado:"Ocupado", mo
 Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",modelo:"Megan", anio:2008,
     tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#A8A560")
 
+#Precios
+Precio.create(valor: 100.56, fecha_de_actualizacion: "2020-12-17")
+Precio.create(valor: 200.72, fecha_de_actualizacion: "2020-12-24")
+Precio.create(valor: 300.38, fecha_de_actualizacion: "2021-01-01")
+Precio.create(valor: 400.24, fecha_de_actualizacion: "2021-03-10")
+
 #Usuarios
 User.destroy_all
 Admin.destroy_all

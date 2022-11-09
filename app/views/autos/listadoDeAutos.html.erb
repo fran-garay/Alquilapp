@@ -1,46 +1,42 @@
-<h1>Autos#listadoDeAutos</h1>
+<h1>VehListado de Autosiculo</h1>
 
 <% @autos = Auto.all%>
+<br>
+  <%= link_to "Crear nuevo Auto", new_auto_path, :class => "btn btn-primary " %>
+<br>
 
-<%# <%= search_form_for @q do |f| %>
-  <%# <%= f.label :patente_cont %>
-  <%# <%= f.search_field :patente_cont %>
-<%# <% end %>
-
-<%# <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> %>
-<div calss="m-5" style="margin-bottom: 10px">
-  <%= link_to "Nuevo", new_auto_path, :class => "btn btn-primary" %>
-</div>
-<div>
-  <table id="myTable">
-    <tr class="header">
-      <th class="text-center" style="width:4%;">ID</th>
-      <th class="text-center" style="width:8%;">PATENTE</th>
-      <th class="text-center" style="width:20%;">MODELO</th>
-      <th class="text-center" style="width:5%;">AÑO</th>
-      <th class="text-center" style="width:15%;">TIPO DE COMBUSTIBLE</th>
-      <th class="text-center" style="width:15%;">TIPO DE CAJA</th>
-      <th class="text-center" style="width:15%;">COMBUSTIBLE</th>
-      <th class="text-center" style="width:5%;">COLOR</th>
-      <th class="text-center" style="width:15%;">ESTADO</th>
-      <th class="text-center" style="width:5%;">MODIFICAR</th>
-    </tr>
-    <% @autos.each do |auto| %>
+<div class="container-sm">
+ <hr> 
+  <div class="table-responsive">
+    <table class="table">
       <tr>
-        <td class="text-center"><%= auto.id %></td>
-        <td class="text-center"><%= auto.patente %></td>
-        <td class="text-center"><%= auto.modelo %></td>
-        <td class="text-center"><%= auto.anio %></td>
-        <td class="text-center"><%= auto.tipo_de_combustible %></td>
-        <td class="text-center"><%= auto.tipo_de_caja %></td>
-        <td class="text-center"><%= auto.porcentaje_combustible %></td>
-        <td class="text-center" style="background-color: <%= auto.color %>;"></td>
-        <td class="text-center"><%= auto.estado %></td>
-        <td class="text-center"><%= link_to "Editar", root_path, :class => "btn btn-primary" %></td>
-        <%# <td class="text-center"><%= link_to "Editar", autos_editarAuto_path(auto.id), :class => "btn btn-primary" %>
+        <th class="fs-5 text-center">ID</th>
+        <th class="fs-5 text-center">PATENTE</th>
+        <th class="fs-5 text-center">MODELO</th>
+        <th class="fs-5 text-center">AÑO</th>
+        <th class="fs-5 text-center">TIPO DE COMBUSTIBLE</th>
+        <th class="fs-5 text-center">TIPO DE CAJA</th>
+        <th class="fs-5 text-center">COMBUSTIBLE</th>
+        <th class="fs-5 text-center">COLOR</th>
+        <th class="fs-5 text-center">ESTADO</th>
+        <th class="fs-5 text-center">MODIFICAR</th>
       </tr>
-    <% end %>
-  </table> 
+      <%-@autos.each do |auto|-%>
+        <tr>
+        <td class="font-size: 1rem text-center"><%= auto.id %></td>
+        <td class="font-size: 1rem text-center"><%= auto.patente %></td>
+        <td class="font-size: 1rem text-center"><%= auto.modelo %></td>
+        <td class="font-size: 1rem text-center"><%= auto.anio %></td>
+        <td class="font-size: 1rem text-center"><%= auto.tipo_de_combustible %></td>
+        <td class="font-size: 1rem text-center"><%= auto.tipo_de_caja %></td>
+        <td class="font-size: 1rem text-center"><%= auto.porcentaje_combustible %></td>
+        <td class="font-size: 1rem text-center" style="background-color: <%= auto.color %>;"></td>
+        <td class="font-size: 1rem text-center"><%= auto.estado %></td>
+        <td class="font-size: 1rem text-center"><%= link_to "Editar", edit_auto_path(auto.id), :class => "btn btn-primary" %></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
 </div>
 
 <style>
@@ -108,3 +104,44 @@
     <%# </tr> %>
 <%# <% end %>
 <!--<%= @autos.inspect%>
+
+<%# <%= search_form_for @q do |f| %>
+  <%# <%= f.label :patente_cont %>
+  <%# <%= f.search_field :patente_cont %>
+<%# <% end %>
+
+<%# <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> %>
+<%# <div calss="m-5" style="margin-bottom: 10px"> %>
+
+<%# </div>
+<div>
+  <table id="myTable">
+    <tr class="header">
+      <th class="text-center" style="width:4%;">ID</th>
+      <th class="text-center" style="width:8%;">PATENTE</th>
+      <th class="text-center" style="width:20%;">MODELO</th>
+      <th class="text-center" style="width:5%;">AÑO</th>
+      <th class="text-center" style="width:15%;">TIPO DE COMBUSTIBLE</th>
+      <th class="text-center" style="width:15%;">TIPO DE CAJA</th>
+      <th class="text-center" style="width:15%;">COMBUSTIBLE</th>
+      <th class="text-center" style="width:5%;">COLOR</th>
+      <th class="text-center" style="width:15%;">ESTADO</th>
+      <th class="text-center" style="width:5%;">MODIFICAR</th>
+    </tr> %>
+    <%# <% @autos.each do |auto| %> 
+      <%# <tr> %>
+        <%# <td class="text-center"><%= auto.id %></td>
+        <%# <td class="text-center"><%= auto.patente %></td> 
+        <%# <td class="text-center"><%= auto.modelo %></td> 
+        <%# <td class="text-center"><%= auto.anio %></td> 
+        <%# <td class="text-center"><%= auto.tipo_de_combustible %></td> 
+        <%# <td class="text-center"><%= auto.tipo_de_caja %></td> 
+        <%# <td class="text-center"><%= auto.porcentaje_combustible %></td> 
+        <%# <td class="text-center" style="background-color: <%= auto.color %></td> 
+        <%# <td class="text-center"><%= auto.estado %></td> 
+        <%# <td class="text-center"><%= link_to "Editar", root_path, :class => "btn btn-primary" %></td>
+        <%# <td class="text-center"><%= link_to "Editar", autos_editarAuto_path(auto.id), :class => "btn btn-primary" %>
+      <%# </tr> %>
+    <%# <% end %>
+  <%# </table> 
+</div> %>
