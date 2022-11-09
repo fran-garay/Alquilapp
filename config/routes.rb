@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     delete 'admins/deleteSupervisor/:id', to: 'admins/registrations#deleteSupervisor', as: 'deleteSupervisor'
   end
 
+  devise_scope :user do
+    put 'users/edit', to: 'users/registrations#updateUser', as: 'updateUser'
+  end
+
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
   # devise_for :supervisors, controllers: {
@@ -26,7 +30,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations',
   }
-  resources :users
+  resources :users, only: [:index]
   resources :admins, only: [:index]
 
 

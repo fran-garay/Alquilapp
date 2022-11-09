@@ -17,13 +17,13 @@ class Admin < ApplicationRecord
 
   def is_an_adult
     if birth_date.present? && birth_date > 18.years.ago
-      errors.add(:birth_date, "El administrador debe ser mayor de edad")
+      errors.add(:birth_date, "es inválida, debe ser mayor de edad")
     end
   end
 
   def phone_only_contains_numbers
     if phone.present? && !phone.match?(/\A[+-]?\d+\z/)
-      errors.add(:phone, "El teléfono solo debe contener números")
+      errors.add(:phone, "solo debe contener números")
     end
   end
 
