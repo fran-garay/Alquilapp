@@ -1,9 +1,15 @@
 <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
+          <%# <img src="https://cdn.vectorstock.com/i/1000x1000/71/86/car-icon-orange-sticker-vector-1727186.webp" class="card-img-top" alt="..."> %>
+<%# D:/6to_Ingenieria_de_Software/Alquilapp/app %>
+        <h2 class="text-white">Bienvenido, <%= current_user.first_name %>!</h2>
            <%= link_to "Editar perfil", edit_user_registration_path, class: "nav-link" %>
 
-          <a href="#">Services</a>
+
+          <a href="#">
+          <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, style:"border:none"%>
+          </a>
           <a href="#">Clients</a>
           <a href="#">Contact</a>
         </div>

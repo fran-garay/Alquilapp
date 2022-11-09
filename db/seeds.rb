@@ -25,7 +25,7 @@ Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",
 User.destroy_all
 Admin.destroy_all
 
-User.create(email: "user@gmail.com", first_name: "Lionel Andres", last_name: "Messi", password: "123456",
+User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890", is_being_validated: false)
 User.create(email: "en_validacion@gmail.com", first_name: "Juan", last_name: "Perez", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890")

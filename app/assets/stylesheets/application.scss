@@ -35,6 +35,11 @@ black_bg {
     transition: 0.5s;
   }
 
+  .overlay button {
+    background-color: rgb(255, 171, 14);
+    color: #818181;
+  }
+
   .overlay-content {
     position: relative;
     top: 25%;
@@ -52,7 +57,13 @@ black_bg {
     transition: 0.3s;
   }
 
+
+
   .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+
+  .overlay button:hover, .overlay button:focus {
     color: #f1f1f1;
   }
 
@@ -84,4 +95,14 @@ black_bg {
   border-radius:50%;
   width:50px;
   height:50px;
+  }
+
+  i {
+    margin-left: 5px;
+    color: #818181;
+  }
+
+  i:hover, i:focus {
+    color: rgb(255, 171, 14);
+    cursor: pointer ;
   }
