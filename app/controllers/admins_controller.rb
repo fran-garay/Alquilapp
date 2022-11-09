@@ -2,6 +2,7 @@ class AdminsController < ApplicationController
   layout "for_admins"
   before_action :authenticate_admin!
   def index
+    flash.keep
   end
 
   def listar_usuarios

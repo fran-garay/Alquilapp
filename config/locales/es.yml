@@ -13,6 +13,7 @@ es:
         email: "El email"
         password: "La contraseña"
         password_confirmation: "La contraseña"
+        current_password: "La contraseña actual"
       user:
         phone: "El teléfono"
         birth_date: "La fecha de nacimiento"
@@ -21,6 +22,7 @@ es:
         email: "El email"
         password: "La contraseña"
         password_confirmation: "La contraseña"
+        current_password: "La contraseña actual"
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

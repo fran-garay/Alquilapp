@@ -15,7 +15,18 @@
 
   <body>
 
-
+     <% if notice != nil%>
+      <div class="alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+          <%= notice %>
+          <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <%end%>
+    <% if alert != nil%>
+      <div class="alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <%end%>
 
     <div class="d-flex flex-column border border-5 border-danger element-mobile-100vh" >
 
@@ -27,10 +38,9 @@
     </div>
 
     <%# check if current user not on edit path %>
-    <% if !request.original_url.include? "edit" %>
+    <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
       <%= render "users/partials/footer" %>
     <% end %>
-      <%# request.original_url %>
 
     </div>
 
@@ -98,19 +108,7 @@
       element[0].parentNode.removeChild(element[0]);
     }, 3000);
 
-
-
-    // hide and show navbar when button b is pressed
-    var b = document.getElementById("b");
-    var navbar = document.getElementById("nav");
-    b.addEventListener("click", function() {
-      if (navbar.style.display === "none") {
-        navbar.style.display = "block";
-      } else {
-        navbar.style.display = "none";
-      }
-    });
-
+    // hide and show navbar when button
     function openNav() {
       document.getElementById("myNav").style.width = "65%";
     }
