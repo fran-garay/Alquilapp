@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :autos, only: [:new, :create, :edit, :update]
+  resources :precios
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
   # }

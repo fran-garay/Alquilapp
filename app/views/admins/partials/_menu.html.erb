@@ -11,8 +11,20 @@
         <li class="nav-item">
           <%= link_to "Home", root_path, class:"nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Listar autos", "/autos", class:"nav-link" %> <%# Ni idea pq no funca %>
+        <%# <li class="nav-item"> %>
+          <%# <%= link_to "Listar autos", "/autos", class:"nav-link" %>
+        <%# </li> %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Vehiculos
+          </a>
+          <ul class="dropdown-menu">
+            <li> <%= link_to "Listar", '/autos', class:"dropdown-item" %> </li>
+            <li> <%= link_to "Nuevo", '/autos/new', class:"dropdown-item" %> </li>
+            <% if current_admin.is_admin %>
+              <li> <%= link_to "Precio", '/precios', class:"dropdown-item" %> </li>
+            <% end %>
+          </ul>
         </li>
         <% if current_admin.is_admin %>
         <li class="nav-item dropdown">
