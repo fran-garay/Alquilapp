@@ -16,13 +16,13 @@
   <body>
 
      <% if notice != nil%>
-      <div class="alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+      <div class="close_alert alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
           <%= notice %>
           <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <%end%>
     <% if alert != nil%>
-      <div class="alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert">
+      <div class="close_alert alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert">
           <%= alert %>
           <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
@@ -34,7 +34,14 @@
 
 
     <div class="container z1" style="flex-grow:1;">
-      <%= yield %>
+      <% if current_user.is_being_validated? %>
+        <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+          <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
+          <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </div>
 
     <%# check if current user not on edit path %>
@@ -104,7 +111,7 @@
 
     // delete myalert after 5 seconds
     setTimeout(function() {
-      var element = document.getElementsByClassName("alert");
+      var element = document.getElementsByClassName("close_alert");
       element[0].parentNode.removeChild(element[0]);
     }, 3000);
 
@@ -116,6 +123,21 @@
     function closeNav() {
       document.getElementById("myNav").style.width = "0%";
     }
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("max", today);
 
   </script>
 </html>
