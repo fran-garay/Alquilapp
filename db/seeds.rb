@@ -44,7 +44,6 @@ Admin.create(email:"super2@gmail.com", first_name: "Ernesto", last_name: "Flores
 Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345678")
 
-Admin.create(email:"admin@gmail.com", first_name: "Laureano", last_name: "Admin", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
-Admin.create(email:"super@gmail.com", first_name: "Francisco", last_name: "Super", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)
-User.create(email: "user@gmail.com", first_name: "Jerónimo", last_name: "User", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)))
-User.create(email: "ruben@gmail.com", first_name: "Ruben", last_name: "User", password: "123456", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)))
+User.all.each do |user|
+    Wallet.create(user_id: user.id, saldo: 0, ultima_carga: 0, ultima_descarga: 0)
+end
