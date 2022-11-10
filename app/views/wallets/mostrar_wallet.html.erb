@@ -1,5 +1,11 @@
+<button type="button" class="btn btn-default btn-circle btn-lg">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+  </svg>
+</button>
+
 <div>
-<h3 class="text-center pb-4">Aquí está tu saldo disponible, <strong><%= @wallet.user.first_name%></strong></h3>
+  <h3 class="text-center p-4">Aquí está tu saldo disponible, <strong><%= @wallet.user.first_name%></strong></h3>
 </div>
 <div class="container-fluid d-flex justify-content-center">
     <% if @wallet.saldo >= 0 %>
@@ -15,26 +21,57 @@
     </button>
 </div>
 
+
+
+
+
+<table class="table text-center mt-3">
+  <thead>
+    <tr>
+      <th scope="col" style="color: green">Última carga</th>
+      <th scope="col" style="color: red">Último gasto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="color: green">
+        $ <%= @wallet.ultima_carga %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+      </td>
+      <td style="color: red">
+        $ <%= @wallet.ultimo_gasto %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+        </svg>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <!-- Button trigger modal -->
 <div class="d-flex justify-content-center">
-<button type="button" class="btn btn-warning m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"></path>
-    </svg>
-    Cargar saldo
-</button>
+  <button type="button" class="btn btn-warning m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"></path>
+      </svg>
+      Cargar saldo
+  </button>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar saldo</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
+
         <div class="row m-4">
             <div class="form-outline">
                 <input type="text" id="formNameOnCard" class="form-control"  placeholder="Juan Pérez" />
@@ -50,22 +87,25 @@
         </div>
 
         <div class="row m-4">
+
           <div class="col-5">
             <div class="form-outline">
               <input type="date" id="formExpiration" class="form-control" />
               <label class="form-label" for="formExpiration">Vencimiento</label>
             </div>
           </div>
+
           <div class="col-3">
             <div class="form-outline">
               <input type="text" id="formCVV" class="form-control"  placeholder="123" />
               <label class="form-label" for="formCVV">CVV</label>
             </div>
           </div>
+
         </div>
 
 
-        <%= form_for(@wallet, as: :user, url: "/wallets/cargar_saldo/#{@wallet.user_id}/" , html: { method: :put }) do |form| %>
+        <%= form_for(@wallet, as: :wallet, url: "/wallets/cargar_saldo/#{@wallet.user_id}/" , html: { method: :put }) do |form| %>
         <div class="row m-4">
           <div class="col-5">
             <div class="form-outline">
@@ -80,30 +120,8 @@
           <%= form.submit "Pagar", class: "btn btn-warning" %>
         </div>
         <% end %>
-
-
-
-<!--
-        <div class="row m-4">
-          <div class="input-group">
-            <span class="input-group-text">$</span>
-            <div class="form-outline">
-              <input type="number" class="form-control" id="formAmount" placeholder="1000">
-            </div>
-          </div>
-          <label for="formAmount">Monto</label>
-        </div>
       </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
-        <button type="button" class="btn btn-warning">Pagar</button>
-      </div>
-    </div> -->
-
-    
-
-
-
+      
+    </div>
   </div>
 </div>

@@ -24,14 +24,8 @@ Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",
 #Usuarios
 User.destroy_all
 Admin.destroy_all
-User.create(email: "user@gmail.com", first_name: "Ruben", last_name: "User", password: "123456",
-    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)))
-Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
-    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)
-Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
-    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
-
 
 Admin.create(email:"admin@gmail.com", first_name: "Laureano", last_name: "Admin", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
 Admin.create(email:"super@gmail.com", first_name: "Francisco", last_name: "Super", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)
 User.create(email: "user@gmail.com", first_name: "Jerónimo", last_name: "User", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)))
+User.create(email: "ruben@gmail.com", first_name: "Ruben", last_name: "User", password: "123456", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)))
