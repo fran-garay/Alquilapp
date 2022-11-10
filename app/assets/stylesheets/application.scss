@@ -18,7 +18,7 @@ black_bg {
 .floating_btn{
   font-size:25px;
   cursor:pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
 // Menu izquierdo
@@ -40,13 +40,13 @@ black_bg {
     color: #818181;
   }
 
-  .overlay-content {
-    position: relative;
-    top: 25%;
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
-  }
+  // .overlay-content {
+  //   position: relative;
+  //   top: 25%;
+  //   width: 100%;
+  //   text-align: center;
+  //   margin-top: 30px;
+  // }
 
   .overlay a {
     padding: 8px;
@@ -68,9 +68,10 @@ black_bg {
   }
 
   .overlay .closebtn {
-    position: absolute;
+    // position: absolute;
     top: 20px;
-    right: 45px;
+    // right: 65px;
+    align-self : flex-end;
     font-size: 60px;
   }
 
@@ -105,4 +106,22 @@ black_bg {
   i:hover, i:focus {
     color: rgb(255, 171, 14);
     cursor: pointer ;
+  }
+
+  .icon_img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: white;
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    z-index: auto;
+    border: 2px solid white;
+    border-radius: 10%;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 5px;
   }
