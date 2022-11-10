@@ -23,6 +23,10 @@ class AdminsController < ApplicationController
     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :id, :is_admin, :first_name, :last_name, :phone, :birth_date])
   end
 
+  def showUser
+    @user = User.find(params[:id])
+  end
+
   # def layout_by_resource
   #   if admin_signed_in?
   #     "for_admins"

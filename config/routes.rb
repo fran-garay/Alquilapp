@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'
   get '/autos', :to => 'autos#listadoDeAutos'
 
+  get '/admins/showUser/:id', :to => 'admins#showUser', as: 'showUser'
+
   root "main#home"
   match "*path" => redirect("/"), via: [:get, :post]
 end
