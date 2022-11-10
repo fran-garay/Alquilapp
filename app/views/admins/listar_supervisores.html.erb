@@ -1,4 +1,7 @@
 <h1 class="h1 text-center">Supervisores registrados</h1>
+<% if @admin != nil %>
+  <%= render "admins/shared/error_messages", resource: @admin %>
+<% end %>
 <div class="container-sm">
   <hr>
   <div class="table-responsive">
@@ -13,7 +16,9 @@
 
           <td style="font-size: 1rem">
             <%= link_to "Editar", "/admins/editSupervisor/#{supervisor.id}", class: "btn btn-primary p-1" %>
-            <%# <%= link_to "Eliminar", "/admin/:id", method: delete class: "btn btn-danger p-1" %>
+          </td>
+          <td>
+            <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger p-1" %>
           </td>
         </tr>
       <%end%>

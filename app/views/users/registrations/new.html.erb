@@ -1,47 +1,51 @@
 <div class="border">
-  <h2>Registro de usuarios</h2>
+  <h2>Registrarse</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :Email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
     </div>
 
     <div class="field">
-      <%= f.label :password %>
+      <%= f.label :Constraseña %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <div class="d-flex align-items-center">
+        <%= f.password_field :password, autocomplete: "new-password", required: true, minlength: 6, id:"user_password"  %>
+        <i  class="fa" id="eye">&#xf06e;</i>
+      </div>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.label "Confirmación de contraseña" %><br />
+      <div class="d-flex align-items-center">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6 %>
+        <i  class=" fa " id="eye2">&#xf06e;</i>
+      </div>
     </div>
 
     <div class="field">
       <%= f.label :Nombre %><br />
-      <%= f.text_field :first_name %>
+      <%= f.text_field :first_name, required: true, minlength: 3, maxlength: 50, size:20 %>
     </div>
 
     <div class="field">
       <%= f.label :Apellido %><br />
-      <%= f.text_field :last_name %>
+      <%= f.text_field :last_name, required: true, minlength: 3, maxlength: 50, size:20 %>
     </div>
 
     <div class="field">
       <%= f.label :Numero_de_telefono %><br />
-      <%= f.number_field :phone %>
+      <%= f.number_field :phone, required: true, placeholder:"Ej: 2214230649" %>
     </div>
-
-
 
     <div class="field">
       <%= f.label :fecha_de_nacimiento %><br />
-      <%= f.date_field :birth_date %>
+      <%= f.date_field :birth_date, required: true, id:"datefield", min:'1899-01-01', max:'0-13-13' %>
     </div>
 
     <hr>

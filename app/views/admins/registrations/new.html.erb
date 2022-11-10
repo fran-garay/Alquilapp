@@ -1,5 +1,5 @@
 <div>
-  <h4>Sign up </h4>
+  <h4>Registro de personal</h4>
   <% logger.debug "DEBUG: #{resource.inspect}" %>
    <% logger.debug "RESOURCE: #{resource}" %>
    <% logger.debug "el name: #{resource_name}" %>
@@ -7,54 +7,59 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "admins/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+   <div class="field">
+      <%= f.label :Email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
     </div>
 
     <div class="field">
-      <%= f.label :password %>
+      <%= f.label :Constraseña %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.label "Confirmación de contraseña" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
     </div>
 
     <div class="field">
       <%= f.label :Nombre %><br />
-      <%= f.text_field :first_name %>
+      <%= f.text_field :first_name, required: true %>
     </div>
 
     <div class="field">
       <%= f.label :Apellido %><br />
-      <%= f.text_field :last_name %>
+      <%= f.text_field :last_name, required: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :DNI %><br />
+      <%= f.number_field :dni, required: true %>
     </div>
 
     <div class="field">
       <%= f.label :Numero_de_telefono %><br />
-      <%= f.number_field :phone %>
+      <%= f.number_field :phone, required: true %>
     </div>
 
     <div class="field">
       <%= f.label :fecha_de_nacimiento %><br />
-      <%= f.date_field :birth_date %>
+      <%= f.date_field :birth_date, required: true, id:"datefield", min:'1899-01-01', max:'0-13-13' %>
     </div>
-    <div><br/><div>
+    <div><br/></div>
 
     <div class="field">
       <%= f.label "Es administrador", sytle:"margin-right:2px" %>
-      <%= f.check_box :is_admin, style:"margin-top:2px" %>
+      <%= f.check_box :is_admin, style:"margin-top:2px", required: true %>
     </div>
 
     <hr>
 
     <div class="actions">
-      <%= f.submit "Sign up" %>
+      <%= f.submit "Registrar", class:"btn btn-info p-2" %>
     </div>
   <% end %>
 </div>

@@ -1,3 +1,5 @@
+# Traducciones adicionales en https://github.com/plataformatec/devise/wiki/I18n
+
 es:
   devise:
     confirmations:
@@ -41,8 +43,10 @@ es:
       update_needs_confirmation: "Ha actualizado su cuenta correctamente, sin embargo necesitamos verificar su nueva cuenta de correo. Por favor revise su correo electrónico y visite el enlace para finalizar la confirmación de su nueva dirección de correo electrónico."
       updated: "Ha actualizado tu cuenta correctamente."
     sessions:
-      signed_in: "Ha iniciado sesión satisfactoriamente."
-      signed_out: "Ha cerrado la sesión satisfactoriamente."
+      signed_in: "Ha iniciado sesión exitosamente."
+      signed_out: "Ha cerrado la sesión exitosamente."
+      user:
+        already_signed_out: "Se cerró la sesión"
     unlocks:
       send_instructions: "Recibira un correo electrónico en unos minutos con instrucciones sobre cómo desbloquear su cuenta."
       send_paranoid_instructions: "Si su cuenta existe, recibira un correo electrónico en unos minutos con instrucciones sobre cómo desbloquear su cuenta."

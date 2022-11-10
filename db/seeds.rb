@@ -21,9 +21,28 @@ Auto.create(patente:"KJH-123", porcentaje_combustible:50.2, estado:"Ocupado", mo
 Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",modelo:"Megan", anio:2008,
     tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#A8A560")
 
+#Precios
+Precio.create(valor: 100.56, fecha_de_actualizacion: "2020-12-17")
+Precio.create(valor: 200.72, fecha_de_actualizacion: "2020-12-24")
+Precio.create(valor: 300.38, fecha_de_actualizacion: "2021-01-01")
+Precio.create(valor: 400.24, fecha_de_actualizacion: "2021-03-10")
+
 #Usuarios
 User.destroy_all
 Admin.destroy_all
+
+User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890", is_being_validated: false)
+User.create(email: "en_validacion@gmail.com", first_name: "Juan", last_name: "Perez", password: "123456",
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890")
+
+Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, phone: "1234567890", dni: "12345678")
+Admin.create(email:"super2@gmail.com", first_name: "Ernesto", last_name: "Flores", password: "123456",
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, is_handling_report: :true,
+     phone: "1234567890", dni: "87654321")
+Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345678")
 
 Admin.create(email:"admin@gmail.com", first_name: "Laureano", last_name: "Admin", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)), is_admin: :true)
 Admin.create(email:"super@gmail.com", first_name: "Francisco", last_name: "Super", password: "12345678", password_confirmation: "12345678", birth_date: (Date.new(2001, 11, 18)), is_admin: :false)

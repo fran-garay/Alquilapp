@@ -8,10 +8,8 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required:true %>
   </div>
-
-
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -22,40 +20,45 @@
     <% end %>
   </div>
 
-  <%# fields for first_name, last_name, phone, birth_date, is_admin %>
-  <div class="field">
-    <%= f.label :Nombre %><br />
-    <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Apellido %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Teléfono %><br />
-    <%= f.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Fecha_de_nacimiento %><br />
-    <%= f.date_field :birth_date %>
-  </div>
-
-  <div class="field mt-2 mb-2">
-      <%= f.label "Es administrador", sytle:"margin-right:2px" %>
-      <%= f.check_box :is_admin, style:"margin-top:2px" %>
-    </div>
-
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <%# fields for first_name, last_name, phone, birth_date, is_admin %>
+  <div class="field">
+    <%= f.label :Nombre %><br />
+    <%= f.text_field :first_name, required:true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Apellido %><br />
+    <%= f.text_field :last_name, required:true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :DNI %><br />
+    <%= f.number_field :dni, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Teléfono %><br />
+    <%= f.text_field :phone, required:true %>
+  </div>
+
+  <div class="field">
+      <%= f.label :fecha_de_nacimiento %><br />
+      <%= f.date_field :birth_date, required: true, id:"datefield", min:'1899-01-01', max:'0-13-13', required:true %>
+    </div>
+
+  <div class="field mt-2 mb-2">
+      <%= f.label "Es administrador", sytle:"margin-right:2px" %>
+      <%= f.check_box :is_admin, style:"margin-top:2px" %>
+  </div>
+
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", required:true %>
   </div>
 
 

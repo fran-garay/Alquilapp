@@ -1,7 +1,8 @@
 class AdminsController < ApplicationController
-  layout :layout_by_resource
+  layout "for_admins"
   before_action :authenticate_admin!
   def index
+    flash.keep
   end
 
   def listar_usuarios
@@ -22,11 +23,11 @@ class AdminsController < ApplicationController
     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :id, :is_admin, :first_name, :last_name, :phone, :birth_date])
   end
 
-  def layout_by_resource
-    if admin_signed_in?
-      "for_admins"
-    else
-      "application"
-    end
-  end
+  # def layout_by_resource
+  #   if admin_signed_in?
+  #     "for_admins"
+  #   else
+  #     "application"
+  #   end
+  # end
 end

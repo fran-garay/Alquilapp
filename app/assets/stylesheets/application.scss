@@ -18,7 +18,7 @@ black_bg {
 .floating_btn{
   font-size:25px;
   cursor:pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
 // Menu izquierdo
@@ -35,13 +35,18 @@ black_bg {
     transition: 0.5s;
   }
 
-  .overlay-content {
-    position: relative;
-    top: 25%;
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
+  .overlay button {
+    background-color: rgb(255, 171, 14);
+    color: #818181;
   }
+
+  // .overlay-content {
+  //   position: relative;
+  //   top: 25%;
+  //   width: 100%;
+  //   text-align: center;
+  //   margin-top: 30px;
+  // }
 
   .overlay a {
     padding: 8px;
@@ -52,14 +57,21 @@ black_bg {
     transition: 0.3s;
   }
 
+
+
   .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
   }
 
+  .overlay button:hover, .overlay button:focus {
+    color: #f1f1f1;
+  }
+
   .overlay .closebtn {
-    position: absolute;
+    // position: absolute;
     top: 20px;
-    right: 45px;
+    // right: 65px;
+    align-self : flex-end;
     font-size: 60px;
   }
 
@@ -78,3 +90,38 @@ black_bg {
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
 }
+
+// rounded button
+.bien_redondito{
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  }
+
+  i {
+    margin-left: 5px;
+    color: #818181;
+  }
+
+  i:hover, i:focus {
+    color: rgb(255, 171, 14);
+    cursor: pointer ;
+  }
+
+  .icon_img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: white;
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    z-index: auto;
+    border: 2px solid white;
+    border-radius: 10%;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 5px;
+  }
