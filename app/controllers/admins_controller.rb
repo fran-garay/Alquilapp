@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
   end
 
   def listar_usuarios
-    @users = User.all
+    @users = User.all.order(:first_name)
   end
 
   def listar_supervisores
