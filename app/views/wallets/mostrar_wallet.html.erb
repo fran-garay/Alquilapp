@@ -63,7 +63,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <form class="modal-content">
 
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar saldo</h1>
@@ -74,14 +74,14 @@
 
         <div class="row m-4">
             <div class="form-outline">
-                <input type="text" id="formNameOnCard" class="form-control"  placeholder="Juan Pérez" />
+                <input required type="text" id="formNameOnCard" class="form-control"  placeholder="Juan Pérez" />
                 <label class="form-label" for="formNameOnCard">Nombre en tarjeta</label>
             </div>
         </div>
 
         <div class="row m-4">
           <div class="form-outline">
-            <input type="money" id="formCardNumber" class="form-control"  placeholder="XXXX XXXX XXXX XXXX"/>
+            <input required type="number" id="formCardNumber" class="form-control" min="1000000000000000" max="9999999999999999"  placeholder="XXXX XXXX XXXX XXXX"/>
             <label class="form-label" for="formCardNumber">Número de tarjeta</label>
           </div>
         </div>
@@ -90,14 +90,14 @@
 
           <div class="col-5">
             <div class="form-outline">
-              <input type="date" id="formExpiration" class="form-control" />
+              <input required type="date" id="formExpiration" class="form-control" />
               <label class="form-label" for="formExpiration">Vencimiento</label>
             </div>
           </div>
 
           <div class="col-3">
             <div class="form-outline">
-              <input type="text" id="formCVV" class="form-control"  placeholder="123" />
+              <input required type="number" min="100" max="999" step="1" id="formCVV" class="form-control"  placeholder="123" />
               <label class="form-label" for="formCVV">CVV</label>
             </div>
           </div>
@@ -107,9 +107,12 @@
 
         <%= form_for(@wallet, as: :wallet, url: "/wallets/cargar_saldo/#{@wallet.user_id}/" , html: { method: :put }) do |form| %>
         <div class="row m-4">
-          <div class="col-5">
+          <div class="col-7">
             <div class="form-outline">
-              <%= form.number_field :ultima_carga, class: "form-control" %>
+              <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">$</span>
+              <%= form.number_field :ultima_carga, class: "form-control", min: "0", required: true %>
+              </div>
               <%= form.label "Monto" %>
             </div>
           </div>
