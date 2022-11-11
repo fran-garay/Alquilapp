@@ -1,12 +1,14 @@
-<h1>VehListado de Autosiculo</h1>
+<h1>Listado de Vehículos</h1>
 
-<% @autos = Auto.all%>
+
+<% if current_admin.is_admin? %>
 <br>
   <%= link_to "Crear nuevo Auto", new_auto_path, :class => "btn btn-primary " %>
 <br>
+<% end %>
 
 <div class="container-sm">
- <hr> 
+ <hr>
   <div class="table-responsive">
     <table class="table">
       <tr>
@@ -32,7 +34,16 @@
         <td class="font-size: 1rem text-center"><%= auto.porcentaje_combustible %></td>
         <td class="font-size: 1rem text-center" style="background-color: <%= auto.color %>;"></td>
         <td class="font-size: 1rem text-center"><%= auto.estado %></td>
+        <% if current_admin.is_admin? %>
         <td class="font-size: 1rem text-center"><%= link_to "Editar", edit_auto_path(auto.id), :class => "btn btn-primary" %></td>
+        <% else %>
+        <td>
+          <%= form_for(auto, as: auto, url: "/autos/cambiarEstado/#{auto.id}" , html: { method: :put }) do |f| %>
+          <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"], class:"form-select", required: true%>
+          <%= f.submit class:"btn btn-info p-1" %>
+          <% end %>
+        <% end %>
+        </td>
         </tr>
       <%end%>
     </table>
@@ -74,74 +85,3 @@
 }
 </style>
 
-<script>
-<function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-
-<%# <% @autos.each do |auto|%>
-    <%# <tr> %>
-        <%# <td><%=auto.id%>
-    <%# </tr> %>
-<%# <% end %>
-<!--<%= @autos.inspect%>
-
-<%# <%= search_form_for @q do |f| %>
-  <%# <%= f.label :patente_cont %>
-  <%# <%= f.search_field :patente_cont %>
-<%# <% end %>
-
-<%# <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> %>
-<%# <div calss="m-5" style="margin-bottom: 10px"> %>
-
-<%# </div>
-<div>
-  <table id="myTable">
-    <tr class="header">
-      <th class="text-center" style="width:4%;">ID</th>
-      <th class="text-center" style="width:8%;">PATENTE</th>
-      <th class="text-center" style="width:20%;">MODELO</th>
-      <th class="text-center" style="width:5%;">AÑO</th>
-      <th class="text-center" style="width:15%;">TIPO DE COMBUSTIBLE</th>
-      <th class="text-center" style="width:15%;">TIPO DE CAJA</th>
-      <th class="text-center" style="width:15%;">COMBUSTIBLE</th>
-      <th class="text-center" style="width:5%;">COLOR</th>
-      <th class="text-center" style="width:15%;">ESTADO</th>
-      <th class="text-center" style="width:5%;">MODIFICAR</th>
-    </tr> %>
-    <%# <% @autos.each do |auto| %> 
-      <%# <tr> %>
-        <%# <td class="text-center"><%= auto.id %></td>
-        <%# <td class="text-center"><%= auto.patente %></td> 
-        <%# <td class="text-center"><%= auto.modelo %></td> 
-        <%# <td class="text-center"><%= auto.anio %></td> 
-        <%# <td class="text-center"><%= auto.tipo_de_combustible %></td> 
-        <%# <td class="text-center"><%= auto.tipo_de_caja %></td> 
-        <%# <td class="text-center"><%= auto.porcentaje_combustible %></td> 
-        <%# <td class="text-center" style="background-color: <%= auto.color %></td> 
-        <%# <td class="text-center"><%= auto.estado %></td> 
-        <%# <td class="text-center"><%= link_to "Editar", root_path, :class => "btn btn-primary" %></td>
-        <%# <td class="text-center"><%= link_to "Editar", autos_editarAuto_path(auto.id), :class => "btn btn-primary" %>
-      <%# </tr> %>
-    <%# <% end %>
-  <%# </table> 
-</div> %>

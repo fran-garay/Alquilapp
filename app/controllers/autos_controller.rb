@@ -2,15 +2,23 @@ class AutosController < ApplicationController
 
   layout "for_admins"
   before_action :authenticate_admin!
-  before_action:set_search
+  # before_action :set_search
 
   def set_search
     @q = Auto.ransack(params[:q])
   end
 
+  def cambiarEstado
+    @auto = Auto.find(params[:auto_id])
+    @auto.estado = estado_params[:estado]
+    @auto.save
+    redirect_to autos_path
+  end
+
   def listadoDeAutos
-    @q = Auto.ransack(params[:q])
-    @autos = @q.result(distinct: true)
+    # @q = Auto.ransack(params[:q])
+    # @autos = @q.result(distinct: true)
+    @autos = Auto.all.order(anio: :desc)
   end
 
   def new
@@ -48,5 +56,9 @@ class AutosController < ApplicationController
   def auto_params
     params.require(:auto).permit(:patente, :modelo, :porcentaje_combustible, :estado, :anio, :tipo_de_caja, :tipo_de_combustible, :color)
   end
-  
+
+  def estado_params
+    params.require(:auto).permit(:estado)
+  end
+
 end
