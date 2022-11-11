@@ -3,7 +3,7 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])rails
 #   Character.create(name: "Luke", movie: movies.first)
 
 #Autos
@@ -59,3 +59,6 @@ Admin.create(email:"super2@gmail.com", first_name: "Ernesto", last_name: "Flores
 Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345679")
 
+User.all.each do |user|
+    Wallet.create(user_id: user.id, saldo: 0, ultima_carga: 0, ultimo_gasto: 0)
+end

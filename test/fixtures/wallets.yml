@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  saldo: 1.5
+  ultimo_gasto: 1.5
+  ultima_carga: 1.5
+
+two:
+  saldo: 1.5
+  ultimo_gasto: 1.5
+  ultima_carga: 1.5

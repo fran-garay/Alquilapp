@@ -37,6 +37,27 @@
 
   <script>
 
+    <% if request.original_url.include?("wallets") %>
+      var form1 = document.getElementById('form1');
+    var form2 = document.getElementById('form2');
+
+    var input1 = document.getElementById('formNameOnCard');
+    var input2 = document.getElementById('formCardNumber');
+    var input3 = document.getElementById('formExpiration');
+    var input4 = document.getElementById('formCVV');
+
+    form2.addEventListener('submit', function(e) {
+        console.log("submit");
+        if (input1.value == "" || input2.value == "" || input3.value == "" || input4.value == "") {
+            e.preventDefault();
+            alert("Por favor, complete todos los campos de la tarjeta");
+        }
+    });
+    <% end %>
+
+
+    eye.addEventListener("click", togglePass);
+
     // button to make password visible
     var password = document.getElementById("user_password")
     var eye = document.getElementById("eye")
