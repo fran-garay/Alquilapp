@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   layout "for_admins"
   before_action :authenticate_admin!
   def index
-    flash.keep
+    # flash.keep
   end
 
   def listar_usuarios
@@ -10,7 +10,7 @@ class AdminsController < ApplicationController
   end
 
   def listar_supervisores
-    @supervisors = Admin.all.where(is_admin: false)
+    @supervisors = Admin.all.where(is_admin: false).order(:first_name)
   end
 
   # GET /resource/edit

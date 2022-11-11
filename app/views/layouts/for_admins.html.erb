@@ -18,13 +18,13 @@
 
 
     <% if notice != nil%>
-      <div class="alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+      <div class="close_alert alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
           <%= notice %>
           <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <%end%>
     <% if alert != nil%>
-      <div class="alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert" style="margin-bottom:1px">
+      <div class="close_alert alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert" style="margin-bottom:1px">
           <%= alert %>
           <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
@@ -34,7 +34,7 @@
 
     <%= render "admins/partials/menu" %>
 
-    <div class="container z1" style="margin-top:1vh; flex-grow:1;">
+    <div class="container" style="margin-top:2vh; flex-grow:1;">
       <%= yield %>
     </div>
 
@@ -46,7 +46,7 @@
   <script>
     // delete myalert after 5 seconds
     setTimeout(function() {
-      var element = document.getElementsByClassName("alert");
+      var element = document.getElementsByClassName("close_alert");
       element[0].parentNode.removeChild(element[0]);
     }, 3000);
 

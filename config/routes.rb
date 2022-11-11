@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     put 'users/edit', to: 'users/registrations#updateUser', as: 'updateUser'
   end
 
+  put "/autos/cambiarEstado/:auto_id", to: "autos#cambiarEstado", as: "cambiarEstado"
+
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
   # devise_for :supervisors, controllers: {

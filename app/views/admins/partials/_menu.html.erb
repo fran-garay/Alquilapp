@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-warning">
-  <div class="container-fluid">
+  <div class="container container-fluid">
     <%= link_to "Alquilapp", root_path, class:"navbar-brand" %>
     <%# <a class="navbar-brand" href="#">Alquilapp</a> %>
     <%# <%= button_to "Listar autos", autos_path,  %>
@@ -41,10 +41,12 @@
           <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"nav-link" %>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <%# <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> %>
+
+      <%= image_tag "logo.png", width: 20, class:"p-1 icon_img_admins" %>
     </div>
   </div>
 </nav>
