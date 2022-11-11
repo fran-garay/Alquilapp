@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'autos/listadoDeAutos'
 
   devise_scope :admin do
     get 'admins/editSupervisor/:id', to: 'admins/registrations#editSupervisor', as: 'editSupervisor'
@@ -9,7 +8,18 @@ Rails.application.routes.draw do
     put 'admins/updateSupervisor/:id', to: 'admins/registrations#updateSupervisor', as: 'updateSupervisor'
   end
 
+  devise_scope :admin do
+    delete 'admins/deleteSupervisor/:id', to: 'admins/registrations#deleteSupervisor', as: 'deleteSupervisor'
+  end
+
+  devise_scope :user do
+    put 'users/edit', to: 'users/registrations#updateUser', as: 'updateUser'
+  end
+
+  put "/autos/cambiarEstado/:auto_id", to: "autos#cambiarEstado", as: "cambiarEstado"
+
   resources :autos, only: [:new, :create, :edit, :update]
+  resources :precios
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
   # }
@@ -22,7 +32,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations',
   }
-  resources :users
+  resources :users, only: [:index]
   resources :admins, only: [:index]
 
 
@@ -40,6 +50,9 @@ Rails.application.routes.draw do
 
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
   get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'
+  get '/autos', :to => 'autos#listadoDeAutos'
+
+  get '/admins/showUser/:id', :to => 'admins#showUser', as: 'showUser'
 
   root "main#home"
   match "*path" => redirect("/"), via: [:get, :post]

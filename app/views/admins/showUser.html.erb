@@ -1,0 +1,14 @@
+
+<h1>Perfil de <%= @user.first_name %></h1>
+<p>El Nombre es: <%= @user.first_name %></p>
+<p>El apellido es: <%= @user.last_name %></p>
+<p>El Email es: <%= @user.email %></p>
+<p>Se registró el: <%= @user.created_at.strftime("%d/%m/%Y") %></p>
+
+<% if @user.is_being_validated %>
+<p>Estado actual: <%= image_tag "times.png", class:"p-2 icon_admins_list" %></p>
+<% else %>
+<p>Estado actual: <%= image_tag "check.png", class:"p-2 icon_admins_list" %></p>
+<% end %>
+
+<%= link_to "Volver", "/admins/listar_usuarios", class: "btn btn-warning p-1" %>

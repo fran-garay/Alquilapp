@@ -1,0 +1,72 @@
+<h1>Welcome to edit car</h1>
+<% if @auto.estado != "Ocupado"%>
+  <div style="padding-left: 20px">
+    <%= form_for (@auto) do |f| %>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :patente %><br>
+        <div class="col-md-2">
+          <%= f.text_field :patente , class:"form-control", required: true%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :anio, "Año" %><br>
+        <div class="col-md-2">
+          <%= f.number_field :anio, class:"form-control", required: true, min:1950, max:2022%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :modelo %><br>
+        <div class="col-md-2">
+          <%= f.text_field :modelo, class:"form-control", required: true%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :tipo_de_caja %><br>
+        <div class="col-md-2">
+          <%= f.select :tipo_de_caja, ["Automatico", "Manual"],  class:"form-select", required: true%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :tipo_de_combustible %><br>
+        <div class="col-md-2" >
+          <%= f.select :tipo_de_combustible, ["Diesel", "Nafta", "Electrico"], class:"form-control", required: true%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :porcentaje_combustible %><br>
+        <div class="col-md-2">
+          <%= f.number_field :porcentaje_combustible, in:0.0..100.0, step: 0.1, class:"form-control", required: true%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :estado %><br>
+        <div class="col-md-2">
+          <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"], class:"form-select", required: true%>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 5px">
+        <%= f.label :color %><br>
+        <div class="col-md-2">
+          <%= f.color_field :color, class:"form-control", required: true%>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px">
+        <%= f.submit class:"btn btn-info" %>
+      </div>
+
+  <%end%>
+</div>
+<%else%>
+  <div class="alert alert-warning alert-dismissible fade show p-2 m-4" role="alert" style="margin-bottom:1px; font-size:22px;">
+          <strong>¡Atención!</strong> El auto de patente <%= @auto.patente %> no se puede editar porque se encuentra ocupado.
+        </div>
+<%end%>

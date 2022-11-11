@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> f83e11f43d24da82bbf6bf4d2deb7e7718f7318c
 # SQLite. Versions 3.8.0 and up are supported.
 #   gem install sqlite3
 #
@@ -12,7 +16,11 @@ default: &default
 development:
   <<: *default
   username: postgres
+<<<<<<< HEAD
   password: 582622658774
+=======
+  password: <%= ENV.fetch("DB_PASS")%>
+>>>>>>> f83e11f43d24da82bbf6bf4d2deb7e7718f7318c
   database: alquilapp_development
 
 # Warning: The database defined as "test" will be erased and
@@ -21,11 +29,19 @@ development:
 test:
   <<: *default
   username: postgres
+<<<<<<< HEAD
   password: 582622658774
+=======
+  password: <%= ENV.fetch("DB_PASS") %>
+>>>>>>> f83e11f43d24da82bbf6bf4d2deb7e7718f7318c
   database: alquilapp_test
 
 production:
   <<: *default
   username: postgres
+<<<<<<< HEAD
   password: 582622658774
+=======
+  password: <%= ENV.fetch("DB_PASS")%>
+>>>>>>> f83e11f43d24da82bbf6bf4d2deb7e7718f7318c
   database: alquilapp_production

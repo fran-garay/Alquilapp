@@ -1,0 +1,51 @@
+<h1>Precio por hora actual</h1>
+<% @precio = Precio.last%>
+
+<% if @precio == nil %>
+  <h2> No hay precio cargado </h2>
+<% else %>
+    <h1 class="m-4" style="color: green; text-align: center; font-size: 4em;">$ <%= @precio.valor %></h1>
+<% end %>
+<!--
+<div id="addItemModal" class="modal">
+  <%= form_with(model: Precio.new, class: "col s12") do |f| %>
+    <div class="modal-content">
+      <h4 class="col s12">Nuevo Precio</h4>
+      <div class="row">
+        <div class="row">
+          <div class="input-field col s6">
+            <%= f.number_field :valor, class:"form-control" %>
+            <%= f.datetime_local_field :fecha_de_actualizacion, class: "validate" %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <%= f.submit "Save", class: "modal-action modal-close waves-effect waves-green btn light-blue darken-2 text-white" %>
+    </div>
+ <% end %>
+</div>
+-->
+
+<h2>Precios pasados</h2>
+<%# <% @precios = Precio.all.reverse%>
+
+<div class="container-sm">
+ <hr>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th class="fs-5 text-center">PRECIO</th>
+        <th class="fs-5 text-center">FECHA DE ACTUALIZACION</th>
+      </tr>
+      <%-@precios.each do |precio|-%>
+        <tr>
+        <td class="font-size: 1rem text-center">$<%= precio.valor %></td>
+        <td class="font-size: 1rem text-center"><%= precio.fecha_de_actualizacion.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div>
