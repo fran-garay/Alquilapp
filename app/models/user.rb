@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :phone, presence: true, length: { minimum: 10, maximum: 10 }
   validate :is_an_adult
   validate :phone_only_contains_numbers
+  has_one_attached :licencia
 
   def is_an_adult
     if birth_date.present? && birth_date > 17.years.ago

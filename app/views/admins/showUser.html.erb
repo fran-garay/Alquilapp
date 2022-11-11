@@ -11,6 +11,13 @@
 <p>Estado actual: <%= image_tag "check.png", class:"p-2 icon_admins_list" %></p>
 <% end %>
 
+<% if @user.licencia.attached? %>
+    <%= image_tag(@user.licencia) %>
+<% else %>
+    <label>No hay imagen para mostrar</label>
+<% end %>
+<br><br>
+
 <%= link_to "Volver", "/admins/listar_usuarios", class: "btn btn-warning p-1" %>
 
 <script>

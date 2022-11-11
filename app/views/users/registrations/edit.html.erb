@@ -3,6 +3,14 @@
 <%= form_for(resource, as: resource_name, url: "/users/edit", html: { method: :put }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
+  <label>Licencia Actual</label><br>
+  <% image_tag(resource.licencia, class:"img-fluid") %>
+  <br><br>
+
+  <div class="field">
+      <%= f.label :licencia %><br />
+      <%= f.file_field :licencia %>
+    </div>
 
   <div class="field">
       <%= f.label :Email %><br />
