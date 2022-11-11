@@ -64,18 +64,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body">
+      <form class="modal-body" id="form1">
 
         <div class="row m-4">
             <div class="form-outline">
-                <input required type="text" id="formNameOnCard" class="form-control"  placeholder="Juan Pérez">
+                <input   type="text" id="formNameOnCard" class="form-control"  placeholder="Juan Pérez" required>
                 <label class="form-label" for="formNameOnCard">Nombre en tarjeta</label>
             </div>
         </div>
 
         <div class="row m-4">
           <div class="form-outline">
-            <input required type="number" id="formCardNumber" class="form-control" min="1000000000000000" max="9999999999999999"  placeholder="XXXX XXXX XXXX XXXX">
+            <input  type="number" id="formCardNumber" class="form-control" min="1000000000000000" max="9999999999999999"  placeholder="XXXX XXXX XXXX XXXX">
             <label class="form-label" for="formCardNumber">Número de tarjeta</label>
           </div>
         </div>
@@ -84,22 +84,23 @@
 
           <div class="col-5">
             <div class="form-outline">
-              <input required type="date" id="formExpiration" class="form-control">
+              <input  type="date" id="formExpiration" class="form-control" required>
               <label class="form-label" for="formExpiration">Vencimiento</label>
             </div>
           </div>
 
           <div class="col-3">
             <div class="form-outline">
-              <input required type="number" min="100" max="999" step="1" id="formCVV" class="form-control"  placeholder="123">
+              <input type="number" min="100" max="999" step="1" id="formCVV" class="form-control"  placeholder="123" required>
               <label class="form-label" for="formCVV">CVV</label>
             </div>
           </div>
 
-        </div>
+        </form>
+<%#
+        <% @wallet.user_id %>
 
-
-        <%= form_for(@wallet, as: :wallet, url: "/wallets/cargar_saldo/#{@wallet.user_id}/" , html: { method: :put }) do |form| %>
+        <%= form_for(@wallet, as: :wallet, url: "/wallets/cargar_saldo/#{@wallet.user_id}" , html: { method: :put, id:"form2" }) do |form| %>
         <div class="row m-4">
           <div class="col-7">
             <div class="form-outline">
@@ -118,7 +119,16 @@
         </div>
         <% end %>
       </div>
-      
+
     </div>
   </div>
 </div>
+
+
+<script>
+
+//  check if form1 has all its fields completed before letting submit form 2
+
+
+
+</script>

@@ -201,7 +201,7 @@ Rails.application.routes.draw do
 
 
 
-  
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end
