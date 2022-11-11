@@ -12,7 +12,7 @@
 <% end %>
 
 <% if @user.licencia.attached? %>
-    <%= image_tag(@user.licencia) %>
+    <%= image_tag(@user.licencia, width: 400) %>
 <% else %>
     <label>No hay imagen para mostrar</label>
 <% end %>

@@ -48,6 +48,7 @@
       </form> %>
 
       <%= image_tag "logo.png", width: 20, class:"p-1 icon_img_admins d-flex" %>
+      <%= button_to "Logout", destroy_admin_session_path, method: :delete, class:"btn btn-info", style:"background-color:white; border-color:white"  %>
     </div>
   </div>
 </nav>

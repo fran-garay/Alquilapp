@@ -12,7 +12,7 @@
   <div class="table-responsive">
     <table class="table">
       <tr>
-        <th class="fs-5 text-center">ID</th>
+        <th class="fs-5 text-center">FOTO</th>
         <%# <th class="fs-5 text-center">FOTO</th> %>
         <th class="fs-5 text-center">PATENTE</th>
         <th class="fs-5 text-center">MODELO</th>
@@ -26,12 +26,14 @@
       </tr>
       <%-@autos.each do |auto|-%>
         <tr>
-        <td class="font-size: 1rem text-center"><%= auto.id %></td>
-        <!--<%if auto.imagen.attached?%>
-          <td class="font-size: 1rem text-center"><%= image_tag(auto.imagen) %></td>
+        <!--<td class="font-size: 1rem text-center"><%= auto.id %></td>-->
+        <td class="font-size: 1rem text-center">
+        <%if auto.imagen.attached?%>
+          <%= image_tag(auto.imagen, class:"icon_admins_list") %></td>
         <%else%>
-          <td class="font-size: 1rem text-center">Sin Foto</td>
-        <%end%>-->
+          <label>Sin Foto</label>
+        <%end%>
+        </td>
         <td class="font-size: 1rem text-center"><%= auto.patente %></td>
         <td class="font-size: 1rem text-center"><%= auto.modelo %></td>
         <td class="font-size: 1rem text-center"><%= auto.anio %></td>
@@ -56,7 +58,7 @@
   </div>
 </div>
 
-<style>
+<%# <style>
  #myInput {
   background-image: url('/css/searchicon.png'); /* Add a search icon to input */
   background-position: 10px 12px; /* Position the search icon */
@@ -89,5 +91,5 @@
   /* Add a grey background color to the table header and on hover */
   background-color: #f1f1f1;
 }
-</style>
+</style> %>
 

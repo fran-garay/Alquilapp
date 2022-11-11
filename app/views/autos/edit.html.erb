@@ -1,15 +1,13 @@
-<h1>Welcome to edit car</h1>
+<h1>Editar Vehículo</h1>
 <% if @auto.estado != "Ocupado"%>
-  <div style="padding-left: 20px">
-    <%= form_for (@auto) do |f| %>
 
-<% if @auto.imagen.attached?%>
-  <% if @auto.imagen.representable?%>
-    <%= image_tag(@auto.imagen)%>
+  <% if @auto.imagen.attached?%>
+    <% if @auto.imagen.representable?%>
+      <%= image_tag(@auto.imagen, width: 400)%>
+    <%end%>
+  <%else%>
+    <label>No hay imagen Disponible</label>
   <%end%>
-<%else%>
-  <label>No hay imagen Disponible</label>
-<%end%>
 
 <div style="padding-left: 20px">
   <%= form_for (@auto) do |f| %>
