@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
   username: postgres
-  password: admin
+  password: <%= ENV.fetch("DB_PASS") %>
   database: alquilapp_development
 
 # Warning: The database defined as "test" will be erased and
@@ -21,11 +21,11 @@ development:
 test:
   <<: *default
   username: postgres
-  password: admin
+  password: <%= ENV.fetch("DB_PASS") %>
   database: alquilapp_test
 
 production:
   <<: *default
   username: postgres
-  password: admin
+  password: <%= ENV.fetch("DB_PASS") %>
   database: alquilapp_production

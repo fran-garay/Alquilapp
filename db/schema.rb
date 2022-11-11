@@ -115,9 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_230755) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  
   create_table "wallets", force: :cascade do |t|
     t.float "saldo"
     t.float "ultimo_gasto"
@@ -127,4 +124,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_230755) do
     t.bigint "user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end
