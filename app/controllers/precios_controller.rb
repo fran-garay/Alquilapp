@@ -26,8 +26,6 @@ class PreciosController < ApplicationController
     end
 
     def editarPrecio
-        logger.debug "\n\n\n\nPrecio: #{@precio}\n\n\n\n"
-
         @precio = Precio.new(valor: precio_params[:valor], fecha_de_actualizacion: Time.now)
         @precio.save
         redirect_to precios_path
