@@ -1,8 +1,21 @@
 <h1>Welcome to edit car</h1>
 
-<% auto = Auto.new %>
+<% if @auto.imagen.attached?%>
+  <% if @auto.imagen.representable?%>
+    <%= image_tag(@auto.imagen)%>
+  <%end%>
+<%else%>
+  <label>No hay imagen Disponible</label>
+<%end%>
+
 <div style="padding-left: 20px">
   <%= form_for (@auto) do |f| %>
+    <br>
+    <div>
+      <%= f.label :imagen %><br>
+      <div class="col-md-2">
+        <%= f.file_field :imagen%>
+      </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :patente %><br>

@@ -5,6 +5,13 @@
   <%= form_for (@auto) do |f| %>
 
     <div class="form-group" style="margin-bottom: 5px">
+      <%= f.label :imagen %><br>
+      <div class="col-md-2">
+        <%= f.file_field :imagen %>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :patente %><br>
       <div class="col-md-2">
         <%= f.text_field :patente , class:"form-control"%>

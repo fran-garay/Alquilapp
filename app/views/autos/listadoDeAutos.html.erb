@@ -1,4 +1,4 @@
-<h1>VehListado de Autosiculo</h1>
+<h1>Listado de Autos</h1>
 
 <% @autos = Auto.all%>
 <br>
@@ -11,6 +11,7 @@
     <table class="table">
       <tr>
         <th class="fs-5 text-center">ID</th>
+        <%# <th class="fs-5 text-center">FOTO</th> %>
         <th class="fs-5 text-center">PATENTE</th>
         <th class="fs-5 text-center">MODELO</th>
         <th class="fs-5 text-center">AÑO</th>
@@ -24,6 +25,11 @@
       <%-@autos.each do |auto|-%>
         <tr>
         <td class="font-size: 1rem text-center"><%= auto.id %></td>
+        <!--<%if auto.imagen.attached?%>
+          <td class="font-size: 1rem text-center"><%= image_tag(auto.imagen) %></td>
+        <%else%>
+          <td class="font-size: 1rem text-center">Sin Foto</td>
+        <%end%>-->
         <td class="font-size: 1rem text-center"><%= auto.patente %></td>
         <td class="font-size: 1rem text-center"><%= auto.modelo %></td>
         <td class="font-size: 1rem text-center"><%= auto.anio %></td>

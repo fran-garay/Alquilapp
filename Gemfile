@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'font-awesome-sass'
 gem 'geocoder'
+gem "image_processing", ">= 1.2"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

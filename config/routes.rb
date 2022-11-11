@@ -51,5 +51,5 @@ Rails.application.routes.draw do
   get '/autos', :to => 'autos#listadoDeAutos'
 
   root "main#home"
-  match "*path" => redirect("/"), via: [:get, :post]
+  # match "*path" => redirect("/"), via: [:get, :post]
 end

@@ -46,7 +46,7 @@ class AutosController < ApplicationController
   end
 
   def auto_params
-    params.require(:auto).permit(:patente, :modelo, :porcentaje_combustible, :estado, :anio, :tipo_de_caja, :tipo_de_combustible, :color)
+    params.require(:auto).permit(:imagen, :patente, :modelo, :porcentaje_combustible, :estado, :anio, :tipo_de_caja, :tipo_de_combustible, :color)
   end
   
 end

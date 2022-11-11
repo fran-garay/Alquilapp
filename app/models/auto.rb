@@ -7,4 +7,5 @@ class Auto < ApplicationRecord
     validates :tipo_de_caja, presence: true
     validates :tipo_de_combustible, presence: true
     validates :color, presence: true
+    has_one_attached :imagen
 end
