@@ -29,6 +29,20 @@ class PreciosController < ApplicationController
             render :edit
         end
     end
+
+    def editarPrecio
+        @precio = Precio.new(valor: precio_params[:valor], fecha_de_actualizacion: Time.now)
+        @precio.save
+        redirect_to precios_path
+    end
+
+
+    def index
+        @precios = Precio.all.order(:fecha_de_actualizacion => 'desc')
+        @precio = Precio.last
+        @nuevo_precio = Precio.new
+    end
+
     def destroy
         @precio = Precio.find(params[:id])
         @precio.destroy

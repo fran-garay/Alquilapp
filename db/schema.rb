@@ -82,4 +82,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_183052) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.float "saldo"
+    t.float "ultimo_gasto"
+    t.float "ultima_carga"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+  end
+
 end
