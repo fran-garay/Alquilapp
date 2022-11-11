@@ -1,4 +1,7 @@
 class WalletsController < ApplicationController
+
+    #layout "for_users"
+
     before_action :authenticate_user!
     before_action :verificar_id_belongs_to_user
 
@@ -22,7 +25,6 @@ class WalletsController < ApplicationController
 
     def wallet_params
         params.require(:wallet).permit(:user_id, :ultima_carga)
-        #params.permit(:user_id, :ultima_carga)
     end
 
 end

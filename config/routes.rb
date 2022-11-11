@@ -59,6 +59,9 @@ Rails.application.routes.draw do
   get '/wallets/:user_id', :to => 'wallets#mostrar_wallet'
   put '/wallets/cargar_saldo/:user_id', :to => 'wallets#cargar_saldo'
 
+  get '/precios', :to => 'precios#index'
+  post '/precios/editarPrecio', :to => 'precios#editarPrecio'
+
 
 
 
@@ -199,6 +202,6 @@ Rails.application.routes.draw do
 
 
   
-  match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
+  #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end
