@@ -13,13 +13,16 @@ class WalletsController < ApplicationController
 
     def mostrar_wallet
         @wallet = Wallet.find_by(user_id: params[:user_id])
-    end 
+    end
 
     def cargar_saldo
+        logger.debug "CARGANDO SALDOOOO"
         @wallet = Wallet.find_by(user_id: params[:user_id])
         @wallet.ultima_carga = wallet_params[:ultima_carga]
         @wallet.saldo = @wallet.saldo + wallet_params[:ultima_carga].to_i
         @wallet.save
+        logger.debug "DEBUG: #{wallet_params[:ultima_carga]}"
+        logger.debug "DEBUG: #{params[:user_id]}"
         redirect_to "/wallets/#{params[:user_id]}"
     end
 
