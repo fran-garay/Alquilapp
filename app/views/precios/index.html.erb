@@ -16,7 +16,7 @@
           <div class="input-field col s6">
             <%= f.number_field :valor, class:"form-control" %>
             <%= f.datetime_local_field :fecha_de_actualizacion, class: "validate" %>
-            
+
           </div>
         </div>
       </div>
@@ -30,10 +30,10 @@
 -->
 
 <h2>Precios pasados</h2>
-<% @precios = Precio.all.reverse%>
+<%# <% @precios = Precio.all.reverse%>
 
 <div class="container-sm">
- <hr> 
+ <hr>
   <div class="table-responsive">
     <table class="table">
       <tr>

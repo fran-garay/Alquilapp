@@ -2,7 +2,11 @@ class PreciosController < ApplicationController
 
     layout "for_admins"
     before_action :authenticate_admin!
-    
+
+    def index
+        @precios = Precio.all.order(fecha_de_actualizacion: :desc)
+    end
+
     def new
         @precio = Precio.new
     end
@@ -32,5 +36,5 @@ class PreciosController < ApplicationController
     end
     def precio_params
         params.require(:precio).permit(:valor, :fecha_de_actualizacion)
-    end 
+    end
 end

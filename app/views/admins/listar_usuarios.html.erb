@@ -1,12 +1,14 @@
 <h1 class="h1 text-center">Usuarios registrados</h1>
-<div class="container-sm m-5">
+<div class="m-5">
   <hr>
-  <div class="table-responsive">
+  <div class="table-responsive border">
     <table class="table">
       <tr>
         <th class="fs-5">Nombre</th>
         <th class="fs-5">Email</th>
         <th class="fs-5">Estado</th>
+
+        <th class="fs-5"></th>
       </tr>
       <%-@users.each do |user|-%>
         <tr>
@@ -22,8 +24,8 @@
           <td>
             <%= link_to "Ver usuario", "/admins/showUser/#{user.id}" , class: "btn btn-warning p-1" %>
           </td>
-        </tr>
       <%end%>
+        </tr>
     </table>
   </div>
 </div>
