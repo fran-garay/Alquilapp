@@ -46,7 +46,7 @@ Admin.destroy_all
 usuario = User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 07, 24)), phone: "1234567890", is_being_validated: false)
 usuario.licencia.attach(io: File.open('app/assets/images/licencias/Leo.png'), filename: 'Leo.png', content_type: 'image/png')
-    
+
 usuario = User.create(email: "en_validacion@gmail.com", first_name: "Luisito", last_name: "Comunica", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890")
 usuario.licencia.attach(io: File.open('app/assets/images/licencias/Luisito.png'), filename: 'Luisito.png', content_type: 'image/png')
@@ -60,5 +60,5 @@ Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", p
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345679")
 
 User.all.each do |user|
-    Wallet.create(user_id: user.id, saldo: 0, ultima_carga: 0, ultimo_gasto: 0)
+    Wallet.create(user_id: user.id, saldo: -10, ultima_carga: 0, ultimo_gasto: 0)
 end

@@ -95,7 +95,7 @@
 
           <div class="col-3">
             <div class="form-outline">
-              <input type="number" min="100" max="999" step="1" id="formCVV" class="form-control"  placeholder="123" required>
+              <input type="number" min="100" style="width:85px;" max="999" step="1" id="formCVV" class="form-control"  placeholder="123" required>
               <label class="form-label" for="formCVV">CVV</label>
             </div>
           </div>
@@ -130,6 +130,19 @@
 
 
 <script>
+    // min date for date field input with id formExpiration
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("formExpiration").setAttribute("min", today);
 
 
 

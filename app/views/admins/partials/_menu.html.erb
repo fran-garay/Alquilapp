@@ -20,8 +20,8 @@
           </a>
           <ul class="dropdown-menu">
             <li> <%= link_to "Listar", '/autos', class:"dropdown-item" %> </li>
-            <li> <%= link_to "Nuevo", '/autos/new', class:"dropdown-item" %> </li>
             <% if current_admin.is_admin %>
+            <li> <%= link_to "Nuevo", '/autos/new', class:"dropdown-item" %> </li>
               <li> <%= link_to "Precio", '/precios', class:"dropdown-item" %> </li>
             <% end %>
           </ul>

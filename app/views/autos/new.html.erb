@@ -1,5 +1,7 @@
 <h1>Ingrese los datos del Nuevo Vehiculo</h1>
 
+<%= render "error_messages", resource: @auto %>
+
 <% auto = Auto.new %>
 <div style="padding-left: 20px" class="mb-2">
   <%= form_for (@auto) do |f| %>

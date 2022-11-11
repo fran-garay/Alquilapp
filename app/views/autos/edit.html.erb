@@ -1,4 +1,7 @@
 <h1>Editar Vehículo</h1>
+
+<%= render "error_messages", resource: @auto %>
+
 <% if @auto.estado != "Ocupado"%>
 
   <% if @auto.imagen.attached?%>

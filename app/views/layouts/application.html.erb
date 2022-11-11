@@ -35,9 +35,10 @@
   </body>
 
 
-  <script>
+
 
     <% if request.original_url.include?("wallets") %>
+    <script>
       var form1 = document.getElementById('form1');
     var form2 = document.getElementById('form2');
 
@@ -53,37 +54,45 @@
             alert("Por favor, complete todos los campos de la tarjeta");
         }
     });
+    </script>
     <% end %>
 
-
-    eye.addEventListener("click", togglePass);
-
-    // button to make password visible
-    var password = document.getElementById("user_password")
-    var eye = document.getElementById("eye")
-
-    eye.addEventListener("click", togglePass);
+  <script>
 
     function togglePass() {
       eye.classList.toggle("active");
       (password.type == "password") ? password.type = "text" : password.type = "password";
     }
 
+    function togglePass2() {
+      eye2.classList.toggle("active");
+      (password_confirmation.type == "password") ? password_confirmation.type = "text" : password_confirmation.type = "password";
+    }
+
+
+    // button to make password visible
+    var password = document.getElementById("user_password")
+    var eye = document.getElementById("eye")
+
+
+    eye.addEventListener("click", togglePass);
+
+
+
     var password_confirmation = document.getElementById("user_password_confirmation")
     var eye2 = document.getElementById("eye2")
 
     eye2.addEventListener("click", togglePass2);
 
-    function togglePass2() {
-      eye2.classList.toggle("active");
-      (password_confirmation.type == "password") ? password_confirmation.type = "text" : password_confirmation.type = "password";
-    }
+
 
     // delete myalert after 5 seconds
     setTimeout(function() {
       var element = document.getElementsByClassName("alert");
       element[0].parentNode.removeChild(element[0]);
     }, 3000);
+
+
 
 
   </script>

@@ -27,7 +27,7 @@
     <div class="field">
       <%= f.label "Confirmación de contraseña" %><br />
       <div class="d-flex align-items-center">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6 %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6, id:"user_password_confirmation" %>
         <i  class=" fa " id="eye2">&#xf06e;</i>
       </div>
     </div>
