@@ -5,7 +5,7 @@
 
   <label>Licencia Actual</label><br>
   <%if resource.licencia.attached? %>
-    <%= image_tag(resource.licencia) %>
+    <%= image_tag(resource.licencia, width: 400) %>
   <%else%>
     <label>     Aun no se ha subido ninguna foto</label>
   <%end%>
