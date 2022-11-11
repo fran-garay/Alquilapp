@@ -1,6 +1,7 @@
 <h1>Listado de Vehículos</h1>
 
 
+
 <% if current_admin.is_admin? %>
 <br>
   <%= link_to "Crear nuevo Auto", new_auto_path, :class => "btn btn-primary " %>
@@ -45,10 +46,10 @@
         <% if current_admin.is_admin? %>
         <td class="font-size: 1rem text-center"><%= link_to "Editar", edit_auto_path(auto.id), :class => "btn btn-primary" %></td>
         <% else %>
-        <td>
+        <td class="text-center">
           <%= form_for(auto, as: auto, url: "/autos/cambiarEstado/#{auto.id}" , html: { method: :put }) do |f| %>
           <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"], class:"form-select", required: true%>
-          <%= f.submit class:"btn btn-info p-1" %>
+          <%= f.submit "Actualizar Estado", class:"btn btn-info p-1 mt-1" %>
           <% end %>
         <% end %>
         </td>

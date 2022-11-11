@@ -16,18 +16,42 @@
 
   <body>
 
+     <% if notice != nil%>
+      <div class="close_alert alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+          <%= notice %>
+          <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <%end%>
+    <% if alert != nil%>
+      <div class="close_alert alert alert-danger alert-dismissible fade show p-2 d-flex" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <%end%>
 
+    <div class="d-flex flex-column element-mobile-100vh" >
 
-    <div class="d-flex flex-column border border-5 border-danger element-mobile-100vh" >
-
+      <div style="z-index:1">
       <%= render "users/partials/menu" %>
 
 
-    <div class="container z1" style="margin-top:1vh; flex-grow:1;">
-      <%= yield %>
+    <div class="container" style="flex-grow:1; z-index:-1">
+      <% if current_user.is_being_validated? && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+        <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+          <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
+          <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </div>
 
-    <%= render "users/partials/footer" %>
+    <%# check if current user not on edit path %>
+    <div style="z-index:1">
+    <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+      <%= render "users/partials/footer" %>
+    <% end %>
+    </div>
 
     </div>
 
@@ -101,17 +125,14 @@
     }, 3000);
 
 
-
-    // hide and show navbar when button b is pressed
-    var b = document.getElementById("b");
-    var navbar = document.getElementById("nav");
-    b.addEventListener("click", function() {
-      if (navbar.style.display === "none") {
-        navbar.style.display = "block";
-      } else {
-        navbar.style.display = "none";
-      }
-    });
+  // when the parto of the page is clicked, close the navbar
+      $(document).click(function(event) {
+        if (!$(event.target).closest('#myNav').length) {
+          if ($('#myNav').width() != 0) {
+            $('#myNav').width(0);
+          }
+        }
+      });
 
     function openNav() {
       document.getElementById("myNav").style.width = "65%";
@@ -120,6 +141,21 @@
     function closeNav() {
       document.getElementById("myNav").style.width = "0%";
     }
+
+     var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("max", today);
 
   </script>
 </html>
