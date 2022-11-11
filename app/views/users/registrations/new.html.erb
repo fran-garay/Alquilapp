@@ -14,22 +14,28 @@
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", required: true, minlength: 6 %>
+      <div class="d-flex align-items-center">
+        <%= f.password_field :password, autocomplete: "new-password", required: true, minlength: 6, id:"user_password"  %>
+        <i  class="fa" id="eye">&#xf06e;</i>
+      </div>
     </div>
 
     <div class="field">
       <%= f.label "Confirmación de contraseña" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6 %>
+      <div class="d-flex align-items-center">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6 %>
+        <i  class=" fa " id="eye2">&#xf06e;</i>
+      </div>
     </div>
 
     <div class="field">
       <%= f.label :Nombre %><br />
-      <%= f.text_field :first_name, required: true, minlength: 3, maxlength: 50 %>
+      <%= f.text_field :first_name, required: true, minlength: 3, maxlength: 50, size:20 %>
     </div>
 
     <div class="field">
       <%= f.label :Apellido %><br />
-      <%= f.text_field :last_name, required: true, minlength: 3, maxlength: 50 %>
+      <%= f.text_field :last_name, required: true, minlength: 3, maxlength: 50, size:20 %>
     </div>
 
     <div class="field">

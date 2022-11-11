@@ -31,7 +31,7 @@ Precio.create(valor: 400.24, fecha_de_actualizacion: "2021-03-10")
 User.destroy_all
 Admin.destroy_all
 
-User.create(email: "user@gmail.com", first_name: "Lionel Andres", last_name: "Messi", password: "123456",
+User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890", is_being_validated: false)
 User.create(email: "en_validacion@gmail.com", first_name: "Juan", last_name: "Perez", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890")
@@ -42,5 +42,5 @@ Admin.create(email:"super2@gmail.com", first_name: "Ernesto", last_name: "Flores
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, is_handling_report: :true,
      phone: "1234567890", dni: "87654321")
 Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", password: "123456",
-    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345678")
+    password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345679")
 

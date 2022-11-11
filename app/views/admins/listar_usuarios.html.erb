@@ -4,15 +4,27 @@
   <div class="table-responsive">
     <table class="table">
       <tr>
-        <th class="fs-5">ID</th>
-        <th class="fs-5">eMail</th>
+        <th class="fs-5">Nombre</th>
+        <th class="fs-5">Email</th>
+        <th class="fs-5">Estado</th>
       </tr>
       <%-@users.each do |user|-%>
         <tr>
-          <td style="font-size: 1rem"><%= user.id %></td>
+          <td style="font-size: 1rem"><%= user.first_name %> <%= user.last_name %></td>
           <td style="font-size: 1rem"><%= user.email %></td>
+          <td>
+            <% if user.is_being_validated %>
+              <%= image_tag "times.png", class:"p-2 icon_admins_list" %>
+            <% else %>
+              <%= image_tag "check.png", class:"p-2 icon_admins_list" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "Ver usuario", "/admins/showUser/#{user.id}" , class: "btn btn-warning p-1" %>
+          </td>
         </tr>
       <%end%>
     </table>
   </div>
 </div>
+

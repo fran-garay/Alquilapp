@@ -1,7 +1,7 @@
 <h1>Ingrese los datos del Nuevo Vehiculo</h1>
 
 <% auto = Auto.new %>
-<div style="padding-left: 20px">
+<div style="padding-left: 20px" class="mb-2">
   <%= form_for (@auto) do |f| %>
 
     <div class="form-group" style="margin-bottom: 5px">
@@ -14,62 +14,62 @@
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :patente %><br>
       <div class="col-md-2">
-        <%= f.text_field :patente , class:"form-control"%>
+        <%= f.text_field :patente , class:"form-control", required: true %>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :anio, "Año" %><br>
       <div class="col-md-2">
-        <%= f.text_field :anio, class:"form-control"%>
+        <%= f.number_field :anio, class:"form-control", required: true, min:1900, max:2022 %>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :modelo %><br>
       <div class="col-md-2">
-        <%= f.text_field :modelo, class:"form-control"%>
+        <%= f.text_field :modelo, class:"form-control", required: true%>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :tipo_de_caja %><br>
       <div class="col-md-2">
-        <%= f.select :tipo_de_caja, ["Automatico", "Manual"],  class:"form-select"%>
+        <%= f.select :tipo_de_caja, ["Automatico", "Manual"],  class:"form-select", required: true%>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :tipo_de_combustible %><br>
       <div class="col-md-2" >
-        <%= f.select :tipo_de_combustible, ["Diesel", "Nafta", "Electrico"], class:"form-control"%>
+        <%= f.select :tipo_de_combustible, ["Diesel", "Nafta", "Electrico"], class:"form-control", required: true%>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :porcentaje_combustible %><br>
       <div class="col-md-2">
-        <%= f.number_field :porcentaje_combustible, in:0.0..100.0, step: 0.1, class:"form-control"%>
+        <%= f.number_field :porcentaje_combustible, in:0.0..100.0, step: 0.1, class:"form-control", required: true%>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :estado %><br>
       <div class="col-md-2">
-        <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"], class:"form-select"%>
+        <%= f.select :estado, ["Disponible", "Ocupado", "En mantenimiento", "Necesita Atencion", "Inhabilitado"], class:"form-select", required: true%>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 5px">
       <%= f.label :color %><br>
       <div class="col-md-2">
-        <%= f.color_field :color, class:"form-control"%>
+        <%= f.color_field :color, class:"form-control", required: true%>
       </div>
     </div>
 
     <div style="margin-top: 10px">
-      <%= f.submit %>
+      <%= f.submit class:"btn btn-info" %>
     </div>
-    
+
   <%end%>
 </div>

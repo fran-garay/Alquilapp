@@ -1,23 +1,43 @@
-<div id="myNav" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="overlay-content">
-           <%= link_to "Editar perfil", edit_user_registration_path, class: "nav-link" %>
+<div id="myNav" class="overlay  d-flex flex-column align-items-center justify-content-between">
 
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
-        </div>
-     </div>
-
-
-    <div class="border border-success d-flex z2 p-3 justify-content-between">
-      <span class="btn btn-warning bien_redondito floating_btn text-white z2 " onclick="openNav()">&#9776;</span>
-
-      <span class="btn btn-warning rounded-5 p-2 w-50 fs-5 floating_btn text-white d-flex justify-content-center align-items-center">
-        <%= link_to "Alquilapp", root_path, class: "text-white", style:"text-decoration:none" %>
-      </span>
-
-      <span class="btn btn-warning bien_redondito floating_btn text-white z2 d-flex align-items-center p-2">
-        <%= link_to "🚗", root_path, style:"text-decoration:none" %>
-      </span>
+  <div class="d-flex flex-column border-danger align-items-center justify-content-center mt-5">
+    <div class="d-flex flex-column align-item-center mb-5">
+        <%= image_tag "logo.png", width: 90, class:"p-3 icon_img" %>
+        <h1 class="text-white mt-1">Bienvenido, <%= current_user.first_name %>!</h1>
+        <hr>
     </div>
+    <div class="overlay-content text-center">
+          <%= link_to "Editar perfil", edit_user_registration_path, class: "nav-link" %>
+
+
+        <a href="#">
+        <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, style:"border:none"%>
+        </a>
+        <%= link_to "Wallet", root_path, class: "nav-link" %>
+        <a href="#">Contact</a>
+    </div>
+    </div>
+      <div class="overlay-content text-white mb-2">
+        Ⓒ 2022 Alquilapp
+      </div>
+</div>
+
+
+<div class="d-flex z2 p-3 justify-content-between">
+  <span class="btn btn-warning bien_redondito floating_btn text-white z2 " onclick="openNav()">&#9776;</span>
+
+  <span class="btn btn-warning rounded-5 p-2 w-50 fs-5 floating_btn text-white d-flex justify-content-center align-items-center">
+    <%= link_to "Alquilapp", root_path, class: "text-white", style:"text-decoration:none" %>
+  </span>
+
+  <span class="btn btn-warning bien_redondito floating_btn text-white z2 d-flex align-items-center p-2">
+    <%= link_to "🚗", root_path, style:"text-decoration:none" %>
+  </span>
+</div>
+
+
+<script>
+
+
+
+  </script>
