@@ -4,13 +4,19 @@
   <%= render "users/shared/error_messages", resource: resource %>
 
   <label>Licencia Actual</label><br>
-  <% image_tag(resource.licencia, class:"img-fluid") %>
-  <br><br>
+  <%if resource.licencia.attached? %>
+    <%= image_tag(resource.licencia) %>
+  <%else%>
+    <label>     Aun no se ha subido ninguna foto</label>
+  <%end%>
+  <%# <% image_tag(@resource.licencia, class:"img-fluid") %>
+  <br>
 
   <div class="field">
-      <%= f.label :licencia %><br />
+      <%= f.label :licencia, "Foto nueva" %><br />
       <%= f.file_field :licencia %>
     </div>
+  <br>
 
   <div class="field">
       <%= f.label :Email %><br />
