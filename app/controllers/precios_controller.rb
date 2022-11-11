@@ -2,7 +2,10 @@ class PreciosController < ApplicationController
 
     layout "for_admins"
     before_action :authenticate_admin!
-
+    
+    def new
+        @precio = Precio.new
+    end
     def create
         @precio = Precio.new(precio_params)
         if @precio.save
@@ -46,5 +49,5 @@ class PreciosController < ApplicationController
 
     def precio_params
         params.require(:precio).permit(:valor, :fecha_de_actualizacion)
-    end 
+    end
 end

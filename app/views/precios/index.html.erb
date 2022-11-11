@@ -14,9 +14,10 @@
 </div>
 
 <h2>Precios pasados</h2>
+<% @precios = Precio.all.reverse%>
 
 <div class="container-sm">
- <hr> 
+ <hr>
   <div class="table-responsive">
     <table class="table">
       <tr>
