@@ -8,4 +8,10 @@ class Auto < ApplicationRecord
     validates :tipo_de_combustible, presence: true
     validates :color, presence: true
     has_one_attached :imagen
+
+    def patente_format
+        if birth_date.present? && birth_date > 17.years.ago
+          errors.add(:birth_date, "es inválida, debes tener al menos 17 años para registrarte")
+        end
+      end
 end
