@@ -23,7 +23,7 @@
             <%= link_to "Editar", "/admins/editSupervisor/#{supervisor.id}", class: "btn btn-primary p-1" %>
           </td>
           <td>
-            <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger p-1" %>
+            <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger p-1", onclick: "return confirm('¿Está seguro que desea eliminar permanentemente a #{supervisor.first_name}?');" %>
           </td>
         </tr>
       <%end%>
