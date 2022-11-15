@@ -16,4 +16,8 @@ class UsersController < ApplicationController
   #   end
   # end
 
+  def vista_mapa
+
+  end
+
 end

@@ -1,0 +1,76 @@
+<div>
+    <%# show map on a div %>
+    <div id="map" style="height: 100vh;"></div>
+    </div>
+
+    <%# div that is shown on top of the map %>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
+
+    <%# div that is shown on top of the map %>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
+
+
+
+
+</div>
+
+<script>
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showMap);
+    }
+
+    function showMap(position) {
+        user_lat = position.coords.latitude;
+        user_lon = position.coords.longitude;
+
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+            source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([ user_lon,  user_lat ]),
+            zoom: 10
+        })
+        });
+
+        // marker of the user
+        var marker = new ol.Feature({
+        geometry: new ol.geom.Point(
+            ol.proj.fromLonLat([ user_lon ,  user_lat ])
+        ),  // Cordinates of New York's Town Hall
+        });
+        var vectorSource = new ol.source.Vector({
+        features: [marker]
+        });
+
+        var markerVectorLayer = new ol.layer.Vector({
+        source: vectorSource,
+        });
+
+        map.addLayer(markerVectorLayer);
+
+    }
+
+    // var user_lat = -34;
+    // var user_lon = 90;
+
+
+    // map of the city where the user is located that covers the entire screen
+    // reference to ol library https://openlayers.org/en/latest/doc/quickstart.html
+
+
+    // show map on a div with id map
+
+
+
+</script>
