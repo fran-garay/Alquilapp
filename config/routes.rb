@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   get '/precios', :to => 'precios#index'
   post '/precios/editarPrecio', :to => 'precios#editarPrecio'
 
+  get '/users/vista_mapa', :to => 'users#vista_mapa'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end

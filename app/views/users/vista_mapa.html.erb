@@ -1,0 +1,111 @@
+<div>
+    <%# show map on a div %>
+    <div id="map" class="element-mobile-100vh"></div>
+
+    <%# div that is shown on top of the map %>
+
+
+</div>
+
+<script>
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showMap);
+    }
+
+    function showMap(position) {
+        user_lat = position.coords.latitude;
+        user_lon = position.coords.longitude;
+
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+            source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([ user_lon,  user_lat ]),
+            zoom: 16
+        })
+        });
+
+        // remove + and - buttons
+        console.log(map.getControls());
+        map.removeControl(map.getControls().getArray()[2]);
+
+
+
+
+        // marker of the user with a blue circle
+        var user_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([user_lon, user_lat])
+            ),  // Cordinates of New York's Town Hall
+        });
+
+        var user_marker_style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({color: 'blue'}),
+                stroke: new ol.style.Stroke({
+                    color: 'white', width: 2
+                })
+            })
+        });
+
+        user_marker.setStyle(user_marker_style);
+
+        var vectorSource = new ol.source.Vector({
+            features: [user_marker]
+        });
+
+        var user_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+
+        map.addLayer(user_marker_vectorLayer);
+
+        // marker of a car with a car icon
+        var car_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([user_lon + 0.0005, user_lat + 0.0005])
+            ),  // Cordinates of New York's Town Hall
+        });
+
+        var car_marker_style = new ol.style.Style({
+            image: new ol.style.Icon({
+                anchor: [0.5, 0.5],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'fraction',
+                src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
+                scale: 0.03
+            })
+        });
+
+        car_marker.setStyle(car_marker_style);
+
+        var vectorSource = new ol.source.Vector({
+            features: [car_marker]
+        });
+
+        var car_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+
+        map.addLayer(car_marker_vectorLayer);
+
+
+    }
+
+    // var user_lat = -34;
+    // var user_lon = 90;
+
+
+    // map of the city where the user is located that covers the entire screen
+    // reference to ol library https://openlayers.org/en/latest/doc/quickstart.html
+
+
+
+
+</script>
