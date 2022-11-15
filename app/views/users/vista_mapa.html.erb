@@ -1,13 +1,10 @@
 <div>
     <%# show map on a div %>
-    <div id="map" class="element-mobile-100vh"></div>
-
-    <%# div that is shown on top of the map %>
-
-
+    <div id="map" class="element-mobile-100vh">  </div>
 </div>
 
 <script>
+
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showMap);
@@ -16,6 +13,17 @@
     function showMap(position) {
         user_lat = position.coords.latitude;
         user_lon = position.coords.longitude;
+
+
+
+    //   check if map is on local storage and if it is, show it
+    //   if (localStorage.getItem("map") !== null) {
+    //     var map = localStorage.getItem("map");
+    //     console.log("MAPA")
+    //     // console.log(map)
+    //     // map.setTarget('map');
+    //     return;
+    //   }
 
       var map = new ol.Map({
         target: 'map',
@@ -30,10 +38,20 @@
         })
         });
 
+        //
+
+
         // remove + and - buttons
         console.log(map.getControls());
-        map.removeControl(map.getControls().getArray()[2]);
 
+        map.getControls().forEach(function(control) {
+            if (control instanceof ol.control.Zoom) {
+                map.removeControl(control);
+            }
+        });
+
+        // save map on local storage to be able to use it later
+        localStorage.setItem("map", map);
 
 
 
@@ -65,6 +83,9 @@
         });
 
         map.addLayer(user_marker_vectorLayer);
+
+
+        // marker
 
         // marker of a car with a car icon
         var car_marker = new ol.Feature({
@@ -104,8 +125,4 @@
 
     // map of the city where the user is located that covers the entire screen
     // reference to ol library https://openlayers.org/en/latest/doc/quickstart.html
-
-
-
-
 </script>
