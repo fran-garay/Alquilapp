@@ -35,11 +35,10 @@
 
     <div class="d-flex flex-column element-mobile-100vh" >
 
-      <div style="z-index:1">
-      <%= render "users/partials/menu" %>
 
 
-    <div class="" style="flex-grow:1; z-index:-1">
+
+    <div class="" style="flex-grow:1;">
       <% if current_user.is_being_validated? && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
         <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
           <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
@@ -50,11 +49,17 @@
       <% end %>
     </div>
 
+
+    <div class="map-top d-flex flex-column">
+      <%= render "users/partials/menu" %>
+
+    </div>
+
     <%# check if current user not on edit path %>
-    <div style="z-index:1">
-    <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
-      <%= render "users/partials/footer" %>
-    <% end %>
+    <div class="map-bottom d-flex flex-column">
+      <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+        <%= render "users/partials/footer" %>
+      <% end %>
     </div>
 
     </div>
