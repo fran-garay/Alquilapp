@@ -23,10 +23,60 @@
             <%= link_to "Editar", "/admins/editSupervisor/#{supervisor.id}", class: "btn btn-primary p-1" %>
           </td>
           <td>
-            <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger p-1" %>
+            <button id="btn-confirm" class="btn btn-danger p-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="<%= supervisor.id %>">Eliminar</button>
           </td>
         </tr>
+        <%# div that covers all the screen it pops up in the center and the background is darkened %>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar supervisor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>¿Está seguro que desea eliminar a <%= supervisor.first_name %>?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger", id:"btn-yes" %>
+              </div>
+            </div>
+          </div>
       <%end%>
     </table>
   </div>
 </div>
+
+
+<script>
+
+  // when button with id btn-confirm is clicked a div with id confirm is shown with a button with id btn-yes and a button with id btn-no
+  // when button with id btn-yes is clicked the form is submitted
+  // when button with id btn-no is clicked the div with id confirm is hidden
+  // when button with id btn-cancel is clicked the div with id confirm is hidden
+
+  let btnConfirm = document.getElementById('btn-confirm');
+  let confirm = document.getElementById('confirm');
+  let btnYes = document.getElementById('btn-yes');
+  let btnNo = document.getElementById('btn-no');
+  let btnCancel = document.getElementById('btn-cancel');
+
+  btnConfirm.addEventListener('click', () => {
+    confirm.style.display = 'block';
+  });
+
+  btnYes.addEventListener('click', () => {
+    confirm.style.display = 'none';
+    btnConfirm.form.submit();
+  });
+
+  btnNo.addEventListener('click', () => {
+    confirm.style.display = 'none';
+  });
+
+  btnCancel.addEventListener('click', () => {
+    confirm.style.display = 'none';
+  });
+
+  </script>
