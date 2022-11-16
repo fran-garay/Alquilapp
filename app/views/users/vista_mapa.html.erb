@@ -75,6 +75,7 @@
 
         map.addLayer(user_marker_vectorLayer);
 
+        // localStorage
 
         // for each auto, add a marker with the auto's location and a popup with the auto's info when clicked on the marker
         <% @autos.each do |auto| %>
@@ -186,7 +187,14 @@
         // map.addLayer(car_marker_vectorLayer);
 
         // return map
+
+        console.log(JSON.stringify(map));
+    console.log(map)
     }
+
+
+
+
 
     console.log("hola")
     document.getElementById("prueba").innerHTML = "hola";
