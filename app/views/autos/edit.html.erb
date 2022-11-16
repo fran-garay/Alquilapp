@@ -6,11 +6,14 @@
 
   <% if @auto.imagen.attached?%>
     <% if @auto.imagen.representable?%>
-      <%= image_tag(@auto.imagen, width: 400)%>
+      <%= image_tag(@auto.imagen, width: 400)%> <br>
+      <%= link_to "Descargar Imágen", rails_blob_path(@auto.imagen, disposition: "attachment") %>
     <%end%>
   <%else%>
     <label>No hay imagen Disponible</label>
   <%end%>
+
+
 
 <div style="padding-left: 20px">
   <%= form_for (@auto) do |f| %>

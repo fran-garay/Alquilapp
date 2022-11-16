@@ -103,6 +103,8 @@ GEM
     erubi (1.11.0)
     execjs (2.8.1)
     ffi (1.15.5-x64-mingw-ucrt)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     font-awesome-sass (6.2.0)
       sassc (~> 2.0)
     geocoder (1.8.1)
@@ -265,6 +267,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  font-awesome-rails
   font-awesome-sass
   geocoder
   importmap-rails
