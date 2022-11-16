@@ -18,8 +18,10 @@ Rails.application.routes.draw do
 
   put "/autos/cambiarEstado/:auto_id", to: "autos#cambiarEstado", as: "cambiarEstado"
 
+
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
+	resources :locations, only: :create
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
   # }

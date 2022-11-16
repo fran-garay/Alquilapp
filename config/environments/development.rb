@@ -61,7 +61,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.hosts << "9404-163-10-77-216.sa.ngrok.io"
+  config.hosts << "2255-152-169-126-103.sa.ngrok.io"
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

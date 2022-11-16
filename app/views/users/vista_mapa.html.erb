@@ -1,29 +1,22 @@
 <div>
     <%# show map on a div %>
     <div id="map" class="element-mobile-100vh">  </div>
+    <%# <%= Auto.last. %>
+    <div id="prueba">asdfasdf</div>
 </div>
 
 <script>
 
-
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showMap);
+        navigator.geolocation.getCurrentPosition(getMap);
     }
 
-    function showMap(position) {
-        user_lat = position.coords.latitude;
-        user_lon = position.coords.longitude;
-
-
-
-    //   check if map is on local storage and if it is, show it
-    //   if (localStorage.getItem("map") !== null) {
-    //     var map = localStorage.getItem("map");
-    //     console.log("MAPA")
-    //     // console.log(map)
-    //     // map.setTarget('map');
-    //     return;
-    //   }
+    function getMap(pos) {
+        console.log("ENTRO A GETMAP");
+        user_lat = pos.coords.latitude;
+        user_lon = pos.coords.longitude;
+        console.log(user_lat);
+        console.log(user_lon);
 
       var map = new ol.Map({
         target: 'map',
@@ -42,8 +35,6 @@
 
 
         // remove + and - buttons
-        console.log(map.getControls());
-
         map.getControls().forEach(function(control) {
             if (control instanceof ol.control.Zoom) {
                 map.removeControl(control);
@@ -85,42 +76,121 @@
         map.addLayer(user_marker_vectorLayer);
 
 
-        // marker
+        // for each auto, add a marker with the auto's location and a popup with the auto's info when clicked on the marker
+        <% @autos.each do |auto| %>
+            var auto_marker = new ol.Feature({
+                geometry: new ol.geom.Point(
+                    ol.proj.fromLonLat([<%= auto.location_point.y %>, <%= auto.location_point.x %>])
+                ),  // Cordinates of New York's Town Hall
+            });
 
-        // marker of a car with a car icon
-        var car_marker = new ol.Feature({
+            var auto_marker_style = new ol.style.Style({
+                image: new ol.style.Icon({
+                    anchor: [0.5, 0.5],
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'fraction',
+                    src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
+                    scale: 0.03
+                })
+            });
+
+            auto_marker.setStyle(auto_marker_style);
+
+            var vectorSource = new ol.source.Vector({
+                features: [auto_marker]
+            });
+
+            var auto_marker_vectorLayer = new ol.layer.Vector({
+                source: vectorSource,
+            });
+
+            map.addLayer(auto_marker_vectorLayer);
+
+            // var popup = new ol.Overlay.Popup();
+            // map.addOverlay(popup);
+
+            // map.on('click', function(evt) {
+            //     var feature = map.forEachFeatureAtPixel(evt.pixel,
+            //         function(feature) {
+            //             return feature;
+            //         });
+            //     if (feature) {
+            //         var coordinates = feature.getGeometry().getCoordinates();
+            //         popup.show(coordinates, '<div><h2> <%= auto.modelo %></h2><p><%= auto.patente %></p></div>');
+            //     } else {
+            //         popup.hide();
+            //     }
+            // });
+
+        <% end %>
+
+        // add a marker with the user's location and a popup with the user's info when clicked on the marker
+        var user_marker = new ol.Feature({
             geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([user_lon + 0.0005, user_lat + 0.0005])
+                ol.proj.fromLonLat([user_lon, user_lat])
             ),  // Cordinates of New York's Town Hall
         });
 
-        var car_marker_style = new ol.style.Style({
-            image: new ol.style.Icon({
-                anchor: [0.5, 0.5],
-                anchorXUnits: 'fraction',
-                anchorYUnits: 'fraction',
-                src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
-                scale: 0.03
+        var user_marker_style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({color: 'blue'}),
+                stroke: new ol.style.Stroke({
+                    color: 'white', width: 2
+                })
             })
         });
 
-        car_marker.setStyle(car_marker_style);
+        user_marker.setStyle(user_marker_style);
 
         var vectorSource = new ol.source.Vector({
-            features: [car_marker]
+            features: [user_marker]
         });
 
-        var car_marker_vectorLayer = new ol.layer.Vector({
+        var user_marker_vectorLayer = new ol.layer.Vector({
             source: vectorSource,
         });
 
-        map.addLayer(car_marker_vectorLayer);
+        map.addLayer(user_marker_vectorLayer);
 
+        // var popup = new ol.Overlay.Popup
 
+        // // marker of a car with a car icon
+
+        // var car_marker = new ol.Feature({
+        //     geometry: new ol.geom.Point(
+        //         ol.proj.fromLonLat([user_lon + 0.0005, user_lat + 0.0005])
+        //     ),  // Cordinates of New York's Town Hall
+        // });
+
+        // var car_marker_style = new ol.style.Style({
+        //     image: new ol.style.Icon({
+        //         anchor: [0.5, 0.5],
+        //         anchorXUnits: 'fraction',
+        //         anchorYUnits: 'fraction',
+        //         src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
+        //         scale: 0.03
+        //     })
+        // });
+
+        // car_marker.setStyle(car_marker_style);
+
+        // var vectorSource = new ol.source.Vector({
+        //     features: [car_marker]
+        // });
+
+        // var car_marker_vectorLayer = new ol.layer.Vector({
+        //     source: vectorSource,
+        // });
+
+        // map.addLayer(car_marker_vectorLayer);
+
+        // return map
     }
 
-    // var user_lat = -34;
-    // var user_lon = 90;
+    console.log("hola")
+    document.getElementById("prueba").innerHTML = "hola";
+
 
 
     // map of the city where the user is located that covers the entire screen
