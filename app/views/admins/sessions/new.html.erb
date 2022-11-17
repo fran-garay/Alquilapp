@@ -1,4 +1,4 @@
-<div class="container w-75 bg-dark mt-5 rounded sombra">
+<div class="container w-75 bg-dark mt-2 rounded sombra">
   <div class="row align-items-stech">
     <div class="col bg d-none d-lg-block">
 
@@ -11,7 +11,6 @@
 
       <h1 class="fw-bold text-center pt-5 ">Alquilapp</h1>
       <h2 class="fw-bold text-center pt-2">Personal</h2>
-        <br>
         <br>
       <!--Login-->
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -27,7 +26,6 @@
           <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
         </div>
 
-        <br>
         <br>
 
         <div class="d-grid">
