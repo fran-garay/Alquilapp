@@ -19,9 +19,7 @@
     <%# Mapbox %>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js"></script>
-    <script>
-      mapboxgl.accessToken = "<%= Rails.application.credentials.mapbox[:access_token] %>";
-    </script>
+
     <script src="https://unpkg.com/mapkick@0.1.1/dist/mapkick.js"></script>
 
   </head>
@@ -48,7 +46,7 @@
 
 
     <div class="" style="flex-grow:1;">
-      <% if current_user.is_being_validated? && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+      <% if current_user.status=='Pendiente' && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
         <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
           <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
           <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>

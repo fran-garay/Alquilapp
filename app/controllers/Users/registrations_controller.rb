@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
 
+
   # GET /resource/sign_up
   def new
     super
@@ -71,7 +72,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       parameters.delete(:current_password)
       if @user.update(parameters)
         bypass_sign_in(@user)
-        @user.is_being_validated = true
+        @user.status = 1
         @user.save
         redirect_to users_path, notice: "Se ha actualizado exitosamente su información"
       else

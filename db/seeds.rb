@@ -44,7 +44,7 @@ User.destroy_all
 Admin.destroy_all
 
 usuario = User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
-    password_confirmation: "123456", birth_date: (Date.new(2001, 07, 24)), phone: "1234567890", is_being_validated: false, license_valid_until: (Date.new(2022, 12, 10)))
+    password_confirmation: "123456", birth_date: (Date.new(2001, 07, 24)), phone: "1234567890", license_valid_until: (Date.new(2022, 12, 10)))
 usuario.licencia.attach(io: File.open('app/assets/images/licencias/Leo.png'), filename: 'Leo.png', content_type: 'image/png')
 
 usuario = User.create(email: "en_validacion@gmail.com", first_name: "Luisito", last_name: "Comunica", password: "123456",

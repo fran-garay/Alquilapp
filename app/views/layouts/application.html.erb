@@ -69,7 +69,6 @@
       (password_confirmation.type == "password") ? password_confirmation.type = "text" : password_confirmation.type = "password";
     }
 
-
     // button to make password visible
     var password = document.getElementById("user_password")
     var eye = document.getElementById("eye")
@@ -77,14 +76,10 @@
 
     eye.addEventListener("click", togglePass);
 
-
-
     var password_confirmation = document.getElementById("user_password_confirmation")
     var eye2 = document.getElementById("eye2")
 
     eye2.addEventListener("click", togglePass2);
-
-
 
     // delete myalert after 5 seconds
     setTimeout(function() {
@@ -114,9 +109,5 @@
     if (date_valid_until_lnc != null){
       date_valid_until_lnc.setAttribute("min", today);
     }
-
-
-
-
   </script>
 </html>
