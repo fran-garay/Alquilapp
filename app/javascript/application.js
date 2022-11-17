@@ -1,10 +1,4 @@
 
-//= require_tree .
-//= require_self
-//= require jquery3
-//= require popper
-//= require bootstrap
-
 import "jquery"
 import "jquery_ujs"
 import "popper"
