@@ -1,4 +1,34 @@
 
     <div class="d-flex justify-content-center">
-      <%= link_to "📍 #{request.location.city}", root_path , class: "btn btn-warning rounded-4 fs-2 p-2 text-white", id:"myCity" %>
+      <%= link_to "📍", root_path , class: "btn btn-warning rounded-4 fs-2 p-2 text-white", id:"myCity" %>
     </div>
+
+    <script>
+
+      function removePartido(city){
+      if(city.includes("Partido de ")){
+        city = city.replace("Partido de ", "");
+      }
+      return city;
+    }
+
+        function getCity(lat, lon) {
+      $.ajax({
+        url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+lat+"&lon="+lon,
+        type: "GET",
+        success: function(result){
+          document.getElementById("myCity").innerHTML = "📍 " + removePartido(result.address.state_district);
+        }
+      });
+    }
+
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          getCity(position.coords.latitude, position.coords.longitude);
+        });
+      } else {
+        document.getElementById("myCity").innerHTML = "📍 No se pudo ubicar";
+      }
+
+    </script>

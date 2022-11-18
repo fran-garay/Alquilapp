@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   # end
 
   def vista_mapa
-
+    @autos = Auto.all
   end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_10_230755) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_17_162635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_230755) do
     t.string "tipo_de_caja"
     t.string "tipo_de_combustible"
     t.string "color"
+    t.point "location_point"
   end
 
   create_table "perros", force: :cascade do |t|
@@ -110,7 +111,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_230755) do
     t.string "last_name"
     t.string "phone"
     t.date "birth_date"
-    t.boolean "is_being_validated", default: true
+    t.date "license_valid_until"
+    t.integer "status", default: 1
+    t.boolean "is_renting", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
