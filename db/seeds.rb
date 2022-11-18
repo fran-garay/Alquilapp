@@ -39,17 +39,25 @@ Precio.create(valor: 200.72, fecha_de_actualizacion: "2020-12-24")
 Precio.create(valor: 300.38, fecha_de_actualizacion: "2021-01-01")
 Precio.create(valor: 400.24, fecha_de_actualizacion: "2021-03-10")
 
-# #Usuarios
+# Usuarios
 User.destroy_all
 Admin.destroy_all
 
 usuario = User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
-    password_confirmation: "123456", status:0, birth_date: (Date.new(2001, 07, 24)), phone: "1234567890", license_valid_until: (Date.new(2022, 12, 10)))
+    password_confirmation: "123456", status: 0, birth_date: (Date.new(2001, 07, 24)), phone: "1234567890", license_valid_until: (Date.new(2022, 12, 10)))
 usuario.licencia.attach(io: File.open('app/assets/images/licencias/Leo.png'), filename: 'Leo.png', content_type: 'image/png')
 
 usuario = User.create(email: "en_validacion@gmail.com", first_name: "Luisito", last_name: "Comunica", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 31)))
 usuario.licencia.attach(io: File.open('app/assets/images/licencias/Luisito.png'), filename: 'Luisito.png', content_type: 'image/png')
+
+usuario = User.create(email: "bloqueado@gmail.com", first_name: "TiniTini", last_name: "Stoessel", password: "123456",
+    password_confirmation: "123456", status: 3 ,birth_date: (Date.new(2001, 12, 10)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 15)))
+usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
+
+usuario = User.create(email: "rechazado@gmail.com", first_name: "Elre", last_name: "Chazado", password: "123456",
+    password_confirmation: "123456", status: 2 ,birth_date: (Date.new(2001, 05, 18)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 18)))
+#usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
 
 Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, phone: "1234567890", dni: "12345678")
