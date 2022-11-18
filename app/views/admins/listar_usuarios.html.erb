@@ -15,11 +15,10 @@
           <td style="font-size: 1rem"><%= user.first_name %> <%= user.last_name %></td>
           <td style="font-size: 1rem"><%= user.email %></td>
           <td>
-            <% if user.is_being_validated %>
-              <%= image_tag "times.png", class:"p-2 icon_admins_list" %>
-            <% else %>
-              <%= image_tag "check.png", class:"p-2 icon_admins_list" %>
-            <% end %>
+            <i class="fas fa-check-circle text-success" style="font-size: 1.5rem"></i>
+            <i class="fas fa-clock" style="color: #FFC107; font-size: 1.5rem"></i>
+            <i class="fas fa-lock" style="color: #000000;font-size: 1.5rem"></i>
+            <i class="fas fa-times-circle text-danger" style="font-size: 1.5rem"></i>
           </td>
           <td>
             <%= link_to "Ver usuario", "/admins/showUser/#{user.id}" , class: "btn btn-warning p-1" %>
@@ -29,4 +28,17 @@
     </table>
   </div>
 </div>
+
+<script>
+//connect to fontawesome api
+  (function() {
+    var script = document.createElement('script');
+    script.src = 'https://kit.fontawesome.com/2c36e9b7b1.js';
+    script.crossOrigin = 'anonymous';
+    document.head.appendChild(script);
+  })();
+
+
+
+</script>
 

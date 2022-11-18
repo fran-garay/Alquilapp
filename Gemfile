@@ -12,7 +12,7 @@ gem 'yarn'
 gem 'ransack'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'font-awesome-sass'
+gem "font-awesome-sass", "~> 6.2.1"
 gem 'geocoder'
 gem 'font-awesome-rails'
 
