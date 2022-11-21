@@ -58,7 +58,7 @@
   </button>
 </div>
 
-<!-- Modal -->
+<!-- Pay modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -68,41 +68,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form class="modal-body" id="form1">
-
-        <div class="row m-4">
-            <div class="form-outline">
-                <input   type="text" id="formNameOnCard" class="form-control"  placeholder="Juan Pérez" required>
-                <label class="form-label" for="formNameOnCard">Nombre en tarjeta</label>
-            </div>
+      <div class="modal-body" id="form1">
+        
+        <div class="row m-4 p-2">
+        <select class="form-select mb-3" aria-label="Default select example" name="card_id" id="card_id">
+          <% if !@cards.empty? %>
+            <% @cards.each do |card| %>
+              <option value="<%= card.id %>">
+                <%= card.brand %>
+                •
+                <%= card.number %>
+              </option>
+            <% end %>
+          <%else%>
+            <option selected>No hay tarjetas cargadas</option>
+          <%end%>
+        </select>
+          Tarjeta
+          <button type="button" class="btn btn-warning mt-3" data-bs-toggle="modal" data-bs-target="#cardModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+              <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+            </svg>
+            Cargar nueva tarjeta
+          </button>
         </div>
-
-        <div class="row m-4">
-          <div class="form-outline">
-            <input  type="number" id="formCardNumber" class="form-control" min="1000000000000000" max="9999999999999999"  placeholder="XXXX XXXX XXXX XXXX">
-            <label class="form-label" for="formCardNumber">Número de tarjeta</label>
-          </div>
-        </div>
-
-        <div class="row m-4">
-
-          <div class="col-5">
-            <div class="form-outline">
-              <input  type="date" id="formExpiration" class="form-control" required>
-              <label class="form-label" for="formExpiration">Vencimiento</label>
-            </div>
-          </div>
-
-          <div class="col-3">
-            <div class="form-outline">
-              <input type="number" min="100" style="width:85px;" max="999" step="1" id="formCVV" class="form-control"  placeholder="123" required>
-              <label class="form-label" for="formCVV">CVV</label>
-            </div>
-          </div>
-
-        </form>
-<%#
-        <% @wallet.user_id %>
 
         <%= form_for(@wallet, as: :wallet, url: "/wallets/cargar_saldo/#{@wallet.user_id}" , html: { method: :put, id:"form2" }) do |form| %>
         <div class="row m-4">
@@ -119,7 +109,11 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <%= form.submit "Pagar", class: "btn btn-warning" %>
+          <% if @cards.empty? %>
+            <%= form.submit "Pagar", class: "btn btn-warning", disabled:"true" %>
+          <%else%>
+            <%= form.submit "Pagar", class: "btn btn-warning" %>
+          <%end%>
         </div>
         <% end %>
       </div>
@@ -129,21 +123,77 @@
 </div>
 
 
+<!-- Card modal -->
+<div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar nueva tarjeta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body" id="form1">
+
+        <% @card = @wallet.user.cards.new %>
+
+        <%= form_for(@card, as: :card, url: "/cards/create/#{@wallet.user_id}", html: { method: :put }) do |form| %>
+
+        <div class="row m-4">
+          <div class="form-outline">
+            <%= form.text_field :name, class: "form-control", placeholder: "Juan Perez", required: true %>
+            <%= form.label :name, "Nombre en tarjeta" %>
+          </div>
+        </div>
+
+        <div class="row m-4">
+          <div class="form-outline">
+            <%= form.number_field :number, class: "form-control", min: "1000000000000000", max: "999999999999999999", placeholder: "XXXX XXXX XXXX XXXX", required: true %>
+            <%= form.label :number, "Número de tarjeta" %>
+          </div>
+        </div>
+
+        <div class="row m-4">
+
+          <div class="col-5">
+            <div class="form-outline">
+              <%= form.date_field :date, class: "form-control", required: true, type:"month", id:"formExpiration" %>
+              <%= form.label :date, "Vencimiento" %>
+            </div> 
+          </div>
+
+          <div class="col-3">
+            <div class="form-outline">
+              <%= form.number_field :cvv, class: "form-control", min: "100", max: "999", placeholder: "123", required: true %>
+              <%= form.label :cvv, "CVV" %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <div><%= form.submit "Cargar", class: "btn btn-warning"%></div>
+        </div>
+
+        <% end %>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 <script>
-    // min date for date field input with id formExpiration
+    //min date for expiration date
     var today = new Date();
-    var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
-    if(dd<10){
-        dd='0'+dd
-    }
     if(mm<10){
         mm='0'+mm
     }
-    today = yyyy+'-'+mm+'-'+dd;
+    today = yyyy+'-'+mm;
     document.getElementById("formExpiration").setAttribute("min", today);
-
-
-
 </script>

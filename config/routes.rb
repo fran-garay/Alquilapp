@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   get '/precios', :to => 'precios#index'
   post '/precios/editarPrecio', :to => 'precios#editarPrecio'
 
+  put '/cards/create/:user_id', :to => 'cards#create'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end

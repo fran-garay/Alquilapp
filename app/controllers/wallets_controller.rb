@@ -13,6 +13,7 @@ class WalletsController < ApplicationController
 
     def mostrar_wallet
         @wallet = Wallet.find_by(user_id: params[:user_id])
+        @cards = Card.where(user_id: params[:user_id])
     end
 
     def cargar_saldo
