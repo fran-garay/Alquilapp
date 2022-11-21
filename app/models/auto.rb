@@ -7,5 +7,13 @@ class Auto < ApplicationRecord
     validates :tipo_de_caja, presence: true
     validates :tipo_de_combustible, presence: true
     validates :color, presence: true
+    validate :patente_format
     has_one_attached :imagen
+
+    # make patente validates with a regex
+    def patente_format
+        if patente.present? && !patente.match?(/\A^[a-zA-Z]{3}-[0-9]{3}$\z/) && !patente.match?(/\A^[a-zA-Z]{2}-[0-9]{3}-[a-zA-Z]{2}$\z/)
+            errors.add(:patente, "formato inválido, debe ser AAA-000 o AA-000-AA")
+        end
+    end
 end

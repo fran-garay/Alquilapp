@@ -18,8 +18,10 @@ Rails.application.routes.draw do
 
   put "/autos/cambiarEstado/:auto_id", to: "autos#cambiarEstado", as: "cambiarEstado"
 
+
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
+	resources :locations, only: :create
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
   # }
@@ -63,6 +65,7 @@ Rails.application.routes.draw do
   post '/precios/editarPrecio', :to => 'precios#editarPrecio'
 
   put '/cards/create/:user_id', :to => 'cards#create'
+  get '/users/vista_mapa', :to => 'users#vista_mapa'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 

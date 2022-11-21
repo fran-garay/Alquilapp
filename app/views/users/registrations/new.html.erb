@@ -52,6 +52,11 @@
       <%= f.date_field :birth_date, required: true, id:"datefield", min:'1899-01-01', max:'0-13-13' %>
     </div>
 
+     <div class="field">
+      <%= f.label :Fecha_de_expiracion_de_la_licencia %><br />
+      <%= f.date_field :license_valid_until, required: true, id:"date_valid_until_lnc", min:'1899-01-01', max:'0-13-13' %>
+    </div>
+
     <hr>
     <div class="actions">
       <%= f.submit "Sign up", class:"btn btn-info p-1"%>

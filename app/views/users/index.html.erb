@@ -1,9 +1,27 @@
-<div>
+<div style="margin-top:10vh">
     <div class="autos d-flex flex-column align-items-center">
-    <h4 class="p-2">Los mejores autos disponibles</h4>
+    <h4 class="p-2">Los mejor autos disponibles</h4>
         <%# <div class="card" style="width: 18rem;"> %>
 
-        <div class="card" style="width: 19rem;">
+        <%@autos.each do |auto| %>
+            <%if (auto.estado == "Disponible")%>
+                <div class="card" style="width: 19rem;">
+                    <%if auto.imagen.attached?%>
+                        <%= image_tag(auto.imagen) %></td>
+                    <%else%>
+                        <label>Sin Foto</label>
+                    <%end%>
+                    <div class="card-body">
+                        <h5 class="card-title"><%=auto.modelo%></h5>
+                        <p class="card-text">Año: <%=auto.anio%></p>
+                        <p class="card-text">Tipo de caja: <%=auto.tipo_de_caja%></p>
+                    </div>
+                </div>
+                <br>
+            <%end%>
+        <% end %>
+
+        <%# <div class="card" style="width: 19rem;">
         <img src="https://thumbs.dreamstime.com/b/ferrari-f-white-background-251916421.jpg" class="card-img-top" alt="...">
         <div class="card-body">
             <b class="card-text">Ferrari Rey de Copas</b>
@@ -27,7 +45,7 @@
             <b class="card-text">Reno 12 La Vieja Escuela</b>
             <p class="card-text">Modelo 1978. A 1.5 km de distancia</p>
         </div>
-        </div>
+        </div> %>
     </div>
 </div>
 

@@ -1,22 +1,76 @@
-<div class="border border-danger border-1 p-2">
-<h2>Log in Personal</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :Email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container w-75 bg-dark rounded sombra">
+  <div class="row align-items-stech">
+    <div class="col bg d-none d-lg-block">
+
+    </div>
+    <div class="col">
+      <div class="text-end">
+
+        <%= image_tag "logo.png", width: 48%>
+      </div>
+
+      <h1 class="fw-bold text-center pt-5 ">Alquilapp</h1>
+      <h2 class="fw-bold text-center pt-2">Personal</h2>
+        <br>
+      <!--Login-->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="mb-4">
+          <%= f.label :Email, class: "form-label mb-4"%><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+        
+        <br>
+
+        <div class="mb-4">
+          <%= f.label :Constraseña, class: "form-label mb-4" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <br>
+
+        <div class="d-grid">
+          <%= f.submit "Log in", class:"btn btn-info"%>
+        </div>
+        
+        <br>
+        <br>        
+      <% end %>
+
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :Constraseña %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-
-  <div class="actions mt-2">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "admins/shared/links" %>
 </div>
+
+<style>
+  .bg{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url(<%= asset_path 'Portada6.jpg' %>);
+    background-position: center center;
+  }
+  .vertical-center{
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body{
+    background-color: #000000;
+    background: linear-gradient(to right, #000000, #505050);
+    /* background: linear-gradient(to right, #000000, #9e3c0e); */
+    /*background: linear-gradient(to right, #000000, #cf7f17);*/
+    height: 100vh;
+  }
+  .sombra{
+    box-shadow: 0px 0px 20px 6px #f29718;
+  }
+  h1{
+    color: #FFFFFF;
+  }
+  h2{
+    color: #FFFFFF;
+  }
+  label{
+    color: #FFFFFF;
+  }
+
+</style>

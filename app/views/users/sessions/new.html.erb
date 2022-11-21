@@ -1,22 +1,128 @@
-<div class="border border-warning border-1 p-2">
-<h2>Log in usuarios</h2>
+<div class="container w-75 bg-dark rounded shadow">
+  <div class="row align-items-stech">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :Email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="col">
+
+      <div class="text-end">
+        <%= image_tag "logo.png", width: 48%>
+      </div>
+
+      <h1 class="fw-bold text-center pt-5 ">Alquilapp</h1>
+      <h2 class="fw-bold text-center pt-2"></h2>
+        <br>
+        <br>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="field">
+          <%= f.label :Email, class: "form-label mb-4"%><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: "form-control" %>
+        </div>
+
+        <br>
+
+        <div class="field">
+          <%= f.label :Contraseña, class: "form-label mb-4" %>
+          <%= f.password_field :password, autocomplete: "new-password", required: true, id:"user_password", class: "form-control" %>
+          <p id="eye">Ver Contraseña <i  class=" fa ">&#xf06e;</i></p>
+        </div>
+
+        <br>
+
+        <div class="d-grid">
+          <%= f.submit "Log in", class:"btn btn-info" %>
+        </div>
+
+      <% end %>
+    </div>
+    <div class="my-2 links">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :Contraseña %><br />
-    <%= f.password_field :password, autocomplete: "new-password", required: true, id:"user_password" %>
-        <i  class=" fa " id="eye">&#xf06e;</i>
-  </div>
-
-  <div class="actions mt-2">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
 </div>
+
+
+<!--
+<div class="container w-75 bg-dark mt-5 rounded shadow">
+  <div class="row align-items-stech">
+    <div class="col bg d-none d-lg-block">
+
+    </div>
+    <div class="col">
+      <div class="text-end">
+
+        <%= image_tag "logo.png", width: 48%>
+      </div>
+
+      <h1 class="fw-bold text-center pt-5 ">Alquilapp</h1>
+      <h2 class="fw-bold text-center pt-2">Personal</h2>
+        <br>
+        <br>
+      <!--Login
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="mb-4">
+          <%= f.label :Email, class: "form-label mb-4"%><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+        
+        <br>
+
+        <div class="mb-4">
+          <%= f.label :Constraseña, class: "form-label mb-4" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="d-grid">
+          <%= f.submit "Log in", class:"btn btn-info"%>
+        </div>
+        
+        <br>
+        <br>        
+      <% end %>
+
+
+    </div>
+  </div>
+</div>
+-->
+
+<style>
+  .bg{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url(<%= asset_path 'Portada6.jpg' %>);
+    background-position: center center;
+  }
+  .vertical-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .links{
+    color: #3d8582;
+  }
+  body{
+    background-color: #000000;
+    /* background: linear-gradient(to right, #000000, #505050); */
+    background: linear-gradient(to right, #000000, #9e3c0e);
+    background: linear-gradient(to right, #000000, #cf7f17);
+    height: 100vh;
+  }
+  h1{
+    color: #FFFFFF;
+  }
+  h2{
+    color: #FFFFFF;
+  }
+  p{
+    margin-top: 5px;
+    color: #F0F0F0;
+  }
+  label{
+    color: #FFFFFF;
+  }
+
+</style>
+
+

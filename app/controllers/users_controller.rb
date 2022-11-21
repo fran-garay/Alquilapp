@@ -6,7 +6,10 @@ class UsersController < ApplicationController
 
     # flash.keep
     @user = current_user
+    @autos = Auto.all.order(anio: :desc)
   end
+
+
 
   # def layout_by_resource
   #   if user_signed_in?
@@ -15,5 +18,9 @@ class UsersController < ApplicationController
   #     "application"
   #   end
   # end
+
+  def vista_mapa
+    @autos = Auto.all
+  end
 
 end

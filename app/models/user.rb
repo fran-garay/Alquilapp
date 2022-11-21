@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validate :is_an_adult
   validate :phone_only_contains_numbers
   has_one_attached :licencia
+  enum status: [:Validado, :Pendiente, :Rechazado, :Bloqueado]
 
   def is_an_adult
     if birth_date.present? && birth_date > 17.years.ago
