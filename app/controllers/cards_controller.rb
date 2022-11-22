@@ -20,8 +20,6 @@ class CardsController < ApplicationController
             @card.number = card_params[:number]
         else
             flash[:alert] = "El número de tarjeta es inválido"
-            redirect_to "/wallets/#{params[:user_id]}"
-            return
         end
         @card.cvv = card_params[:cvv]
         @card.date = card_params[:date].to_s
