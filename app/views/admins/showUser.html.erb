@@ -1,24 +1,16 @@
 <h1>Perfil de <%= @user.first_name %></h1>
-<p>Nombre: <%= @user.first_name %></p>
+<%= render "admins/shared/error_messages", resource: @user %>
 <p>apellido: <%= @user.last_name %></p>
 <p>Email: <%= @user.email %></p>
 <p>Se registró el: <%= @user.created_at.strftime("%d/%m/%Y") %></p>
 
 <p>Estado Actual: <%= @user.status %></p>
 
-<%
-=begin%>
- #create a form to change the status
-<%= form_for(user, as: user, url: "/admins/showUser/cambiarEstado/#{auto.id}" , html: { method: :put }) %>
-  <%= f.label :status %>
-  <%= f.select :status, options_for_select([["Activo", "active"], ["Inactivo", "inactive"]]) %>
-  <%= f.submit "Cambiar" %>
-<% end %> 
-<%
-=end%>
-
-
-
+<%# Add a select tag to change the status %>
+<%# <%= form_for(@user, as: :user, url: "/admins/updateUserStatus/#{@user.id}" , html: { method: :put }) do |f| %>
+  <%# <%= f.select :status, options_for_select([["Validado", "Validado"], ["Inactivo", "Inactivo"]]) %>
+  <%# <%= f.submit "Actualizar" %>
+<%# <% end %>
 
 <% if @user.licencia.attached? %>
     <%= image_tag(@user.licencia, width: 400) %>

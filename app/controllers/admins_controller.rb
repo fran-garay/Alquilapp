@@ -34,4 +34,20 @@ class AdminsController < ApplicationController
   #     "application"
   #   end
   # end
+
+  def updateUserStatus
+    logger.debug "Actualizando estado de usuario"
+    logger.debug "DEBUG : #{params[:id]}"
+    @user = User.find(params[:id])
+    @user.status = user_params[:status]
+    if !@user.save
+      @user.errors.add(:status, "No se pudo actualizar, intenta mas tarde")
+    end
+    redirect_to "admins/showUser/#{params[:id]}"
+  end
+
+  def user_params
+    params.require(:user).permit(:status)
+  end
+
 end
