@@ -36,14 +36,17 @@ class AdminsController < ApplicationController
   # end
 
   def updateUserStatus
-    logger.debug "Actualizando estado de usuario"
-    logger.debug "DEBUG : #{params[:id]}"
-    @user = User.find(params[:id])
-    @user.status = user_params[:status]
-    if !@user.save
-      @user.errors.add(:status, "No se pudo actualizar, intenta mas tarde")
+    @user = User.find(params[:user_id])
+
+    if @user.is_renting?
+      @user.errors.add(:base, "El usuario no puede ser bloqueado porque tiene un alquiler en curso")
+    else
+      @user.status = user_params[:status]
+      if !@user.save
+        @user.errors.add(:status, "No se pudo actualizar, intenta mas tarde")
+      end
     end
-    redirect_to "admins/showUser/#{params[:id]}"
+    render "/admins/showUser"
   end
 
   def user_params

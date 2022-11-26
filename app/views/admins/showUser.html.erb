@@ -1,23 +1,36 @@
-<h1>Perfil de <%= @user.first_name %></h1>
-<%= render "admins/shared/error_messages", resource: @user %>
-<p>apellido: <%= @user.last_name %></p>
-<p>Email: <%= @user.email %></p>
-<p>Se registró el: <%= @user.created_at.strftime("%d/%m/%Y") %></p>
+<h1>Perfil de <%= @user.first_name %> <%= @user.last_name %></h1>
+<div class="d-flex flex-column align-items-center">
+  <div class="d-flex justify-content-between w-75 mt-3 bg-2 gray_bg_showUser">
+    <div>
+    <%= render "admins/shared/error_messages", resource: @user %>
 
-<p>Estado Actual: <%= @user.status %></p>
+    <label class="h3">Email</label>
+    <p> <%= @user.email %> </p>
 
-<%# Add a select tag to change the status %>
-<%# <%= form_for(@user, as: :user, url: "/admins/updateUserStatus/#{@user.id}" , html: { method: :put }) do |f| %>
-  <%# <%= f.select :status, options_for_select([["Validado", "Validado"], ["Inactivo", "Inactivo"]]) %>
-  <%# <%= f.submit "Actualizar" %>
-<%# <% end %>
+    <label class="h3">Fecha de registro</label>
+    <p>Se registró el: <%= @user.created_at.strftime("%d/%m/%Y") %></p>
 
-<% if @user.licencia.attached? %>
-    <%= image_tag(@user.licencia, width: 400) %>
-<% else %>
-    <label>No hay licencia para mostrar</label>
-<% end %>
-<br><br>
+    <label class="h3">Cambiar Estado</label>
+    <p>Estado Actual: <%= @user.status %></p>
 
-<%= link_to "Volver", "/admins/listar_usuarios", class: "btn btn-warning p-1" %>
-<br><br><br><br><br><br><br><br>
+    <%# Add a select tag to change the status %>
+    <%= form_for(@user, as: :user, url: "/admins/updateUserStatus/#{@user.id}" , html: { method: :put }) do |f| %>
+      <%= f.select :status, ["Validado", "Pendiente", "Rechazado", "Bloqueado"], class:"form-select" %>
+        <%= f.submit "Actualizar" %>
+    <% end %>
+    <%# ["Validado", "Pendiente", "Rechazado", "Bloqueado"] %>
+    <%# [:Validado, :Pendiente, :Rechazado, :Bloqueado] %>
+    </div>
+
+    <% if @user.licencia.attached? %>
+        <%= image_tag(@user.licencia, width: 400, class:"rounded-2") %>
+    <% else %>
+        <label>No hay licencia para mostrar</label>
+    <% end %>
+
+  </div>
+  <div class="w-75 mt-5">
+  <%= link_to "Volver", "/admins/listar_usuarios", class: "btn btn-warning p-1 align-self-start" %>
+  </div>
+</div>
+
