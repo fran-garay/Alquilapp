@@ -34,4 +34,23 @@ class AdminsController < ApplicationController
   #     "application"
   #   end
   # end
+
+  def updateUserStatus
+    @user = User.find(params[:user_id])
+
+    if @user.is_renting?
+      @user.errors.add(:base, "El usuario no puede ser bloqueado porque tiene un alquiler en curso")
+    else
+      @user.status = user_params[:status]
+      if !@user.save
+        @user.errors.add(:status, "No se pudo actualizar, intenta mas tarde")
+      end
+    end
+    render "/admins/showUser"
+  end
+
+  def user_params
+    params.require(:user).permit(:status)
+  end
+
 end
