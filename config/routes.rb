@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
   put '/cards/create/:user_id', :to => 'cards#create'
   get '/users/vista_mapa', :to => 'users#vista_mapa'
+  get '/cards/:user_id/create', :to => 'cards#new', :as => 'new_card'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 

@@ -1,6 +1,6 @@
 class WalletsController < ApplicationController
 
-    #layout "for_users"
+    layout "for_users"
 
     before_action :authenticate_user!
     before_action :verificar_id_belongs_to_user

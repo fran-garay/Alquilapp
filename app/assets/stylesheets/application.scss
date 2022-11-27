@@ -15,153 +15,169 @@ black_bg {
   z-index: 2;
 }
 
-.floating_btn{
+.floating_btn {
   font-size: 25px;
-  cursor:pointer;
+  cursor: pointer;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
 // Menu izquierdo
 .overlay {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 5;
-    top: 0;
-    left: 0;
-    // background-color: orange;
-    background-color: rgb(255, 171, 14);
-    overflow-x: hidden;
-    transition: 0.5s;
-  }
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  // background-color: orange;
+  background-color: rgb(255, 171, 14);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
 
-  .overlay button {
-    background-color: rgb(255, 171, 14);
-    color: #818181;
-  }
+.overlay button {
+  background-color: rgb(255, 171, 14);
+  color: #818181;
+}
 
-  // .overlay-content {
-  //   position: relative;
-  //   top: 25%;
-  //   width: 100%;
-  //   text-align: center;
-  //   margin-top: 30px;
-  // }
+// .overlay-content {
+//   position: relative;
+//   top: 25%;
+//   width: 100%;
+//   text-align: center;
+//   margin-top: 30px;
+// }
 
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 28px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+
+
+.overlay a:hover,
+.overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay button:hover,
+.overlay button:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  // position: absolute;
+  top: 20px;
+  // right: 65px;
+  align-self: flex-end;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
   .overlay a {
-    padding: 8px;
-    text-decoration: none;
-    font-size: 28px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-
-
-
-  .overlay a:hover, .overlay a:focus {
-    color: #f1f1f1;
-  }
-
-  .overlay button:hover, .overlay button:focus {
-    color: #f1f1f1;
+    font-size: 20px
   }
 
   .overlay .closebtn {
-    // position: absolute;
-    top: 20px;
-    // right: 65px;
-    align-self : flex-end;
-    font-size: 60px;
-  }
-
-  @media screen and (max-height: 450px) {
-    .overlay a {font-size: 20px}
-    .overlay .closebtn {
     font-size: 40px;
     top: 15px;
     right: 35px;
-    }
   }
+}
+
 // Fin menu izquierdo
 
 
 .element-mobile-100vh {
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: 100vh;
+  /* Fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
 }
 
 // rounded button
-.bien_redondito{
-  border-radius:50%;
-  width:55px;
-  height:55px;
-  }
+.bien_redondito {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+}
 
-  i {
-    margin-left: 5px;
-    color: #818181;
-  }
+i {
+  margin-left: 5px;
+  color: #818181;
+}
 
-  i:hover, i:focus {
-    color: rgb(255, 171, 14);
-    cursor: pointer ;
-  }
+i:hover,
+i:focus {
+  color: rgb(255, 171, 14);
+  cursor: pointer;
+}
 
-  .icon_img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 0 auto;
-    background-color: white;
-    margin-bottom: 2rem;
-  }
+.icon_img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: white;
+  margin-bottom: 2rem;
+}
 
-  hr {
-    z-index: auto;
-    border: 2px solid white;
-    border-radius: 10%;
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 5px;
-  }
+hr {
+  z-index: auto;
+  border: 2px solid white;
+  border-radius: 10%;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 5px;
+}
 
-  .icon_admins_list{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 0 auto;
-    background-color: white;
-  }
+.icon_admins_list {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: white;
+}
 
-  .icon_img_admins {
-    width: 50px;
-    height: 48px;
-    border-radius: 50%;
-    margin: 0 auto;
-    background-color: white;
-  }
+.icon_img_admins {
+  width: 50px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: white;
+}
 
-  .map-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-  }
-
-
-  .map-bottom {
-    position: absolute;
-    // border : 5px solid red;
-    bottom: 25px;
+.map-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
 
 
-    // center
-    left: 50%;
-    transform: translateX(-50%);
-    // red border
-    // border: 10px solid red;
-    z-index: 1;
+.map-bottom {
+  position: absolute;
+  // border : 5px solid red;
+  bottom: 25px;
 
-  }
+
+  // center
+  left: 50%;
+  transform: translateX(-50%);
+  // red border
+  // border: 10px solid red;
+  z-index: 1;
+
+}
+
+.mb-11vh {
+  margin-bottom: 11vh;
+}
+
+.mt-11vh {
+  margin-top: 11vh;
+}
