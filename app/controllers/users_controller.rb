@@ -35,6 +35,20 @@ class UsersController < ApplicationController
 
   def alquilar
     parametros = alquiler_params
+    @user = current_user
+    @auto = Auto.find(params[:auto_id])
+    total_horas = (parametros[:fecha_devolucion].to_d - parametros[:fecha_alquiler].to_d).to_i * 24
+    total_precio = total_horas * Precio.last.valor
+    if no_tiene_saldo?(total_precio)
+      @precio = Precio.last
+      @user.errors.add(:base, "No tienes suficiente dinero para alquilar este auto")
+      render "/users/vehiculo" and return
+    end
+    if la_hora_es_menor_a_la_actual_y_el_dia_es_hoy?(parametros[:fecha_devolucion], parametros[:hora_devolucion])
+      @precio = Precio.last
+      @user.errors.add(:base, "La hora de devolución debe ser mayor a la hora actual")
+      render "/users/vehiculo" and return
+    end
     @alquiler = Alquiler.new
     @alquiler.user_id = current_user.id
     @alquiler.auto_id = params[:auto_id]
@@ -43,14 +57,15 @@ class UsersController < ApplicationController
     @alquiler.fecha_devolucion = parametros[:fecha_devolucion]
     @alquiler.hora_devolucion = parametros[:hora_devolucion]
     @alquiler.save
-    @user = current_user
     @user.alquiler_id = @alquiler.id
     @user.is_renting = true
     @user.save
-    @auto = Auto.find(@alquiler.auto_id)
     @auto.alquiler_id = @alquiler.id
     @auto.estado = "Ocupado"
     @auto.save
+    @wallet = @user.wallet
+    @wallet.saldo = @wallet.saldo - total_precio
+    @wallet.save
     redirect_to users_vista_alquiler_path
   end
 
@@ -95,6 +110,21 @@ class UsersController < ApplicationController
     @alquiler = Alquiler.find(current_user.alquiler_id)
     @auto = Auto.find(@alquiler.auto_id)
     @user = current_user
+  end
+
+  def no_tiene_saldo?(total_precio)
+    current_user.wallet.saldo < total_precio
+  end
+
+  def la_hora_es_menor_a_la_actual_y_el_dia_es_hoy?(fecha_devolucion, hora_devolucion)
+    logger.debug "DEBUGS "
+    logger.debug "fecha_devolucion #{fecha_devolucion}"
+    logger.debug "fecha_devolucion.to_date #{fecha_devolucion.to_date}"
+    logger.debug "Date.today #{Date.today.to_s}"
+    logger.debug "Date.today #{Date.today.to_s == fecha_devolucion}"
+    logger.debug "Time.now #{Time.now > hora_devolucion}"
+    # Date.today.
+    fecha_devolucion == Date.today.to_s && hora_devolucion < Time.now
   end
 
 end

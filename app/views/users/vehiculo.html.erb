@@ -1,43 +1,57 @@
-<div style="margin-top:12vh" style="height: 100%;">
+<div class="mt-12vh mb-11vh">
+    <div class="p-2">
+        <%= render "users/shared/error_messages", resource: current_user%>
+    </div>
     <div class="autos d-flex flex-column align-items-center">
-        <div class="card container-in" style="width: 23rem;">
-            <h1><%=@auto.modelo%> <%=@auto.anio%></h1>
+        <div class="card container-in" style="width: 21rem;">
+            <h1 class="m-2"><%=@auto.modelo%> <%=@auto.anio%></h1>
 
-                <%if @auto.imagen.attached?%>
-                    <%= image_tag(@auto.imagen) %></td>
-                <%else%>
-                    <label>Sin Foto</label>
-                <%end%>
-            <div>
-            <br>
-            <div class="mostrar m-2">
-                <label class="card-text">Patente: </label>
-                <p><%=@auto.patente%></p>
-                <label class="card-text">Tipo de Caja: </label>
-                <p><%=@auto.tipo_de_caja%></p>
-                <label class="card-text">Tipo de Combustible: </label>
-                <p><%=@auto.tipo_de_combustible%></p>
-                <label class="card-text">Precio: </label>
-                <p>$<%=@precio.valor%> /h</p>
+            <%if @auto.imagen.attached?%>
+                <%= image_tag(@auto.imagen) %></td>
+            <%else%>
+                <label>Sin Foto</label>
+            <%end%>
+            <div class="mostrar m-3 mb-0">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col">
+                            <label class="card-text">Patente: </label>
+
+                            <hr class="orange-light-hr">
+                            <p><%=@auto.patente%></p>
+                        </div>
+                        <div class="col">
+                            <label class="card-text">Tipo de Caja: </label>
+
+                            <hr class="orange-light-hr">
+                            <p><%=@auto.tipo_de_caja%></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col">
+                            <label class="card-text">Combustible: </label>
+                            <hr class="orange-light-hr">
+                            <p><%=@auto.tipo_de_combustible%></p>
+                        </div>
+                        <div class="col">
+                            <label class="card-text">Precio: </label>
+
+                            <hr class="orange-light-hr">
+                            <p>$<%=@precio.valor%> /h</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div id="small_map" style="height:15vh; width:100%"></div>
         </div>
     </div>
-    <br>
 
 
+    <div class= "border border-danger container mt-1 ">
 
-
-    <%= form_with model: @alquiler, url: "/users/alquilar/#{@auto.id}", method: :post do |form| %>
-        <%= form.label :fecha_devolucion, required: true %>
-        <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2022-01-01' %>
-        <%= form.label :hora_devolucion, required: true %>
-        <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00' %>
-
-        <%= form.submit "Alquilar", class: "btn btn-success" %>
-        <%# <div class="d-flex justify-content-center">
-            <button id="btn-confirm" class="btn btn-warning btn-lg btn-block"  data-bs-target="#exampleModal" data-bs-whatever="asdf">Alquilar</button>
-        </div>
-        <div class="modal centrar_vertical fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -45,18 +59,27 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>¿Está seguro que desea alquilar al <%= @auto.modelo %>
-                    <%# </div>
+                        <%= form_with model: @alquiler, url: "/users/alquilar/#{@auto.id}", method: :post do |form| %>
+                        <%= form.label "Fecha de Devolucion", required: true, class:"" %>
+                        <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2022-01-01' %>
+                        <%= form.label "Hora de Devolucion", required: true, class:"" %>
+                        <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00' %>
+
+                        <p>¿Está seguro que desea alquilar a <%= @auto.modelo %>?</p>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes" %>
+                        <%# <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger", id:"btn-yes" %>
                     </div>
                 </div>
             </div>
-        </div> %>
-                        <%# <%= button_to "Confirmar", "/users/alquilar/#{@auto.id}", method: :put, class: "btn btn-success", id:"btn-yes" %>
-
+        </div>
 
     <% end %>
+    </div>
+    <button id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Elegir horario</button>
+
 
 </div>
 
@@ -74,27 +97,31 @@
 
     h1{
         font-weight: 600;
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     p{
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
 
     label{
         font-weight: bolder;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
     }
 
     .boton{
         width: 23rem;
 
     }
-    .centrar_vertical {
-        /* position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); */
+    .orange-light-hr{
+        border-top: 3px solid #ff8c00;
+        rounded: 5px;
+        padding: 0;
+        margin: 0;
+        width: 40%;
+        /* center hr */
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 
@@ -135,52 +162,138 @@
     var date = document.getElementById("datefield");
     if (date != null){
       date.setAttribute("min", today);
+        date.setAttribute("value", today);
       date.setAttribute("max", today_plus_ten_days);
     }
 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getMap);
+    }
+
+    function getMap(pos) {
+        user_lat = pos.coords.latitude;
+        user_lon = pos.coords.longitude;
+        console.log(user_lat);
+        console.log(user_lon);
+
+      var map = new ol.Map({
+        target: 'small_map',
+        layers: [
+            new ol.layer.Tile({
+            source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([ <%= @auto.location_point.y %>, <%= @auto.location_point.x %> ]),
+            zoom: 16
+        })
+        });
 
 
-    // var time = document.getElementById("timefield");
-    // if (time != null){
-    //   time.setAttribute("min", actual_time);
-    // }
 
-    // let btnConfirm = document.getElementById('btn-confirm');
-    // let confirm = document.getElementById('confirm');
-    // let btnYes = document.getElementById('btn-yes');
-    // let btnNo = document.getElementById('btn-no');
-    // let btnCancel = document.getElementById('btn-cancel');
-    // let modal = document.getElementById('exampleModal');
+        // remove + and - buttons
+        map.getControls().forEach(function(control) {
+            if (control instanceof ol.control.Zoom) {
+                map.removeControl(control);
+            }
+        });
 
-    // btnConfirm.addEventListener('click', () => {
-    //     // check if datefield is empty and if timefield is empty if it is then dont show modal
-    //     console.log(date.value);
-    //     console.log(time.value);
-    //     if (date.value == "" || time.value == ""){
-    //         console.log("ENTRO")
-    //         modal.style.display = "none";
-    //         return;
-    //     }
-    //     else {
-    //         confirm.style.display = "block";
-    //         // show modal with id exampleModal
-    //         modal.style.display = "block";
-    //     }
-    // });
+        // save map on local storage to be able to use it later
+        // localStorage.setItem("map", map);
 
-    // btnYes.addEventListener('click', () => {
-    //     confirm.style.display = 'none';
-    //     // btnConfirm.form.submit();
-    // });
 
-    // btnNo.addEventListener('click', () => {
-    //     confirm.style.display = 'none';
-    // });
 
-    // btnCancel.addEventListener('click', () => {
-    //     confirm.style.display = 'none';
-    // });
+        // marker of the user with a blue circle
+        var user_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([user_lon, user_lat])
+            ),  // Cordinates of New York's Town Hall
+        });
 
+        var user_marker_style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({color: 'blue'}),
+                stroke: new ol.style.Stroke({
+                    color: 'white', width: 2
+                })
+            })
+        });
+
+        user_marker.setStyle(user_marker_style);
+
+        var vectorSource = new ol.source.Vector({
+            features: [user_marker]
+        });
+
+        var user_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+
+        map.addLayer(user_marker_vectorLayer);
+
+        // localStorage
+
+        // for each auto, add a marker with the auto's location and a popup with the auto's info when clicked on the marker
+
+        var auto_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([<%= @auto.location_point.y %>, <%= @auto.location_point.x %>])
+            ),  // Cordinates of New York's Town Hall
+        });
+
+        var auto_marker_style = new ol.style.Style({
+            image: new ol.style.Icon({
+                anchor: [0.5, 0.5],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'fraction',
+                src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
+                scale: 0.03
+            })
+        });
+
+        auto_marker.setStyle(auto_marker_style);
+
+        var vectorSource = new ol.source.Vector({
+            features: [auto_marker]
+        });
+
+        var auto_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+
+        map.addLayer(auto_marker_vectorLayer);
+
+
+        // add a marker with the user's location and a popup with the user's info when clicked on the marker
+        var user_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([user_lon, user_lat])
+            ),  // Cordinates of New York's Town Hall
+        });
+
+        var user_marker_style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({color: 'blue'}),
+                stroke: new ol.style.Stroke({
+                    color: 'white', width: 2
+                })
+            })
+        });
+
+        user_marker.setStyle(user_marker_style);
+
+        var vectorSource = new ol.source.Vector({
+            features: [user_marker]
+        });
+
+        var user_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+
+        map.addLayer(user_marker_vectorLayer);
+    }
 
 
 </script>

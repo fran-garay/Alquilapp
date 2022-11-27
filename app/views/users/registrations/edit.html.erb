@@ -1,78 +1,92 @@
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= form_for(resource, as: resource_name, url: "/users/edit", html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<div class="w-100 p-3 d-flex flex-column">
+<h2 class="mt-10vh">Edit <%= resource_name.to_s.humanize %></h2>
 
-  <label>Licencia Actual</label><br>
-  <%if resource.licencia.attached? %>
-    <%= image_tag(resource.licencia, width:300) %>
+
+<% if !current_user.is_renting? %>
+
+  <%= form_for(resource, as: resource_name, url: "/users/edit", html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <%# <% image_tag(@resource.licencia, class:"img-fluid") %>
+    <%if resource.licencia.attached? %>
+      <label>Licencia Actual</label>
+      <%= image_tag(resource.licencia, width:300, class:"mt-2 align-self-center") %>
+    <%else%>
+      <label>     Aun no se ha subido ninguna foto</label>
+    <%end%>
+
+    <div class="field">
+        <%= f.label :licencia, "Foto nueva" %><br />
+        <%= f.file_field :licencia %>
+      </div>
+    <br>
+
+    <div class="field">
+        <%= f.label :Email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+      </div>
+
+    <div class="field">
+        <%= f.label :Constraseña %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", minlength: 6 %>
+      </div>
+
+  <div class="field">
+        <%= f.label "Confirmación de contraseña" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :Nombre %><br />
+        <%= f.text_field :first_name, required: true, minlength: 3, maxlength: 50, size:20 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :Apellido %><br />
+        <%= f.text_field :last_name, required: true, minlength: 3, maxlength: 50, size:20 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :Numero_de_telefono %><br />
+        <%= f.number_field :phone, required: true, placeholder:"Ej: 2214230649" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :fecha_de_nacimiento %><br />
+        <%= f.date_field :birth_date, required: true, id:"datefield", min:'1899-01-01', max:'0-13-13' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :Fecha_de_expiracion_de_la_licencia %><br />
+        <%= f.date_field :license_valid_until, required: true, id:"date_valid_until_lnc", min:'1899-01-01', max:'0-13-13' %>
+      </div>
+
+    <div class="field">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password", required:true %>
+    </div>
+
+    <div class="actions ">
+      <%= f.submit "Update", class:"btn btn-primary p-1 mt-2" %>
+    </div>
+  <% end %>
   <%else%>
-    <label>     Aun no se ha subido ninguna foto</label>
-  <%end%>
-  <%# <% image_tag(@resource.licencia, class:"img-fluid") %>
-  <br>
-
-  <div class="field">
-      <%= f.label :licencia, "Foto nueva" %><br />
-      <%= f.file_field :licencia %>
+    <div class="alert alert-danger alert-dismissible fade show p-2 mt-2" role="alert">
+      <strong>¡Atención!</strong>  No puedes editar tu perfil mientras estes alquilando un vehiculo.
+      <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
     </div>
-  <br>
-
-  <div class="field">
-      <%= f.label :Email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-    </div>
-
-  <div class="field">
-      <%= f.label :Constraseña %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", minlength: 6 %>
-    </div>
-
- <div class="field">
-      <%= f.label "Confirmación de contraseña" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :Nombre %><br />
-      <%= f.text_field :first_name, required: true, minlength: 3, maxlength: 50, size:20 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :Apellido %><br />
-      <%= f.text_field :last_name, required: true, minlength: 3, maxlength: 50, size:20 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :Numero_de_telefono %><br />
-      <%= f.number_field :phone, required: true, placeholder:"Ej: 2214230649" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :fecha_de_nacimiento %><br />
-      <%= f.date_field :birth_date, required: true, id:"datefield", min:'1899-01-01', max:'0-13-13' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :Fecha_de_expiracion_de_la_licencia %><br />
-      <%= f.date_field :license_valid_until, required: true, id:"date_valid_until_lnc", min:'1899-01-01', max:'0-13-13' %>
-    </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password", required:true %>
-  </div>
-
-  <div class="actions ">
-    <%= f.submit "Update", class:"btn btn-primary p-1 mt-2" %>
-  </div>
+        <%if resource.licencia.attached? %>
+      <label>Licencia Actual</label>
+      <%= image_tag(resource.licencia, width:300, class:"mt-2 align-self-center") %>
+    <%else%>
+      <label>     Aun no se ha subido ninguna foto</label>
+    <%end%>
 <% end %>
-
-<%= link_to "Back", "/users"  %>
-
+</div>
 <script>
 
    var today = new Date();

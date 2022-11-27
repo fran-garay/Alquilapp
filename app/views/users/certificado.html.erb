@@ -1,12 +1,12 @@
 <style>
     .cert{
-        width: 100%;
-        height: 100%;
-        transform: rotate(90deg);
+        width: 10vw;
+        height: 10rem;
+        /* transform: rotate(90deg); */
     }
 </style>
 
-<div class="mt-10vh">
+<div class="mt-10vh cert">
     <body>
         <div class="container pm-certificate-container">
             <div class="outer-border"></div>
@@ -21,7 +21,7 @@
 
                 <div class="row pm-certificate-body">
 
-                    
+
 
                     <div class="pm-certificate-block">
 
@@ -77,7 +77,7 @@
                                 <div class="pm-course-title underline col-xs-8 text-center">
                                     <span class="pm-credits-text block sans">
                                         <strong><%=@auto.modelo%></strong>
-                                         de patente 
+                                         de patente
                                         <strong><%=@auto.patente%></strong>
                                     </span>
                                 </div>
@@ -110,9 +110,9 @@
                                 <div class="pm-course-title underline col-xs-8 text-center">
                                     <span class="pm-credits-text block sans">
                                         el día
-                                        <strong><%=@alquiler.fecha_devolucion.to_s%></strong> 
-                                        a las 
-                                        <strong><%=@alquiler.hora_devolucion.to_a[2]%>:<%=@alquiler.hora_devolucion.to_a[1]%> 
+                                        <strong><%=@alquiler.fecha_devolucion.to_s%></strong>
+                                        a las
+                                        <strong><%=@alquiler.hora_devolucion.to_a[2]%>:<%=@alquiler.hora_devolucion.to_a[1]%>
                                         hs </strong>
                                     </span>
                                 </div>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
 
                     <div class="col-xs-12">
