@@ -3,10 +3,15 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-
     # flash.keep
     @user = current_user
     @autos = Auto.all.order(anio: :desc)
+  end
+
+  def vehiculo
+    @user = current_user
+    @auto = Auto.find(params[:id])
+    @precio = Precio.last
   end
 
 
