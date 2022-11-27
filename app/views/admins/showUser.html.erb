@@ -4,6 +4,18 @@
     <div>
     <%= render "admins/shared/error_messages", resource: @user %>
 
+<p>Estado Actual: <%= @user.status %></p>
+<i class="fas fa-check-circle text-success" style="font-size: 1.5rem"></i>
+<%
+=begin%>
+ #create a form to change the status
+<%= form_for(user, as: user, url: "/admins/showUser/cambiarEstado/#{auto.id}" , html: { method: :put }) %>
+  <%= f.label :status %>
+  <%= f.select :status, options_for_select([["Activo", "active"], ["Inactivo", "inactive"]]) %>
+  <%= f.submit "Cambiar" %>
+<% end %> 
+<%
+=end%>
     <label class="h3">Email</label>
     <p> <%= @user.email %> </p>
 
