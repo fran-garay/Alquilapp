@@ -43,13 +43,14 @@ Rails.application.routes.draw do
   end
 
   as :user do
+    # generate route that recives the id of a auto
     get 'users', :to => 'users#index', :as => :users_root # Rails 3
   end
 
   # get "admins/edit/:id", to: "admins/registrations#edit"
   # put "admins/edit/:id", to: "admins/registrations#update"
 
-
+  get '/users/vehiculo/:id', :to => 'users#vehiculo', :as => :vehiculo
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
   get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'
   get '/autos', :to => 'autos#listadoDeAutos'
@@ -67,6 +68,12 @@ Rails.application.routes.draw do
   put '/cards/create/:user_id', :to => 'cards#create'
   get '/users/vista_mapa', :to => 'users#vista_mapa'
   get '/cards/:user_id/create', :to => 'cards#new', :as => 'new_card'
+
+  put '/admins/updateUserStatus/:user_id', :to => 'admins#updateUserStatus'
+
+  get '/users/vista_alquiler', :to => 'users#vista_alquiler'
+
+  put '/users/finalizar_alquiler', :to => 'users#finalizar_alquiler'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 

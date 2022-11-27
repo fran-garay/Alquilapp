@@ -1,11 +1,11 @@
-<div style="margin-top:10vh">
+<div class="mb-11vh mt-11vh">
     <div class="autos d-flex flex-column align-items-center">
     <h4 class="p-2">Los mejor autos disponibles</h4>
         <%# <div class="card" style="width: 18rem;"> %>
 
         <%@autos.each do |auto| %>
             <%if (auto.estado == "Disponible")%>
-                <div class="card" style="width: 19rem;">
+                <a class="card" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
                     <%if auto.imagen.attached?%>
                         <%= image_tag(auto.imagen) %></td>
                     <%else%>
@@ -16,10 +16,13 @@
                         <p class="card-text">Año: <%=auto.anio%></p>
                         <p class="card-text">Tipo de caja: <%=auto.tipo_de_caja%></p>
                     </div>
-                </div>
+                </a>
                 <br>
             <%end%>
+            
         <% end %>
+
+        <br><br><br><br>
 
         <%# <div class="card" style="width: 19rem;">
         <img src="https://thumbs.dreamstime.com/b/ferrari-f-white-background-251916421.jpg" class="card-img-top" alt="...">
@@ -48,4 +51,11 @@
         </div> %>
     </div>
 </div>
+
+<style>
+    a{
+        color: black;
+        text-decoration:none
+    }
+</style>
 

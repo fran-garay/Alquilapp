@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_191056) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_26_200101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_191056) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "alquilers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "auto_id"
+    t.date "fecha_alquiler"
+    t.time "hora_alquiler"
+    t.date "fecha_devolucion"
+    t.time "hora_devolucion"
+    t.decimal "precio_total"
+    t.index ["auto_id"], name: "index_alquilers_on_auto_id"
+    t.index ["user_id"], name: "index_alquilers_on_user_id"
+  end
+
   create_table "autos", force: :cascade do |t|
     t.string "patente"
     t.float "porcentaje_combustible"
@@ -73,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_191056) do
     t.string "tipo_de_combustible"
     t.string "color"
     t.point "location_point"
+    t.bigint "current_alquiler_id"
+    t.index ["current_alquiler_id"], name: "index_autos_on_current_alquiler_id"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -125,6 +141,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_191056) do
     t.date "license_valid_until"
     t.integer "status", default: 1
     t.boolean "is_renting", default: false
+    t.bigint "current_alquiler_id"
+    t.index ["current_alquiler_id"], name: "index_users_on_current_alquiler_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -140,4 +158,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_191056) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "alquilers", "autos"
+  add_foreign_key "alquilers", "users"
+  add_foreign_key "autos", "alquilers", column: "current_alquiler_id"
+  add_foreign_key "users", "alquilers", column: "current_alquiler_id"
 end

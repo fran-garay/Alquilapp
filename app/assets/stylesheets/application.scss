@@ -12,7 +12,7 @@ black_bg {
 }
 
 .z2 {
-  z-index: 2;
+  z-index: -2;
 }
 
 .floating_btn {
@@ -101,8 +101,8 @@ black_bg {
 // rounded button
 .bien_redondito {
   border-radius: 50%;
-  width: 55px;
-  height: 55px;
+  width: 52px;
+  height: 52px;
 }
 
 i {
@@ -125,11 +125,11 @@ i:focus {
   margin-bottom: 2rem;
 }
 
-hr {
+.hr-menu {
   z-index: auto;
   border: 2px solid white;
   border-radius: 10%;
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 5px;
 }
@@ -158,20 +158,40 @@ hr {
   z-index: 1;
 }
 
+.map-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
 
 .map-bottom {
   position: absolute;
   // border : 5px solid red;
   bottom: 25px;
 
+  .map-bottom {
+    position: fixed;
+    // border : 5px solid red;
+    bottom: 25px;
 
-  // center
-  left: 50%;
-  transform: translateX(-50%);
-  // red border
-  // border: 10px solid red;
-  z-index: 1;
+    // center
+    left: 50%;
+    transform: translateX(-50%);
+    // red border
+    // border: 10px solid red;
+    z-index: 1;
 
+  }
+
+}
+
+.gray_bg_showUser {
+  background-color: #b5b5b549;
+  border-radius: 10px;
+  padding: 1.8rem;
+  margin: 10px;
 }
 
 .mb-11vh {

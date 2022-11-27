@@ -59,6 +59,10 @@ usuario = User.create(email: "rechazado@gmail.com", first_name: "Elre", last_nam
     password_confirmation: "123456", status: 2 ,birth_date: (Date.new(2001, 05, 18)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 18)))
 #usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
 
+usuario = User.create(email: "estoy_alquilando@gmail.com", first_name: "Estal", last_name: "Quilando", password: "123456",
+    password_confirmation: "123456", status: 0 ,birth_date: (Date.new(1959, 05, 18)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 18)), is_renting: true)
+    usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
+
 Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, phone: "1234567890", dni: "12345678")
 Admin.create(email:"super2@gmail.com", first_name: "Ernesto", last_name: "Flores", password: "123456",

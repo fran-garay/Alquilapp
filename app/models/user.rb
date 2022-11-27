@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :wallet
   has_many :cards
+  has_many :alquilers
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
