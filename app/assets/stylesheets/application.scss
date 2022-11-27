@@ -3,7 +3,7 @@
 
 @import "bootstrap";
 
-.black_bg {
+black_bg {
   background-color: black;
 }
 
@@ -196,13 +196,6 @@ i:focus {
   margin-top: 10vh;
 }
 
-.mt-11vh {
-  margin-top: 11vh;
-}
-
-.mt-12vh {
-  margin-top: 12vh;
-}
 // ------------------------------------------ PARA EL CERTIFICADO
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pinyon+Script|Rochester');
@@ -243,76 +236,63 @@ i:focus {
 }
 
 body {
-  // padding: 20px 0;
+  padding: 20px 0;
   background: #ccc;
 }
 
+
 .pm-certificate-container {
   position: relative;
-  width: 800px;
+  width: 355px;
   height: 600px;
   background-color: #FFC107;
   padding: 30px;
   color: #333;
   font-family: 'Open Sans', sans-serif;
   box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-  /*background: -webkit-repeating-linear-gradient(
-    45deg,
-    #618597,
-    #618597 1px,
-    #b2cad6 1px,
-    #b2cad6 2px
-  );
-  background: repeating-linear-gradient(
-    90deg,
-    #618597,
-    #618597 1px,
-    #b2cad6 1px,
-    #b2cad6 2px
-  );*/
 
   .outer-border {
-    width: 794px;
+    width: 347.375px;
     height: 594px;
-    position: absolute;
+    position: relative;
     left: 50%;
-    margin-left: -397px;
+    margin-left: -173.6875px;
     top: 50%;
     margin-top: -297px;
     border: 2px solid #fff;
   }
 
   .inner-border {
-    width: 730px;
-    height: 530px;
+    width: 330px;
+    height: 570px;
     position: absolute;
     left: 50%;
-    margin-left: -365px;
+    margin-left: -164.806125px;
     top: 50%;
-    margin-top: -265px;
+    margin-top: -285px;
     border: 2px solid #fff;
   }
 
   .pm-certificate-border {
-    position: relative;
-    width: 720px;
-    height: 520px;
+    position: absolute;
+    width: 319.375px;
+    height: 550px;
     padding: 0;
     border: 1px solid #E1E5F0;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgb(255, 255, 255);
     background-image: none;
     left: 50%;
-    margin-left: -360px;
+    margin-left: -159.6875px;
     top: 50%;
-    margin-top: -260px;
+    margin-top: -275px;
 
     .pm-certificate-block {
-      width: 650px;
+      width: 284.375px;
       height: 200px;
       position: relative;
       left: 50%;
-      margin-left: -325px;
-      top: 70px;
+      margin-left: -142.1875px;
+      top: 50px;
       margin-top: 0;
     }
 
@@ -325,12 +305,12 @@ body {
       top: 40px;
 
       h2 {
-        font-size: 34px !important;
+        font-size: 30px !important;
       }
     }
 
     .pm-certificate-body {
-      padding: 20px;
+      padding: 0px;
 
       .pm-name-text {
         font-size: 20px;
@@ -368,11 +348,11 @@ body {
     }
 
     .pm-certificate-footer {
-      width: 650px;
+      width: 284.375px;
       height: 100px;
       position: relative;
       left: 50%;
-      margin-left: -325px;
+      margin-left: -142.1875px;
       bottom: -105px;
     }
   }

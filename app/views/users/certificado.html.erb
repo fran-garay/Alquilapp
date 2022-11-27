@@ -1,12 +1,5 @@
-<style>
-    .cert{
-        width: 10vw;
-        height: 10rem;
-        /* transform: rotate(90deg); */
-    }
-</style>
-
-<div class="mt-10vh cert">
+<div class="mt-10vh text-center">
+    <div class="d-print">
     <body>
         <div class="container pm-certificate-container">
             <div class="outer-border"></div>
@@ -15,7 +8,7 @@
             <div class="pm-certificate-border col-xs-12">
                 <div class="row pm-certificate-header">
                     <div class="bold pm-certificate-title col-xs-12 text-center">
-                        <h2>Autorización de uso - Alquilapp</h2>
+                        <h2>Autorización de uso <strong>Alquilapp</strong></h2>
                     </div>
                 </div>
 
@@ -31,7 +24,7 @@
                                     <!-- LEAVE EMPTY -->
                                 </div>
                                 <div class="pm-earned col-xs-8 text-center">
-                                    <span class="pm-earned-text padding-0 block">se autoriza al señor/ra</span>
+                                    <span class="pm-earned-text padding-0 block">se autoriza al señor/a</span>
                                 </div>
                                 <div class="col-xs-2">
                                     <!-- LEAVE EMPTY -->
@@ -60,7 +53,7 @@
                                     <!-- LEAVE EMPTY -->
                                 </div>
                                 <div class="pm-earned col-xs-8 text-center">
-                                    <span class="pm-earned-text pt-2 padding-0 block">a conducir el auto con patente</span>
+                                    <span class="pm-earned-text pt-2 padding-0 block">a conducir el vehículo</span>
                                 </div>
                                 <div class="col-xs-2">
                                     <!-- LEAVE EMPTY -->
@@ -147,27 +140,16 @@
             </div>
         </div>
     </body>
+    </div>
 
-    <div class="col-xs-12 text-center">
-        <button class="btn btn-warning mt-4" onclick="window.print()" style="color: white">
+    <div class="col-xs-12 text-center pb-3 d-print-none">
+        <button class="btn btn-warning mt-4" style="color: white" id="download" onclick="window.print()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" class="bi bi-download me-2" viewBox="0 0 16 16">
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
             </svg>
-            Guardar
+            Guardar pdf
         </button>
     </div>
 
 </div>
-
-<script>
-
-    //rotate all to landscape
-
-    var certificate = document.getElementById('certificate');
-    certificate.style.width = '100%';
-    certificate.style.height = '100%';
-    certificate.style.transform = 'rotate(90deg)';
-    certificate.style.transformOrigin = 'left top 0';
-
-</script>
