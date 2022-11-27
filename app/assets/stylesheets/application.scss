@@ -12,7 +12,7 @@ black_bg {
 }
 
 .z2 {
-  z-index: 2;
+  z-index: -2;
 }
 
 .floating_btn{
@@ -94,8 +94,8 @@ black_bg {
 // rounded button
 .bien_redondito{
   border-radius:50%;
-  width:55px;
-  height:55px;
+  width:52px;
+  height:52px;
   }
 
   i {
@@ -117,11 +117,11 @@ black_bg {
     margin-bottom: 2rem;
   }
 
-  hr {
+  .hr-menu {
     z-index: auto;
     border: 2px solid white;
     border-radius: 10%;
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
     margin-top: 5px;
   }
@@ -143,7 +143,7 @@ black_bg {
   }
 
   .map-top {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -152,7 +152,7 @@ black_bg {
 
 
   .map-bottom {
-    position: absolute;
+    position: fixed;
     // border : 5px solid red;
     bottom: 25px;
 
@@ -166,10 +166,17 @@ black_bg {
 
   }
 
-
   .gray_bg_showUser {
     background-color: #b5b5b549;
     border-radius: 10px;
     padding: 1.8rem;
     margin: 10px;
+  }
+
+  .mb-11vh {
+    margin-bottom: 11vh;
+  }
+
+  .mt-11vh {
+    margin-top: 11vh;
   }

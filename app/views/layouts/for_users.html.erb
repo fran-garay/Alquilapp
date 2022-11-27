@@ -44,30 +44,30 @@
 
 
 
-    <div class="" style="flex-grow:1;">
-      <% if current_user.status=='Pendiente' && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
-        <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
-          <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
-          <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
-        </div>
-      <% else %>
-        <%= yield %>
-      <% end %>
-    </div>
+      <div class="" style="flex-grow:1;">
+        <% if current_user.status=='Pendiente' && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+          <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+            <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
+            <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
+          </div>
+        <% else %>
+          <%= yield %>
+        <% end %>
+      </div>
 
 
-    <div class="map-top d-flex flex-column">
-      <%= render "users/partials/menu" %>
+      <div class="d-flex flex-column" >
+        <%= render "users/partials/menu" %>
 
-    </div>
+      </div>
 
-    <%# check if current user not on edit path %>
-    <div class="map-bottom d-flex flex-column">
-      <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
-        <%= render "users/partials/footer" %>
-      <% end %>
+      <%# check if current user not on edit path %>
+      <div class="d-flex flex-column">
+        <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+          <%= render "users/partials/footer" %>
+        <% end %>
 
-    </div>
+      </div>
     </div>
 
   </body>

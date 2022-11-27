@@ -68,6 +68,10 @@ Rails.application.routes.draw do
 
   put '/admins/updateUserStatus/:user_id', :to => 'admins#updateUserStatus'
 
+  get '/users/vista_alquiler', :to => 'users#vista_alquiler'
+
+  put '/users/finalizar_alquiler', :to => 'users#finalizar_alquiler'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end
