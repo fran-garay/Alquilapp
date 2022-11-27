@@ -1,4 +1,4 @@
 class Alquiler < ApplicationRecord
-  has_one :auto
-  has_one :user
+  has_one :auto, dependent: :destroy
+  has_one :user, dependent: :destroy
 end

@@ -2,7 +2,7 @@
     <div class="autos d-flex flex-column align-items-center">
         <div class="card container-in" style="width: 23rem;">
             <h1><%=@auto.modelo%> <%=@auto.anio%></h1>
-            
+
                 <%if @auto.imagen.attached?%>
                     <%= image_tag(@auto.imagen) %></td>
                 <%else%>
@@ -23,9 +23,41 @@
         </div>
     </div>
     <br>
-    <div class="d-flex justify-content-center">
-        <%= link_to "Alquilar", edit_auto_path(@auto), class: "btn btn-warning btn-lg btn-block boton floating_btn", style: "color: white"%>
-    </div>
+
+
+
+
+    <%= form_with model: @alquiler, url: "/users/alquilar/#{@auto.id}", method: :post do |form| %>
+        <%= form.label :fecha_devolucion, required: true %>
+        <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2022-01-01' %>
+        <%= form.label :hora_devolucion, required: true %>
+        <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00' %>
+
+        <%= form.submit "Alquilar", class: "btn btn-success" %>
+        <%# <div class="d-flex justify-content-center">
+            <button id="btn-confirm" class="btn btn-warning btn-lg btn-block"  data-bs-target="#exampleModal" data-bs-whatever="asdf">Alquilar</button>
+        </div>
+        <div class="modal centrar_vertical fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alquilar auto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Está seguro que desea alquilar al <%= @auto.modelo %>
+                    <%# </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div> %>
+                        <%# <%= button_to "Confirmar", "/users/alquilar/#{@auto.id}", method: :put, class: "btn btn-success", id:"btn-yes" %>
+
+
+    <% end %>
+
 </div>
 
 <style>
@@ -36,7 +68,7 @@
 
     .mostrar{
         font-family: 'Roboto', sans-serif;
-        text-align: left; 
+        text-align: left;
         font-weight: 500;
     }
 
@@ -58,4 +90,97 @@
         width: 23rem;
 
     }
+    .centrar_vertical {
+        /* position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
+    }
 </style>
+
+
+<script>
+
+    var today = new Date();
+    var actual_time = today.getHours() + ":" + today.getMinutes();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    // console.log(today+0);
+    var today_plus_ten_days = new Date(today.getTime() + 10 * 24 * 60 * 60 * 1000);
+    var dd_plus_ten_days = today_plus_ten_days.getDate();
+    var mm_plus_ten_days = today_plus_ten_days.getMonth() + 1; //January is 0!
+    var yyyy_plus_ten_days = today_plus_ten_days.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    if (dd_plus_ten_days < 10) {
+      dd_plus_ten_days = '0' + dd_plus_ten_days;
+    }
+
+    if (mm_plus_ten_days < 10) {
+      mm_plus_ten_days = '0' + mm_plus_ten_days;
+    }
+
+    today_plus_ten_days = yyyy_plus_ten_days + '-' + mm_plus_ten_days + '-' + dd_plus_ten_days;
+
+    var date = document.getElementById("datefield");
+    if (date != null){
+      date.setAttribute("min", today);
+      date.setAttribute("max", today_plus_ten_days);
+    }
+
+
+
+    // var time = document.getElementById("timefield");
+    // if (time != null){
+    //   time.setAttribute("min", actual_time);
+    // }
+
+    // let btnConfirm = document.getElementById('btn-confirm');
+    // let confirm = document.getElementById('confirm');
+    // let btnYes = document.getElementById('btn-yes');
+    // let btnNo = document.getElementById('btn-no');
+    // let btnCancel = document.getElementById('btn-cancel');
+    // let modal = document.getElementById('exampleModal');
+
+    // btnConfirm.addEventListener('click', () => {
+    //     // check if datefield is empty and if timefield is empty if it is then dont show modal
+    //     console.log(date.value);
+    //     console.log(time.value);
+    //     if (date.value == "" || time.value == ""){
+    //         console.log("ENTRO")
+    //         modal.style.display = "none";
+    //         return;
+    //     }
+    //     else {
+    //         confirm.style.display = "block";
+    //         // show modal with id exampleModal
+    //         modal.style.display = "block";
+    //     }
+    // });
+
+    // btnYes.addEventListener('click', () => {
+    //     confirm.style.display = 'none';
+    //     // btnConfirm.form.submit();
+    // });
+
+    // btnNo.addEventListener('click', () => {
+    //     confirm.style.display = 'none';
+    // });
+
+    // btnCancel.addEventListener('click', () => {
+    //     confirm.style.display = 'none';
+    // });
+
+
+
+</script>

@@ -73,6 +73,8 @@ Rails.application.routes.draw do
 
   put '/users/finalizar_alquiler', :to => 'users#finalizar_alquiler'
 
+  post '/users/alquilar/:auto_id', :to => 'users#alquilar'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end

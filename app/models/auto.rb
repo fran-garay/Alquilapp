@@ -9,7 +9,7 @@ class Auto < ApplicationRecord
     validates :color, presence: true
     validate :patente_format
     has_one_attached :imagen
-    has_many :alquilers
+    has_many :alquilers, dependent: :destroy
 
     # make patente validates with a regex
     def patente_format

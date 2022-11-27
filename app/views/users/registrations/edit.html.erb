@@ -72,3 +72,29 @@
 <% end %>
 
 <%= link_to "Back", "/users"  %>
+
+<script>
+
+   var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    var date = document.getElementById("datefield");
+    if (date != null){
+      date.setAttribute("max", today);
+    }
+
+    var date_valid_until_lnc = document.getElementById("date_valid_until_lnc");
+    if (date_valid_until_lnc != null){
+      date_valid_until_lnc.setAttribute("min", today);
+    }
+  </script>
