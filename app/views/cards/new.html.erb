@@ -1,0 +1,62 @@
+<div class="mt-10vh">
+
+    <h1 class="m-3 pt-5 pb-4">Cargar una nueva tarjeta</h1>
+
+    <%= form_for(@card, as: :card, url: "/cards/create/#{params[:user_id]}", html: { method: :put }) do |form| %>
+
+    <%= render "wallets/shared/error_messages", resource: @card %>
+
+    <div class="row m-4">
+        <div class="form-outline">
+        <%= form.text_field :name, class: "form-control", placeholder: "Juan Perez", required: true %>
+        <%= form.label :name, "Nombre en tarjeta" %>
+        </div>
+    </div>
+
+    <div class="row m-4">
+        <div class="form-outline">
+        <%= form.number_field :number, class: "form-control", min: "100000000000000", max: "999999999999999999", placeholder: "XXXX XXXX XXXX XXXX", required: true %>
+        <%= form.label :number, "Número de tarjeta" %>
+        </div>
+    </div>
+
+    <div class="row m-4">
+
+        <div class="col-7">
+        <div class="form-outline">
+            <%= form.date_field :date, class: "form-control", required: true, type:"month", id:"formExpiration" %>
+            <%= form.label :date, "Vencimiento" %>
+        </div> 
+        </div>
+
+        <div class="col-4">
+        <div class="form-outline">
+            <%= form.number_field :cvv, class: "form-control", min: "100", max: "999", placeholder: "123", required: true %>
+            <%= form.label :cvv, "CVV" %>
+        </div>
+        </div>
+
+    </div>
+
+    <div class="text-end pt-3 pe-4">
+        <%= link_to "Volver", "/wallets/#{params[:user_id]}", class: "btn btn-secondary"%>
+        <%= form.submit "Cargar", class: "btn btn-warning", style:"color:white"%>
+    </div>
+
+    <% end %>
+
+</div>
+
+
+
+<script>
+    //min date for expiration date
+    var today = new Date();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(mm<10){
+        mm='0'+mm
+    }
+    today = yyyy+'-'+mm;
+    document.getElementById("formExpiration").setAttribute("min", today);
+</script>

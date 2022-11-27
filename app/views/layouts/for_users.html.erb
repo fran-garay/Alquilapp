@@ -63,7 +63,7 @@
 
       <%# check if current user not on edit path %>
       <div class="d-flex flex-column">
-        <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") && !request.original_url.include?("vehiculo") %>
+        <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") && !request.original_url.include?("vehiculo") && !request.original_url.include?("certificado") && !request.original_url.include?("wallets") && !request.original_url.include?("cards")%>
           <%= render "users/partials/footer" %>
         <% end %>
 

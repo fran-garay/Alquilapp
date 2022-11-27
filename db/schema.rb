@@ -91,6 +91,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_060247) do
     t.index ["alquiler_id"], name: "index_autos_on_alquiler_id"
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.string "cvv"
+    t.bigint "number"
+    t.string "date"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "brand"
+  end
+
   create_table "perros", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

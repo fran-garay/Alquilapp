@@ -91,4 +91,10 @@ class UsersController < ApplicationController
     current_user.alquiler_id.nil?
   end
 
+  def certificado
+    @alquiler = Alquiler.find(current_user.alquiler_id)
+    @auto = Auto.find(@alquiler.auto_id)
+    @user = current_user
+  end
+
 end

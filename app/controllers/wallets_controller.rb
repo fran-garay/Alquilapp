@@ -1,6 +1,6 @@
 class WalletsController < ApplicationController
 
-    #layout "for_users"
+    layout "for_users"
 
     before_action :authenticate_user!
     before_action :verificar_id_belongs_to_user
@@ -13,6 +13,7 @@ class WalletsController < ApplicationController
 
     def mostrar_wallet
         @wallet = Wallet.find_by(user_id: params[:user_id])
+        @cards = Card.where(user_id: params[:user_id])
     end
 
     def cargar_saldo
