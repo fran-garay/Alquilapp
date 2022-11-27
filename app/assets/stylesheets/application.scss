@@ -167,25 +167,19 @@ i:focus {
 }
 
 .map-bottom {
-  position: absolute;
+  position: fixed;
   // border : 5px solid red;
   bottom: 25px;
 
-  .map-bottom {
-    position: fixed;
-    // border : 5px solid red;
-    bottom: 25px;
-
-    // center
-    left: 50%;
-    transform: translateX(-50%);
-    // red border
-    // border: 10px solid red;
-    z-index: 1;
-
-  }
+  // center
+  left: 50%;
+  transform: translateX(-50%);
+  // red border
+  // border: 10px solid red;
+  z-index: 1;
 
 }
+
 
 .gray_bg_showUser {
   background-color: #b5b5b549;
