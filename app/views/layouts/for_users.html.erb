@@ -63,7 +63,7 @@
 
       <%# check if current user not on edit path %>
       <div class="d-flex flex-column">
-        <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+        <% if  !request.original_url.include?("edit") && !request.original_url.include?("updateUser") && !request.original_url.include?("vehiculo") %>
           <%= render "users/partials/footer" %>
         <% end %>
 
@@ -261,28 +261,7 @@
       document.getElementById("myNav").style.width = "0%";
     }
 
-     var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
 
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-
-    today = yyyy + '-' + mm + '-' + dd;
-    var date = document.getElementById("datefield");
-    if (date != null){
-      date.setAttribute("max", today);
-    }
-
-    var date_valid_until_lnc = document.getElementById("date_valid_until_lnc");
-    if (date_valid_until_lnc != null){
-      date_valid_until_lnc.setAttribute("min", today);
-    }
 
   </script>
 </html>
