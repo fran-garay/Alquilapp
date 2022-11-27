@@ -46,7 +46,7 @@
 
       <div class="" style="flex-grow:1;">
         <% if current_user.status=='Pendiente' && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
-          <div class="alert alert-warning alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px">
+          <div class="alert alert-warning alert-dismissible fade show p-2 mt-10vh" role="alert" style="margin-bottom:1px">
             <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
             <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
           </div>
