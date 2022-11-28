@@ -120,23 +120,25 @@
                 source: vectorSource,
             });
 
-            map.addLayer(auto_marker_vectorLayer);
+
+            // // add popup with auto's info when clicked on the auto_marker
+            // // im getting this error ol.Overlay.Popup is not a constructor at getMap
 
             // var popup = new ol.Overlay.Popup();
             // map.addOverlay(popup);
 
-            // map.on('click', function(evt) {
-            //     var feature = map.forEachFeatureAtPixel(evt.pixel,
-            //         function(feature) {
-            //             return feature;
-            //         });
-            //     if (feature) {
-            //         var coordinates = feature.getGeometry().getCoordinates();
-            //         popup.show(coordinates, '<div><h2> <%= auto.modelo %></h2><p><%= auto.patente %></p></div>');
-            //     } else {
-            //         popup.hide();
-            //     }
+
+            // auto_marker_vectorLayer.on('click', function(e) {
+            //     popup.show(e.coordinate, '<div class="popup"><h2> <%= auto.modelo %></h2></div>');
             // });
+
+
+
+            map.addLayer(auto_marker_vectorLayer);
+
+
+
+
 
         <% end %>
 

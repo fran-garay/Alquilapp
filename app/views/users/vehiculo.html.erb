@@ -179,20 +179,8 @@
 
     today_plus_ten_days = yyyy_plus_ten_days + '-' + mm_plus_ten_days + '-' + dd_plus_ten_days;
 
-    var date = document.getElementById("datefield");
-    if (date != null){
-      date.setAttribute("min", today);
-        date.setAttribute("value", today);
-      date.setAttribute("max", today_plus_ten_days);
-    }
-
-    var time = document.getElementById("timefield");
-    console.log(time)
-    if (time != null){
-      time.setAttribute("value", actual_time);
-    //   time.setAttribute("step", "3600");
-        time.addEventListener("change", function(){
-            var date_value = today;
+    function actualizarPrecio(){
+        var date_value = today;
             if (date != null){
                 date_value = date.value;
             }
@@ -201,7 +189,7 @@
             console.log(difference_of_hours_between_today_and_date_value);
 
             // round to the higher integer the value of minutes and store it in a variable
-            var minutes = Math.ceil(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
+            var minutes = Math.round(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
 
             console.log(minutes)
             // get the value of hours and store it in a variable
@@ -221,7 +209,7 @@
                 document.getElementById("current_price").innerHTML = "";
                 document.getElementById("text-confirm").innerHTML = "Ingrese un horario válido";
             }
-            else{
+            else if (time.value != "") {
                 document.getElementById("btn-yes").disabled = false;
                 // document.getElementById("btn-yes").setAttribute("href", "#");
                 //round to 2 decimal places
@@ -254,7 +242,24 @@
             //         document.getElementById("timefield").value = actual_time;
             //     }
             // }
-        });
+    }
+
+    var date = document.getElementById("datefield");
+    if (date != null){
+      date.setAttribute("min", today);
+        date.setAttribute("value", today);
+      date.setAttribute("max", today_plus_ten_days);
+      date.addEventListener("change", actualizarPrecio);
+    }
+
+
+
+    var time = document.getElementById("timefield");
+    console.log(time)
+    if (time != null){
+    //   time.setAttribute("value", actual_time);
+    //   time.setAttribute("step", "3600");
+        time.addEventListener("change", actualizarPrecio);
     }
 
 

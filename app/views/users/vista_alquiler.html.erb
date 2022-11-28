@@ -21,7 +21,7 @@
                 <h4><div class="text-center pt-2 bold" id="countdown" style="color: #000000"></div></h4>
         </div>
 
-        
+
         <div class="mt-4 align-self-center">
             <button type="button" class="btn btn-success rounded-5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check me-1 mb-1 ms-2" viewBox="0 0 16 16">
@@ -44,9 +44,9 @@
                             <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                         </svg>
                         <% if @auto.is_open? %>
-                            <%= link_to "Cerrar auto", "/abrir_cerrar/#{@auto.id}/", method: :put, style: "text-decoration: none; color: white"%>
+                            <%= link_to "Cerrar auto", "/abrir_cerrar/#{@auto.id}/", style: "text-decoration: none; color: white"%>
                         <% else %>
-                            <%= link_to "Abrir auto", "/abrir_cerrar/#{@auto.id}/", method: :put, style: "text-decoration: none; color: white"%>
+                            <%= link_to "Abrir auto", "/abrir_cerrar/#{@auto.id}/", style: "text-decoration: none; color: white"%>
                         <% end %>
                     </button>
                 </div>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        
+
     </div>
 
 
@@ -102,12 +102,12 @@
 </div>
 
 <script>
-    
+
     //delete alert after 5 seconds
     setTimeout(function() {
         $('#liveAlertPlaceholder').alert('close');
     }, 5000);
-    
+
     //delete alert after 5 seconds
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -175,7 +175,7 @@
             } else {
                 document.getElementById("countdown").style.color = "red";
             }
-        }        
+        }
 
         // Display the result in the element with id="demo"
         document.getElementById("countdown").innerHTML =  days + "d " +  hours + "h "
