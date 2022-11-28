@@ -9,27 +9,27 @@
 #Autos
 Auto.destroy_all
 vehiculo = Auto.create(patente:"ABC-123", porcentaje_combustible:86.4, estado:"Inhabilitado", modelo:"Ferrari LaFerrari", anio:2022,
-     tipo_de_caja:"Manual", tipo_de_combustible:"Gasolina", color:"#FF0000", location_point: "-34.909680, -57.952094")
+     tipo_de_caja:"Manual", tipo_de_combustible:"Gasolina", color:"#FF0000", location_point: "-34.909680, -57.952094", is_open: false)
 vehiculo.imagen.attach(io: File.open('app/assets/images/car_images/Ferrari.jpg'), filename: 'Ferrari.jpg', content_type: 'image/jpg')
 
 vehiculo = Auto.create(patente:"HTR-235", porcentaje_combustible:100, estado:"Disponible", modelo:"McLaren P1", anio:2015,
-    tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#e03412", location_point: "-34.905879, -57.952040")
+    tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#e03412", location_point: "-34.905879, -57.952040", is_open: false)
 vehiculo.imagen.attach(io: File.open('app/assets/images/car_images/McLarenP1.jpg'), filename: 'McLarenP1.jpg', content_type: 'image/jpg')
 
 vehiculo = Auto.create(patente:"JDG-533", porcentaje_combustible:70.2, estado:"Necesita Atencion", modelo:"Sandero" ,anio:2003,
-    tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#9e1b02", location_point: "-34.907137, -57.957522")
+    tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#9e1b02", location_point: "-34.907137, -57.957522", is_open: false)
 vehiculo.imagen.attach(io: File.open('app/assets/images/car_images/SanderoRoja.jpg'), filename: 'SanderoRoja.jpg', content_type: 'image/jpg')
 
 vehiculo = Auto.create(patente:"JOY-256", porcentaje_combustible:60.2, estado:"Disponible", modelo:"Golf", anio:2017,
-    tipo_de_caja:"Automatica", tipo_de_combustible:"Diesel", color:"#f0dd3a", location_point: "-34.904709, -57.958981")
+    tipo_de_caja:"Automatica", tipo_de_combustible:"Diesel", color:"#f0dd3a", location_point: "-34.904709, -57.958981", is_open: false)
 vehiculo.imagen.attach(io: File.open('app/assets/images/car_images/Golf.jpg'), filename: 'Golf.jpg', content_type: 'image/jpg')
 
 vehiculo = Auto.create(patente:"KJH-123", porcentaje_combustible:50.2, estado:"Ocupado", modelo:"Clio", anio:2020,
-    tipo_de_caja:"Automatica", tipo_de_combustible:"Diesel", color:"#FFFFFF", location_point: "-34.901269, -57.957146")
+    tipo_de_caja:"Automatica", tipo_de_combustible:"Diesel", color:"#FFFFFF", location_point: "-34.901269, -57.957146", is_open: false)
 vehiculo.imagen.attach(io: File.open('app/assets/images/car_images/Clio.jpg'), filename: 'Clio.jpg', content_type: 'image/jpg')
 
 vehiculo= Auto.create(patente:"TGQ-981", porcentaje_combustible:100, estado: "Disponible",modelo:"Megan RS", anio:2008,
-    tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#000000", location_point: "-34.909514, -57.956060")
+    tipo_de_caja:"Manual", tipo_de_combustible:"Diesel", color:"#000000", location_point: "-34.909514, -57.956060", is_open: false)
 vehiculo.imagen.attach(io: File.open('app/assets/images/car_images/Megane.jpg'), filename: 'Megane.jpg', content_type: 'image/jpg')
 
 # Precios

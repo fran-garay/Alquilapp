@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_27_060247) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_032432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_060247) do
     t.string "color"
     t.point "location_point"
     t.bigint "alquiler_id"
+    t.boolean "is_open"
     t.index ["alquiler_id"], name: "index_autos_on_alquiler_id"
   end
 
