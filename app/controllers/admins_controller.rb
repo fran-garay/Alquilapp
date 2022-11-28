@@ -39,7 +39,7 @@ class AdminsController < ApplicationController
     @user = User.find(params[:user_id])
 
     if @user.is_renting?
-      @user.errors.add(:base, "El usuario no puede ser bloqueado porque tiene un alquiler en curso")
+      @user.errors.add(:base, "No se puede modificar el estado del Usuario dado que tiene un alquiler en curso")
     else
       @user.status = user_params[:status]
       if !@user.save

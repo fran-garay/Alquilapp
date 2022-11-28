@@ -4,23 +4,11 @@
     <div>
     <%= render "admins/shared/error_messages", resource: @user %>
 
-<p>Estado Actual: <%= @user.status %></p>
-<i class="fas fa-check-circle text-success" style="font-size: 1.5rem"></i>
-<%
-=begin%>
- #create a form to change the status
-<%= form_for(user, as: user, url: "/admins/showUser/cambiarEstado/#{auto.id}" , html: { method: :put }) %>
-  <%= f.label :status %>
-  <%= f.select :status, options_for_select([["Activo", "active"], ["Inactivo", "inactive"]]) %>
-  <%= f.submit "Cambiar" %>
-<% end %> 
-<%
-=end%>
     <label class="h3">Email</label>
     <p> <%= @user.email %> </p>
 
     <label class="h3">Fecha de registro</label>
-    <p>Se registró el: <%= @user.created_at.strftime("%d/%m/%Y") %></p>
+    <p>Se registró el <%= @user.created_at.strftime("%d/%m/%Y") %></p>
 
     <label class="h3">Cambiar Estado</label>
     <p>Estado Actual: <%= @user.status %></p>
@@ -33,13 +21,13 @@
     <%# ["Validado", "Pendiente", "Rechazado", "Bloqueado"] %>
     <%# [:Validado, :Pendiente, :Rechazado, :Bloqueado] %>
     </div>
-
-    <% if @user.licencia.attached? %>
-        <%= image_tag(@user.licencia, width: 400, class:"rounded-2") %>
-    <% else %>
-        <label>No hay licencia para mostrar</label>
-    <% end %>
-
+    <div style="max-width: 500px; ">
+      <% if @user.licencia.attached? %>
+          <%= image_tag(@user.licencia, width: 500, class:"rounded-2") %>
+      <% else %>
+          <label>No hay licencia para mostrar</label>
+      <% end %>
+    </div>
   </div>
   <div class="w-75 mt-5">
   <%= link_to "Volver", "/admins/listar_usuarios", class: "btn btn-warning p-1 align-self-start" %>

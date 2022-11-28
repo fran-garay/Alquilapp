@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @autos = Auto.all.order(anio: :desc)
+    @autos = Auto.all.order(anio: :desc)    
   end
 
   def vehiculo
@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @precio = Precio.last
     @alquiler = Alquiler.new
   end
+
 
   def vista_alquiler
     logger.debug "user_is_not_renting? #{user_is_not_renting?}"
