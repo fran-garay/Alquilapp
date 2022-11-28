@@ -55,7 +55,6 @@
         <% end %>
       </div>
 
-
       <div class="d-flex flex-column" >
         <%= render "users/partials/menu" %>
 
@@ -68,6 +67,11 @@
         <% end %>
 
       </div>
+
+      	<%= form_with url: locations_path, html: { id: "location-form" } do |f| %>
+        <%= f.hidden_field :lat %>
+        <%= f.hidden_field :lng %>
+      <% end %>
     </div>
 
   </body>
@@ -260,6 +264,16 @@
     function closeNav() {
       document.getElementById("myNav").style.width = "0%";
     }
+
+    // if navigator.
+
+    navigator.geolocation.getCurrentPosition((pos) => {
+    document.querySelector("#lat").value = pos.coords.latitude;
+    console.log(pos.coords.latitude)
+    document.querySelector("#lng").value = pos.coords.longitude;
+    console.log(pos.coords.longitude)
+    document.querySelector("#location-form").requestSubmit();
+  });
 
 
 

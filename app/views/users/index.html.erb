@@ -2,24 +2,23 @@
     <div class="autos d-flex flex-column align-items-center">
     <h4 class="p-2">Los mejor autos disponibles</h4>
         <%# <div class="card" style="width: 18rem;"> %>
-
-        <%@autos.each do |auto| %>
-            <%if (auto.estado == "Disponible")%>
-                <a class="card" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
-                    <%if auto.imagen.attached?%>
-                        <%= image_tag(auto.imagen) %></td>
-                    <%else%>
-                        <label>Sin Foto</label>
-                    <%end%>
-                    <div class="card-body">
-                        <h5 class="card-title"><%=auto.modelo%></h5>
-                        <p class="card-text">Año: <%=auto.anio%></p>
-                        <p class="card-text">Tipo de caja: <%=auto.tipo_de_caja%></p>
+        <% @autos.each do |auto| %>
+            <a class="card" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
+                <%if auto.imagen.attached?%>
+                    <%= image_tag(auto.imagen) %></td>
+                <%else%>
+                    <label>Sin Foto</label>
+                <%end%>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h5 class="card-title"><%=auto.modelo%> </h5>
+                        <p id="distance<%=auto.id%>" class="card-text" style="margin-left:0.7rem;">Distancia no disponible</p>
                     </div>
-                </a>
-                <br>
-            <%end%>
-
+                    <p class="card-text">Año: <%=auto.anio%></p>
+                    <p class="card-text">Caja: <%=auto.tipo_de_caja%></p>
+                </div>
+            </a>
+            <br>
         <% end %>
 
         <%# <div class="card" style="width: 19rem;">
@@ -56,4 +55,49 @@
         text-decoration:none
     }
 </style>
+<script>
 
+    function deg2rad(deg) {
+        return deg * (Math.PI/180)
+    }
+
+    // function that calculates the distance between two points
+    function getDrivingDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+        Number.prototype.toRad = function() {
+        return this * Math.PI / 180;
+        }
+
+        // var lat2 = 42.741;
+        // var lon2 = -71.3161;
+        // var lat1 = 42.806911;
+        // var lon1 = -71.290611;
+
+        var R = 6371; // km
+        //has a problem with the .toRad() method below.
+        var x1 = lat2-lat1;
+        var dLat = x1.toRad();
+        var x2 = lon2-lon1;
+        var dLon = x2.toRad();
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                        Math.sin(dLon/2) * Math.sin(dLon/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d;
+    }
+
+    var user_lat = <%= session[:lat] %>
+    var user_lng = <%= session[:lng] %>
+
+    <% @autos.each do |auto| %>
+        var auto_lng = <%= auto.location_point.y %>
+        var auto_lat = <%= auto.location_point.x %>
+
+        var distance = getDrivingDistanceFromLatLonInKm(user_lat, user_lng, auto_lat, auto_lng);
+        distance = distance.toFixed(2)
+        document.getElementById("distance<%=auto.id%>").innerHTML = distance + " km"
+    <% end %>
+
+    // function that calculates driving distance between two points using haversine formula
+
+</script>
