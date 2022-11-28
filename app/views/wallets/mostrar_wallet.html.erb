@@ -3,9 +3,9 @@
 </div>
 <div class="container-fluid d-flex justify-content-center">
     <% if @wallet.saldo >= 0 %>
-        <h1 class="m-4" style="color: green" id="saldo_verde">$ <%= @wallet.saldo %></h1>
+        <h1 class="m-4" style="color: green" id="saldo_verde">$ <%= @wallet.saldo.round(2) %></h1>
     <% else %>
-        <h1 class="m-4" style="color: red">$ <%= @wallet.saldo %></h1>
+        <h1 class="m-4" style="color: red">$ <%= @wallet.saldo.round(2)%></h1>
     <%end%>
 </div>
 

@@ -224,7 +224,9 @@
             else{
                 document.getElementById("btn-yes").disabled = false;
                 // document.getElementById("btn-yes").setAttribute("href", "#");
-                document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + <%= Precio.last.valor %> * total_hours+"</b>";
+                //round to 2 decimal places
+                var price = Math.round((total_hours * <%= Precio.last.valor %>) * 100) / 100;
+                document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + price +"</b>";
                 document.getElementById("text-confirm").innerHTML = "¿Está seguro que desea alquilar al <%= @auto.modelo %>?";
                 document.getElementById("recordatorio").innerHTML = `
                         <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio">
