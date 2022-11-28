@@ -73,7 +73,7 @@
                         <%# <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger", id:"btn-yes" %>
                     </div>
 
-                    <div id="recordatorio">
+                    <div class="ms-2 me-2" id="recordatorio">
                     </div>
                 </div>
             </div>
@@ -83,10 +83,10 @@
     </div>
     <%if @user.is_renting?%>
         <div class="mt-2 d-flex justify-content-center">
-            <button id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn map-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Elegir horario</button>
+            <button hidden id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn map-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Elegir horario</button>
         </div>
     <%else%>
-        <div hidden class="mt-2 d-flex justify-content-center">
+        <div class="mt-2 d-flex justify-content-center">
             <button id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn map-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Elegir horario</button>
         </div>    
     <%end%>
@@ -224,11 +224,11 @@
             else{
                 document.getElementById("btn-yes").disabled = false;
                 // document.getElementById("btn-yes").setAttribute("href", "#");
-                document.getElementById("current_price").innerHTML = "Precio: <b>&#36;" + <%= Precio.last.valor %> * total_hours+"</b>";
+                document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + <%= Precio.last.valor %> * total_hours+"</b>";
                 document.getElementById("text-confirm").innerHTML = "¿Está seguro que desea alquilar al <%= @auto.modelo %>?";
                 document.getElementById("recordatorio").innerHTML = `
                         <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio">
-                            <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:30 hs costarán lo mismo que 2hs.
+                            <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:01 hs costarán lo mismo que 2hs.
                         </div>`;
             }
 
