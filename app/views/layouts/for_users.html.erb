@@ -45,14 +45,35 @@
 
 
       <div class="" style="flex-grow:1;">
-        <% if current_user.status=='Pendiente' && !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
-          <div class="alert alert-warning alert-dismissible fade show p-2 mt-10vh" role="alert" style="margin-bottom:1px">
-            <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
-            <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
-          </div>
-        <% else %>
-          <%= yield %>
-        <% end %>
+      <% logger.debug "EL ESTADOOOO #{current_user.status}"%>
+      <%case%>
+            <% when current_user.status == "Validado" %>
+              <%= yield %>
+            <%when current_user.status == "Pendiente"%>
+              <% if !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+                <div class="alert alert-info alert-dismissible fade show p-2 mt-10vh" role="alert" style="margin-bottom:1px">
+                  <strong>¡Atención!</strong> Tu cuenta está siendo validada por un administrador. No podrás realizar reservas hasta que tu cuenta sea validada.
+                  <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
+                </div>
+              <% else %>
+                <%= yield %>
+              <% end %>
+            <%when current_user.status == "Rechazado"%>
+              <% if !request.original_url.include?("edit") && !request.original_url.include?("updateUser") %>
+                <div class="alert alert-danger alert-dismissible fade show p-2 mt-10vh" role="alert" style="margin-bottom:1px">
+                  <strong>¡Atención!</strong> Tu cuenta ha sido rechazada por un administrador. Edita tu información y espera a que esta sea validada para poder alquilar.
+                  <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
+                </div>
+              <% else %>
+                <%= yield %>
+              <% end %>
+            <%when current_user.status == "Bloqueado"%>
+              <div class="alert alert-danger alert-dismissible fade show p-2 mt-10vh" role="alert" style="margin-bottom:1px">
+                  <strong>¡Atención!</strong> Tu cuenta ha sido bloqueada. No podrás realizar reservas hasta que tu cuenta sea desbloqueada. Contacta a support@alquilapp.com para más información
+                  <%# <button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button> %>
+                </div>
+        <%end%>
+
       </div>
 
       <div class="d-flex flex-column" >
