@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   get '/users/vehiculo/:id', :to => 'users#vehiculo', :as => :vehiculo
   get '/admins/listar_usuarios', :to => 'admins#listar_usuarios'
+  get '/admins/listar_no_validados', :to => 'admins#listar_no_validados'
   get '/admins/listar_supervisores', :to => 'admins#listar_supervisores'
   get '/autos', :to => 'autos#listadoDeAutos'
 

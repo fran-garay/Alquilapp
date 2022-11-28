@@ -1,0 +1,54 @@
+<h1 class="h1 text-center">Usuarios no validados</h1>
+<div class="m-5">
+  <hr>
+  <div class="table-responsive border">
+    <table class="table">
+      <tr>
+        <th class="fs-5 font-size: 1rem text-center">Nombre</th>
+        <th class="fs-5 font-size: 1rem text-center">Email</th>
+        <th class="fs-5 font-size: 1rem text-center">Estado</th>
+
+        <th class="fs-5"></th>
+      </tr>
+      <%-@users.each do |user|-%>
+        <tr>
+            <td class="font-size: 1rem text-center">
+                <%= user.first_name %> <%= user.last_name %>
+            </td>
+            <td class="font-size: 1rem text-center">
+                <%= user.email %>
+            </td>
+            <td class="font-size: 1rem text-center">
+                <%case%>
+                <%when user.status == "Validado"%>
+                <i class="fas fa-check-circle text-success" style="font-size: 1.5rem"></i>
+                <%when user.status == "Pendiente"%>
+                <i class="fas fa-clock" style="color: #FFC107; font-size: 1.5rem"></i>
+                <%when user.status == "Rechazado"%>
+                <i class="fas fa-times-circle text-danger" style="font-size: 1.5rem"></i>
+                <%when user.status == "Bloqueado"%>
+                <i class="fas fa-lock" style="color: #000000;font-size: 1.5rem"></i>
+                <%end%>
+            </td>
+            <td class="font-size: 1rem text-center">
+                <%= link_to "Ver usuario", "/admins/showUser/#{user.id}" , class: "btn btn-warning p-1" %>
+            </td>
+            <%end%>
+        </tr>
+    </table>
+  </div>
+</div>
+
+<script>
+//connect to fontawesome api
+  (function() {
+    var script = document.createElement('script');
+    script.src = 'https://kit.fontawesome.com/2c36e9b7b1.js';
+    script.crossOrigin = 'anonymous';
+    document.head.appendChild(script);
+  })();
+
+
+
+</script>
+
