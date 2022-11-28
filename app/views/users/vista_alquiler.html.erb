@@ -32,12 +32,12 @@
                 </div>
 
                 <div class="col">
-                    <button type="button" class="btn btn-danger rounded-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle ms-4 me-1 mb-1" viewBox="0 0 16 16">
+                    <button type="button" class="btn btn-danger rounded-5 me-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle me-1 mb-1 ms-4" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
-                        <%= link_to "Finalizar", "/users/finalizar_alquiler", style: "text-decoration: none; color: white", method: :put, class:"me-4"%>
+                        <span class="me-4">Finalizar</span>
                     </button>
                 </div>
             </div>
@@ -48,6 +48,24 @@
     </div>
 
 
+</div>
+
+<div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Finalizar alquiler</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <p>¿Está seguro que desea finalizar el alquiler del <strong><%=@auto.modelo%></strong>?</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <%= button_to "Finalizar", "/users/finalizar_alquiler", method: :put, class:"btn btn-danger"%>
+        </div>
+    </div>
+    </div>
 </div>
 
 
