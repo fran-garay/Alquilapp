@@ -9,13 +9,21 @@
     </div>
     <div class="overlay-content text-center">
         <%= link_to "Editar perfil", edit_user_registration_path, class: "nav-link" %>
-        
-        <%= link_to "Wallet", "/wallets/#{current_user.id}", class: "nav-link" %>
+
+        <% if current_user.status == "Validado" %>
+          <%= link_to "Wallet", "/wallets/#{current_user.id}", class: "nav-link" %>
+        <% end %>
+
+        <% if !current_user.is_renting? %>
+          <%= link_to "Listado de autos", users_root_path , class: "nav-link" %>
+        <% else %>
+          <%= link_to "Mi alquiler", users_root_path, class: "nav-link" %>
+        <% end %>
 
         <a href="#">
         <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, style:"border:none"%>
         </a>
-        
+
     </div>
     </div>
       <div class="overlay-content text-white mb-2">
@@ -32,6 +40,10 @@
   </span>
 
   <span class="btn btn-warning bien_redondito floating_btn text-white d-flex p-1 d-flex align-items-center justify-content-center">
-    <%= link_to "🗺️", "/users/vista_mapa", style:"text-decoration:none" %>
+    <% if  request.original_url.include?("vista_mapa") %>
+      <%= link_to "🚗", "/users/", style:"text-decoration:none" %>
+    <% else %>
+      <%= link_to "🗺️", "/users/vista_mapa", style:"text-decoration:none" %>
+    <% end %>
   </span>
 </div>
