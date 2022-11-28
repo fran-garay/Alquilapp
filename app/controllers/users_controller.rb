@@ -7,14 +7,34 @@ class UsersController < ApplicationController
       redirect_to "/users/vista_alquiler" and return
     end
     @user = current_user
-    @autos = Auto.all.order(anio: :desc)    
+    @autos = Auto.all.where(estado: "Disponible").order(:modelo)
+    # sort cars by distance using haversine distance function and current user location GRANDE FRAN
+    if (session[:lat] !=nil && session[:lng] != nil)
+      @autos = @autos.sort_by { |auto| haversine_distance(session[:lat], session[:lng], auto.location_point.y, auto.location_point.x) }
+      # invert the order of the array
+      @autos = @autos.reverse
+    end
   end
+
 
   def vehiculo
     @user = current_user
     @auto = Auto.find(params[:id])
     @precio = Precio.last
     @alquiler = Alquiler.new
+  end
+
+  def haversine_distance(lat1, lon1, lat2, lon2)
+    dLat = (lat2 - lat1) * Math::PI / 180
+    dLon = (lon2 - lon1) * Math::PI / 180
+    lat1 = lat1 * Math::PI / 180
+    lat2 = lat2 * Math::PI / 180
+
+    a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    d = 6371 * c;
+    return d
   end
 
 
