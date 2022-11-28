@@ -154,7 +154,13 @@ class UsersController < ApplicationController
   # end
 
   def vista_mapa
-    @autos = Auto.all.where(estado: "Disponible").order(:modelo)
+    if current_user.is_renting?
+      @alquiler = Alquiler.find(current_user.alquiler_id)
+      @autos = Auto.where(id: @alquiler.auto_id)
+      # @autos = Auto.where(current_user.alquiler_id.auto_id)
+    else
+      @autos = Auto.all.where(estado: "Disponible").order(:modelo)
+    end
   end
 
   def user_is_not_renting?
