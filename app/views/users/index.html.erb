@@ -1,26 +1,31 @@
 <div class="mb-10vh mt-10vh">
     <div class="autos d-flex flex-column align-items-center">
-    <h4 class="p-2">Los mejores autos disponibles</h4>
+    
         <%# <div class="card" style="width: 18rem;"> %>
-
-        <% @autos.each do |auto| %>
-            <a class="card" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
-                <%if auto.imagen.attached?%>
-                    <%= image_tag(auto.imagen) %></td>
-                <%else%>
-                    <label>Sin Foto</label>
-                <%end%>
-                <div class="card-body">
-                    <div class="d-flex">
-                        <h5 class="card-title"><%=auto.modelo%> </h5>
-                        <p id="distance<%=auto.id%>" class="card-text" style="margin-left:0.7rem;">Distancia no disponible</p>
+    
+        <%if @autos.empty?%>
+            <h4 class="p-2">No hay autos disponibles</h4>
+        <%else%>
+            <h4 class="p-2">Los mejores autos disponibles</h4>
+            <% @autos.each do |auto| %>
+                <a class="card" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
+                    <%if auto.imagen.attached?%>
+                        <%= image_tag(auto.imagen) %></td>
+                    <%else%>
+                        <label>Sin Foto</label>
+                    <%end%>
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <h5 class="card-title"><%=auto.modelo%> </h5>
+                            <p id="distance<%=auto.id%>" class="card-text" style="margin-left:0.7rem;">Distancia no disponible</p>
+                        </div>
+                        <p class="card-text">Año: <%=auto.anio%></p>
+                        <p class="card-text">Caja: <%=auto.tipo_de_caja%></p>
                     </div>
-                    <p class="card-text">Año: <%=auto.anio%></p>
-                    <p class="card-text">Caja: <%=auto.tipo_de_caja%></p>
-                </div>
-            </a>
-            <br>
-        <% end %>
+                </a>
+                <br>
+            <% end %>
+        <%end%>
     </div>
 </div>
 
