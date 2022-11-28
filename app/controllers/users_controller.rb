@@ -85,6 +85,7 @@ class UsersController < ApplicationController
     @auto.save
     @wallet = @user.wallet
     @wallet.saldo = @wallet.saldo - total_precio
+    @wallet.ultimo_gasto = total_precio
     @wallet.save
     redirect_to users_vista_alquiler_path
   end

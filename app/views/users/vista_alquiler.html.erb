@@ -12,13 +12,12 @@
                 <p class="card-text"><%=@auto.patente%></p>
             </div>
         </div>
-        <div class="m-4">
-            <h6>Tiempo restante:  </h6>
-                <h4><div class="text-center pt-2" id="countdown"></div></h4>
+        <div class="mt-4">
+            <h5>Tiempo restante:</h5>
+                <h4><div class="text-center pt-2 bold" id="countdown" style="color: #DC3545"></div></h4>
         </div>
 
-        <div class="container map-bottom text-center">
-
+        <div class="container map-bottom text-center" id="botones">
             <div class="row">
 
                 <div class="col">
@@ -41,7 +40,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
 
         
@@ -50,6 +48,7 @@
 
 </div>
 
+<!--MODAL-->
 <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -57,7 +56,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Finalizar alquiler</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body m-2">
         <p>¿Está seguro que desea finalizar el alquiler del <strong><%=@auto.modelo%></strong>?</p>
         </div>
         <div class="modal-footer">
@@ -109,9 +108,8 @@
         // If the count down is finished, write some text
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
+            document.getElementById("countdown").innerHTML = "Tiempo finalizado";
         }
     }, 1000);
-
 
 </script>
