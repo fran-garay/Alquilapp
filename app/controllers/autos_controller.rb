@@ -27,7 +27,8 @@ class AutosController < ApplicationController
 
   def create
     @auto = Auto.new(auto_params)
-    @auto.is_open = false    
+    @auto.location_point = "-34.905085, -57.939161"
+    @auto.is_open = false
     if @auto.save
       redirect_to autos_path
     else
