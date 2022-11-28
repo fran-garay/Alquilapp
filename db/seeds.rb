@@ -77,7 +77,7 @@ Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", p
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :true, phone: "1234567890", dni: "12345679")
 
 User.all.each do |user|
-    Wallet.create(user_id: user.id, saldo: -10, ultima_carga: 0, ultimo_gasto: 0)
+    Wallet.create(user_id: user.id, saldo: 0, ultima_carga: 0, ultimo_gasto: 0)
 end
 
 a = User.find_by(first_name: "Rodrigo")
