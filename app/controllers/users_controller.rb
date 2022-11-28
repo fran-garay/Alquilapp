@@ -133,6 +133,16 @@ class UsersController < ApplicationController
     params.require(:alquiler).permit(:user_id, :auto_id, :fecha_inicio, :hora_inicio, :fecha_devolucion, :hora_devolucion)
   end
 
+  def abrir_cerrar
+    @auto = Auto.find(params[:id])
+    if @auto.is_open?
+      @auto.is_open = false
+    else
+      @auto.is_open = true
+    end
+    @auto.save
+    redirect_to users_path
+  end
 
 
   # def layout_by_resource

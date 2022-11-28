@@ -27,6 +27,7 @@ class AutosController < ApplicationController
 
   def create
     @auto = Auto.new(auto_params)
+    @auto.is_open = false    
     if @auto.save
       redirect_to autos_path
     else
@@ -51,6 +52,17 @@ class AutosController < ApplicationController
     @auto = Auto.find(params[:id])
     @auto.destroy
     redirect_to autos_path
+  end
+
+  def abrir_cerrar
+    @auto = Auto.find(params[:id])
+    if @auto.is_open?
+      @auto.is_open = false
+    else
+      @auto.is_open = true
+    end
+    @auto.save
+    redirect_to users_path
   end
 
   def auto_params

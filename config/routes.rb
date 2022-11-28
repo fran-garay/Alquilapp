@@ -79,6 +79,8 @@ Rails.application.routes.draw do
 
   get '/users/certificado', :to => 'users#certificado'
 
+  put '/abrir_cerrar/:id', :to => 'users#abrir_cerrar'  
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end
