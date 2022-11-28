@@ -14,7 +14,7 @@ class AdminsController < ApplicationController
   end
 
   def listar_no_validados
-    @users = User.all.order(:created_at).where(status: "1").reverse
+    @users = User.all.order(:created_at).where(status: "1")
   end
 
   # GET /resource/edit
