@@ -13,6 +13,10 @@ class AdminsController < ApplicationController
     @supervisors = Admin.all.where(is_admin: false).order(:first_name)
   end
 
+  def listar_no_validados
+    @users = User.all.order(:created_at).where(status: "1").reverse
+  end
+
   # GET /resource/edit
   def edit
     logger.debug "Editando admin"
