@@ -144,7 +144,7 @@ class UsersController < ApplicationController
   # end
 
   def vista_mapa
-    @autos = Auto.all
+    @autos = Auto.all.where(estado: "Disponible").order(:modelo)
   end
 
   def user_is_not_renting?
