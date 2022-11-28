@@ -16,7 +16,7 @@
 
         <div class="mt-4">
             <h5>Tiempo restante:</h5>
-                <h4><div class="text-center pt-2 bold" id="countdown" style="color: #DC3545"></div></h4>
+                <h4><div class="text-center pt-2 bold" id="countdown" style="color: #000000"></div></h4>
         </div>
 
         <div class="container map-bottom text-center" id="botones">
@@ -101,6 +101,19 @@
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        //If the count is less than 15 minutes, change the color to red
+        if (distance < 900000 && distance > 300000) {
+            document.getElementById("countdown").style.color = "red";
+        }
+        // // else, if the count is less than 5 minutes, alternate color
+        else if (distance <= 300000) {
+            if (document.getElementById("countdown").style.color == "red") {
+                document.getElementById("countdown").style.color = "black";
+            } else {
+                document.getElementById("countdown").style.color = "red";
+            }
+        }        
 
         // Display the result in the element with id="demo"
         document.getElementById("countdown").innerHTML =  days + "d " +  hours + "h "
