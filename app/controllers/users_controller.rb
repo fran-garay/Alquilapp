@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if current_user.is_renting?
+      redirect_to "/users/vista_alquiler" and return
+    end
     @user = current_user
     @autos = Auto.all.order(anio: :desc)    
   end
