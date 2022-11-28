@@ -8,7 +8,7 @@
 
     <div class="row m-4">
         <div class="form-outline">
-        <%= form.text_field :name, class: "form-control", placeholder: "Juan Perez", required: true %>
+        <%= form.text_field :name, class: "form-control", placeholder: "#{@user.first_name} #{@user.last_name}", required: true %>
         <%= form.label :name, "Nombre en tarjeta" %>
         </div>
     </div>
