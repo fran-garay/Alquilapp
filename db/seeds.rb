@@ -42,6 +42,7 @@ Precio.create(valor: 400.24, fecha_de_actualizacion: "2021-03-10")
 # Usuarios
 User.destroy_all
 Admin.destroy_all
+Wallet.destroy_all
 
 usuario = User.create(email: "user@gmail.com", first_name: "Lionel", last_name: "Messi", password: "123456",
     password_confirmation: "123456", status: 0, birth_date: (Date.new(2001, 07, 24)), phone: "1234567890", license_valid_until: (Date.new(2022, 12, 10)))
@@ -61,7 +62,11 @@ usuario = User.create(email: "rechazado@gmail.com", first_name: "Elre", last_nam
 
 usuario = User.create(email: "estoy_alquilando@gmail.com", first_name: "Estal", last_name: "Quilando", password: "123456",
     password_confirmation: "123456", status: 0 ,birth_date: (Date.new(1959, 05, 18)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 18)), is_renting: true)
-    usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
+usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
+
+usuario = User.create(email: "backup@gmail.com", first_name: "Rodrigo", last_name: "DePaul", password: "123456",
+    password_confirmation: "123456", status: 0 ,birth_date: (Date.new(1992, 05, 18)), phone: "1234567890", license_valid_until: (Date.new(2024, 12, 18)), is_renting: false)
+usuario.licencia.attach(io: File.open('app/assets/images/licencias/Tini.png'), filename: 'Tini.png', content_type: 'image/png')
 
 Admin.create(email:"super@gmail.com", first_name: "Juana", last_name: "Super", password: "123456",
     password_confirmation: "123456", birth_date: (Date.new(2001, 11, 18)), is_admin: :false, phone: "1234567890", dni: "12345678")
@@ -74,3 +79,8 @@ Admin.create(email:"admin@gmail.com", first_name: "Mario", last_name: "Admin", p
 User.all.each do |user|
     Wallet.create(user_id: user.id, saldo: -10, ultima_carga: 0, ultimo_gasto: 0)
 end
+
+a = User.find_by(first_name: "Rodrigo")
+wal = Wallet.find_by(user_id: a.id)
+wal.saldo = 1000000
+wal.save
