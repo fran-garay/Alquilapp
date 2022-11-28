@@ -10,9 +10,9 @@ class UsersController < ApplicationController
     @autos = Auto.all.where(estado: "Disponible").order(:modelo)
     # sort cars by distance using haversine distance function and current user location GRANDE FRAN
     if (session[:lat] !=nil && session[:lng] != nil)
-      @autos = @autos.sort_by { |auto| haversine_distance(session[:lat], session[:lng], auto.location_point.y, auto.location_point.x) }
+      @autos = @autos.sort_by { |auto| haversine_distance(session[:lat], session[:lng], auto.location_point.x, auto.location_point.y) }
       # invert the order of the array
-      @autos = @autos.reverse
+      # @autos = @autos.reverse
     end
   end
 
