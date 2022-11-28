@@ -1,7 +1,8 @@
 <div class="mb-10vh mt-10vh d-flex justify-content-center">
     <div class="d-flex flex-column " style="width:80%">
         <h4 class="p-2 align-self-start">Tu alquiler, <%=current_user.first_name %></h4>
-        <div class="card align-self-center" style="width: 16rem;">
+
+        <a class="card align-self-center text-black" style="width: 16rem; text-decoration: none" href="/users/vehiculo/<%=@auto.id%>">
             <%if @auto.imagen.attached?%>
                 <%= image_tag(@auto.imagen) %></td>
             <%else%>
@@ -11,13 +12,12 @@
                 <h5 class="card-title"><%=@auto.modelo%> <%=@auto.anio%></h5>
                 <p class="card-text"><%=@auto.patente%></p>
             </div>
-        </div>
+        </a>
+
         <div class="mt-4">
             <h5>Tiempo restante:</h5>
                 <h4><div class="text-center pt-2 bold" id="countdown" style="color: #DC3545"></div></h4>
         </div>
-
-        <div id="small_map" style="height:15vh; width:100%"></div>
 
         <div class="container map-bottom text-center" id="botones">
             <div class="row">
@@ -68,184 +68,6 @@
     </div>
     </div>
 </div>
-
-<style>
-    .container-in{
-        background-color: #f5f5f5;
-        text-align: center;
-    }
-
-    .mostrar{
-        font-family: 'Roboto', sans-serif;
-        text-align: left;
-        font-weight: 500;
-    }
-
-    h1{
-        font-weight: 600;
-        font-size: 2rem;
-    }
-
-    p{
-        font-size: 1rem;
-    }
-
-    label{
-        font-weight: bolder;
-        font-size: 1.1rem;
-    }
-
-    .boton{
-        width: 23rem;
-
-    }
-    .orange-light-hr{
-        border-top: 3px solid #ff8c00;
-        rounded: 5px;
-        padding: 0;
-        margin: 0;
-        width: 40%;
-        /* center hr */
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
-
-
-<script>
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getMap);
-    }
-
-    function getMap(pos) {
-        user_lat = pos.coords.latitude;
-        user_lon = pos.coords.longitude;
-        console.log(user_lat);
-        console.log(user_lon);
-
-      var map = new ol.Map({
-        target: 'small_map',
-        layers: [
-            new ol.layer.Tile({
-            source: new ol.source.OSM()
-            })
-        ],
-        view: new ol.View({
-            center: ol.proj.fromLonLat([ <%= @auto.location_point.y %>, <%= @auto.location_point.x %> ]),
-            zoom: 16
-        })
-        });
-
-
-
-        // remove + and - buttons
-        map.getControls().forEach(function(control) {
-            if (control instanceof ol.control.Zoom) {
-                map.removeControl(control);
-            }
-        });
-
-        // save map on local storage to be able to use it later
-        // localStorage.setItem("map", map);
-
-
-
-        // marker of the user with a blue circle
-        var user_marker = new ol.Feature({
-            geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([user_lon, user_lat])
-            ),  // Cordinates of New York's Town Hall
-        });
-
-        var user_marker_style = new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 8,
-                fill: new ol.style.Fill({color: 'blue'}),
-                stroke: new ol.style.Stroke({
-                    color: 'white', width: 2
-                })
-            })
-        });
-
-        user_marker.setStyle(user_marker_style);
-
-        var vectorSource = new ol.source.Vector({
-            features: [user_marker]
-        });
-
-        var user_marker_vectorLayer = new ol.layer.Vector({
-            source: vectorSource,
-        });
-
-        map.addLayer(user_marker_vectorLayer);
-
-        // localStorage
-
-        // for each auto, add a marker with the auto's location and a popup with the auto's info when clicked on the marker
-
-        var auto_marker = new ol.Feature({
-            geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([<%= @auto.location_point.y %>, <%= @auto.location_point.x %>])
-            ),  // Cordinates of New York's Town Hall
-        });
-
-        var auto_marker_style = new ol.style.Style({
-            image: new ol.style.Icon({
-                anchor: [0.5, 0.5],
-                anchorXUnits: 'fraction',
-                anchorYUnits: 'fraction',
-                src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
-                scale: 0.03
-            })
-        });
-
-        auto_marker.setStyle(auto_marker_style);
-
-        var vectorSource = new ol.source.Vector({
-            features: [auto_marker]
-        });
-
-        var auto_marker_vectorLayer = new ol.layer.Vector({
-            source: vectorSource,
-        });
-
-        map.addLayer(auto_marker_vectorLayer);
-
-
-        // add a marker with the user's location and a popup with the user's info when clicked on the marker
-        var user_marker = new ol.Feature({
-            geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([user_lon, user_lat])
-            ),  // Cordinates of New York's Town Hall
-        });
-
-        var user_marker_style = new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 8,
-                fill: new ol.style.Fill({color: 'blue'}),
-                stroke: new ol.style.Stroke({
-                    color: 'white', width: 2
-                })
-            })
-        });
-
-        user_marker.setStyle(user_marker_style);
-
-        var vectorSource = new ol.source.Vector({
-            features: [user_marker]
-        });
-
-        var user_marker_vectorLayer = new ol.layer.Vector({
-            source: vectorSource,
-        });
-
-        map.addLayer(user_marker_vectorLayer);
-    }
-
-</script>
-
-
 
 <script>
     // function that given a month number return the first three letters of the month
