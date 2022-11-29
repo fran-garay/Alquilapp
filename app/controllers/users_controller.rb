@@ -55,6 +55,19 @@ class UsersController < ApplicationController
     # @segundos_fin = @tiempo_fin.split(":")[2]
   end
 
+  def resumen
+
+    @alquiler = Alquiler.where(user_id: current_user.id).last
+    @auto = Auto.find(@alquiler.auto_id)
+
+    #difference between @alquiler.hora_devolucion and @alquiler.hora_inicio
+    @tiempo = @alquiler.hora_devolucion - @alquiler.hora_alquiler
+    @tiempo = @tiempo.to_i
+    @tiempo = Time.at(@tiempo).utc.strftime("%Hh %Mm %Ss")
+    @horas = @tiempo.split("h")[0]
+
+  end
+
   def alquilar
     parametros = alquiler_params
     @user = current_user
@@ -100,6 +113,7 @@ class UsersController < ApplicationController
     @alquiler.hora_alquiler = Time.now
     @alquiler.fecha_devolucion = parametros[:fecha_devolucion]
     @alquiler.hora_devolucion = parametros[:hora_devolucion]
+    @alquiler.precio_total = total_precio
     @alquiler.save
     @user.alquiler_id = @alquiler.id
     @user.is_renting = true
@@ -126,7 +140,7 @@ class UsersController < ApplicationController
     current_user.alquiler_id = nil
     current_user.is_renting = false
     current_user.save
-    redirect_to users_path
+    redirect_to resumen_path
   end
 
   def alquiler_params
@@ -169,6 +183,8 @@ class UsersController < ApplicationController
 
   def certificado
     @alquiler = Alquiler.find(current_user.alquiler_id)
+    @fecha = @alquiler.fecha_devolucion.strftime("%d/%m/%Y")
+    @tiempo = Time.at(@alquiler.hora_devolucion).utc.strftime("%H:%M hs")
     @auto = Auto.find(@alquiler.auto_id)
     @user = current_user
   end

@@ -1,0 +1,65 @@
+<div class="mt-11vh"> 
+    <h1 class="m-3 pt-3 pb-3 text-center">Aquí hay un resumen de tu viaje!</h1>
+
+    <div class="container text-center border shadow">
+
+        <div class="row mb-3 mt-4">
+            <label class="titulos">Auto alquilado</label>
+            <hr class="orange-light-hr">
+            <p class="datos"><%=@auto.modelo%> <%=@auto.patente%></p>
+        </div>
+
+
+        <div class="row mb-3">
+            <label class="titulos">Tiempo total del alquiler </label>
+            <hr class="orange-light-hr">
+            <p class="datos"><%=@tiempo%></p>
+        </div>
+
+        <div class="row mb-3">
+            <label class="titulos">Costo total</label>
+
+            <hr class="orange-light-hr">
+            <p class="datos">$<%=@alquiler.precio_total%></p>
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <button type="button" class="btn btn-warning btn-lg mt-4 me-2 map-bottom shadow rounded-5">
+            <%= link_to "Entendido!", root_path, style: "text-decoration: none; color: white"%>
+        </button>
+    </div>
+</div>
+
+<style>
+
+    .border{
+        background-color: #F5F5F5;
+        border: 2px solid black;
+        border-radius: 2%;
+        width: 90%;
+    }
+
+    .titulos{
+        font-size: 1.2rem;
+    }
+
+    .datos{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .orange-light-hr{
+        border-top: 3px solid #000000;
+        rounded: 5px;
+        padding: 0;
+        margin: 0;
+        width: 80%;
+        /* center hr */
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+    }
+
+</style>

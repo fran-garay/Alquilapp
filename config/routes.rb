@@ -82,6 +82,8 @@ Rails.application.routes.draw do
 
   get '/abrir_cerrar/:id', :to => 'users#abrir_cerrar'
 
+  get 'alquiler/resumen', :to => 'users#resumen', :as => 'resumen'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end

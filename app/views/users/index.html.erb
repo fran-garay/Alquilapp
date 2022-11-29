@@ -8,7 +8,7 @@
         <%else%>
             <h4 class="p-2">Los mejores autos disponibles</h4>
             <% @autos.each do |auto| %>
-                <a class="card" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
+                <a class="card shadow" style="width: 19rem;" href="/users/vehiculo/<%=auto.id%>">
                     <%if auto.imagen.attached?%>
                         <%= image_tag(auto.imagen) %></td>
                     <%else%>

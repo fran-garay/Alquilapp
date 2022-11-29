@@ -4,7 +4,7 @@
 
         <div id="liveAlertPlaceholder"></div>
 
-        <a class="card align-self-center text-black" style="width: 16rem; text-decoration: none" href="/users/vehiculo/<%=@auto.id%>">
+        <a class="card align-self-center text-black shadow" style="width: 16rem; text-decoration: none" href="/users/vehiculo/<%=@auto.id%>">
             <%if @auto.imagen.attached?%>
                 <%= image_tag(@auto.imagen) %></td>
             <%else%>
