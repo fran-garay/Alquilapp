@@ -25,31 +25,98 @@ class CardsController < ApplicationController
 
         @card.name = card_params[:name]
         @card.number = card_params[:number]
-        if card_params[:number].to_s.credit_card_brand_name != nil
-            @card.cvv = card_params[:cvv]
-            @card.date = card_params[:date].to_s
-            @card.user_id = params[:user_id]
-            @card.brand = card_params[:number].to_s.credit_card_brand_name
+        # if card_params[:number].to_s.credit_card_brand_name != nil
+        #     @card.cvv = card_params[:cvv]
+        #     @card.date = card_params[:date].to_s
+        #     @card.user_id = params[:user_id]
+        #     @card.brand = card_params[:number].to_s.credit_card_brand_name
 
-            logger.debug "\n\n\nAsigna\n\n\n"
+        #     logger.debug "\n\n\nAsigna\n\n\n"
 
-            if @card.save
+        #     if @card.save
 
-                logger.debug "\n\n\nGuardado\n\n\n"
+        #         logger.debug "\n\n\nGuardado\n\n\n"
 
-                redirect_to "/wallets/#{params[:user_id]}"
-            else
+        #         redirect_to "/wallets/#{params[:user_id]}"
+        #     else
 
-                logger.debug "\n\n\nNo guardado\n\n\n"
+        #         logger.debug "\n\n\nNo guardado\n\n\n"
 
-                redirect_to "/wallets/#{params[:user_id]}"
-            end
-        else
-            @card.errors.add(:base, "Número de tarjeta inválido")
+        #         redirect_to "/wallets/#{params[:user_id]}"
+        #     end
+        # else
+        #     @card.errors.add(:base, "Número de tarjeta inválido")
+        #     @wallet = Wallet.find_by(user_id: params[:user_id])
+        #     @cards = Card.all
+        #     render "/cards/new"
+        # end
+
+        if Card.where(user_id: params[:user_id]).find_by(number: card_params[:number]) != nil
+            @card.errors.add(:base, "Ya tienes una tarjeta con ese número")
             @wallet = Wallet.find_by(user_id: params[:user_id])
             @cards = Card.all
             render "/cards/new"
+        else
+            if card_params[:number].to_s.credit_card_brand_name != nil
+                @card.cvv = card_params[:cvv]
+                @card.date = card_params[:date].to_s
+                @card.user_id = params[:user_id]
+                @card.brand = card_params[:number].to_s.credit_card_brand_name
+
+                logger.debug "\n\n\nAsigna\n\n\n"
+
+                if @card.save
+
+                    logger.debug "\n\n\nGuardado\n\n\n"
+
+                    redirect_to "/wallets/#{params[:user_id]}"
+                else
+
+                    logger.debug "\n\n\nNo guardado\n\n\n"
+
+                    redirect_to "/wallets/#{params[:user_id]}"
+                end
+            else
+                @card.errors.add(:base, "Número de tarjeta inválido")
+                @wallet = Wallet.find_by(user_id: params[:user_id])
+                @cards = Card.all
+                render "/cards/new"
+            end
         end
+
+
+        # if card_params[:number].to_s.credit_card_brand_name = nil
+        #     @card.errors.add(:base, "Número de tarjeta inválido")
+        #     @wallet = Wallet.find_by(user_id: params[:user_id])
+        #     @cards = Card.all
+        #     render "/cards/new"
+        # else
+        #     if Card.find_by(user_id: params[:user_id]).find_by(number: card_params[:number]) != nil
+        #         @card.errors.add(:base, "Ya tienes una tarjeta con ese número")
+        #         @wallet = Wallet.find_by(user_id: params[:user_id])
+        #         @cards = Card.all
+        #         render "/cards/new"
+        #     else
+        #         @card.cvv = card_params[:cvv]
+        #         @card.date = card_params[:date].to_s
+        #         @card.user_id = params[:user_id]
+        #         @card.brand = card_params[:number].to_s.credit_card_brand_name
+
+        #         logger.debug "\n\n\nAsigna\n\n\n"
+
+        #         if @card.save
+
+        #             logger.debug "\n\n\nGuardado\n\n\n"
+
+        #             redirect_to "/wallets/#{params[:user_id]}"
+        #         else
+
+        #             logger.debug "\n\n\nNo guardado\n\n\n"
+
+        #             redirect_to "/wallets/#{params[:user_id]}"
+        #         end
+        #     end
+        # end
     end
 
     def card_params
