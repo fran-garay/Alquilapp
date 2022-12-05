@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     minutos_alquiler = Time.now.getlocal.min.to_i
 
     horas = hora_devolucion - hora_alquiler
-    minutos = (minutos_devolucion/60 - minutos_alquiler/60).round
+    minutos = (minutos_devolucion/60 - minutos_alquiler/60).ceil
     total_horas = horas + minutos + difference_of_hours_between_today_and_date_value
 
     logger.debug "DEBUGGGGG AHORA ESTE #{total_horas}"

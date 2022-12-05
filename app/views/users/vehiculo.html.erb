@@ -1,99 +1,138 @@
-<div class="mt-11vh mb-11vh">
-    <div class="p-2">
-        <%= render "users/shared/error_messages", resource: current_user%>
-    </div>
-    <div class="autos d-flex flex-column align-items-center">
-        <div class="card container-in" style="width: 21rem;">
-            <h1 class="m-2"><%=@auto.modelo%> <%=@auto.anio%></h1>
+<% @autos = Auto.all.where("estado = 'Disponible'") %>
 
-            <%if @auto.imagen.attached?%>
-                <%= image_tag(@auto.imagen) %></td>
-            <%else%>
-                <label>Sin Foto</label>
-            <%end%>
-            <div class="mostrar m-3 mb-0">
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col">
-                            <label class="card-text">Patente: </label>
+<div class="mt-11vh">
+    <ul class="carrusel">
+        <%# iterate over each @autos %>
+        <% @autos.each do |a| %>
+            <li class="item-carrusel mostrar mb-3" id="car<%a.id%>">
+                <div class="" >
+                    <div class="p-2">
+                         <%= render "users/shared/error_messages", resource: current_user%>
+                    </div>
+                    <div class="autos d-flex flex-column align-items-center">
+                        <div class="card container-in" style="width: 20.2rem;">
+                            <h1 class="m-2"><%=a.modelo%> <%=a.anio%></h1>
 
-                            <hr class="orange-light-hr">
-                            <p><%=@auto.patente%></p>
-                        </div>
-                        <div class="col">
-                            <label class="card-text">Tipo de Caja: </label>
+                            <%if a.imagen.attached?%>
+                                <%= image_tag(a.imagen) %></td>
+                            <%else%>
+                                <label>Sin Foto</label>
+                            <%end%>
+                            <div class="mostrar m-3 mb-0">
+                                <div class="container text-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="card-text">Patente: </label>
 
-                            <hr class="orange-light-hr">
-                            <p><%=@auto.tipo_de_caja%></p>
+                                            <hr class="orange-light-hr">
+                                            <p><%=a.patente%></p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="card-text">Tipo de Caja: </label>
+
+                                            <hr class="orange-light-hr">
+                                            <p><%=a.tipo_de_caja%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container text-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="card-text">Combustible: </label>
+                                            <hr class="orange-light-hr">
+                                            <p><%=a.tipo_de_combustible%></p>
+                                        </div>
+                                        <div class="col">
+                                            <label class="card-text">Precio: </label>
+
+                                            <hr class="orange-light-hr">
+                                            <p>$<%=@precio.valor%> /h</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="small_map<%=a.id%>" style="height:15vh; width:100%"></div>
                         </div>
                     </div>
+                    <div class= "container mt-1 ">
+
+                    <div class="modal fade" id="exampleModal<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel<%=a.id%>">Alquilar auto</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <% @alquiler_v = Alquiler.new %>
+                                    <%= form_with model: @alquiler_v, url: "/users/alquilar/#{a.id}", method: :post do |form| %>
+                                    <%= form.label "Fecha de Devolucion", required: true, class:"" %>
+                                    <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield#{a.id}", min:'2022-01-01', max:'2022-01-01' %>
+                                    <%= form.label "Hora de Devolucion", required: true, class:"" %>
+                                    <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield#{a.id}", min:'00:00' %>
+                                    <div id="current_price<%=a.id%>" class="text-success text-center p-3 fs-5"></div>
+                                    <p class="text-center" id="text-confirm<%=a.id%>"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes#{a.id}" %>
+                                    <%# <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger", id:"btn-yes" %>
+                                </div>
+
+                                <div class="ms-2 me-2" id="recordatorio<%=a.id%>"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
                 </div>
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col">
-                            <label class="card-text">Combustible: </label>
-                            <hr class="orange-light-hr">
-                            <p><%=@auto.tipo_de_combustible%></p>
-                        </div>
-                        <div class="col">
-                            <label class="card-text">Precio: </label>
-
-                            <hr class="orange-light-hr">
-                            <p>$<%=@precio.valor%> /h</p>
-                        </div>
+                <%if @user.is_renting?%>
+                    <div class="mt-2 d-flex justify-content-center" style="font-family:none">
+                        <button hidden id="btn-confirm<%=a.id%>" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn" data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" data-bs-whatever="">Elegir horario</button>
                     </div>
+                <%else%>
+                    <div class="mt-2 d-flex justify-content-center">
+                        <button id="btn-confirm<%=a.id%>" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn" data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" data-bs-whatever="">Elegir horario</button>
+                    </div>
+                <%end%>
                 </div>
-            </div>
-            <div id="small_map" style="height:15vh; width:100%"></div>
-        </div>
-    </div>
+
+            </li>
 
 
-    <div class= "container mt-1 ">
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Alquilar auto</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <%= form_with model: @alquiler, url: "/users/alquilar/#{@auto.id}", method: :post do |form| %>
-                        <%= form.label "Fecha de Devolucion", required: true, class:"" %>
-                        <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2022-01-01' %>
-                        <%= form.label "Hora de Devolucion", required: true, class:"" %>
-                        <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00' %>
-                        <div id="current_price" class="text-success text-center p-3 fs-5"></div>
-                        <p class="text-center" id="text-confirm"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes" %>
-                        <%# <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger", id:"btn-yes" %>
-                    </div>
+        <% end %>
+    </ul>
 
-                    <div class="ms-2 me-2" id="recordatorio">
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    <% end %>
-    </div>
-    <%if @user.is_renting?%>
-        <div class="mt-2 d-flex justify-content-center">
-            <button hidden id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn map-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Elegir horario</button>
-        </div>
-    <%else%>
-        <div class="mt-2 d-flex justify-content-center">
-            <button id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn map-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Elegir horario</button>
-        </div>
-    <%end%>
 
 </div>
 
 <style>
+    ul {
+    list-style-type: none;
+}
+    .carrusel {
+        display:flex;
+        align-items: center;
+        /* border : 1px solid red; */
+        scroll-snap-type: x mandatory;
+        /* scroll-padding: 0 24px; */
+        overflow: auto;
+        scroll-behavior: smooth;
+        /* width: 21rem; */
+    }
+
+    .carrusel .item-carrusel {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        width: 100vw;
+    }
+
+    .item-carrusel {
+        display: flex;
+        justify-content: center;
+    }
+
     .container-in{
         background-color: #f5f5f5;
         text-align: center;
@@ -137,18 +176,110 @@
 
 
 <script>
+    function actualizarPrecio(id, modelo, time,date){
+        console.log("EL ID QUE CAMBIO")
+        console.log(id)
+        var today = new Date();
+        var actual_time = today.getHours() + ":" + today.getMinutes();
+
+        if (today.getMinutes() < 10) {
+            actual_time = today.getHours() + ":0" + today.getMinutes();
+        }
+        if (today.getHours() < 10) {
+            actual_time = "0" + today.getHours() + ":" + today.getMinutes();
+        }
+
+
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        // console.log(today+0);
+        var today_plus_ten_days = new Date(today.getTime() + 10 * 24 * 60 * 60 * 1000);
+        var dd_plus_ten_days = today_plus_ten_days.getDate();
+        var mm_plus_ten_days = today_plus_ten_days.getMonth() + 1; //January is 0!
+        var yyyy_plus_ten_days = today_plus_ten_days.getFullYear();
+
+        if (dd < 10) {
+        dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+        mm = '0' + mm;
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        if (dd_plus_ten_days < 10) {
+        dd_plus_ten_days = '0' + dd_plus_ten_days;
+        }
+
+        if (mm_plus_ten_days < 10) {
+        mm_plus_ten_days = '0' + mm_plus_ten_days;
+        }
+
+        today_plus_ten_days = yyyy_plus_ten_days + '-' + mm_plus_ten_days + '-' + dd_plus_ten_days;
+        var date_value = today;
+        if (date != null){
+            date_value = date.value;
+        }
+
+            var difference_of_hours_between_today_and_date_value = (new Date(date_value).getTime() - new Date(today).getTime()) / 1000 / 60 / 60;
+            console.log(difference_of_hours_between_today_and_date_value);
+
+            // round to the higher integer the value of minutes and store it in a variable
+            var minutes = Math.ceil(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
+
+            console.log(minutes)
+            // get the value of hours and store it in a variable
+            var hours = parseInt(time.value.split(":")[0]) - parseInt(actual_time.split(":")[0]);
+            // round hours to the higher integer if its positive and to the lower integer if its negative
+
+
+            console.log(hours)
+
+            var total_hours = hours + minutes + difference_of_hours_between_today_and_date_value;
+            console.log(total_hours);
+
+            if (total_hours <= 0){
+                document.getElementById(`btn-yes${id}`).disabled = true;
+                // document.getElementById("btn-yes").setAttribute("href", "#");
+                alert("La hora de devolución debe ser mayor a la hora actual");
+                document.getElementById(`current_price${id}`).innerHTML = "";
+                document.getElementById(`text-confirm${id}`).innerHTML = "Ingrese un horario válido";
+            }
+            else if (time.value != "") {
+                document.getElementById(`btn-yes${id}`).disabled = false;
+                // document.getElementById("btn-yes").setAttribute("href", "#");
+                //round to 2 decimal places
+                var price = Math.round((total_hours * <%= Precio.last.valor %>) * 100) / 100;
+                document.getElementById(`current_price${id}`).innerHTML = "Costo total: <b>&#36;" + price +"</b>";
+                document.getElementById(`text-confirm${id}`).innerHTML = `¿Está seguro que desea alquilar al ${modelo}?`;
+                document.getElementById(`recordatorio${id}`).innerHTML = `
+                        <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio${id}">
+                            <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:01 hs costará lo mismo que 2hs.
+                        </div>`;
+            }
+    }
+
+    function getMap(pos, a) {
+
+    }
+
+     <% @autos.each do |a| %>
 
     var today = new Date();
-    var actual_time = today.getHours() + ":" + today.getMinutes();
+        var actual_time = today.getHours() + ":" + today.getMinutes();
 
-    if (today.getMinutes() < 10) {
-        actual_time = today.getHours() + ":0" + today.getMinutes();
-    }
-    if (today.getHours() < 10) {
-        actual_time = "0" + today.getHours() + ":" + today.getMinutes();
-    }
+        if (today.getMinutes() < 10) {
+            actual_time = today.getHours() + ":0" + today.getMinutes();
+        }
+        if (today.getHours() < 10) {
+            actual_time = "0" + today.getHours() + ":" + today.getMinutes();
+        }
 
-    document.getElementById("text-confirm").innerHTML = "Ingrese horario y fecha de devolución para ver el precio";
+
+
+    document.getElementById("text-confirm<%=a.id%>").innerHTML = "Ingrese horario y fecha de devolución para ver el precio";
 
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -179,111 +310,53 @@
 
     today_plus_ten_days = yyyy_plus_ten_days + '-' + mm_plus_ten_days + '-' + dd_plus_ten_days;
 
-    function actualizarPrecio(){
-        var date_value = today;
-            if (date != null){
-                date_value = date.value;
-            }
-
-            var difference_of_hours_between_today_and_date_value = (new Date(date_value).getTime() - new Date(today).getTime()) / 1000 / 60 / 60;
-            console.log(difference_of_hours_between_today_and_date_value);
-
-            // round to the higher integer the value of minutes and store it in a variable
-            var minutes = Math.round(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
-
-            console.log(minutes)
-            // get the value of hours and store it in a variable
-            var hours = parseInt(time.value.split(":")[0]) - parseInt(actual_time.split(":")[0]);
-            // round hours to the higher integer if its positive and to the lower integer if its negative
 
 
-            console.log(hours)
+    var date<%=a.id%> = document.getElementById("datefield<%=a.id%>");
+    console.log(date<%=a.id%>);
+    console.log("ES NULL")
+    if (date<%=a.id%> != null){
+      date<%=a.id%>.setAttribute("min", today);
+        date<%=a.id%>.setAttribute("value", today);
+      date<%=a.id%>.setAttribute("max", today_plus_ten_days);
+      date<%=a.id%>.addEventListener("change", function(){
 
-            var total_hours = hours + minutes + difference_of_hours_between_today_and_date_value;
-            console.log(total_hours);
-
-            if (total_hours <= 0){
-                document.getElementById("btn-yes").disabled = true;
-                // document.getElementById("btn-yes").setAttribute("href", "#");
-                alert("La hora de devolución debe ser mayor a la hora actual");
-                document.getElementById("current_price").innerHTML = "";
-                document.getElementById("text-confirm").innerHTML = "Ingrese un horario válido";
-            }
-            else if (time.value != "") {
-                document.getElementById("btn-yes").disabled = false;
-                // document.getElementById("btn-yes").setAttribute("href", "#");
-                //round to 2 decimal places
-                var price = Math.round((total_hours * <%= Precio.last.valor %>) * 100) / 100;
-                document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + price +"</b>";
-                document.getElementById("text-confirm").innerHTML = "¿Está seguro que desea alquilar al <%= @auto.modelo %>?";
-                document.getElementById("recordatorio").innerHTML = `
-                        <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio">
-                            <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:01 hs costará lo mismo que 2hs.
-                        </div>`;
-            }
-
-
-            // var today = new Date();
-            // var dd = today.getDate();
-            // var mm = today.getMonth() + 1; //January is 0!
-            // var yyyy = today.getFullYear();
-            // if (dd < 10) {
-            //   dd = '0' + dd;
-            // }
-
-            // if (mm < 10) {
-            //   mm = '0' + mm;
-            // }
-
-            // today = yyyy + '-' + mm + '-' + dd;
-            // if (date == today){
-            //     if (time < actual_time){
-            //         alert("La hora de devolución debe ser mayor a la hora actual");
-            //         document.getElementById("timefield").value = actual_time;
-            //     }
-            // }
-    }
-
-    var date = document.getElementById("datefield");
-    if (date != null){
-      date.setAttribute("min", today);
-        date.setAttribute("value", today);
-      date.setAttribute("max", today_plus_ten_days);
-      date.addEventListener("change", actualizarPrecio);
+            actualizarPrecio(<%=a.id%>, "<%=a.modelo%>", time, date<%=a.id%>);
+        });
     }
 
 
 
-    var time = document.getElementById("timefield");
-    console.log(time)
-    if (time != null){
+    var time<%=a.id%> = document.getElementById("timefield<%=a.id%>");
+    console.log(time<%=a.id%>)
+    if (time<%=a.id%> != null){
     //   time.setAttribute("value", actual_time);
     //   time.setAttribute("step", "3600");
-        time.addEventListener("change", actualizarPrecio);
+        time<%=a.id%>.addEventListener("change", function(){
+            console.log("cambio el time")
+            actualizarPrecio(<%=a.id%>, "<%=a.modelo%>", time<%=a.id%>, date<%=a.id%>);
+        });
     }
 
 
 
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getMap);
-    }
 
-    function getMap(pos) {
+    navigator.geolocation.getCurrentPosition((pos) =>  {
         user_lat = pos.coords.latitude;
         user_lon = pos.coords.longitude;
         console.log(user_lat);
         console.log(user_lon);
 
-      var map = new ol.Map({
-        target: 'small_map',
+        var map = new ol.Map({
+        target: 'small_map<%=a.id%>',
         layers: [
             new ol.layer.Tile({
             source: new ol.source.OSM()
             })
         ],
         view: new ol.View({
-            center: ol.proj.fromLonLat([ <%= @auto.location_point.y %>, <%= @auto.location_point.x %> ]),
+            center: ol.proj.fromLonLat([ <%= a.location_point.y %>, <%= a.location_point.x %> ]),
             zoom: 16
         })
         });
@@ -337,7 +410,7 @@
 
         var auto_marker = new ol.Feature({
             geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([<%= @auto.location_point.y %>, <%= @auto.location_point.x %>])
+                ol.proj.fromLonLat([<%= a.location_point.y %>, <%= a.location_point.x %>])
             ),  // Cordinates of New York's Town Hall
         });
 
@@ -393,6 +466,10 @@
         });
 
         map.addLayer(user_marker_vectorLayer);
-    }
+    });
+
+
+
+    <% end %>
 
 </script>
