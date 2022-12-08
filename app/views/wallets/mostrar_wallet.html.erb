@@ -85,7 +85,7 @@
               <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
               <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
             </svg>
-            <%= link_to "Cargar nueva tarjeta", "/cards/#{params[:user_id]}/create", style: "text-decoration: none; color: white"%>
+            <%= link_to "Cargar nueva tarjeta", "/cards/create", style: "text-decoration: none; color: white"%>
           </button>
         </div>
 
@@ -117,67 +117,12 @@
   </div>
 </div>
 
+<script>
 
- <!-- Card modal
-<div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  let myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
+  hist = document.referrer;
+  if (hist.includes("cards/create")) {
+    myModal.show();
+  }
 
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar nueva tarjeta</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body" id="form1">
-
-        <% @card = @wallet.user.cards.new %>
-
-        <%= form_for(@card, as: :card, url: "/cards/create/#{@wallet.user_id}", html: { method: :put }) do |form| %>
-
-        <%= render "wallets/shared/error_messages", resource: @card %>
-
-        <div class="row m-4">
-          <div class="form-outline">
-            <%= form.text_field :name, class: "form-control", placeholder: "Juan Perez", required: true %>
-            <%= form.label :name, "Nombre en tarjeta" %>
-          </div>
-        </div>
-
-        <div class="row m-4">
-          <div class="form-outline">
-            <%= form.number_field :number, class: "form-control", min: "100000000000000", max: "999999999999999999", placeholder: "XXXX XXXX XXXX XXXX", required: true %>
-            <%= form.label :number, "Número de tarjeta" %>
-          </div>
-        </div>
-
-        <div class="row m-4">
-
-          <div class="col-5">
-            <div class="form-outline">
-              <%= form.date_field :date, class: "form-control", required: true, type:"month", id:"formExpiration" %>
-              <%= form.label :date, "Vencimiento" %>
-            </div> 
-          </div>
-
-          <div class="col-4">
-            <div class="form-outline">
-              <%= form.number_field :cvv, class: "form-control", min: "100", max: "999", placeholder: "123", required: true %>
-              <%= form.label :cvv, "CVV" %>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <div><%= form.submit "Cargar", class: "btn btn-warning"%></div>
-        </div>
-
-        <% end %>
-
-
-      </div>
-
-    </div>
-  </div>
-</div> -->
+</script>

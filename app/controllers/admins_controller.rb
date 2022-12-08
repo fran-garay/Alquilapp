@@ -39,6 +39,14 @@ class AdminsController < ApplicationController
   #   end
   # end
 
+  def estadisticas
+    @autos = Auto.all
+    @users = User.all
+    @supervisors = Admin.all.where(is_admin: false)
+    @precios = Precio.all
+    @alquileres = Alquiler.all
+  end
+
   def updateUserStatus
     @user = User.find(params[:user_id])
 

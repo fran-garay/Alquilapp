@@ -66,9 +66,9 @@ Rails.application.routes.draw do
   get '/precios', :to => 'precios#index'
   post '/precios/editarPrecio', :to => 'precios#editarPrecio'
 
-  put '/cards/create/:user_id', :to => 'cards#create'
+  put '/cards/create/', :to => 'cards#create'
   get '/users/vista_mapa', :to => 'users#vista_mapa'
-  get '/cards/:user_id/create', :to => 'cards#new', :as => 'new_card'
+  get '/cards/create', :to => 'cards#new', :as => 'new_card'
 
   put '/admins/updateUserStatus/:user_id', :to => 'admins#updateUserStatus'
 
@@ -83,6 +83,8 @@ Rails.application.routes.draw do
   get '/abrir_cerrar/:id', :to => 'users#abrir_cerrar'
 
   get 'alquiler/resumen', :to => 'users#resumen', :as => 'resumen'
+
+  get '/admins/estadisticas', :to => 'admins#estadisticas'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 

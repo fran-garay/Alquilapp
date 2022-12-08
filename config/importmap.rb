@@ -10,3 +10,6 @@ pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "jquery", to: "jquery.min.js", preload: true
 pin "jquery_ujs", to: "jquery_ujs.js", preload: true
 pin "popper", to: "popper.js", preload: true
+#chartkick
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"

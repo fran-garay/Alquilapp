@@ -1,0 +1,57 @@
+<h2>Estadísticas generales de uso</h2>
+
+<div class="container pt-4 border shadow" id="graficos-autos">
+    <h3>Uso de los autos</h3>
+    <nav class="pt-3">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-t" data-bs-toggle="tab"
+                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                aria-selected="true">Todos</button>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Gráficas por modelo</a>
+                <ul class="dropdown-menu" style="">
+                    <%for @auto in @autos do %>
+                        <% patente = @auto.patente %>
+                        <li class="nav-link dopdown-item" id="<%=patente%>-tab" data-bs-toggle="tab" 
+                        data-bs-target="#<%=patente%>" type="button" role="tab" 
+                        aria-controls="<%=patente%>" aria-selected="false"><%= @auto.modelo %></li>
+                <% end %>
+                </ul>
+            </li>
+        </div>
+    </nav>
+    <div class="tab-content pt-3" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-t">
+            <%= line_chart @autos.map { |auto|
+                {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count}
+            } %>
+        </div>
+        <%for @auto in @autos do %>
+            <% patente = @auto.patente%>
+            <div class="tab-pane fade" id="<%=patente%>" role="tabpanel" aria-labelledby="<%=patente%>-tab">
+                <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count %>
+            </div>
+        <% end %>
+        <!--<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            Sanctus vero sit kasd sea gubergren takimata consetetur elitr elitr, consetetur sadipscing takimata ipsum
+            dolores. Accusam duo accusam et labore ea elitr ipsum tempor sit, dolore aliquyam ipsum sit amet sit. Et dolore
+            ipsum labore invidunt rebum. Sed dolore gubergren sanctus vero diam lorem rebum elitr, erat diam dolor clita.
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            Sit consetetur eirmod lorem ea magna sadipscing ipsum elitr invidunt, dolores lorem erat ipsum ut aliquyam eos
+            lorem sed. Nonumy aliquyam ea justo eos dolores dolores duo dolores. Aliquyam dolor sea dolores sit takimata no
+            erat vero. At lorem justo tempor lorem duo, stet kasd aliquyam ipsum voluptua labore at.
+        </div>-->
+    </div>
+</div>
+
+<style>
+
+    .border{
+        background-color: #F5F5F5;
+        border: 2px solid black;
+        border-radius: 2%;
+    }
+
+</style>
+

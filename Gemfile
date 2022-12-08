@@ -16,6 +16,8 @@ gem "font-awesome-sass", "~> 6.2.1"
 gem 'geocoder'
 gem 'credit_card_validations'
 gem 'font-awesome-rails'
+gem "chartkick"
+gem "groupdate"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

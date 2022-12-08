@@ -14,7 +14,7 @@ class CardsController < ApplicationController
 
     def new
         @card = Card.new
-        @user = User.find(params[:user_id])
+        @user = User.find(current_user.id)
     end
 
     def create
@@ -53,14 +53,14 @@ class CardsController < ApplicationController
 
         if Card.where(user_id: params[:user_id]).find_by(number: card_params[:number]) != nil
             @card.errors.add(:base, "Ya tienes una tarjeta con ese número")
-            @wallet = Wallet.find_by(user_id: params[:user_id])
+            @wallet = Wallet.find_by(user_id: current_user.id)
             @cards = Card.all
             render "/cards/new"
         else
             if card_params[:number].to_s.credit_card_brand_name != nil
                 @card.cvv = card_params[:cvv]
                 @card.date = card_params[:date].to_s
-                @card.user_id = params[:user_id]
+                @card.user_id = current_user.id
                 @card.brand = card_params[:number].to_s.credit_card_brand_name
 
                 logger.debug "\n\n\nAsigna\n\n\n"
@@ -69,7 +69,7 @@ class CardsController < ApplicationController
 
                     logger.debug "\n\n\nGuardado\n\n\n"
 
-                    redirect_to "/wallets/#{params[:user_id]}"
+                    redirect_to "/wallets/#{current_user.id}"
                 else
 
                     logger.debug "\n\n\nNo guardado\n\n\n"
@@ -78,7 +78,7 @@ class CardsController < ApplicationController
                 end
             else
                 @card.errors.add(:base, "Número de tarjeta inválido")
-                @wallet = Wallet.find_by(user_id: params[:user_id])
+                @wallet = Wallet.find_by(user_id: current_user.id)
                 @cards = Card.all
                 render "/cards/new"
             end
