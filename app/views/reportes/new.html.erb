@@ -1,0 +1,8 @@
+<%= form_for(@reporte, as: :wallet, url: "/users/reporte/new" , html: { method: :put, id:"form2" }) do |form| %>
+<div class="row m-4">
+    <div class="col-7">
+        <div class="form-outline">
+            <%= form.text_field :descripcion, class: "form-control", id: "descripcion" %>
+        </div>
+    </div>
+</div>
