@@ -10,7 +10,10 @@
     <div class="container d-flex">
 
         <div class="container d-flex border shadow me-3">
-            <i class="align-self-center fa-solid fa-star fa-5x m-3" style="color: #46a85a"></i>
+            <!--<i class="align-self-center fa-solid fa-star fa-5x m-3" style="color: #46a85a"></i>-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#46a85a" class="m-3 bi bi-triangle-fill align-self-center" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+            </svg>
             <div class="align-self-center text-center m-auto">
                 <h5 class="font"> Auto más usado históricamente </h5>
                 <h2 class="font bold"> <%= @mas_alquilado.modelo %> </h2>
@@ -18,7 +21,10 @@
         </div>
 
         <div class="container d-flex border shadow ms-3">
-            <i class="fa-solid fa-star align-self-center fa-5x m-3" style="color: #a84659"></i>
+            <!--<i class="fa-solid fa-star align-self-center fa-5x m-3" style="color: #a84659"></i>-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#a84659" class="m-3 bi bi-triangle-fill align-self-center" viewBox="0 0 16 16" id="icon">
+                <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+            </svg>
             <div class="align-self-center text-center m-auto">
                 <h5 class="font"> Auto menos usado históricamente </h5>
                 <h2 class="font bold"> <%= @menos_alquilado.modelo %> </h2>
@@ -299,6 +305,9 @@
         conteiner.hidden = false;
 
     });
+
+    var icon = document.getElementById("icon");
+    icon.style.transform = "rotate(180deg)";
 
 
 </script>

@@ -43,8 +43,8 @@
             Usuarios
           </a>
           <ul class="dropdown-menu">
-            <li> <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"nav-link" %> </li>
-            <li> <%= link_to "Listar usuarios no validados", admins_listar_no_validados_path, class:"nav-link" %> </li>
+            <li> <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"dropdown-item" %> </li>
+            <li> <%= link_to "Listar usuarios no validados", admins_listar_no_validados_path, class:"dropdown-item" %> </li>
           </ul>
         </li>
 
@@ -54,7 +54,7 @@
             <span class="visually-hidden">Toggle Dropdown</span>
           </button>
           <ul class="dropdown-menu">
-            <li><%= link_to "Alquileres", '/admins/estadisticas/alquileres', class:"dropdown-item" %></li>
+            <li><%= link_to "Reservas", '/admins/estadisticas/alquileres', class:"dropdown-item" %></li>
             <li><%= link_to "Ganancias", '/admins/estadisticas/ganancias', class:"dropdown-item" %></li>
             <li><%= link_to "En curso", '/admins/estadisticas/en_curso', class:"dropdown-item" %></li>
             <li><%#= link_to "Ganancias", '/admins/estadisticas/ganancias', class:"dropdown-item" %></li>
