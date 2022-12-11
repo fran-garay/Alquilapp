@@ -1,8 +1,37 @@
-<%= form_for(@reporte, as: :user, url: "/users/reporte/new" , html: { method: :put, id:"form2" }) do |form| %>
-<div class="row m-4">
-    <div class="col-7">
+<html>
+<body>
+
+<div class="container mt-10vh">
+
+    <h3 class="text-center p-4"> ¿Desea realizar un reclamo? </h3>
+
+    <%= form_for(@reporte, as: :reporte, url: "/users/reporte/create" , html: { method: :post }) do |form| %>
+    <div class="mb-4">
+
         <div class="form-outline">
-            <%= form.text_field :descripcion, class: "form-control", id: "descripcion" %>
+            <label for="tipo" class="form-label">¿Sobre que es el reclamo?</label>
+            <%= form.select :tipo, options_for_select([["El estado del vehículo", "Estado"], ["Tuve un problema conduciendo", "Sinietro"], ["Tuve un problema con el pago", "Pagos"]]), {}, class: "form-select", id: "tipo" %>
         </div>
+
+        <div class="form-outline">
+            <label for="descripcion" class="form-label">Describanos el problema</label>
+            <%= form.text_area :descripcion, class: "form-control", id: "descripcion" %>
+        </div>
+
     </div>
+    <%= form.submit "Enviar", class: "btn btn-lg btn-warning map-bottom rounded-5 shadow text-white" %>
+    <% end %>
+
+    <div class="mb-3">
+        
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
 </div>
+</body>
+
+<html>
