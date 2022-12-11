@@ -4,7 +4,6 @@ class CreateAutos < ActiveRecord::Migration[7.0]
       t.string :patente
       t.float :porcentaje_combustible
       t.string :estado
-      t.imagen :attachment
       t.timestamps
     end
   end

@@ -48,18 +48,21 @@
           </ul>
         </li>
 
-        <div class="btn-group nav-item">
-          <%= link_to "Estadisticas", '/admins/estadisticas/', class:"nav-link" %>
-          <button type="button" class="btn nav-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
+        <li class="nav-item">
+          <%= link_to "Reportes", '/admins/listado_reportes', class:"nav-link" %>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Estadisticas
+          </a>
           <ul class="dropdown-menu">
             <li><%= link_to "Alquileres", '/admins/estadisticas/alquileres', class:"dropdown-item" %></li>
             <li><%= link_to "Ganancias", '/admins/estadisticas/ganancias', class:"dropdown-item" %></li>
             <li><%= link_to "En curso", '/admins/estadisticas/en_curso', class:"dropdown-item" %></li>
             <li><%#= link_to "Ganancias", '/admins/estadisticas/ganancias', class:"dropdown-item" %></li>
           </ul>
-        </div>
+        </li>
 
         <!--<li class="nav-item">
           <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"nav-link" %>
