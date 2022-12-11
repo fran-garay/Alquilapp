@@ -40,7 +40,7 @@
         <td class="font-size: 1rem text-center"><%= auto.tipo_de_combustible %></td>
         <td class="font-size: 1rem text-center"><%= auto.tipo_de_caja %></td>
         <td class="font-size: 1rem text-center"><%= auto.porcentaje_combustible %></td>
-        <td class="font-size: 1rem text-center" style="background-color: <%= auto.color %>;"></td>
+        <td class="font-size: 1rem text-center" style="background-color: <%= auto.color %>; border-width: thin;"></td>
         <td class="font-size: 1rem text-center"><%= auto.estado %></td>
         <% if current_admin.is_admin? %>
         <td class="font-size: 1rem text-center"><%= link_to "Editar", edit_auto_path(auto.id), :class => "btn btn-primary" %></td>
