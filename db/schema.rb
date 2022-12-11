@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_11_183440) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_11_220936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -127,9 +127,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_183440) do
     t.integer "id_alquiler"
     t.string "descripcion"
     t.integer "id_supervisor"
-    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "type", default: 0
+    t.index ["type"], name: "index_reportes_on_type"
   end
 
   create_table "supervisors", force: :cascade do |t|
