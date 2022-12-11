@@ -72,6 +72,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_183440) do
     t.time "hora_devolucion"
     t.decimal "precio_total"
     t.time "duracion"
+    t.date "fecha_user_devolucion"
+    t.time "hora_user_devolucion"
+    t.integer "duracion_en_cant_horas"
+    t.time "tiempo_de_demora"
+    t.float "precio_por_demora"
+    t.float "precio_de_reserva"
     t.index ["auto_id"], name: "index_alquilers_on_auto_id"
     t.index ["user_id"], name: "index_alquilers_on_user_id"
   end

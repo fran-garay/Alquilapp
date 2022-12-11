@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="shortcut icon" href="/app/assets/imagen/favicon.ico"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,11 +22,11 @@
 
     <script src="https://unpkg.com/mapkick@0.1.1/dist/mapkick.js"></script>
 
+
   </head>
 
 
   <body>
-
      <%# <% if notice != nil%>
       <%# <div class="close_alert alert alert-success alert-dismissible fade show p-2" role="alert" style="margin-bottom:1px"> %>
           <%# <%= notice %>
@@ -45,7 +46,6 @@
 
 
       <div class="" style="flex-grow:1;">
-      <% logger.debug "EL ESTADOOOO #{current_user.status}"%>
       <%case%>
             <% when current_user.status == "Validado" %>
               <%= yield %>
@@ -84,9 +84,9 @@
       <%# check if current user not on edit path %>
       <div class="d-flex flex-column">
         <% if  (!request.original_url.include?("edit") && !request.original_url.include?("updateUser") &&
-        !request.original_url.include?("vehiculo") && !request.original_url.include?("certificado") && 
-        !request.original_url.include?("wallets") && !request.original_url.include?("cards") && 
-        !request.original_url.include?("vehiculo")  && !request.original_url.include?("alquilar") && 
+        !request.original_url.include?("vehiculo") && !request.original_url.include?("certificado") &&
+        !request.original_url.include?("wallets") && !request.original_url.include?("cards") &&
+        !request.original_url.include?("vehiculo")  && !request.original_url.include?("alquilar") &&
         !request.original_url.include?("vista_alquiler") && !request.original_url.include?("resumen"))%>
           <%= render "users/partials/footer" %>
         <% end %>

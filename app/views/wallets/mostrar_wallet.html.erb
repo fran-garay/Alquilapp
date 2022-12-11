@@ -23,18 +23,26 @@
   <tbody>
     <tr>
       <td style="color: green">
-        $ <%= @wallet.ultima_carga %>
+        $ <%= '%.2f' % @wallet.ultima_carga %>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
         </svg>
       </td>
       <td style="color: red">
-        $ <%= @wallet.ultimo_gasto %>
+
+        $ <%= '%.2f' % @wallet.ultimo_gasto %>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
         </svg>
       </td>
     </tr>
+      <%# <% @alquilers = Alquiler.where(last(5)) %>
+        <%# for each alquiler display price %>
+        <%# <% @alquilers.each do |alquiler| %>
+          <%# <% if alquiler.precio != nil %>
+            <%# <p class="text-center">Total gastado: $ <%= '%.2f' % alquiler.precio %></p>
+          <%# <% end %>
+
   </tbody>
 </table>
 
@@ -62,7 +70,7 @@
       </div>
 
       <div class="modal-body" id="form1">
-        
+
         <div class="row m-4 p-2">
         <select class="form-select mb-3" aria-label="Default select example" name="card_id" id="card_id">
           <% if !@cards.empty? %>
@@ -79,7 +87,7 @@
         </select>
           Tarjeta
 
-          
+
           <button type="button" class="btn btn-warning mt-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFFFFF" class="bi bi-credit-card me-2 mb-1" viewBox="0 0 16 16">
               <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
@@ -124,5 +132,6 @@
   if (hist.includes("cards/create")) {
     myModal.show();
   }
+
 
 </script>
