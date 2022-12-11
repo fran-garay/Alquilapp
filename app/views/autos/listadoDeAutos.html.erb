@@ -1,17 +1,16 @@
-<h1>Listado de Vehículos</h1>
-
-
-
+<h1 class="h1 text-center">Vehículos</h1>
 <% if current_admin.is_admin? %>
 <br>
-  <%= link_to "Crear nuevo Auto", new_auto_path, :class => "btn btn-primary " %>
+<div class="text-center">
+  <%= link_to "Crear nuevo Vehiculo", new_auto_path, :class => "btn btn-primary " %>
+</div>
 <br>
 <% end %>
 
 <div class="container-sm">
  <hr>
-  <div class="table-responsive">
-    <table class="table">
+  <div class="table-responsive" >
+    <table class="table shadow rounded" style="background-color:white;">
       <tr>
         <th class="fs-5 text-center">FOTO</th>
         <%# <th class="fs-5 text-center">FOTO</th> %>

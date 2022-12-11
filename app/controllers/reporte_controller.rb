@@ -1,6 +1,12 @@
 class ReporteController < ApplicationController
-    def listado_reportes
+
+    layout "for_admins"
+    before_action :authenticate_admin!
+    
+    def index
+
         @reporte = Reporte.all
+        render '/admins/listado_reportes' and return
     end
     def new
         @reporte = Reporte.new
