@@ -1,10 +1,9 @@
 class ReportesController < ApplicationController
 
-    layout "for_admins"
-    before_action :authenticate_admin!
+    layout :by_resource
+    before_action :authenticate_persona!
 
     def index
-
         @reporte = Reporte.all
         render '/admins/listado_reportes' and return
     end
@@ -42,6 +41,22 @@ class ReportesController < ApplicationController
 
     def reporte_params
         params.require(:reporte).permit(:descripcion)
+    end
+
+    def by_resource
+        if user_signed_in?
+            "for_users"
+        elsif admin_signed_in?
+            "for_admins"
+        end
+    end
+
+    def authenticate_persona!
+        if user_signed_in?
+            authenticate_user!
+        elsif admin_signed_in?
+            authenticate_admin!
+        end
     end
 
 end
