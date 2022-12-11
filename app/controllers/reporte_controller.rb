@@ -2,7 +2,7 @@ class ReporteController < ApplicationController
 
     layout "for_admins"
     before_action :authenticate_admin!
-    
+
     def index
 
         @reporte = Reporte.all

@@ -33,7 +33,7 @@
           </a>
           <ul class="dropdown-menu">
             <li> <%= link_to "Listar", '/admins/listar_supervisores', class:"dropdown-item" %> </li>
-            <li> <%= link_to "Crear", '/admins/sign_up', class:"dropdown-item" %> </li>
+            <li> <%= link_to "Nuevo", '/admins/sign_up', class:"dropdown-item" %> </li>
           </ul>
         </li>
         <% end %>
@@ -43,8 +43,8 @@
             Usuarios
           </a>
           <ul class="dropdown-menu">
-            <li> <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"dropdown-item" %> </li>
-            <li> <%= link_to "Listar usuarios no validados", admins_listar_no_validados_path, class:"dropdown-item" %> </li>
+            <li> <%= link_to "Todos", admins_listar_usuarios_path, class:"dropdown-item" %> </li>
+            <li> <%= link_to "No validados", admins_listar_no_validados_path, class:"dropdown-item" %> </li>
           </ul>
         </li>
 
