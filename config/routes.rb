@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
+  #resources :reportes
 	resources :locations, only: :create
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
@@ -83,6 +84,8 @@ Rails.application.routes.draw do
   get '/abrir_cerrar/:id', :to => 'users#abrir_cerrar'
 
   get 'alquiler/resumen', :to => 'users#resumen', :as => 'resumen'
+
+  get '/admins/listado_reportes', :to => 'reporte#index'
 
   get '/admins/estadisticas', :to => 'admins#estadisticas'
 
