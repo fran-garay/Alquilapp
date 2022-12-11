@@ -1,14 +1,80 @@
 <head>
     <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/38e5d75ed7.js" crossorigin="anonymous"></script>
 </head>
 
 <div class="text-center">
 
     <h1 class="mt-4 mb-5 font">Estadísticas sobre ganancias</h1>
 
+    <div class="container d-flex border shadow me-3">
+        <i class="align-self-center fa-solid fa-dollar-sign fa-5x m-3 ms-5" style="color: #46a85a"></i>
+        <div class="align-self-center text-center m-auto">
+            <h5 class="font"> Dinero recaudado en el último mes </h5>
+            <h2 class="font bold" style="color: #46a85a"> <%= @recaudado_mes %> </h2>
+        </div>
+    </div>
+
+    <br>
+
     <!-- GRAFICOS GENERALES -->
     <div class="container pt-4 border shadow">
-        <h3 class="d-flex align-self-start font bold">Ganancias generales</h3>
+        <h3 class="d-flex align-self-start font bold">Ganancias en general</h3>
+        <nav class="pt-3">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                <button class="nav-link active" id="genn-week-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-week" type="button" role="tab" aria-controls="genn-week" aria-selected="true">
+                    Última semana
+                </button>
+
+                <button class="nav-link" id="genn-month-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-month" type="button" role="tab" aria-controls="genn-month" aria-selected="false">
+                    Último mes
+                </button>
+
+                <button class="nav-link" id="genn-year-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-year" type="button" role="tab" aria-controls="genn-year" aria-selected="false">
+                    Último año
+                </button>
+
+                <button class="nav-link" id="genn-hist-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-hist" type="button" role="tab" aria-controls="genn-hist"
+                    aria-selected="false">
+                    Histórico
+                </button>
+
+            </div>
+        </nav>
+        
+        <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+
+            <div class="tab-pane fade show active" id="genn-week" role="tabpanel" aria-labelledby="genn-week-tab">
+                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, last: 7).sum(:precio_total) %>
+            </div>
+
+            <div class="tab-pane fade" id="genn-month" role="tabpanel" aria-labelledby="genn-month-tab">
+                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, last: 30).sum(:precio_total) %>
+            </div>
+
+            <div class="tab-pane fade" id="genn-year" role="tabpanel" aria-labelledby="genn-year-tab">
+                <%= line_chart @alquileres.group_by_month(:fecha_alquiler, last: 12).sum(:precio_total) %>
+            </div>
+
+            <div class="tab-pane fade" id="genn-hist" role="tabpanel" aria-labelledby="genn-hist-tab">
+                <%= line_chart @alquileres.group_by_month(:fecha_alquiler).sum(:precio_total) %>
+            </div>
+
+        </div>
+
+        <br>
+
+    </div>
+
+    <br>
+
+    <div class="container pt-4 border shadow">
+        <h3 class="d-flex align-self-start font bold">Ganancias desglosadas</h3>
         <nav class="pt-3">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
 

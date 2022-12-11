@@ -33,7 +33,7 @@
             <i class="fa-solid fa-chart-pie align-self-center fa-5x m-3" style="color: #f59e3e"></i>
             <div class="align-self-center text-center m-auto">
                 <h5 class="font"> Auto más pedido hoy </h5>
-                <% if @mas_usado_hoy.nil? %>
+                <% if @mas_alquilado_hoy.nil? %>
                     <h2 class="font bold" style="color: #f59e3e"> Ninguno </h2>
                 <% else %>
                     <h2 class="font bold" style="color: #f59e3e"> <%= @mas_alquilado_hoy.modelo %> </h2>

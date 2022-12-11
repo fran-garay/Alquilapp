@@ -1,12 +1,90 @@
 <head>
     <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/38e5d75ed7.js" crossorigin="anonymous"></script>
 </head>
 
 <div class="text-center">
 
     <h1 class="mt-4 mb-5 font">Estadísticas sobre reservas</h1>
 
+    <div class="container d-flex">
+
+        <div class="container d-flex border shadow me-3">
+            <i class="align-self-center fa-solid fa-star fa-5x m-3" style="color: #46a85a"></i>
+            <div class="align-self-center text-center m-auto">
+                <h5 class="font"> Auto más usado históricamente </h5>
+                <h2 class="font bold"> <%= @mas_alquilado.modelo %> </h2>
+            </div>
+        </div>
+
+        <div class="container d-flex border shadow ms-3">
+            <i class="fa-solid fa-star align-self-center fa-5x m-3" style="color: #a84659"></i>
+            <div class="align-self-center text-center m-auto">
+                <h5 class="font"> Auto menos usado históricamente </h5>
+                <h2 class="font bold"> <%= @menos_alquilado.modelo %> </h2>
+            </div>
+        </div>
+        
+    </div>
+
+    <br>
+
     <!-- GRAFICOS GENERALES -->
+    <div class="container pt-4 border shadow">
+        <h3 class="d-flex align-self-start font bold">Reservas en general</h3>
+        <nav class="pt-3">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                <button class="nav-link active" id="genn-week-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-week" type="button" role="tab" aria-controls="genn-week" aria-selected="true">
+                    Última semana
+                </button>
+
+                <button class="nav-link" id="genn-month-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-month" type="button" role="tab" aria-controls="genn-month" aria-selected="false">
+                    Último mes
+                </button>
+
+                <button class="nav-link" id="genn-year-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-year" type="button" role="tab" aria-controls="genn-year" aria-selected="false">
+                    Último año
+                </button>
+
+                <button class="nav-link" id="genn-hist-tab" data-bs-toggle="tab"
+                    data-bs-target="#genn-hist" type="button" role="tab" aria-controls="genn-hist"
+                    aria-selected="false">
+                    Histórico
+                </button>
+
+            </div>
+        </nav>
+        
+        <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+
+            <div class="tab-pane fade show active" id="genn-week" role="tabpanel" aria-labelledby="genn-week-tab">
+                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y", last: 7).count %>
+            </div>
+
+            <div class="tab-pane fade" id="genn-month" role="tabpanel" aria-labelledby="genn-month-tab">
+                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y", last: 30).count %>
+            </div>
+
+            <div class="tab-pane fade" id="genn-year" role="tabpanel" aria-labelledby="genn-year-tab">
+                <%= line_chart @alquileres.group_by_month(:fecha_alquiler, format: "%m/%Y").count %>
+            </div>
+
+            <div class="tab-pane fade" id="genn-hist" role="tabpanel" aria-labelledby="genn-hist-tab">
+                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count %>
+            </div>
+
+        </div>
+
+        <br>
+
+    </div>
+
+    <br>
+
     <div class="container pt-4 border shadow">
         <h3 class="d-flex align-self-start font bold">Reservas de los autos</h3>
         <nav class="pt-3">
