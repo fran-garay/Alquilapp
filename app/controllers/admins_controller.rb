@@ -41,10 +41,70 @@ class AdminsController < ApplicationController
 
   def estadisticas
     @autos = Auto.all
-    @users = User.all
-    @supervisors = Admin.all.where(is_admin: false)
-    @precios = Precio.all
     @alquileres = Alquiler.all
+    @alquileres_hoy = Alquiler.all.where("created_at >= ?", Date.today)
+    @usuarios = User.all
+
+    if @alquileres_hoy.empty?
+      
+      @mas_alquilado_hoy = nil
+      @dinero_recaudado_hoy = 0
+      @mas_usado_hoy = nil
+
+    else
+      @id_mas_alquilado_hoy = @alquileres_hoy.group(:auto_id).count.max_by{|k,v| v}[0]
+      @mas_alquilado_hoy = Auto.find(@id_mas_alquilado_hoy)
+
+      @dinero_recaudado_hoy = 0
+      @alquileres_hoy.each do |alquiler|
+        @dinero_recaudado_hoy += alquiler.precio_total
+      end
+
+      # @id_mas_usado_hoy = @alquileres_hoy.group(:auto_id).sum(:duracion).max_by{|k,v| v}[0]
+      # @mas_usado_hoy = Auto.find(@id_mas_usado_hoy)
+
+      @usuarios_alquilando = Array.new
+      for usuario in @usuarios
+        if usuario.is_renting?
+          @usuarios_alquilando.append(usuario)
+        end
+      end
+    end
+
+  end
+
+  def estadisticas_alquileres
+    @autos = Auto.all
+    @alquileres = Alquiler.all
+  end
+
+  def estadisticas_ganancias
+    @autos = Auto.all
+    @alquileres = Alquiler.all
+  end
+
+  def estadisticas_uso
+    @autos = Auto.all
+    @alquileres = Alquiler.all
+  end
+
+  def estadisticas_en_curso
+    @alquileres = Alquiler.all
+    @autos = Auto.all
+    @usuarios = User.all
+
+    @usuarios_alquilando = Array.new
+    for usuario in @usuarios
+      if usuario.is_renting?
+        @usuarios_alquilando.append(usuario)
+      end
+    end
+
+    @alquileres_en_curso = Array.new
+    for usuario in @usuarios_alquilando
+      @alquileres_en_curso.append(@alquileres.where(user_id: usuario.id).last)
+    end
+
   end
 
   def updateUserStatus

@@ -14,6 +14,18 @@ class UsersController < ApplicationController
       # invert the order of the array
       # @autos = @autos.reverse
     end
+
+
+    # DESCOMENTAR LA PRIMERA VEZ QUE CORRAN LA APP
+    # alquileres = Alquiler.all
+    # for alquiler in alquileres
+    #   if alquiler.duracion == nil
+    #     alquiler.duracion = Time.at(alquiler.hora_devolucion - alquiler.hora_alquiler).utc
+    #     alquiler.save
+    #   end
+    # end
+
+    
   end
 
 
@@ -60,22 +72,13 @@ class UsersController < ApplicationController
     @alquiler = Alquiler.where(user_id: current_user.id).last
     @auto = Auto.find(@alquiler.auto_id)
 
-    #difference between @alquiler.hora_devolucion and @alquiler.hora_inicio
-    @tiempo = @alquiler.hora_devolucion - @alquiler.hora_alquiler
-    @tiempo = @tiempo.to_i
-    @tiempo = Time.at(@tiempo).utc.strftime("%Hh %Mm %Ss")
-    @horas = @tiempo.split("h")[0]
-
+    @tiempo = "0d " + @alquiler.duracion.strftime("%Hh %Mm %Ss")
   end
 
   def alquilar
     parametros = alquiler_params
     @user = current_user
     @auto = Auto.find(params[:auto_id])
-    # logger.debug "FECHA #{parametros[:fecha_devolucion]}"
-    # logger.debug "HORA #{parametros[:hora_devolucion]}"
-    # logger.debug "EL PARSE  #{(Date.parse(parametros[:fecha_devolucion]).to_time- Date.today.to_time) / 1.hours}"
-    # todays date
 
     difference_of_hours_between_today_and_date_value = ((Date.parse(parametros[:fecha_devolucion]).to_time- Date.today.to_time) / 1.hours).to_i
 
@@ -114,6 +117,7 @@ class UsersController < ApplicationController
     @alquiler.fecha_devolucion = parametros[:fecha_devolucion]
     @alquiler.hora_devolucion = parametros[:hora_devolucion]
     @alquiler.precio_total = total_precio
+    @alquiler.duracion = total_horas
     @alquiler.save
     @user.alquiler_id = @alquiler.id
     @user.is_renting = true
@@ -132,6 +136,8 @@ class UsersController < ApplicationController
     @alquiler = Alquiler.find(current_user.alquiler_id)
     @alquiler.fecha_devolucion = Date.today
     @alquiler.hora_devolucion = Time.now
+    logger.debug "\n\n\n\n Duracion final #{Time.at(@alquiler.hora_devolucion - @alquiler.hora_alquiler).utc.strftime("%H:%M:%S")}\n\n\n\n"
+    @alquiler.duracion = Time.at(@alquiler.hora_devolucion - @alquiler.hora_alquiler).utc
     @alquiler.save
     @auto = Auto.find(@alquiler.auto_id)
     @auto.alquiler_id = nil
@@ -194,14 +200,14 @@ class UsersController < ApplicationController
   end
 
   def la_hora_es_menor_a_la_actual_y_el_dia_es_hoy?(fecha_devolucion, hora_devolucion)
-    logger.debug "DEBUGS "
-    logger.debug "fecha_devolucion #{fecha_devolucion}"
-    logger.debug "fecha_devolucion.to_date #{fecha_devolucion.to_date}"
-    logger.debug "hora_devolucion #{hora_devolucion}"
-    logger.debug "Date.today #{Date.today.to_s}"
-    logger.debug "Date.today #{Date.today.to_s == fecha_devolucion}"
-    logger.debug "Time.now #{Time.now.getlocal }"
-    logger.debug "Time.now #{Time.parse(hora_devolucion) - Time.now}"
+    # logger.debug "DEBUGS "
+    # logger.debug "fecha_devolucion #{fecha_devolucion}"
+    # logger.debug "fecha_devolucion.to_date #{fecha_devolucion.to_date}"
+    # logger.debug "hora_devolucion #{hora_devolucion}"
+    # logger.debug "Date.today #{Date.today.to_s}"
+    # logger.debug "Date.today #{Date.today.to_s == fecha_devolucion}"
+    # logger.debug "Time.now #{Time.now.getlocal }"
+    # logger.debug "Time.now #{Time.parse(hora_devolucion) - Time.now}"
     # Date.today.
     # Time now based on the time zone of the server
 

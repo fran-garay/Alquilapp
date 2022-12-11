@@ -86,6 +86,14 @@ Rails.application.routes.draw do
 
   get '/admins/estadisticas', :to => 'admins#estadisticas'
 
+  get '/admins/estadisticas/alquileres', :to => 'admins#estadisticas_alquileres'
+
+  get '/admins/estadisticas/ganancias', :to => 'admins#estadisticas_ganancias'
+
+  #get '/admins/estadisticas/uso', :to => 'admins#estadisticas_uso'
+
+  get '/admins/estadisticas/en_curso', :to => 'admins#estadisticas_en_curso'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end
