@@ -99,6 +99,8 @@ Rails.application.routes.draw do
 
   get '/users/reportes/new', :to => 'reportes#new', :as => 'new_reporte'
 
+  post '/users/reportes/create', :to => 'reportes#create', :as => 'create_reporte'
+
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
 end

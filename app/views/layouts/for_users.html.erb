@@ -87,7 +87,8 @@
         !request.original_url.include?("vehiculo") && !request.original_url.include?("certificado") &&
         !request.original_url.include?("wallets") && !request.original_url.include?("cards") &&
         !request.original_url.include?("vehiculo")  && !request.original_url.include?("alquilar") &&
-        !request.original_url.include?("vista_alquiler") && !request.original_url.include?("resumen"))%>
+        !request.original_url.include?("reportes")  && !request.original_url.include?("vista_alquiler") &&
+        !request.original_url.include?("resumen"))%>
           <%= render "users/partials/footer" %>
         <% end %>
 
