@@ -97,6 +97,9 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <%= button_to "Finalizar", "/users/finalizar_alquiler", method: :put, class:"btn btn-danger"%>
         </div>
+        <div class="alert alert-danger alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio${id}">
+                            <strong>¡Recordatorio!</strong>El precio final del alquiler se calcula sobre las horas de reserva, no sobre las horas de uso.
+                        </div>
     </div>
     </div>
 </div>

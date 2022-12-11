@@ -1,5 +1,3 @@
-<% @autos = Auto.all.where("estado = 'Disponible'") %>
-
 <div class="mt-11vh">
     <ul class="carrusel">
         <%# iterate over each @autos %>
@@ -60,7 +58,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel<%=a.id%>">Alquilar auto</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel<%=a.id%>">Alquilar el <%=a.modelo%></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -76,7 +74,6 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                     <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes#{a.id}" %>
-                                    <%# <%= button_to "Eliminar", "/admins/deleteSupervisor/#{supervisor.id}", method: :delete, class: "btn btn-danger", id:"btn-yes" %>
                                 </div>
 
                                 <div class="ms-2 me-2" id="recordatorio<%=a.id%>"></div>
