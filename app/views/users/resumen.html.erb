@@ -1,3 +1,9 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/38e5d75ed7.js" crossorigin="anonymous"></script>
+</head>
+
+
 <div class="mt-11vh">
     <h1 class="m-3 pt-3 pb-3 text-center">Aquí hay un resumen de tu viaje!</h1>
 
@@ -43,11 +49,18 @@
         <%end%>
     </div>
 
-    <div class="text-center">
-        <button type="button" class="btn btn-warning btn-lg mt-4 me-2 map-bottom shadow rounded-5">
-            <%= link_to "Entendido!", root_path, style: "text-decoration: none; color: white"%>
+    <div>
+
+        <button type="button" class="btn btn-warning btn-lg shadow rounded-5 text-center">
+            <%= link_to "Entendido!", root_path, style: "text-decoration: none; color: white", class: ""%>
         </button>
+            
+        
+
     </div>
+    <button type="button" class="btn btn-danger bien_redondito shadow text-end">
+            <i class="fa-regular fa-flag fa-lg" style="color: white"></i>
+        </button>
 </div>
 
 <style>
