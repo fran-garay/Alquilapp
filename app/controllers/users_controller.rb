@@ -320,13 +320,34 @@ class UsersController < ApplicationController
     @alquiler = Alquiler.find(current_user.alquiler_id)
 
     fecha_devolucion = Date.parse(parametros[:fecha_devolucion])
-    hora_devolucion = Time.parse(parametros[:hora_devolucion])
+    hora_devolucion = Time.parse(parametros[:hora_devolucion]).utc
+
+    # logger.debug.
+
+    logger.debug "\n\n\n\n\n DEBUG HORAS #{@alquiler.hora_devolucion.to_time}\n #{hora_devolucion.to_time}\n#{hora_devolucion.to_time  <= @alquiler.hora_devolucion.to_time}\n\n\n\n"
+    logger.debug "\n\n\n\n  #{@alquiler.fecha_devolucion} \n \n#{fecha_devolucion}\n #{fecha_devolucion <= @alquiler.fecha_devolucion}\n"
+
+
+    if (fecha_devolucion <= @alquiler.fecha_devolucion && hora_devolucion.to_time.strftime( "%H%M%S%N" ) <= @alquiler.hora_devolucion.to_time.strftime( "%H%M%S%N" ) )
+      current_user.errors.add(:base, "La fecha de devolucion debe ser mayor a la actual")
+
+      @auto = Auto.find(@alquiler.auto_id)
+      @tiempo_fin = Time.at(@alquiler.hora_devolucion).strftime("%H:%M:%S")
+      @minutos_restantes = calcular_deferencia_minutos(@alquiler.fecha_user_devolucion, @alquiler.hora_devolucion, Date.today, Time.now)
+
+      render "/users/vista_alquiler" and return
+    end
 
     horas_totales = calcular_deferencia_horas_ceil(fecha_devolucion, hora_devolucion, Date.today, Time.now) # redondeadas hacia arriba
     precio_total = horas_totales * Precio.last.valor
 
     if no_tiene_saldo?(precio_total)
-      @user.errors.add(:base, "No tiene suficiente saldo")
+      current_user.errors.add(:base, "No tiene suficiente saldo")
+
+      @auto = Auto.find(@alquiler.auto_id)
+      @tiempo_fin = Time.at(@alquiler.hora_devolucion).strftime("%H:%M:%S")
+      @minutos_restantes = calcular_deferencia_minutos(@alquiler.fecha_user_devolucion, @alquiler.hora_devolucion, Date.today, Time.now)
+
       render "/users/vista_alquiler" and return
     end
 
@@ -336,10 +357,10 @@ class UsersController < ApplicationController
     @alquiler.precio_total = precio_total + @alquiler.precio_total
     @alquiler.save
 
-    redirect_to vista_alquiler_path
+    redirect_to "/users/vista_alquiler" and return
   end
 
   def prolongar_params
-    params.permit(:fecha_devolucion, :hora_devolucion)
+    params.require(:alquiler).permit(:fecha_devolucion, :hora_devolucion)
   end
 end

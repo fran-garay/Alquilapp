@@ -100,11 +100,11 @@
                 </div>
                 <div class="modal-body">
                     <% @a = Alquiler.new %>
-                    <%= form_with model: @a, url: "/users/finalizar_alquiler", method: :post do |form| %>
+                    <%= form_with model: @alquiler, url: "/users/prolongar_alquiler", method: :put do |form| %>
                     <%= form.label "Fecha de Devolucion", required: true, class:"" %>
-                    <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2022-01-01' %>
+                    <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2122-01-01' %>
                     <%= form.label "Hora de Devolucion", required: true, class:"" %>
-                    <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00' %>
+                    <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00'%>
                     <div id="current_price" class="text-success text-center p-3 fs-5"></div>
                     <p class="text-center" id="text-confirm"></p>
                 </div>
@@ -146,7 +146,6 @@
 </div>
 
 <script>
-
     var today = new Date();
     var actual_time = today.getHours() + ":" + today.getMinutes();
 
@@ -157,7 +156,7 @@
         actual_time = "0" + today.getHours() + ":" + today.getMinutes();
     }
 
-    document.getElementById("text-confirm").innerHTML = "Ingrese horario y fecha de devolución para ver el precio";
+    document.getElementById("text-confirm").innerHTML = "Ingrese horario y fecha de devolución";
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
@@ -180,79 +179,58 @@
       mm_plus_ten_days = '0' + mm_plus_ten_days;
     }
     today_plus_ten_days = yyyy_plus_ten_days + '-' + mm_plus_ten_days + '-' + dd_plus_ten_days;
-    function actualizarPrecio(){
-        var date_value = today;
-            if (date != null){
-                date_value = date.value;
-            }
 
-            var difference_of_hours_between_today_and_date_value = (new Date(date_value).getTime() - new Date(today).getTime()) / 1000 / 60 / 60;
-            console.log(difference_of_hours_between_today_and_date_value);
+    // function actualizarPrecio(){
+    //     var date_value = today;
+    //         if (date != null){
+    //             date_value = date.value;
+    //         }
 
-            // round to the higher integer the value of minutes and store it in a variable
-            var minutes = Math.round(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
+    //         var difference_of_hours_between_today_and_date_value = (new Date(date_value).getTime() - new Date(today).getTime()) / 1000 / 60 / 60;
+    //         console.log(difference_of_hours_between_today_and_date_value);
 
-            console.log(minutes)
-            // get the value of hours and store it in a variable
-            var hours = parseInt(time.value.split(":")[0]) - parseInt(actual_time.split(":")[0]);
-            // round hours to the higher integer if its positive and to the lower integer if its negative
+    //         // round to the higher integer the value of minutes and store it in a variable
+    //         var minutes = Math.round(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
 
-            console.log(hours)
-            var total_hours = hours + minutes + difference_of_hours_between_today_and_date_value;
-            console.log(total_hours);
-            if (total_hours <= 0){
-                document.getElementById("btn-yes").disabled = true;
-                // document.getElementById("btn-yes").setAttribute("href", "#");
-                alert("La hora de devolución debe ser mayor a la hora actual");
-                document.getElementById("current_price").innerHTML = "";
-                document.getElementById("text-confirm").innerHTML = "Ingrese un horario válido";
-            }
-            else if (time.value != "") {
-                document.getElementById("btn-yes").disabled = false;
-                // document.getElementById("btn-yes").setAttribute("href", "#");
-                //round to 2 decimal places
-                var price = Math.round((total_hours * <%= Precio.last.valor %>) * 100) / 100;
-                document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + price +"</b>";
-                document.getElementById("text-confirm").innerHTML = "¿Está seguro que desea alquilar al <%= @auto.modelo %>?";
-                document.getElementById("recordatorio").innerHTML = `
-                        <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio">
-                            <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:01 hs costará lo mismo que 2hs.
-                        </div>`;
-            }
+    //         console.log(minutes)
+    //         // get the value of hours and store it in a variable
+    //         var hours = parseInt(time.value.split(":")[0]) - parseInt(actual_time.split(":")[0]);
+    //         // round hours to the higher integer if its positive and to the lower integer if its negative
 
-
-            // var today = new Date();
-            // var dd = today.getDate();
-            // var mm = today.getMonth() + 1; //January is 0!
-            // var yyyy = today.getFullYear();
-            // if (dd < 10) {
-            //   dd = '0' + dd;
-            // }
-
-            // if (mm < 10) {
-            //   mm = '0' + mm;
-            // }
-
-            // today = yyyy + '-' + mm + '-' + dd;
-            // if (date == today){
-            //     if (time < actual_time){
-            //         alert("La hora de devolución debe ser mayor a la hora actual");
-            //         document.getElementById("timefield").value = actual_time;
-            //     }
-            // }
-    }
+    //         console.log(hours)
+    //         var total_hours = hours + minutes + difference_of_hours_between_today_and_date_value;
+    //         console.log(total_hours);
+    //         if (total_hours <= 0){
+    //             document.getElementById("btn-yes").disabled = true;
+    //             // document.getElementById("btn-yes").setAttribute("href", "#");
+    //             alert("La hora de devolución debe ser mayor a la hora actual");
+    //             document.getElementById("current_price").innerHTML = "";
+    //             document.getElementById("text-confirm").innerHTML = "Ingrese un horario válido";
+    //         }
+    //         else if (time.value != "") {
+    //             document.getElementById("btn-yes").disabled = false;
+    //             // document.getElementById("btn-yes").setAttribute("href", "#");
+    //             //round to 2 decimal places
+    //             var price = Math.round((total_hours * <%= Precio.last.valor %>) * 100) / 100;
+    //             document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + price +"</b>";
+    //             document.getElementById("text-confirm").innerHTML = "¿Está seguro que desea alquilar al <%= @auto.modelo %>?";
+    //             document.getElementById("recordatorio").innerHTML = `
+    //                     <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio">
+    //                         <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:01 hs costará lo mismo que 2hs.
+    //                     </div>`;
+    //         }
+    // }
 
     var date = document.getElementById("datefield");
     if (date != null){
       date.setAttribute("min", today);
-        date.setAttribute("value", today);
       date.setAttribute("max", today_plus_ten_days);
       date.addEventListener("change", actualizarPrecio);
     }
     var time = document.getElementById("timefield");
     console.log(time)
     if (time != null){
-    //   time.setAttribute("value", actual_time);
+      time.setAttribute("value", "");
     //   time.setAttribute("step", "3600");
         time.addEventListener("change", actualizarPrecio);
     }
