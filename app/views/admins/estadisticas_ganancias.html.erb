@@ -62,7 +62,7 @@
             </div>
 
             <div class="tab-pane fade" id="genn-hist" role="tabpanel" aria-labelledby="genn-hist-tab">
-                <%= line_chart @alquileres.group_by_month(:fecha_alquiler).sum(:precio_total) %>
+                <%= line_chart @alquileres.group_by_day(:fecha_alquiler).sum(:precio_total) %>
             </div>
 
         </div>

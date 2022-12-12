@@ -22,7 +22,11 @@
             <i class="fa-solid fa-car-side align-self-center fa-5x m-3" style="color: #f59e3e"></i>
             <div class="align-self-center text-center m-auto">
                 <h5 class="font"> Alquileres en curso </h5>
-                <h2 class="font bold" style="color: #f59e3e"> <%= @usuarios_alquilando.size %> </h2>
+                <% if @usuarios_alquilando.empty? %>
+                    <h2 class="font bold" style="color: #f59e3e"> Ninguno </h2>
+                <% else %>
+                    <h2 class="font bold" style="color: #f59e3e"> <%= @usuarios_alquilando.size %> </h2>
+                <% end %>
             </div>
         </div>
         

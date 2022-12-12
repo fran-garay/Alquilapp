@@ -16,9 +16,10 @@ class ReportesController < ApplicationController
         @reporte = Reporte.new
         @reporte.descripcion = params[:reporte][:descripcion]
         @reporte.tipo = params[:reporte][:tipo]
-        @reporte.id_usuario = current_user.id
+        @reporte.user_id = current_user.id
         @reporte.title = params[:reporte][:title]
-        @reporte.id_alquiler = Alquiler.where(user_id: current_user.id).last.id
+        @reporte.alquiler_id = Alquiler.where(user_id: current_user.id).last.id
+        @reporte.auto_id = Alquiler.where(user_id: current_user.id).last.auto_id
         @reporte.save
         redirect_to root_path
     end
@@ -44,7 +45,7 @@ class ReportesController < ApplicationController
     end
 
     def reporte_params
-        params.require(:reporte).permit(:descripcion)
+        params.require(:reporte).permit(:descripcion, :tipo, :id_usuario, :title, :id_alquiler)
     end
 
     def by_resource
