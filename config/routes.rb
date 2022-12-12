@@ -103,7 +103,7 @@ Rails.application.routes.draw do
 
   put '/users/prolongar_alquiler', :to => 'users#prolongar_alquiler'
 
-  get '/', :to => 'main#home'
+  # get '/', :to => 'main#home'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 
