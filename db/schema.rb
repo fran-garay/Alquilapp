@@ -123,10 +123,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_034822) do
   end
 
   create_table "reportes", force: :cascade do |t|
-    t.integer "id_usuario"
-    t.integer "id_alquiler"
+    t.integer "user_id"
+    t.integer "alquiler_id"
     t.string "descripcion"
-    t.integer "id_supervisor"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tipo", default: 0
