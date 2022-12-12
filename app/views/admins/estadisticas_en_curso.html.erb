@@ -19,7 +19,7 @@
                     <i class="align-self-center fa-solid fa-car-side fa-7x m-3" style="color: #f59e3e"></i>
                 <%end%>
                 <div class="align-self-center ms-1" style="text-align: left">
-                    <h5 class="font"> <i class="fa-solid fa-car me-2 fa-lg" style="color: #9B9BA0"></i> <b><%= alquiler.auto.modelo %></b> - <%= alquiler.auto.patente %> </h5>
+                    <h5 class="font"> <i class="fa-solid fa-car me-2 fa-lg" style="color: #9B9BA0"></i> <b><%= alquiler.auto.modelo %></b> <%= alquiler.auto.patente %> </h5>
                     <h5 class="font"> <i class="fa-solid fa-user me-2 fa-lg" style="color: #9B9BA0"></i> <%= alquiler.user.first_name %> <%= alquiler.user.last_name %> </h5>
                     <h5 class="font"> <i class="fa-solid fa-calendar-alt me-2 fa-lg" style="color: #9B9BA0"></i> <%= alquiler.fecha_devolucion.strftime("%d/%m/%y") %> <%= alquiler.hora_devolucion.strftime("%H:%M:%M") %> </h5>
                 </div>

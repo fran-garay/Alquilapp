@@ -1,0 +1,44 @@
+<html>
+<body>
+
+<div class="container mt-10vh">
+
+    <h3 class="text-center p-4"> ¿Desea realizar un reclamo? </h3>
+
+    <%= form_for(@reporte, as: :reporte, url: "/users/reportes/create" , html: { method: :post }) do |form| %>
+    <div class="mb-4">
+
+        <div class="form-outline mb-3">
+            <label for="tipo" class="form-label">¿De que se trata el reclamo?</label>
+            <%= form.select :tipo, options_for_select([["El estado del vehículo", "Estado"], ["Tuve un problema conduciendo", "Sinietro"], ["Tuve un problema con el pago", "Pagos"]]), {}, class: "form-select", id: "tipo" %>
+        </div>
+
+        <div class="form-outline mb-3">
+            <label for="title" class="form-label">Sintetícelo en pocas palabras</label>
+            <%= form.text_field :title, class: "form-control", id: "title", maxlength:"50"%>
+            <div class="text-end mt-1 me-1" id="titleLeft" style="font-size: 0.8em">50 caracteres restantes</div>
+        </div>
+
+        <div class="form-outline mb-3">
+            <label for="descripcion" class="form-label">Describanos el problema</label>
+            <%= form.text_area :descripcion, class: "form-control", id: "descripcion", style: "height: 100px" %>
+        </div>
+
+    </div>
+    <%= form.submit "Enviar", class: "btn btn-lg btn-warning map-bottom rounded-5 shadow text-white" %>
+    <% end %>
+
+</div>
+</body>
+
+<script>
+
+    var title = document.getElementById("title");
+    //show characters left in title
+    title.addEventListener("keyup", function() {
+        var titleLeft = document.getElementById("titleLeft");
+        titleLeft.innerHTML = 50 - title.value.length + " caracteres restantes";
+    });
+</script>
+
+<html>

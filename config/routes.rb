@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
+  #resources :reportes
 	resources :locations, only: :create
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
@@ -84,6 +85,8 @@ Rails.application.routes.draw do
 
   get 'alquiler/resumen', :to => 'users#resumen', :as => 'resumen'
 
+  get '/admins/listado_reportes', :to => 'reportes#index'
+
   get '/admins/estadisticas', :to => 'admins#estadisticas'
 
   get '/admins/estadisticas/alquileres', :to => 'admins#estadisticas_alquileres'
@@ -93,6 +96,10 @@ Rails.application.routes.draw do
   #get '/admins/estadisticas/uso', :to => 'admins#estadisticas_uso'
 
   get '/admins/estadisticas/en_curso', :to => 'admins#estadisticas_en_curso'
+
+  get '/users/reportes/new', :to => 'reportes#new', :as => 'new_reporte'
+
+  post '/users/reportes/create', :to => 'reportes#create', :as => 'create_reporte'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 

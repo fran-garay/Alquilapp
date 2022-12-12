@@ -33,7 +33,7 @@
           </a>
           <ul class="dropdown-menu">
             <li> <%= link_to "Listar", '/admins/listar_supervisores', class:"dropdown-item" %> </li>
-            <li> <%= link_to "Crear", '/admins/sign_up', class:"dropdown-item" %> </li>
+            <li> <%= link_to "Nuevo", '/admins/sign_up', class:"dropdown-item" %> </li>
           </ul>
         </li>
         <% end %>
@@ -43,9 +43,13 @@
             Usuarios
           </a>
           <ul class="dropdown-menu">
-            <li> <%= link_to "Listar usuarios", admins_listar_usuarios_path, class:"nav-link" %> </li>
-            <li> <%= link_to "Listar usuarios no validados", admins_listar_no_validados_path, class:"nav-link" %> </li>
+            <li> <%= link_to "Todos", admins_listar_usuarios_path, class:"dropdown-item" %> </li>
+            <li> <%= link_to "No validados", admins_listar_no_validados_path, class:"dropdown-item" %> </li>
           </ul>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Reportes", '/admins/listado_reportes', class:"nav-link" %>
         </li>
 
         <div class="btn-group nav-item">
@@ -54,7 +58,7 @@
             <span class="visually-hidden">Toggle Dropdown</span>
           </button>
           <ul class="dropdown-menu">
-            <li><%= link_to "Alquileres", '/admins/estadisticas/alquileres', class:"dropdown-item" %></li>
+            <li><%= link_to "Reservas", '/admins/estadisticas/alquileres', class:"dropdown-item" %></li>
             <li><%= link_to "Ganancias", '/admins/estadisticas/ganancias', class:"dropdown-item" %></li>
             <li><%= link_to "En curso", '/admins/estadisticas/en_curso', class:"dropdown-item" %></li>
             <li><%#= link_to "Ganancias", '/admins/estadisticas/ganancias', class:"dropdown-item" %></li>
