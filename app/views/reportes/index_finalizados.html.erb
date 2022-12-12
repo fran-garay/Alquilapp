@@ -18,7 +18,7 @@
 <div class="container m-2 shadow rounded" style="background-color: white;">
     <div class="row m-4">
 
-        <% for reporte in @reportes %>
+        <%-@reportes.each do |reporte|-%>
             <div class="col-4 py-2">
 
                 <%if reporte.tipo == "Siniestro"%>
