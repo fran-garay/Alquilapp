@@ -7,7 +7,7 @@
 
     <h1 class="mt-4 mb-5 font">Alquileres en curso en este momento</h1>
 
-    <% if @alquileres_en_curso.empty? %>
+    <% if @alquileres_en_curso.nil? %>
         <h3 class="font">No hay alquileres en curso en este momento</h3>
     <% else %>
         <div class="container d-flex">

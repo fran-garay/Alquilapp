@@ -159,10 +159,13 @@ class AdminsController < ApplicationController
         @usuarios_alquilando.append(usuario)
       end
     end
-
-    @alquileres_en_curso = Array.new
-    for usuario in @usuarios_alquilando
-      @alquileres_en_curso.append(@alquileres.where(user_id: usuario.id).last)
+    if @usuarios_alquilando.empty?
+      @alquileres_en_curso = nil
+    else
+      @alquileres_en_curso = Array.new
+      for usuario in @usuarios_alquilando
+        @alquileres_en_curso.append(@alquileres.where(user_id: usuario.id).last)
+      end
     end
 
   end
