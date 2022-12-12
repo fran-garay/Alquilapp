@@ -1,5 +1,17 @@
-<div class="mb-10vh mt-10vh d-flex justify-content-center">
+<div class="mb-10vh mt-10vh d-flex justify-content-center flex-column align-items-center">
+    <% if @minutos_restantes > 0 %>
+        <% if @minutos_restantes <= 5 %>
+            <div class="alert alert-danger alert-dismissible fade show p-2 w-80" role="alert" style="margin-bottom:1px">
+                <strong>¡Atención!</strong> Tu tiempo de alquiler ha finalizado, como no has devuelto el vehículo, se te ha cobrado una multa. Puedes devolver el vehiculo ahora o prolongar el alquiler
+            </div>
+        <% elsif @minutos_restantes <= 15 %>
+            <div class="alert alert-warning alert-dismissible fade show p-2 w-80" role="alert" style="margin-bottom:1px">
+                <strong>¡Atención!</strong> Te quedan menos de <%=@minutos_restantes%> minutos de alquiler
+            </div>
+        <%end%>
+    <%end%>
     <div class="d-flex flex-column " style="width:80%">
+         <%= render "users/shared/error_messages", resource: current_user%>
         <h4 class="p-2 align-self-start">Tu alquiler, <%=current_user.first_name %></h4>
 
         <div id="liveAlertPlaceholder"></div>
@@ -78,6 +90,35 @@
 
 
     </div>
+    <button  id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn" data-bs-toggle="modal" data-bs-target="#modalProlongar" data-bs-whatever="">Prolongar alquiler</button>
+    <div class="modal fade" id="modalProlongar" tabindex="-1" aria-labelledby="modalProlongarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalProlongarLabel">Prolongar el alquiler</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <% @a = Alquiler.new %>
+                    <%= form_with model: @a, url: "/users/finalizar_alquiler", method: :post do |form| %>
+                    <%= form.label "Fecha de Devolucion", required: true, class:"" %>
+                    <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2022-01-01' %>
+                    <%= form.label "Hora de Devolucion", required: true, class:"" %>
+                    <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00' %>
+                    <div id="current_price" class="text-success text-center p-3 fs-5"></div>
+                    <p class="text-center" id="text-confirm"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes" %>
+                </div>
+                <%end%>
+
+                <div class="ms-2 me-2" id="recordatorio"></div>
+            </div>
+        </div>
+    </div>
+
 
 
 </div>
@@ -105,6 +146,116 @@
 </div>
 
 <script>
+
+    var today = new Date();
+    var actual_time = today.getHours() + ":" + today.getMinutes();
+
+    if (today.getMinutes() < 10) {
+        actual_time = today.getHours() + ":0" + today.getMinutes();
+    }
+    if (today.getHours() < 10) {
+        actual_time = "0" + today.getHours() + ":" + today.getMinutes();
+    }
+
+    document.getElementById("text-confirm").innerHTML = "Ingrese horario y fecha de devolución para ver el precio";
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    // console.log(today+0);
+    var today_plus_ten_days = new Date(today.getTime() + 10 * 24 * 60 * 60 * 1000);
+    var dd_plus_ten_days = today_plus_ten_days.getDate();
+    var mm_plus_ten_days = today_plus_ten_days.getMonth() + 1; //January is 0!
+    var yyyy_plus_ten_days = today_plus_ten_days.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    today = yyyy + '-' + mm + '-' + dd;
+    if (dd_plus_ten_days < 10) {
+      dd_plus_ten_days = '0' + dd_plus_ten_days;
+    }
+    if (mm_plus_ten_days < 10) {
+      mm_plus_ten_days = '0' + mm_plus_ten_days;
+    }
+    today_plus_ten_days = yyyy_plus_ten_days + '-' + mm_plus_ten_days + '-' + dd_plus_ten_days;
+    function actualizarPrecio(){
+        var date_value = today;
+            if (date != null){
+                date_value = date.value;
+            }
+
+            var difference_of_hours_between_today_and_date_value = (new Date(date_value).getTime() - new Date(today).getTime()) / 1000 / 60 / 60;
+            console.log(difference_of_hours_between_today_and_date_value);
+
+            // round to the higher integer the value of minutes and store it in a variable
+            var minutes = Math.round(time.value.split(":")[1]/60 - parseInt(actual_time.split(":")[1])/60);
+
+            console.log(minutes)
+            // get the value of hours and store it in a variable
+            var hours = parseInt(time.value.split(":")[0]) - parseInt(actual_time.split(":")[0]);
+            // round hours to the higher integer if its positive and to the lower integer if its negative
+
+            console.log(hours)
+            var total_hours = hours + minutes + difference_of_hours_between_today_and_date_value;
+            console.log(total_hours);
+            if (total_hours <= 0){
+                document.getElementById("btn-yes").disabled = true;
+                // document.getElementById("btn-yes").setAttribute("href", "#");
+                alert("La hora de devolución debe ser mayor a la hora actual");
+                document.getElementById("current_price").innerHTML = "";
+                document.getElementById("text-confirm").innerHTML = "Ingrese un horario válido";
+            }
+            else if (time.value != "") {
+                document.getElementById("btn-yes").disabled = false;
+                // document.getElementById("btn-yes").setAttribute("href", "#");
+                //round to 2 decimal places
+                var price = Math.round((total_hours * <%= Precio.last.valor %>) * 100) / 100;
+                document.getElementById("current_price").innerHTML = "Costo total: <b>&#36;" + price +"</b>";
+                document.getElementById("text-confirm").innerHTML = "¿Está seguro que desea alquilar al <%= @auto.modelo %>?";
+                document.getElementById("recordatorio").innerHTML = `
+                        <div class="alert alert-success alert-dismissible fade show p-2 mt-2" role="alert" id="recordatorio">
+                            <strong>¡Recordatorio!</strong>  Recuerda que el precio del alquiler se computa por hora, por lo que 1:01 hs costará lo mismo que 2hs.
+                        </div>`;
+            }
+
+
+            // var today = new Date();
+            // var dd = today.getDate();
+            // var mm = today.getMonth() + 1; //January is 0!
+            // var yyyy = today.getFullYear();
+            // if (dd < 10) {
+            //   dd = '0' + dd;
+            // }
+
+            // if (mm < 10) {
+            //   mm = '0' + mm;
+            // }
+
+            // today = yyyy + '-' + mm + '-' + dd;
+            // if (date == today){
+            //     if (time < actual_time){
+            //         alert("La hora de devolución debe ser mayor a la hora actual");
+            //         document.getElementById("timefield").value = actual_time;
+            //     }
+            // }
+    }
+
+    var date = document.getElementById("datefield");
+    if (date != null){
+      date.setAttribute("min", today);
+        date.setAttribute("value", today);
+      date.setAttribute("max", today_plus_ten_days);
+      date.addEventListener("change", actualizarPrecio);
+    }
+    var time = document.getElementById("timefield");
+    console.log(time)
+    if (time != null){
+    //   time.setAttribute("value", actual_time);
+    //   time.setAttribute("step", "3600");
+        time.addEventListener("change", actualizarPrecio);
+    }
 
     //delete alert after 5 seconds
     setTimeout(function() {

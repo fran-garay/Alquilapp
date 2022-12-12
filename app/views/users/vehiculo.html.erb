@@ -82,11 +82,7 @@
                     </div>
                     <% end %>
                 </div>
-                <%if @user.is_renting?%>
-                    <div class="mt-2 d-flex justify-content-center" style="font-family:none">
-                        <button hidden id="btn-confirm<%=a.id%>" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn" data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" data-bs-whatever="">Elegir horario</button>
-                    </div>
-                <%else%>
+                <%if ! @user.is_renting?%>
                     <div class="mt-2 d-flex justify-content-center">
                         <button id="btn-confirm<%=a.id%>" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn" data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" data-bs-whatever="">Elegir horario</button>
                     </div>

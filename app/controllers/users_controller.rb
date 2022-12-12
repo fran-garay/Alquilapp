@@ -56,7 +56,8 @@ class UsersController < ApplicationController
 
     @tiempo_fin = @alquiler.hora_devolucion
     @tiempo_fin = Time.at(@tiempo_fin).strftime("%H:%M:%S")
-    @minutos_restantes = calcular_deferencia_minutos(@alquiler.fecha_devolucion, @alquiler.hora_devolucion, Date.today, Time.now)
+    @minutos_restantes = calcular_deferencia_minutos(@alquiler.fecha_user_devolucion, @alquiler.hora_devolucion, Date.today, Time.now)
+    logger.debug "\n\n\n\n MINUTOS RESTANTES #{@minutos_restantes}\n\n\n\n"
     # split @tiempo_fin to get hour, minutes and seconds
     # @hora_fin = @tiempo_fin.split(":")[0]
     # @minutos_fin = @tiempo_fin.split(":")[1]
@@ -76,25 +77,35 @@ class UsersController < ApplicationController
     @user = current_user
     @auto = Auto.find(params[:auto_id])
 
-    difference_in_hours_between_today_and_date_value = ((Date.parse(parametros[:fecha_devolucion]).to_time- Date.today.to_time) / 1.hours).to_i
+    fecha_devolucion = Date.parse(parametros[:fecha_devolucion])
+    hora_devolucion = Time.parse(parametros[:hora_devolucion])
 
-    # console.
-    hora_devolucion = parametros[:hora_devolucion].split(":")[0].to_i
-    minutos_devolucion = parametros[:hora_devolucion].split(":")[1].to_i
-    # get current hour
-    hora_alquiler = Time.now.hour.to_i
-    minutos_alquiler = Time.now.min.to_f
-
-    horas = hora_devolucion - hora_alquiler
-    minutos =  ((minutos_devolucion.to_f - minutos_alquiler)/60)
-    logger.debug "MINUTOSSSSSS #{minutos}/n/n/n/n/n/n/n/n/n/n/n/n"
-    minutos = (minutos).ceil
-    total_horas = horas + minutos + difference_in_hours_between_today_and_date_value
+    horas_totales = calcular_deferencia_horas_ceil(fecha_devolucion, hora_devolucion, Date.today, Time.now) # redondeadas hacia arriba
+    precio_total = horas_totales * Precio.last.valor
 
 
-    total_precio = total_horas * Precio.last.valor
+    logger.debug "\n\n\n\n\n\nPRECIO TOTAL #{precio_total}"
+    logger.debug "HORA DEVOLUCION: #{hora_devolucion}\HORA DEVOLUCION #{horas_totales}\n\n\n\n\n"
+
+    # difference_in_hours_between_today_and_date_value = ((Date.parse(parametros[:fecha_devolucion]).to_time- Date.today.to_time) / 1.hours).to_i
+
+    # # # console.
+    # hora_devolucion = parametros[:hora_devolucion].split(":")[0].to_i
+    # minutos_devolucion = parametros[:hora_devolucion].split(":")[1].to_i
+    # # get current hour
+    # hora_alquiler = Time.now.hour.to_i
+    # minutos_alquiler = Time.now.min.to_f
+
+    # horas = hora_devolucion - hora_alquiler
+    # minutos =  ((minutos_devolucion.to_f - minutos_alquiler)/60)
+    # minutos = (minutos).ceil
+    # total_horas = horas + minutos + difference_in_hours_between_today_and_date_value
+
+
+    # precio_total = total_horas * Precio.last.valor
     @alquiler = Alquiler.new
-    if no_tiene_saldo?(total_precio)
+
+    if no_tiene_saldo?(precio_total)
       @precio = Precio.last
       @autos = Auto.all.where(estado: "Disponible").order(:modelo)
       if (session[:lat] !=nil && session[:lng] != nil)
@@ -106,6 +117,7 @@ class UsersController < ApplicationController
       @user.errors.add(:base, "No tienes suficiente dinero para alquilar este auto")
       render "/users/vehiculo" and return
     end
+
     if la_hora_es_menor_a_la_actual_y_el_dia_es_hoy?(parametros[:fecha_devolucion], parametros[:hora_devolucion])
       @precio = Precio.last
       @autos = Auto.all.where(estado: "Disponible").order(:modelo)
@@ -129,9 +141,9 @@ class UsersController < ApplicationController
     # fecha y hora en las que el usuario piensa inicialmente que va a devolver el auto
     @alquiler.hora_user_devolucion =  @alquiler.hora_devolucion
     @alquiler.fecha_user_devolucion = @alquiler.fecha_devolucion
-    @alquiler.precio_total = total_precio
-    @alquiler.precio_de_reserva = total_precio
-    @alquiler.duracion_en_cant_horas = total_horas
+    @alquiler.precio_total = precio_total
+    @alquiler.precio_de_reserva = precio_total
+    @alquiler.duracion_en_cant_horas = horas_totales
     @alquiler.save
 
     @user.alquiler_id = @alquiler.id
@@ -152,9 +164,9 @@ class UsersController < ApplicationController
     @alquiler = Alquiler.find(current_user.alquiler_id)
 
     @alquiler.fecha_devolucion = Date.today
-    @alquiler.hora_devolucion = Time.now
+    @alquiler.hora_devolucion = Time.now.utc
 
-    @precio = calcular_precio(@alquiler)
+    @precio = calcular_precio_post_alquiler(@alquiler)
 
     @alquiler.precio_total = @precio
     @alquiler.save
@@ -246,12 +258,8 @@ class UsersController < ApplicationController
     fecha_devolucion == Date.today.to_s && Time.parse(hora_devolucion)  < Time.now.getlocal
   end
 
-  def calcular_deferencia_horas(fecha_devolucion, hora_devolucion, fecha_inicio, hora_inicio)
-    diff_in_hours_between_today_and_date_value = ((fecha_devolucion.to_time- fecha_inicio.to_time) / 1.hours).to_i
-
-    diff_horas = hora_devolucion.hour - hora_comienzo.hour
-    diff_minutos = ((hora_devolucion.min - hora_devolucion.min)/60).ceil
-    total_horas = diff_horas + diff_minutos + diff_in_hours_between_today_and_date_value
+  def calcular_deferencia_horas_ceil(fecha_devolucion, hora_devolucion, fecha_inicio, hora_inicio)
+    (calcular_deferencia_minutos(fecha_devolucion, hora_devolucion, fecha_inicio, hora_inicio).to_f / 60).ceil
   end
 
   def calcular_deferencia_minutos(fecha_devolucion, hora_devolucion, fecha_inicio, hora_inicio)
@@ -261,19 +269,42 @@ class UsersController < ApplicationController
     diff_horas = (hora_devolucion.hour - hora_inicio.hour) * 60
     diff_minutos = (hora_devolucion.min - hora_inicio.min)
     # debug and print every variable in this function
+    # logger.debug "\n\n\n\n\nDEBUGS "
+    # logger.debug "fecha_devolucion #{fecha_devolucion}"
+    # logger.debug "fecha_devolucion.to_date #{fecha_devolucion.to_date}"
+    # logger.debug "hora_devolucion #{hora_devolucion}"
+    # logger.debug "diff_in_hours #{diff_in_hours_between_today_and_date_value}"
+    # logger.debug "diff_horas #{diff_horas}"
+    # logger.debug "diff_horas #{hora_devolucion.hour}"
+    # logger.debug "diff_horas #{hora_inicio.hour}"
+    # logger.debug "diff_minutos #{diff_minutos}\n\n\n\n"
+
 
     return diff_horas + diff_minutos + diff_in_hours_between_today_and_date_value
   end
 
-  def calcular_precio(alquiler)
+  def calcular_precio_post_alquiler(alquiler)
     minutos_que_se_paso = calcular_deferencia_minutos(@alquiler.fecha_devolucion, @alquiler.hora_devolucion, @alquiler.fecha_user_devolucion, @alquiler.hora_user_devolucion)
+
+    logger.debug "\n\n\n\n #{alquiler} \n\n\n\n"
     @alquiler.precio_por_demora = 0
     if minutos_que_se_paso > 0
       cantidad_de_15_mins_que_se_paso = (minutos_que_se_paso.to_f / 15).ceil
       @alquiler.tiempo_de_demora = Time.at(@alquiler.hora_devolucion - @alquiler.hora_user_devolucion).utc
-      @alquiler.precio_por_demora = cantidad_de_15_mins_que_se_paso * (Precio.last.valor / 4)
+      @alquiler.precio_por_demora = cantidad_de_15_mins_que_se_paso * (Precio.last.valor / 2)
     end
     precio_total = @alquiler.duracion_en_cant_horas * Precio.last.valor + @alquiler.precio_por_demora
+  end
+
+  def calcular_precio_pre_alquiler(fecha_devolucion, hora_devolucion, fecha_inicio, hora_inicio)
+    # precio_actual = calcular_precio_post_alquiler(Alquiler.find(current_user.alquiler_id))
+    precio = (calcular_deferencia_minutos(fecha_devolucion, hora_devolucion, fecha_inicio, hora_inicio).to_f / 60).ceil * (Precio.last.valor)
+    # precio = precio_actual + precio_nuevo_intervalo
+    if precio > current_user.wallet.saldo
+      return "No tiene suficiente saldo"
+    else
+      return precio
+    end
   end
 
   # function that given a number of minutes returns a time object with days hours and minutes
@@ -282,5 +313,33 @@ class UsersController < ApplicationController
     hours = (minutes % 1440) / 60
     minutes = (minutes % 1440) % 60
     Time.new(0, 1, 1, hours, minutes, 0)
+  end
+
+  def prolongar_alquiler
+    parametros = prolongar_params
+    @alquiler = Alquiler.find(current_user.alquiler_id)
+
+    fecha_devolucion = Date.parse(parametros[:fecha_devolucion])
+    hora_devolucion = Time.parse(parametros[:hora_devolucion])
+
+    horas_totales = calcular_deferencia_horas_ceil(fecha_devolucion, hora_devolucion, Date.today, Time.now) # redondeadas hacia arriba
+    precio_total = horas_totales * Precio.last.valor
+
+    if no_tiene_saldo?(precio_total)
+      @user.errors.add(:base, "No tiene suficiente saldo")
+      render "/users/vista_alquiler" and return
+    end
+
+    @alquiler.fecha_devolucion = Date.parse(parametros[:fecha_devolucion])
+    @alquiler.hora_devolucion = Time.parse(parametros[:hora_devolucion])
+    @alquiler.duracion_en_cant_horas = horas_totales + @alquiler.duracion_en_cant_horas
+    @alquiler.precio_total = precio_total + @alquiler.precio_total
+    @alquiler.save
+
+    redirect_to vista_alquiler_path
+  end
+
+  def prolongar_params
+    params.permit(:fecha_devolucion, :hora_devolucion)
   end
 end

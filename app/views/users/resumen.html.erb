@@ -24,7 +24,7 @@
 
         </div>
 
-
+        <% if @alquiler.tiempo_de_demora != nil %>
         <div class="row mb-3">
             <label class="titulos red-text">Tiempo de demora</label>
 
@@ -40,6 +40,7 @@
             <p class="datos red-text">$<%='%.2f' % @alquiler.precio_por_demora%></p>
 
         </div>
+        <%end%>
     </div>
 
     <div class="text-center">
