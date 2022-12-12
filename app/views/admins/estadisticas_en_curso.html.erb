@@ -16,7 +16,7 @@
 
                 <div class="container d-flex align-items-stretch border shadow m-3"> 
                     <!--<i class="align-self-center fa-solid fa-circle-info fa-7x m-3" style="color: #f59e3e"></i>-->
-                    <%if alquiler.auto.imagen.attached?%>
+                    <%if Auto.find_by(alquiler_id: alquiler.id).imagen.attached?%>
                         <%= image_tag(alquiler.auto.imagen, class:"icon_admins_list") %>
                     <%else%>
                         <i class="align-self-center fa-solid fa-car-side fa-7x m-3" style="color: #f59e3e"></i>

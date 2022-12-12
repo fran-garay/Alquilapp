@@ -93,7 +93,7 @@ Rails.application.routes.draw do
 
   get '/admins/estadisticas/ganancias', :to => 'admins#estadisticas_ganancias'
 
-  #get '/admins/estadisticas/uso', :to => 'admins#estadisticas_uso'
+  get '/admins/estadisticas/reportes', :to => 'admins#estadisticas_reportes'
 
   get '/admins/estadisticas/en_curso', :to => 'admins#estadisticas_en_curso'
 

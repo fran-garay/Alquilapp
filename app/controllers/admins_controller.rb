@@ -53,7 +53,7 @@ class AdminsController < ApplicationController
   def estadisticas
     @autos = Auto.all
     @alquileres = Alquiler.all
-    @alquileres_hoy = Alquiler.all.where("created_at >= ?", Date.today)
+    @alquileres_hoy = Alquiler.all.where(fecha_alquiler: Date.today)
     @usuarios = User.all
 
     if @alquileres_hoy.empty?
@@ -61,6 +61,7 @@ class AdminsController < ApplicationController
       @mas_alquilado_hoy = nil
       @dinero_recaudado_hoy = 0
       @mas_usado_hoy = nil
+      @reportes_hoy = 0
 
     else
       @id_mas_alquilado_hoy = @alquileres_hoy.group(:auto_id).count.max_by{|k,v| v}[0]
@@ -74,11 +75,12 @@ class AdminsController < ApplicationController
       # @id_mas_usado_hoy = @alquileres_hoy.group(:auto_id).sum(:duracion).max_by{|k,v| v}[0]
       # @mas_usado_hoy = Auto.find(@id_mas_usado_hoy)
 
-      @usuarios_alquilando = Array.new
-      for usuario in @usuarios
-        if usuario.is_renting?
-          @usuarios_alquilando.append(usuario)
-        end
+    end
+
+    @usuarios_alquilando = Array.new
+    for usuario in @usuarios
+      if usuario.is_renting?
+        @usuarios_alquilando.append(usuario)
       end
     end
 
@@ -109,6 +111,19 @@ class AdminsController < ApplicationController
   def estadisticas_uso
     @autos = Auto.all
     @alquileres = Alquiler.all
+  end
+
+  def estadisticas_reportes
+    @autos = Auto.all
+    @alquileres = Alquiler.all
+    @reportes = Reporte.all
+    @reportes_mes = 0
+    @reportes.each do |reporte|
+      if reporte.created_at.month == Date.today.month
+        @reportes_mes += 1
+      end
+    end
+
   end
 
   def estadisticas_en_curso

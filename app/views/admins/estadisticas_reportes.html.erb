@@ -1,0 +1,301 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/38e5d75ed7.js" crossorigin="anonymous"></script>
+</head>
+
+<div class="text-center">
+
+    <h1 class="mt-4 mb-5 font">Estadísticas reportes</h1>
+
+    <% if @alquileres.empty? %>
+        <h3 class="font">No hay reportes registrados</h3>
+    <% else %>
+
+        <div class="container d-flex border shadow me-3 mb-4">
+            <i class="align-self-center fa-solid fa-flag fa-5x m-3 ms-5" style="color: #a84659"></i>
+            <div class="align-self-center text-center m-auto">
+                <h5 class="font"> Reportes hechos en el mes </h5>
+                <h2 class="font bold" style="color: #a84659"> <%= @reportes_mes %> </h2>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- GRAFICOS GENERALES -->
+        <div class="container pt-4 border shadow">
+            <h3 class="d-flex align-self-start font bold">Reportes en general</h3>
+            <nav class="pt-3">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                    <button class="nav-link active" id="genn-week-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-week" type="button" role="tab" aria-controls="genn-week" aria-selected="true">
+                        Última semana
+                    </button>
+
+                    <button class="nav-link" id="genn-month-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-month" type="button" role="tab" aria-controls="genn-month" aria-selected="false">
+                        Último mes
+                    </button>
+
+                    <button class="nav-link" id="genn-year-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-year" type="button" role="tab" aria-controls="genn-year" aria-selected="false">
+                        Último año
+                    </button>
+
+                    <button class="nav-link" id="genn-hist-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-hist" type="button" role="tab" aria-controls="genn-hist"
+                        aria-selected="false">
+                        Histórico
+                    </button>
+
+                </div>
+            </nav>
+            
+            <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+
+                <div class="tab-pane fade show active" id="genn-week" role="tabpanel" aria-labelledby="genn-week-tab">
+                    <%= line_chart @reportes.group_by_day(:fecha_reporte, format: "%d/%m/%Y", last: 7).count %>
+                </div>
+
+                <div class="tab-pane fade" id="genn-month" role="tabpanel" aria-labelledby="genn-month-tab">
+                    <%= line_chart @reportes.group_by_day(:fecha_reporte, format: "%d/%m/%Y", last: 30).count %>
+                </div>
+
+                <div class="tab-pane fade" id="genn-year" role="tabpanel" aria-labelledby="genn-year-tab">
+                    <%= line_chart @reportes.group_by_month(:fecha_reporte, format: "%m/%Y").count %>
+                </div>
+
+                <div class="tab-pane fade" id="genn-hist" role="tabpanel" aria-labelledby="genn-hist-tab">
+                    <%= line_chart @reportes.group_by_day(:fecha_reporte, format: "%d/%m/%Y").count %>
+                </div>
+
+            </div>
+
+            <br>
+
+        </div>
+
+        <br>
+
+        <div class="container pt-4 border shadow">
+            <h3 class="d-flex align-self-start font bold">Reportes desglosados</h3>
+            <nav class="pt-3">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                    <button class="nav-link active" id="gen-week-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-week" type="button" role="tab" aria-controls="gen-week" aria-selected="true">
+                        Última semana
+                    </button>
+
+                    <button class="nav-link" id="gen-month-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-month" type="button" role="tab" aria-controls="gen-month" aria-selected="false">
+                        Último mes
+                    </button>
+
+                    <button class="nav-link" id="gen-year-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-year" type="button" role="tab" aria-controls="gen-year" aria-selected="false">
+                        Último año
+                    </button>
+
+                    <button class="nav-link" id="gen-hist-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-hist" type="button" role="tab" aria-controls="gen-hist"
+                        aria-selected="false">
+                        Histórico
+                    </button>
+
+                </div>
+            </nav>
+            
+            <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+
+                <div class="tab-pane fade show active" id="gen-week" role="tabpanel" aria-labelledby="gen-week-tab">
+                    <%= line_chart @reportes.map { |reporte|
+                        {name: reporte.modelo, data: @reporte.where(tipo: reporte.tipo).group_by_day(:fecha_reporte, last: 7, format: "%d/%m/%Y").count}
+                    } %>
+                </div>
+
+                <div class="tab-pane fade" id="gen-month" role="tabpanel" aria-labelledby="gen-month-tab">
+                    <%= line_chart @reportes.map { |reporte|
+                        {name: reporte.modelo, data: @reporte.where(tipo: reporte.tipo).group_by_day(:fecha_reporte, last: 30, format: "%d/%m/%Y").count}
+                    } %>
+                </div>
+
+                <div class="tab-pane fade" id="gen-year" role="tabpanel" aria-labelledby="gen-year-tab">
+                    <%= line_chart @autos.map { |auto|
+                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_month(:fecha_reporte, last: 12, format: "%m/%Y").count}
+                    } %>
+                </div>
+
+                <div class="tab-pane fade" id="gen-hist" role="tabpanel" aria-labelledby="gen-hist-tab">
+                    <%= line_chart @autos.map { |auto|
+                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_reporte, format: "%d/%m/%Y").count}
+                    } %>
+                </div>
+
+            </div>
+
+            <br>
+
+        </div>
+
+        <br>
+
+        <!-- GRAFICOS POR AUTO -->
+        <div class="contaner border shadow">
+
+            <div class="d-flex">
+
+                <h3 class=" p-3 align-self-center font bold">Reportes por auto</h3>
+
+                <!-- Dropdown -->
+                <div class="dropdown ms-auto p-3 align-self-center">
+                    <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-button">
+                        <b><%=@autos.first.modelo%></b> - <%=@autos.first.patente%>
+                    </button>
+                    <ul class="dropdown-menu" id="eleccion-auto">
+                        <%for @auto in @autos do %>
+                            <% patente=@auto.patente %>
+                            <li>
+                                <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=@auto.modelo%> - <%=@auto.patente%></a>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- container por auto -->
+            <div id="grafico-por-auto">
+
+                <% i = 0%>
+
+                <% for @auto in @autos do %>
+                    <% i += 1 %>
+
+                    <% patente = @auto.patente %>
+
+                    <% if i == 1 %>
+
+                        <div class="container" id="<%=patente%>-container">
+
+                    <% else %>
+
+                        <div class="container" id="<%=patente%>-container" hidden="true">
+
+                    <% end %>
+                            <nav class="pt-3">
+
+                                <div class="nav nav-tabs" role="tablist">
+                                
+                                    <button class="nav-link active" id="<%=patente%>-week-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-week" type="button" role="tab"
+                                        aria-controls="<%=patente%>-week" aria-selected="true">
+                                        Ultima semana
+                                    </button>
+
+                                    <button class="nav-link" id="<%=patente%>-month-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-month" type="button" role="tab"
+                                        aria-controls="<%=patente%>-month" aria-selected="false">
+                                        Ultimo mes
+                                    </button>
+
+                                    <button class="nav-link" id="<%=patente%>-year-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-year" type="button" role="tab"
+                                        aria-controls="<%=patente%>-year" aria-selected="false">
+                                        Ultimo año
+                                    </button>
+
+                                    <button class="nav-link" id="<%=patente%>-hist-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-hist" type="button" role="tab"
+                                        aria-controls="<%=patente%>-hist" aria-selected="false">
+                                        Histórico
+                                    </button>
+                                
+                                </div>
+
+                            </nav>
+
+                            <div class="tab-content pt-3" style="background-color: white">
+
+                                <div class="tab-pane fade show active" id="<%=patente%>-week" role="tabpanel" aria-labelledby="<%patente%>-week-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_reporte, last: 7, format: "%d/%m/%Y" ).count %>
+                                </div>
+
+                                <div class="tab-pane fade" id="<%=patente%>-month" role="tabpanel" aria-labelledby="<%patente%>-month-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_reporte, last: 30, format: "%d/%m/%Y" ).count %>
+                                </div>
+
+                                <div class="tab-pane fade" id="<%=patente%>-year" role="tabpanel" aria-labelledby="<%patente%>-year-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_month(:fecha_reporte, last: 12, format: "%m/%Y" ).count %>
+                                </div>
+
+                                <div class="tab-pane fade" id="<%=patente%>-hist" role="tabpanel" aria-labelledby="<%patente%>-hist-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_reporte, format: "%d/%m/%Y" ).count %>
+                                </div>
+
+                            </div>
+
+                            <br>
+
+                        </div>
+
+                <% end %>
+
+            </div>
+        </div>
+
+        <br>    
+    
+    <%end%>
+
+</div>
+
+
+
+
+
+
+
+<style>
+
+    .border{
+        background-color: #F5F5F5;
+        border: 2px solid black;
+        border-radius: 15px;
+    }
+
+    .font{
+        font-family: 'Varela Round';
+    }
+
+</style>
+
+<script>
+
+    var eleccion = document.getElementById("eleccion-auto");
+
+    eleccion.addEventListener("click", function(e){
+        var seleccionado = e.target.innerHTML;
+        var id = e.target.id;
+        var patente = id.split("_")[0];
+        console.log(patente);
+
+        modelo = seleccionado.split("-")[0];
+        boldModelo = "<b>" + modelo + "</b>";
+
+        var dropdownButton = document.getElementById("dropdown-button");
+        dropdownButton.innerHTML = boldModelo + " - " + patente;
+
+
+        var graficoPorAuto = document.getElementById("grafico-por-auto");
+        var graficoPorAutoChildren = graficoPorAuto.children;
+        for (var i = 0; i < graficoPorAutoChildren.length; i++) {
+            graficoPorAutoChildren[i].hidden = true;
+        }
+
+        var conteiner = document.getElementById(patente + "-container");
+        conteiner.hidden = false;
+
+    });
+
+    var icon = document.getElementById("icon");
+    icon.style.transform = "rotate(180deg)";
+
+
+</script>

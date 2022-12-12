@@ -86,83 +86,48 @@ wal.saldo = 1000000
 wal.save
 
 # Alquileres
-Alquiler.destroy_all
+#Alquiler.destroy_all
 for i in 1..300
-    Alquiler.create(
-        user_id: 1, 
-        auto_id: 1, 
-        fecha_alquiler: Date.new(2020, 12, 10),
-        hora_alquiler: Time.new(2020, 12, 10, 10, 0, 0),
-        fecha_devolucion: Date.new(2020, 12, 10),
-        hora_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
-        precio_total: 1000,
-        duracion: Time.new(2020, 12, 10, 1, 0, 0),
-        fecha_user_devolucion: Date.new(2020, 12, 10),
-        hora_user_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
-        precio_por_demora: 0,
-        precio_de_reserva: 1000
-    )
-end
-Alquiler.create(
-    user_id: 1, 
-    auto_id: 1, 
-    fecha_alquiler: Date.new(2020, 12, 10),
-    hora_alquiler: Time.new(2020, 12, 10, 10, 0, 0),
-    fecha_devolucion: Date.new(2020, 12, 10),
-    hora_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
-    precio_total: 1000,
-    duracion: Time.new(2020, 12, 10, 1, 0, 0),
-    fecha_user_devolucion: Date.new(2020, 12, 10),
-    hora_user_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
-    precio_por_demora: 0,
-    precio_de_reserva: 1000
-)
-Alquiler.create(
-    user_id: 
-    auto_id:  
-    fecha_alquiler: 
-    hora_alquiler: 
-    fecha_devolucion: 
-    hora_devolucion: 
-    precio_total: 
-    duracion: 
-    fecha_user_devolucion: 
-    hora_user_devolucion: 
-    precio_por_demora: 
-    precio_de_reserva: 
-)
-
-
-
-create_table "alquilers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "auto_id"
-    t.date "fecha_alquiler"
-    t.time "hora_alquiler"
-    t.date "fecha_devolucion"
-    t.time "hora_devolucion"
-    t.decimal "precio_total"
-    t.time "duracion"
-    t.date "fecha_user_devolucion"
-    t.time "hora_user_devolucion"
-    t.integer "duracion_en_cant_horas"
-    t.time "tiempo_de_demora"
-    t.float "precio_por_demora"
-    t.float "precio_de_reserva"
-    t.index ["auto_id"], name: "index_alquilers_on_auto_id"
-    t.index ["user_id"], name: "index_alquilers_on_user_id"
+    a = Alquiler.new()
+    a.user_id= rand(1..User.count)
+    a.auto_id= rand(1..Auto.count)
+    d = Faker::Date.between(from: '2021-12-12', to: '2022-12-12')
+    t = Faker::Time.backward(period: :evening)
+    tt = t + rand(1000..10000)
+    a.fecha_alquiler= d
+    a.hora_alquiler= t
+    a.fecha_devolucion= d
+    a.hora_devolucion= tt
+    pp = rand(400..100000)
+    a.precio_total= pp
+    a.duracion= Time.at(tt - t)
+    a.fecha_user_devolucion= d
+    a.hora_user_devolucion= tt - rand(100..1000)
+    a.precio_por_demora= 0
+    a.precio_de_reserva= pp
+    a.save
 end
 
-create_table "reportes", force: :cascade do |t|
-    t.integer "id_usuario"
-    t.integer "id_alquiler"
-    t.string "descripcion"
-    t.integer "id_supervisor"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "tipo", default: 0
-    t.string "title"
-    t.index ["tipo"], name: "index_reportes_on_tipo"
-end
+al = Alquiler.new()
+al.user_id= 5
+al.auto_id= 5
+d = Date.today
+t = Faker::Time.backward(period: :evening)
+tt = t + rand(1000..10000)
+al.fecha_alquiler= d
+al.hora_alquiler= t
+al.fecha_devolucion= d
+al.hora_devolucion= tt
+pp = rand(400..100000)
+al.duracion= Time.at(tt - t)
+al.precio_de_reserva= pp
+al.precio_total= pp
+al.save
+
+u = User.find(5)
+u.alquiler_id = 301
+u.save
+a = Auto.find(5)
+a.alquiler_id = 301
+a.save
+
