@@ -1,42 +1,96 @@
 
-<h1><%=@reporte.title%></h1>
+<h1 class="text-center"><%=@reporte.title%></h1>
 
-<div class="row border">
-  <div class="col-8 h-100">
-    <div class="d-flex flex-column  w-100 mt-3 bg-2 white_bg_showReporte shadow">
-      <h3 class="">Usuario que reportó</h3>
+<div class="row">
+  <div class="col-8">
+    <div class="d-flex flex-column  w-100 mt-3 white_bg_showReporte shadow">
+      <h3 class="">Información del reporte</h3>
       <hr>
-      <label class="h4">Email</label>
-      <p> <%= @user.email %> </p>
 
-      <label class="h4">Fecha de registro</label>
-      <p>Se registró el <%= @user.created_at.strftime("%d/%m/%Y") %></p>
+      <div class="row">
+        <div class="col">
+          <div>
+            <label class="h4">Fecha de creación</label>
+            <p>Creado a las <%= @reporte.created_at.strftime("%H:%M del %d del mes %m") %> </p>
+            <div class="d-flex">
+              <div>
+                <label class="h4">Motivo</label>
+                <p><%= @reporte.tipo%></p>
+              </div>
 
-      <label class="h4">Estado</label>
-      <p>Estado Actual: <%= @user.status %></p>
+              <div class="ms-5">
+                <label class="h4">Estado actual</label>
+                <% color = 'danger' %>
+                <% if @reporte.status == "Atendido" %>
+                  <% color = 'warning' %>
+                <% elsif @reporte.status == "Finalizado" %>
+                  <% color = 'success' %>
+                <% end %>
+                <p class="text-<%=color%>"><%= @reporte.status %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <label class="h4">Descripción</label>
+            <p><%= @reporte.descripcion %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label class="h4">Ubicación</label>
+          <div id="small_map" style="height:17vh; width:100%"></div>
+        </div>
+        <div class="col">
+          <div>
+                <label class="h4">Vehiculo</label>
+                <div>
+                  <%if @auto.imagen.attached?%>
+                      <%= image_tag(@auto.imagen, style:"height:17vh;") %></td>
+                  <%else%>
+                      <label>Sin Foto</label>
+                  <%end%>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+      <% if @reporte.status == "Pendiente" %>
+        <%# button to atender reporte %>
+        <%= button_to "Atender reporte", "/atender_reporte/#{@reporte.id}", method: :put, class: "btn btn-warning" %>
+      <% elsif @reporte.status == "Atendido" && @reporte.admin_id ==current_admin.id %>
+        <%= button_to "Finalizar reporte", "/finalizar_reporte/#{@reporte.id}", method: :put, class: "btn btn-success" %>
+      <% else %>
+        <p>Este reporte fue atendido el <%=@reporte.updated_at.strftime("%H:%M del %d del mes %m")%> por <%=Admin.find(@reporte.admin_id).first_name%> <%=Admin.find(@reporte.admin_id).last_name%></p>
+      <% end %>
+      </div>
+
     </div>
-    <div id="small_map"></div>
+
   </div>
-  <div class="col-4 h-100">
+  <div class="col-4 d-flex align-items-center">
     <div class="d-flex container justify-content-between font-varela-round">
-      <div class="d-flex flex-column align-items-center">
-        <div class="d-flex flex-column justify-content-between w-80 mt-3 bg-2 white_bg_showReporte shadow">
-          <h4 class="">Usuario que reportó</h4>
-          <hr>
+      <div class="d-flex flex-column justify-content-between w-80 mt-3 bg-2 white_bg_showReporte shadow">
+        <h4 class="">Usuario que reportó</h4>
+        <hr>
+        <div class="align-self-center">
           <% if @user.licencia.attached? %>
               <%= image_tag(@user.licencia, width: 200, class:"rounded-2") %>
           <% else %>
               <label>No hay licencia para mostrar</label>
           <% end %>
-          <label class="h4 mt-3">Email</label>
-          <p> <%= @user.email %> </p>
-
-          <label class="h4">Fecha de registro</label>
-          <p>Se registró el <%= @user.created_at.strftime("%d/%m/%Y") %></p>
-
-          <label class="h4">Estado</label>
-          <p>Estado Actual: <%= @user.status %></p>
         </div>
+        <label class="h4 mt-3">Nombre</label>
+        <p> <%= @user.first_name %> <%=@user.last_name%> </p>
+
+        <label class="h4">Email</label>
+        <a class="mb-3" href="mailto:<%=@user.email%>"><%= @user.email %></a>
+
+        <label class="h4">Teléfono</label>
+        <p><%= @user.phone %></p>
       </div>
     </div>
   </div>

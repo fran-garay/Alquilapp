@@ -1,11 +1,13 @@
-<h1 class="h1 text-center">Reportes</h1>
 
-<link 
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+
+<head>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
   rel="stylesheet"  type='text/css'>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-
+</head>
+<h1 class="h1 text-center">Reportes</h1>
 <div class="container m-2 shadow rounded" style="background-color: white;">
     <div class="row m-4">
 
@@ -32,7 +34,7 @@
                     </div>
 
                     <div>
-                        <h6 class="text-white ">Vehiculo: 
+                        <h6 class="text-white ">Vehiculo:
                         <%if reporte.auto_id != nil%>
                             <%= Auto.find(reporte.auto_id).modelo %>
                         <%else%>
@@ -46,11 +48,13 @@
                     </div>
 
                     <div>
-                        <h6 class="text-white">Supervisor asignado:
-                            <%if reporte.admin_id != nil%>
+                        <h6 class="text-white">Estado de atención:
+                            <%if reporte.status=="Finalizado" %>
                                 <i class="fa fa-check-square" style="font-size: 1.5rem; color: #00aa00;"></i>
-                            <%else%>
+                            <%elsif reporte.status=="Pendiente"%>
                                 <i class="fa fa-close (alias)" style="font-size: 1.5rem; color: #cc0000;"></i>
+                            <%else%>
+                                <i class="fa fa-exclamation-triangle" style="font-size: 1.5rem; color: #ff9900;"></i>
                             <%end%>
                         </h6>
                     </div>
@@ -58,7 +62,7 @@
                     <br>
 
                     <div class="text-center">
-                        <%= link_to "Ver Reporte", "admins/listado_reportes", class: "btn btn-warning p-1"%>
+                        <%= link_to "Ver Reporte", "/reportes/#{reporte.id}", class: "btn btn-warning p-1"%>
                     </div>
 
                 </div>
@@ -98,9 +102,5 @@
 
     .pagos-green {
         background: linear-gradient(145deg, #15d600, #1d7314);
-    }
-
-    body {
-        font-size: 13px;
     }
 </style>

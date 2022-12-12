@@ -1,0 +1,78 @@
+
+<h1 class="text-center"> <%=@auto.modelo%> <%=@auto.anio%></h1>
+
+<div class="row">
+  <div class="col-8">
+    <div class="d-flex flex-column  w-100 mt-3 white_bg_showReporte shadow">
+      <h3 class="">Información del alquiler</h3>
+      <hr>
+
+      <div class="row">
+        <div class="col">
+          <div>
+            <label class="h4">Fecha de creación</label>
+            <p>Creado el <%= @alquiler.fecha_alquiler %></p>
+            <div class="d-flex">
+              <div>
+                <label class="h4">Hora de creacion</label>
+                <p>Creado a las  <%= "#{@alquiler.hora_alquiler.hour}:#{@alquiler.hora_alquiler.min}:#{@alquiler.hora_alquiler.sec} Hs" %></p>
+              </div>
+
+            </div>
+
+              <div>
+                <label class="h4">Fecha de devolucion</label>
+                <p>Devuelto el <%= @alquiler.fecha_devolucion %></p>
+
+                <label class="h4">Hora de devolucion</label>
+                <p>Devuelto a las  <%= "#{@alquiler.hora_devolucion.hour}:#{@alquiler.hora_devolucion.min}:#{@alquiler.hora_devolucion.sec} Hs" %></p>
+
+                <label class="h4">Costo total del alquiler</label>
+                <p>Costo: $<%='%.2f' % @alquiler.precio_total %></p>
+
+              </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+             <div>
+                <label class="h4">Vehiculo</label>
+                <div>
+                  <%if @auto.imagen.attached?%>
+                      <%= image_tag(@auto.imagen, style:"height:32vh;", class:"rounded") %></td>
+                  <%else%>
+                      <label>Sin Foto</label>
+                  <%end%>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-4 d-flex align-items-center">
+    <div class="d-flex container justify-content-between font-varela-round">
+      <div class="d-flex flex-column justify-content-between w-80 mt-3 bg-2 white_bg_showReporte shadow">
+        <h4 class="">Usuario que alquiló</h4>
+        <hr>
+        <div class="align-self-center">
+          <% if @user.licencia.attached? %>
+              <%= image_tag(@user.licencia, width: 200, class:"rounded-2") %>
+          <% else %>
+              <label>No hay licencia para mostrar</label>
+          <% end %>
+        </div>
+        <label class="h4 mt-3">Nombre</label>
+        <p> <%= @user.first_name %> <%=@user.last_name%> </p>
+
+        <label class="h4">Email</label>
+        <a class="mb-3" href="mailto:<%=@user.email%>"><%= @user.email %></a>
+
+        <label class="h4">Teléfono</label>
+        <p><%= @user.phone %></p>
+      </div>
+    </div>
+  </div>
+</div>
+

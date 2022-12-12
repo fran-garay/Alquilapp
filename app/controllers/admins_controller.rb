@@ -5,6 +5,17 @@ class AdminsController < ApplicationController
     # flash.keep
   end
 
+  def historial_de_uso
+    @auto = Auto.find(params[:id])
+    @alquileres = Alquiler.where(auto_id: @auto.id).order(:hora_alquiler).reverse_order
+  end
+
+  def show_alquiler
+    @alquiler = Alquiler.find(params[:id])
+    @auto = Auto.find(@alquiler.auto_id)
+    @user = User.find(@alquiler.user_id)
+  end
+
   def listar_usuarios
     @users = User.all.order(:first_name)
   end
@@ -46,7 +57,7 @@ class AdminsController < ApplicationController
     @usuarios = User.all
 
     if @alquileres_hoy.empty?
-      
+
       @mas_alquilado_hoy = nil
       @dinero_recaudado_hoy = 0
       @mas_usado_hoy = nil
