@@ -108,10 +108,11 @@ class AdminsController < ApplicationController
     @reportes = Reporte.all
     @reportes_mes = 0
     @reportes.each do |reporte|
-      if reporte.created_at.month == Date.today.month
+      if reporte.fecha_reporte.month == Date.today.month
         @reportes_mes += 1
       end
     end
+    @tipos = ["Estado", "Siniestro", "Pagos"]
 
   end
 

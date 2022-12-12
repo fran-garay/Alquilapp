@@ -109,26 +109,26 @@
             <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
 
                 <div class="tab-pane fade show active" id="gen-week" role="tabpanel" aria-labelledby="gen-week-tab">
-                    <%= line_chart @reportes.map { |reporte|
-                        {name: reporte.modelo, data: @reporte.where(tipo: reporte.tipo).group_by_day(:fecha_reporte, last: 7, format: "%d/%m/%Y").count}
+                    <%= line_chart @tipos.map { |tipo|
+                        {name: tipo, data: @reportes.where(tipo: tipo).group_by_day(:fecha_reporte, last: 7, format: "%d/%m/%Y").count}
                     } %>
                 </div>
 
                 <div class="tab-pane fade" id="gen-month" role="tabpanel" aria-labelledby="gen-month-tab">
-                    <%= line_chart @reportes.map { |reporte|
-                        {name: reporte.modelo, data: @reporte.where(tipo: reporte.tipo).group_by_day(:fecha_reporte, last: 30, format: "%d/%m/%Y").count}
+                    <%= line_chart @tipos.map { |tipo|
+                        {name: tipo, data: @reportes.where(tipo: tipo).group_by_day(:fecha_reporte, last: 30, format: "%d/%m/%Y").count}
                     } %>
                 </div>
 
                 <div class="tab-pane fade" id="gen-year" role="tabpanel" aria-labelledby="gen-year-tab">
-                    <%= line_chart @autos.map { |auto|
-                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_month(:fecha_reporte, last: 12, format: "%m/%Y").count}
+                    <%= line_chart @tipos.map { |tipo|
+                        {name: tipo, data: @reportes.where(tipo: tipo).group_by_month(:fecha_reporte, format: "%m/%Y").count}
                     } %>
                 </div>
 
                 <div class="tab-pane fade" id="gen-hist" role="tabpanel" aria-labelledby="gen-hist-tab">
-                    <%= line_chart @autos.map { |auto|
-                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_reporte, format: "%d/%m/%Y").count}
+                    <%= line_chart @tipos.map { |tipo|
+                        {name: tipo, data: @reportes.where(tipo: tipo).group_by_day(:fecha_reporte, format: "%d/%m/%Y").count}
                     } %>
                 </div>
 
@@ -140,7 +140,7 @@
 
         <br>
 
-        <!-- GRAFICOS POR AUTO -->
+        <!-- GRAFICOS POR Tipo -->
         <div class="contaner border shadow">
 
             <div class="d-flex">
@@ -150,13 +150,13 @@
                 <!-- Dropdown -->
                 <div class="dropdown ms-auto p-3 align-self-center">
                     <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-button">
-                        <b><%=@autos.first.modelo%></b> - <%=@autos.first.patente%>
+                        <b><%=@reportes.first.tipo%></b>
                     </button>
                     <ul class="dropdown-menu" id="eleccion-auto">
-                        <%for @auto in @autos do %>
-                            <% patente=@auto.patente %>
+                        <%for @reporte in @reportes do %>
+                            <% patente=@reporte.tipo %>
                             <li>
-                                <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=@auto.modelo%> - <%=@auto.patente%></a>
+                                <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=@reporte.tipo%></a>
                             </li>
                         <% end %>
                     </ul>
@@ -169,10 +169,10 @@
 
                 <% i = 0%>
 
-                <% for @auto in @autos do %>
+                <% for @reporte in @reportes do %>
                     <% i += 1 %>
 
-                    <% patente = @auto.patente %>
+                    <% patente = @reporte.tipo%>
 
                     <% if i == 1 %>
 
@@ -214,19 +214,19 @@
                             <div class="tab-content pt-3" style="background-color: white">
 
                                 <div class="tab-pane fade show active" id="<%=patente%>-week" role="tabpanel" aria-labelledby="<%patente%>-week-tab">
-                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_reporte, last: 7, format: "%d/%m/%Y" ).count %>
+                                    <%= column_chart @reportes.where(tipo: @reporte.tipo).group_by_day(:fecha_reporte, last: 7, format: "%d/%m/%Y" ).count %>
                                 </div>
 
-                                <div class="tab-pane fade" id="<%=patente%>-month" role="tabpanel" aria-labelledby="<%patente%>-month-tab">
-                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_reporte, last: 30, format: "%d/%m/%Y" ).count %>
+                                <div class="tab-pane fade" id="<%=patente%>-month" role="tabpanel" aria-labelledby="<%=patente%>-month-tab">
+                                    <%= column_chart @reportes.where(tipo: @reporte.tipo).group_by_day(:fecha_reporte, last: 30, format: "%d/%m/%Y" ).count %>
                                 </div>
 
-                                <div class="tab-pane fade" id="<%=patente%>-year" role="tabpanel" aria-labelledby="<%patente%>-year-tab">
-                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_month(:fecha_reporte, last: 12, format: "%m/%Y" ).count %>
+                                <div class="tab-pane fade" id="<%=patente%>-year" role="tabpanel" aria-labelledby="<%=patente%>-year-tab">
+                                    <%= column_chart @reportes.where(tipo: @reporte.tipo).group_by_month(:fecha_reporte, last: 12, format: "%m/%Y" ).count %>
                                 </div>
 
-                                <div class="tab-pane fade" id="<%=patente%>-hist" role="tabpanel" aria-labelledby="<%patente%>-hist-tab">
-                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_reporte, format: "%d/%m/%Y" ).count %>
+                                <div class="tab-pane fade" id="<%=patente%>-hist" role="tabpanel" aria-labelledby="<%=patente%>-hist-tab">
+                                    <%= column_chart @reportes.where(tipo: @reporte.tipo).group_by_day(:fecha_reporte, format: "%d/%m/%Y" ).count %>
                                 </div>
 
                             </div>
