@@ -84,3 +84,85 @@ a = User.find_by(first_name: "Rodrigo")
 wal = Wallet.find_by(user_id: a.id)
 wal.saldo = 1000000
 wal.save
+
+# Alquileres
+Alquiler.destroy_all
+for i in 1..300
+    Alquiler.create(
+        user_id: 1, 
+        auto_id: 1, 
+        fecha_alquiler: Date.new(2020, 12, 10),
+        hora_alquiler: Time.new(2020, 12, 10, 10, 0, 0),
+        fecha_devolucion: Date.new(2020, 12, 10),
+        hora_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
+        precio_total: 1000,
+        duracion: Time.new(2020, 12, 10, 1, 0, 0),
+        fecha_user_devolucion: Date.new(2020, 12, 10),
+        hora_user_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
+        precio_por_demora: 0,
+        precio_de_reserva: 1000
+    )
+end
+Alquiler.create(
+    user_id: 1, 
+    auto_id: 1, 
+    fecha_alquiler: Date.new(2020, 12, 10),
+    hora_alquiler: Time.new(2020, 12, 10, 10, 0, 0),
+    fecha_devolucion: Date.new(2020, 12, 10),
+    hora_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
+    precio_total: 1000,
+    duracion: Time.new(2020, 12, 10, 1, 0, 0),
+    fecha_user_devolucion: Date.new(2020, 12, 10),
+    hora_user_devolucion: Time.new(2020, 12, 10, 11, 0, 0),
+    precio_por_demora: 0,
+    precio_de_reserva: 1000
+)
+Alquiler.create(
+    user_id: 
+    auto_id:  
+    fecha_alquiler: 
+    hora_alquiler: 
+    fecha_devolucion: 
+    hora_devolucion: 
+    precio_total: 
+    duracion: 
+    fecha_user_devolucion: 
+    hora_user_devolucion: 
+    precio_por_demora: 
+    precio_de_reserva: 
+)
+
+
+
+create_table "alquilers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "auto_id"
+    t.date "fecha_alquiler"
+    t.time "hora_alquiler"
+    t.date "fecha_devolucion"
+    t.time "hora_devolucion"
+    t.decimal "precio_total"
+    t.time "duracion"
+    t.date "fecha_user_devolucion"
+    t.time "hora_user_devolucion"
+    t.integer "duracion_en_cant_horas"
+    t.time "tiempo_de_demora"
+    t.float "precio_por_demora"
+    t.float "precio_de_reserva"
+    t.index ["auto_id"], name: "index_alquilers_on_auto_id"
+    t.index ["user_id"], name: "index_alquilers_on_user_id"
+end
+
+create_table "reportes", force: :cascade do |t|
+    t.integer "id_usuario"
+    t.integer "id_alquiler"
+    t.string "descripcion"
+    t.integer "id_supervisor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "tipo", default: 0
+    t.string "title"
+    t.index ["tipo"], name: "index_reportes_on_tipo"
+end
