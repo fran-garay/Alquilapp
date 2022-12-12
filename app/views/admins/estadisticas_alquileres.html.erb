@@ -7,254 +7,260 @@
 
     <h1 class="mt-4 mb-5 font">Estadísticas sobre reservas</h1>
 
-    <div class="container d-flex">
+    <% if @alquileres.empty? %>
+        <h3 class="font">No hay reservas registradas</h3>
+    <% else %>
 
-        <div class="container d-flex border shadow me-3">
-            <!--<i class="align-self-center fa-solid fa-star fa-5x m-3" style="color: #46a85a"></i>-->
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#46a85a" class="m-3 bi bi-triangle-fill align-self-center" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
-            </svg>
-            <div class="align-self-center text-center m-auto">
-                <h5 class="font"> Auto más usado históricamente </h5>
-                <h2 class="font bold"> <%= @mas_alquilado.modelo %> </h2>
+        <div class="container d-flex">
+
+            <div class="container d-flex border shadow me-3">
+                <!--<i class="align-self-center fa-solid fa-star fa-5x m-3" style="color: #46a85a"></i>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#46a85a" class="m-3 bi bi-triangle-fill align-self-center" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+                </svg>
+                <div class="align-self-center text-center m-auto">
+                    <h5 class="font"> Auto más usado históricamente </h5>
+                    <h2 class="font bold"> <%= @mas_alquilado.modelo %> </h2>
+                </div>
             </div>
+
+            <div class="container d-flex border shadow ms-3">
+                <!--<i class="fa-solid fa-star align-self-center fa-5x m-3" style="color: #a84659"></i>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#a84659" class="m-3 bi bi-triangle-fill align-self-center" viewBox="0 0 16 16" id="icon">
+                    <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+                </svg>
+                <div class="align-self-center text-center m-auto">
+                    <h5 class="font"> Auto menos usado históricamente </h5>
+                    <h2 class="font bold"> <%= @menos_alquilado.modelo %> </h2>
+                </div>
+            </div>
+            
         </div>
 
-        <div class="container d-flex border shadow ms-3">
-            <!--<i class="fa-solid fa-star align-self-center fa-5x m-3" style="color: #a84659"></i>-->
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#a84659" class="m-3 bi bi-triangle-fill align-self-center" viewBox="0 0 16 16" id="icon">
-                <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
-            </svg>
-            <div class="align-self-center text-center m-auto">
-                <h5 class="font"> Auto menos usado históricamente </h5>
-                <h2 class="font bold"> <%= @menos_alquilado.modelo %> </h2>
-            </div>
-        </div>
-        
-    </div>
+        <br>
 
-    <br>
+        <!-- GRAFICOS GENERALES -->
+        <div class="container pt-4 border shadow">
+            <h3 class="d-flex align-self-start font bold">Reservas en general</h3>
+            <nav class="pt-3">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-    <!-- GRAFICOS GENERALES -->
-    <div class="container pt-4 border shadow">
-        <h3 class="d-flex align-self-start font bold">Reservas en general</h3>
-        <nav class="pt-3">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="genn-week-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-week" type="button" role="tab" aria-controls="genn-week" aria-selected="true">
+                        Última semana
+                    </button>
 
-                <button class="nav-link active" id="genn-week-tab" data-bs-toggle="tab"
-                    data-bs-target="#genn-week" type="button" role="tab" aria-controls="genn-week" aria-selected="true">
-                    Última semana
-                </button>
+                    <button class="nav-link" id="genn-month-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-month" type="button" role="tab" aria-controls="genn-month" aria-selected="false">
+                        Último mes
+                    </button>
 
-                <button class="nav-link" id="genn-month-tab" data-bs-toggle="tab"
-                    data-bs-target="#genn-month" type="button" role="tab" aria-controls="genn-month" aria-selected="false">
-                    Último mes
-                </button>
+                    <button class="nav-link" id="genn-year-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-year" type="button" role="tab" aria-controls="genn-year" aria-selected="false">
+                        Último año
+                    </button>
 
-                <button class="nav-link" id="genn-year-tab" data-bs-toggle="tab"
-                    data-bs-target="#genn-year" type="button" role="tab" aria-controls="genn-year" aria-selected="false">
-                    Último año
-                </button>
+                    <button class="nav-link" id="genn-hist-tab" data-bs-toggle="tab"
+                        data-bs-target="#genn-hist" type="button" role="tab" aria-controls="genn-hist"
+                        aria-selected="false">
+                        Histórico
+                    </button>
 
-                <button class="nav-link" id="genn-hist-tab" data-bs-toggle="tab"
-                    data-bs-target="#genn-hist" type="button" role="tab" aria-controls="genn-hist"
-                    aria-selected="false">
-                    Histórico
-                </button>
+                </div>
+            </nav>
+            
+            <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
 
-            </div>
-        </nav>
-        
-        <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+                <div class="tab-pane fade show active" id="genn-week" role="tabpanel" aria-labelledby="genn-week-tab">
+                    <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y", last: 7).count %>
+                </div>
 
-            <div class="tab-pane fade show active" id="genn-week" role="tabpanel" aria-labelledby="genn-week-tab">
-                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y", last: 7).count %>
-            </div>
+                <div class="tab-pane fade" id="genn-month" role="tabpanel" aria-labelledby="genn-month-tab">
+                    <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y", last: 30).count %>
+                </div>
 
-            <div class="tab-pane fade" id="genn-month" role="tabpanel" aria-labelledby="genn-month-tab">
-                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y", last: 30).count %>
+                <div class="tab-pane fade" id="genn-year" role="tabpanel" aria-labelledby="genn-year-tab">
+                    <%= line_chart @alquileres.group_by_month(:fecha_alquiler, format: "%m/%Y").count %>
+                </div>
+
+                <div class="tab-pane fade" id="genn-hist" role="tabpanel" aria-labelledby="genn-hist-tab">
+                    <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count %>
+                </div>
+
             </div>
 
-            <div class="tab-pane fade" id="genn-year" role="tabpanel" aria-labelledby="genn-year-tab">
-                <%= line_chart @alquileres.group_by_month(:fecha_alquiler, format: "%m/%Y").count %>
-            </div>
-
-            <div class="tab-pane fade" id="genn-hist" role="tabpanel" aria-labelledby="genn-hist-tab">
-                <%= line_chart @alquileres.group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count %>
-            </div>
+            <br>
 
         </div>
 
         <br>
 
-    </div>
+        <div class="container pt-4 border shadow">
+            <h3 class="d-flex align-self-start font bold">Reservas de los autos</h3>
+            <nav class="pt-3">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-    <br>
+                    <button class="nav-link active" id="gen-week-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-week" type="button" role="tab" aria-controls="gen-week" aria-selected="true">
+                        Última semana
+                    </button>
 
-    <div class="container pt-4 border shadow">
-        <h3 class="d-flex align-self-start font bold">Reservas de los autos</h3>
-        <nav class="pt-3">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link" id="gen-month-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-month" type="button" role="tab" aria-controls="gen-month" aria-selected="false">
+                        Último mes
+                    </button>
 
-                <button class="nav-link active" id="gen-week-tab" data-bs-toggle="tab"
-                    data-bs-target="#gen-week" type="button" role="tab" aria-controls="gen-week" aria-selected="true">
-                    Última semana
-                </button>
+                    <button class="nav-link" id="gen-year-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-year" type="button" role="tab" aria-controls="gen-year" aria-selected="false">
+                        Último año
+                    </button>
 
-                <button class="nav-link" id="gen-month-tab" data-bs-toggle="tab"
-                    data-bs-target="#gen-month" type="button" role="tab" aria-controls="gen-month" aria-selected="false">
-                    Último mes
-                </button>
+                    <button class="nav-link" id="gen-hist-tab" data-bs-toggle="tab"
+                        data-bs-target="#gen-hist" type="button" role="tab" aria-controls="gen-hist"
+                        aria-selected="false">
+                        Histórico
+                    </button>
 
-                <button class="nav-link" id="gen-year-tab" data-bs-toggle="tab"
-                    data-bs-target="#gen-year" type="button" role="tab" aria-controls="gen-year" aria-selected="false">
-                    Último año
-                </button>
+                </div>
+            </nav>
+            
+            <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
 
-                <button class="nav-link" id="gen-hist-tab" data-bs-toggle="tab"
-                    data-bs-target="#gen-hist" type="button" role="tab" aria-controls="gen-hist"
-                    aria-selected="false">
-                    Histórico
-                </button>
+                <div class="tab-pane fade show active" id="gen-week" role="tabpanel" aria-labelledby="gen-week-tab">
+                    <%= line_chart @autos.map { |auto|
+                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, last: 7, format: "%d/%m/%Y").count}
+                    } %>
+                </div>
+
+                <div class="tab-pane fade" id="gen-month" role="tabpanel" aria-labelledby="gen-month-tab">
+                    <%= line_chart @autos.map { |auto|
+                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, last: 30, format: "%d/%m/%Y").count}
+                    } %>
+                </div>
+
+                <div class="tab-pane fade" id="gen-year" role="tabpanel" aria-labelledby="gen-year-tab">
+                    <%= line_chart @autos.map { |auto|
+                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_month(:fecha_alquiler, last: 12, format: "%m/%Y").count}
+                    } %>
+                </div>
+
+                <div class="tab-pane fade" id="gen-hist" role="tabpanel" aria-labelledby="gen-hist-tab">
+                    <%= line_chart @autos.map { |auto|
+                        {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count}
+                    } %>
+                </div>
 
             </div>
-        </nav>
-        
-        <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
 
-            <div class="tab-pane fade show active" id="gen-week" role="tabpanel" aria-labelledby="gen-week-tab">
-                <%= line_chart @autos.map { |auto|
-                    {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, last: 7, format: "%d/%m/%Y").count}
-                } %>
-            </div>
-
-            <div class="tab-pane fade" id="gen-month" role="tabpanel" aria-labelledby="gen-month-tab">
-                <%= line_chart @autos.map { |auto|
-                    {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, last: 30, format: "%d/%m/%Y").count}
-                } %>
-            </div>
-
-            <div class="tab-pane fade" id="gen-year" role="tabpanel" aria-labelledby="gen-year-tab">
-                <%= line_chart @autos.map { |auto|
-                    {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_month(:fecha_alquiler, last: 12, format: "%m/%Y").count}
-                } %>
-            </div>
-
-            <div class="tab-pane fade" id="gen-hist" role="tabpanel" aria-labelledby="gen-hist-tab">
-                <%= line_chart @autos.map { |auto|
-                    {name: auto.modelo, data: @alquileres.where(auto_id: auto.id).group_by_day(:fecha_alquiler, format: "%d/%m/%Y").count}
-                } %>
-            </div>
+            <br>
 
         </div>
 
         <br>
 
-    </div>
+        <!-- GRAFICOS POR AUTO -->
+        <div class="contaner border shadow">
 
-    <br>
+            <div class="d-flex">
 
-    <!-- GRAFICOS POR AUTO -->
-    <div class="contaner border shadow">
+                <h3 class=" p-3 align-self-center font bold">Reservas por auto</h3>
 
-        <div class="d-flex">
+                <!-- Dropdown -->
+                <div class="dropdown ms-auto p-3 align-self-center">
+                    <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-button">
+                        <b><%=@autos.first.modelo%></b> - <%=@autos.first.patente%>
+                    </button>
+                    <ul class="dropdown-menu" id="eleccion-auto">
+                        <%for @auto in @autos do %>
+                            <% patente=@auto.patente %>
+                            <li>
+                                <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=@auto.modelo%> - <%=@auto.patente%></a>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
 
-            <h3 class=" p-3 align-self-center font bold">Reservas por auto</h3>
+            </div>
 
-            <!-- Dropdown -->
-            <div class="dropdown ms-auto p-3 align-self-center">
-                <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-button">
-                    <b><%=@autos.first.modelo%></b> - <%=@autos.first.patente%>
-                </button>
-                <ul class="dropdown-menu" id="eleccion-auto">
-                    <%for @auto in @autos do %>
-                        <% patente=@auto.patente %>
-                        <li>
-                            <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=@auto.modelo%> - <%=@auto.patente%></a>
-                        </li>
+            <!-- container por auto -->
+            <div id="grafico-por-auto">
+
+                <% i = 0%>
+
+                <% for @auto in @autos do %>
+                    <% i += 1 %>
+
+                    <% patente = @auto.patente %>
+
+                    <% if i == 1 %>
+
+                        <div class="container" id="<%=patente%>-container">
+
+                    <% else %>
+
+                        <div class="container" id="<%=patente%>-container" hidden="true">
+
                     <% end %>
-                </ul>
-            </div>
+                            <nav class="pt-3">
 
-        </div>
+                                <div class="nav nav-tabs" role="tablist">
+                                
+                                    <button class="nav-link active" id="<%=patente%>-week-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-week" type="button" role="tab"
+                                        aria-controls="<%=patente%>-week" aria-selected="true">
+                                        Ultima semana
+                                    </button>
 
-        <!-- container por auto -->
-        <div id="grafico-por-auto">
+                                    <button class="nav-link" id="<%=patente%>-month-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-month" type="button" role="tab"
+                                        aria-controls="<%=patente%>-month" aria-selected="false">
+                                        Ultimo mes
+                                    </button>
 
-            <% i = 0%>
+                                    <button class="nav-link" id="<%=patente%>-year-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-year" type="button" role="tab"
+                                        aria-controls="<%=patente%>-year" aria-selected="false">
+                                        Ultimo año
+                                    </button>
 
-            <% for @auto in @autos do %>
-                <% i += 1 %>
+                                    <button class="nav-link" id="<%=patente%>-hist-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-hist" type="button" role="tab"
+                                        aria-controls="<%=patente%>-hist" aria-selected="false">
+                                        Histórico
+                                    </button>
+                                
+                                </div>
 
-                <% patente = @auto.patente %>
+                            </nav>
 
-                <% if i == 1 %>
+                            <div class="tab-content pt-3" style="background-color: white">
 
-                    <div class="container" id="<%=patente%>-container">
+                                <div class="tab-pane fade show active" id="<%=patente%>-week" role="tabpanel" aria-labelledby="<%patente%>-week-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, last: 7, format: "%d/%m/%Y" ).count %>
+                                </div>
 
-                <% else %>
+                                <div class="tab-pane fade" id="<%=patente%>-month" role="tabpanel" aria-labelledby="<%patente%>-month-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, last: 30, format: "%d/%m/%Y" ).count %>
+                                </div>
 
-                    <div class="container" id="<%=patente%>-container" hidden="true">
+                                <div class="tab-pane fade" id="<%=patente%>-year" role="tabpanel" aria-labelledby="<%patente%>-year-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_month(:fecha_alquiler, last: 12, format: "%m/%Y" ).count %>
+                                </div>
 
-                <% end %>
-                        <nav class="pt-3">
+                                <div class="tab-pane fade" id="<%=patente%>-hist" role="tabpanel" aria-labelledby="<%patente%>-hist-tab">
+                                    <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, format: "%d/%m/%Y" ).count %>
+                                </div>
 
-                            <div class="nav nav-tabs" role="tablist">
-                            
-                                <button class="nav-link active" id="<%=patente%>-week-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-week" type="button" role="tab"
-                                    aria-controls="<%=patente%>-week" aria-selected="true">
-                                    Ultima semana
-                                </button>
-
-                                <button class="nav-link" id="<%=patente%>-month-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-month" type="button" role="tab"
-                                    aria-controls="<%=patente%>-month" aria-selected="false">
-                                    Ultimo mes
-                                </button>
-
-                                <button class="nav-link" id="<%=patente%>-year-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-year" type="button" role="tab"
-                                    aria-controls="<%=patente%>-year" aria-selected="false">
-                                    Ultimo año
-                                </button>
-
-                                <button class="nav-link" id="<%=patente%>-hist-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-hist" type="button" role="tab"
-                                    aria-controls="<%=patente%>-hist" aria-selected="false">
-                                    Histórico
-                                </button>
-                            
                             </div>
 
-                        </nav>
-
-                        <div class="tab-content pt-3" style="background-color: white">
-
-                            <div class="tab-pane fade show active" id="<%=patente%>-week" role="tabpanel" aria-labelledby="<%patente%>-week-tab">
-                                <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, last: 7, format: "%d/%m/%Y" ).count %>
-                            </div>
-
-                            <div class="tab-pane fade" id="<%=patente%>-month" role="tabpanel" aria-labelledby="<%patente%>-month-tab">
-                                <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, last: 30, format: "%d/%m/%Y" ).count %>
-                            </div>
-
-                            <div class="tab-pane fade" id="<%=patente%>-year" role="tabpanel" aria-labelledby="<%patente%>-year-tab">
-                                <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_month(:fecha_alquiler, last: 12, format: "%m/%Y" ).count %>
-                            </div>
-
-                            <div class="tab-pane fade" id="<%=patente%>-hist" role="tabpanel" aria-labelledby="<%patente%>-hist-tab">
-                                <%= column_chart @alquileres.where(auto_id: @auto.id).group_by_day(:fecha_alquiler, format: "%d/%m/%Y" ).count %>
-                            </div>
+                            <br>
 
                         </div>
 
-                        <br>
+                <% end %>
 
-                    </div>
-
-            <% end %>
-
+            </div>
         </div>
-    </div>
 
-    <br>    
+        <br>    
+    
+    <%end%>
 
 </div>
 
