@@ -12,7 +12,7 @@ class MainController < ApplicationController
     elsif user_signed_in?
       redirect_to :users_root
     else
-      redirect_to :new_user_session
+      redirect_to :users_root
     end
   end
 end

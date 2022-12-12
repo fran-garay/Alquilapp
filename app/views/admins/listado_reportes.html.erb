@@ -1,16 +1,16 @@
 <h1 class="h1 text-center">Reportes</h1>
 
-<p><%= @reportes.count %></p>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
+<div class="container m-2 shadow rounded" style="background-color: white;">
     <div class="row m-4">
 
         <% for reporte in @reportes %>
-            <div class="col-4">
+            <div class="col-4 py-2">
 
                 <%if reporte.tipo == "Siniestro"%>
                     <div class="siniestro-red-orange p-3 shadow-lg rounded">
@@ -20,15 +20,47 @@
                     <div class="pagos-green p-3 shadow-lg rounded">
                 <%end%>
 
-                    <div class="pt-3">
+                    <div>
+                        <p class="text-white" style="margin:0px;"><%= reporte.tipo %></p>
+                    </div>
+                    <div class="pt-1">
                         <h2 class="text-white "><%= reporte.title %></h2>
                     </div>
 
                     <div class="pt-3">
-                        <p class="text-white ">Usuario: <%= User.find(reporte.user_id).first_name %> <%= User.find(reporte.user_id).last_name %></p>
+                        <h6 class="text-white ">Usuario: <%= User.find(reporte.user_id).first_name %> <%= User.find(reporte.user_id).last_name %></h6>
                     </div>
 
-                    
+                    <div>
+                        <h6 class="text-white ">Vehiculo: 
+                        <%if reporte.auto_id != nil%>
+                            <%= Auto.find(reporte.auto_id).modelo %>
+                        <%else%>
+                            *No disponible*
+                        <%end%>
+                        </h6>
+                    </div>
+
+                    <div>
+                        <h6 class="text-white">Fecha: <%= reporte.created_at.strftime("%d/%m/%Y %H:%M") %></h6>
+                    </div>
+
+                    <div>
+                        <h6 class="text-white">Supervisor asignado:
+                            <%if reporte.admin_id != nil%>
+                                <i class="fa fa-check-square" style="font-size: 1.5rem; color: #00aa00;"></i>
+                            <%else%>
+                                <i class="fa fa-close (alias)" style="font-size: 1.5rem; color: #cc0000;"></i>
+                            <%end%>
+                        </h6>
+                    </div>
+
+                    <br>
+
+                    <div class="text-center">
+                        <%= link_to "Ver Reporte", "admins/listado_reportes", class: "btn btn-warning p-1"%>
+                    </div>
+
                 </div>
             </div>
         <%end%>

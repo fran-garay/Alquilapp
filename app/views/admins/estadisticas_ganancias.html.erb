@@ -7,7 +7,7 @@
 
     <h1 class="mt-4 mb-5 font">Estadísticas sobre ganancias</h1>
 
-    <div class="container d-flex border shadow me-3">
+    <div class="container d-flex border shadow me-3 mb-4">
         <i class="align-self-center fa-solid fa-dollar-sign fa-5x m-3 ms-5" style="color: #46a85a"></i>
         <div class="align-self-center text-center m-auto">
             <h5 class="font"> Dinero recaudado en el último mes </h5>
@@ -15,10 +15,10 @@
         </div>
     </div>
 
-    <br>
+
 
     <!-- GRAFICOS GENERALES -->
-    <div class="container pt-4 border shadow">
+    <div class="container pt-4 border shadow mb-4">
         <h3 class="d-flex align-self-start font bold">Ganancias en general</h3>
         <nav class="pt-3">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -46,8 +46,8 @@
 
             </div>
         </nav>
-        
-        <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+
+        <div class="tab-content pt-3 mb-3" id="nav-tabContent" style="background-color: white">
 
             <div class="tab-pane fade show active" id="genn-week" role="tabpanel" aria-labelledby="genn-week-tab">
                 <%= line_chart @alquileres.group_by_day(:fecha_alquiler, last: 7).sum(:precio_total) %>
@@ -67,13 +67,9 @@
 
         </div>
 
-        <br>
-
     </div>
 
-    <br>
-
-    <div class="container pt-4 border shadow">
+    <div class="container pt-4 border shadow mb-4">
         <h3 class="d-flex align-self-start font bold">Ganancias desglosadas</h3>
         <nav class="pt-3">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -101,8 +97,8 @@
 
             </div>
         </nav>
-        
-        <div class="tab-content pt-3" id="nav-tabContent" style="background-color: white">
+
+        <div class="tab-content pt-3  mb-4" id="nav-tabContent" style="background-color: white">
 
             <div class="tab-pane fade show active" id="gen-week" role="tabpanel" aria-labelledby="gen-week-tab">
                 <%= line_chart @autos.map { |auto|
@@ -130,11 +126,9 @@
 
         </div>
 
-        <br>
 
     </div>
 
-    <br>
 
     <!-- GRAFICOS POR AUTO -->
     <div class="contaner border shadow">
@@ -182,7 +176,7 @@
                         <nav class="pt-3">
 
                             <div class="nav nav-tabs" role="tablist">
-                            
+
                                 <button class="nav-link active" id="<%=patente%>-week-tab" data-bs-toggle="tab" data-bs-target="#<%=patente%>-week" type="button" role="tab"
                                     aria-controls="<%=patente%>-week" aria-selected="true">
                                     Ultima semana
@@ -202,7 +196,7 @@
                                     aria-controls="<%=patente%>-hist" aria-selected="false">
                                     Histórico
                                 </button>
-                            
+
                             </div>
 
                         </nav>
@@ -236,7 +230,7 @@
         </div>
     </div>
 
-    <br>    
+    <br>
 
 </div>
 

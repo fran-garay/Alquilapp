@@ -1,0 +1,152 @@
+
+<h1><%=@reporte.title%></h1>
+
+<div class="row border">
+  <div class="col-8 h-100">
+    <div class="d-flex flex-column  w-100 mt-3 bg-2 white_bg_showReporte shadow">
+      <h3 class="">Usuario que reportó</h3>
+      <hr>
+      <label class="h4">Email</label>
+      <p> <%= @user.email %> </p>
+
+      <label class="h4">Fecha de registro</label>
+      <p>Se registró el <%= @user.created_at.strftime("%d/%m/%Y") %></p>
+
+      <label class="h4">Estado</label>
+      <p>Estado Actual: <%= @user.status %></p>
+    </div>
+    <div id="small_map"></div>
+  </div>
+  <div class="col-4 h-100">
+    <div class="d-flex container justify-content-between font-varela-round">
+      <div class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-column justify-content-between w-80 mt-3 bg-2 white_bg_showReporte shadow">
+          <h4 class="">Usuario que reportó</h4>
+          <hr>
+          <% if @user.licencia.attached? %>
+              <%= image_tag(@user.licencia, width: 200, class:"rounded-2") %>
+          <% else %>
+              <label>No hay licencia para mostrar</label>
+          <% end %>
+          <label class="h4 mt-3">Email</label>
+          <p> <%= @user.email %> </p>
+
+          <label class="h4">Fecha de registro</label>
+          <p>Se registró el <%= @user.created_at.strftime("%d/%m/%Y") %></p>
+
+          <label class="h4">Estado</label>
+          <p>Estado Actual: <%= @user.status %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getMap);
+    }
+    function getMap(pos) {
+        user_lat = pos.coords.latitude;
+        user_lon = pos.coords.longitude;
+        console.log(user_lat);
+        console.log(user_lon);
+      var map = new ol.Map({
+        target: 'small_map',
+        layers: [
+            new ol.layer.Tile({
+            source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([ <%= @auto.location_point.y %>, <%= @auto.location_point.x %> ]),
+            zoom: 16
+        })
+        });
+        // remove + and - buttons
+        map.getControls().forEach(function(control) {
+            if (control instanceof ol.control.Zoom) {
+                map.removeControl(control);
+            }
+        });
+        // save map on local storage to be able to use it later
+        // localStorage.setItem("map", map);
+        // marker of the user with a blue circle
+        var user_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([user_lon, user_lat])
+            ),  // Cordinates of New York's Town Hall
+        });
+        var user_marker_style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({color: 'blue'}),
+                stroke: new ol.style.Stroke({
+                    color: 'white', width: 2
+                })
+            })
+        });
+        user_marker.setStyle(user_marker_style);
+        var vectorSource = new ol.source.Vector({
+            features: [user_marker]
+        });
+        var user_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+        map.addLayer(user_marker_vectorLayer);
+        // localStorage
+        // for each auto, add a marker with the auto's location and a popup with the auto's info when clicked on the marker
+
+        var auto_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([<%= @auto.location_point.y %>, <%= @auto.location_point.x %>])
+            ),  // Cordinates of New York's Town Hall
+        });
+
+        var auto_marker_style = new ol.style.Style({
+            image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ {
+                anchor: [0.5, 0.5],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'fraction',
+                //src: 'https://toppng.com/uploads/preview/car-top-view-icon-car-top-view-11563579995rzzpegrkhe.png',
+                src: 'https://cdn-icons-png.flaticon.com/512/859/859864.png',
+                scale: 0.065
+            })
+        });
+        auto_marker.setStyle(auto_marker_style);
+        var vectorSource = new ol.source.Vector({
+            features: [auto_marker]
+        });
+        var auto_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+        map.addLayer(auto_marker_vectorLayer);
+        // add a marker with the user's location and a popup with the user's info when clicked on the marker
+        var user_marker = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([user_lon, user_lat])
+            ),  // Cordinates of New York's Town Hall
+        });
+        var user_marker_style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({color: 'blue'}),
+                stroke: new ol.style.Stroke({
+                    color: 'white', width: 2
+                })
+            })
+        });
+        user_marker.setStyle(user_marker_style);
+        var vectorSource = new ol.source.Vector({
+            features: [user_marker]
+        });
+        var user_marker_vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+        });
+
+        map.addLayer(user_marker_vectorLayer);
+    }
+
+</script>
+

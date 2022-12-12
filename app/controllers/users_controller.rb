@@ -25,8 +25,11 @@ class UsersController < ApplicationController
       render "/users/vehiculo_si_esta_alquilando" and return
     end
     @autos = Auto.all.where(estado: "Disponible").order(:modelo)
+
     if (session[:lat] !=nil && session[:lng] != nil)
       @autos = @autos.sort_by { |auto| haversine_distance(session[:lat], session[:lng], auto.location_point.x, auto.location_point.y) }
+    else
+      @autos = @autos.sort_by { |auto| haversine_distance(@auto.location_point.x, @auto.location_point.y, auto.location_point.x, auto.location_point.y) }
     end
     # set @auto at the beginning of the array
     @autos.delete(@auto)

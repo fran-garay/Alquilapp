@@ -156,7 +156,7 @@
         actual_time = "0" + today.getHours() + ":" + today.getMinutes();
     }
 
-    document.getElementById("text-confirm").innerHTML = "Ingrese horario y fecha de devolución";
+    document.getElementById("text-confirm").innerHTML = "Ingrese horario y fecha de devolución para ver el precio";
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
@@ -225,14 +225,14 @@
     if (date != null){
       date.setAttribute("min", today);
       date.setAttribute("max", today_plus_ten_days);
-      date.addEventListener("change", actualizarPrecio);
+    //   date.addEventListener("change", actualizarPrecio);
     }
     var time = document.getElementById("timefield");
     console.log(time)
     if (time != null){
       time.setAttribute("value", "");
     //   time.setAttribute("step", "3600");
-        time.addEventListener("change", actualizarPrecio);
+        // time.addEventListener("change", actualizarPrecio);
     }
 
     //delete alert after 5 seconds
