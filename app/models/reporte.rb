@@ -8,4 +8,5 @@ class Reporte < ApplicationRecord
     validates :id_alquiler, presence: true
     validates :title, presence: true
     enum tipo: [:Estado, :Siniestro, :Pagos]
+    enum status: [:Pendiente, :Resuelto]
 end
