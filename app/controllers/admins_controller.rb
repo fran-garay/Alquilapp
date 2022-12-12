@@ -92,12 +92,17 @@ class AdminsController < ApplicationController
   def estadisticas_alquileres
     @autos = Auto.all
     @alquileres = Alquiler.all
-    @id_mas_alquilado = @alquileres.group(:auto_id).count.max_by{|k,v| v}[0]
-    logger.debug "ID MAS ALQUILADO: #{@id_mas_alquilado}"
-    @mas_alquilado = Auto.find(@id_mas_alquilado)
-    @id_menos_alquilado = @alquileres.group(:auto_id).count.min_by{|k,v| v}[0]
-    logger.debug "ID MENOS ALQUILADO: #{@id_menos_alquilado}"
-    @menos_alquilado = Auto.find(@id_menos_alquilado)
+    if @alquileres.empty?
+      @mas_alquilado = nil
+      @menos_alquilado = nil
+    else
+      @id_mas_alquilado = @alquileres.group(:auto_id).count.max_by{|k,v| v}[0]
+      logger.debug "ID MAS ALQUILADO: #{@id_mas_alquilado}"
+      @mas_alquilado = Auto.find(@id_mas_alquilado)
+      @id_menos_alquilado = @alquileres.group(:auto_id).count.min_by{|k,v| v}[0]
+      logger.debug "ID MENOS ALQUILADO: #{@id_menos_alquilado}"
+      @menos_alquilado = Auto.find(@id_menos_alquilado)
+    end
   end
 
   def estadisticas_ganancias

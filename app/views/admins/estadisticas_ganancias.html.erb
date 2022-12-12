@@ -7,6 +7,10 @@
 
     <h1 class="mt-4 mb-5 font">Estadísticas sobre ganancias</h1>
 
+    <% if @alquileres.empty? %>
+        <h3 class="font">No hay ganancias registradas</h3>
+    <% else %>
+
     <div class="container d-flex border shadow me-3 mb-4">
         <i class="align-self-center fa-solid fa-dollar-sign fa-5x m-3 ms-5" style="color: #46a85a"></i>
         <div class="align-self-center text-center m-auto">
@@ -231,6 +235,8 @@
     </div>
 
     <br>
+
+    <%end%>
 
 </div>
 
