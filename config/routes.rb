@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :autos, only: [:new, :create, :edit, :update]
   resources :precios
-  #resources :reportes
+  resources :reportes, only: [:show]
 	resources :locations, only: :create
   # devise_for :supervisors, controllers: {
   #   sessions: 'supervisors/sessions'
@@ -102,6 +102,8 @@ Rails.application.routes.draw do
   post '/users/reportes/create', :to => 'reportes#create', :as => 'create_reporte'
 
   put '/users/prolongar_alquiler', :to => 'users#prolongar_alquiler'
+
+  get '/', :to => 'main#home'
 
   #match "*path" => redirect("/"), via: [:get, :post]   #DEJAR SIEMPRE AL FINAL
 

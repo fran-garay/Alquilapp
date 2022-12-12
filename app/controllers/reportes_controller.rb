@@ -1,14 +1,13 @@
 class ReportesController < ApplicationController
-
-    layout :by_resource
-    before_action :authenticate_persona!
+    layout "for_admins"
+    before_action :authenticate_admin!
 
     def index
         @reportes = Reporte.all.order("created_at DESC")
         render '/admins/listado_reportes' and return
     end
-    
-    def new
+
+    def newz
         @reporte = Reporte.new
     end
 
@@ -25,6 +24,9 @@ class ReportesController < ApplicationController
 
     def show
         @reporte = Reporte.find(params[:id])
+        @user = User.find(@reporte.user_id)
+        @alquiler = Alquiler.find(@reporte.alquiler_id)
+        @auto = Auto.find(@alquiler.auto_id)
     end
 
     def edit
@@ -46,21 +48,4 @@ class ReportesController < ApplicationController
     def reporte_params
         params.require(:reporte).permit(:descripcion)
     end
-
-    def by_resource
-        if user_signed_in?
-            "for_users"
-        elsif admin_signed_in?
-            "for_admins"
-        end
-    end
-
-    def authenticate_persona!
-        if user_signed_in?
-            authenticate_user!
-        elsif admin_signed_in?
-            authenticate_admin!
-        end
-    end
-
 end
