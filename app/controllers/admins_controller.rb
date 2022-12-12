@@ -3,6 +3,15 @@ class AdminsController < ApplicationController
   before_action :authenticate_admin!
   def index
     # flash.keep
+    # check if a report has an admin assigned
+    reporte = Reporte.find_by(admin_id:current_admin.id, status:"Atendido")
+    logger.debug "#{!current_admin.is_admin?}"
+    if (!current_admin.is_admin? && reporte != nil)
+      logger.debug "HOLAAAA"
+      redirect_to "/reportes/#{reporte.id}" and return
+    else
+      redirect_to '/admins/estadisticas' and return
+    end
   end
 
   def historial_de_uso

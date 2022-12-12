@@ -5,6 +5,7 @@
     <table class="table shadow rounded" style="background-color:white;">
       <tr>
         <th class="fs-5">Auto</th>
+        <th class="fs-5">Usuario</th>
         <th class="fs-5">Fecha del alquiler</th>
         <th class="fs-5">Hora del alquiler</th>
         <th class="fs-5"></th>
@@ -14,7 +15,10 @@
           <tr>
             <td style="font-size: 1rem"><%= @auto.modelo %> <%= @auto.anio %> </td>
 
-            <td style="font-size: 1rem"><%= alquiler.fecha_alquiler %></td>
+            <% user = User.find(alquiler.user_id) %>
+            <td style="font-size:1rem;"><%= user.first_name  %> <%= user.last_name%></td>
+
+            <td class="" style="font-size: 1rem"><%= alquiler.fecha_alquiler %></td>
 
             <td style="font-size: 1rem"><%= "#{alquiler.hora_alquiler.hour}:#{alquiler.hora_alquiler.min}:#{alquiler.hora_alquiler.sec} Hs" %></td>
 

@@ -72,6 +72,7 @@ class ReportesController < ApplicationController
     def finalizar_reporte
         @reporte = Reporte.find(params[:id])
         @reporte.status = "Finalizado"
+        @admin = Admin.find(current_admin.id)
         @admin.is_handling_report = false
         @admin.save
         @reporte.save

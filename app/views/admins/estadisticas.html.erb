@@ -1,4 +1,4 @@
-<html> 
+<html>
 
 <head>
     <script src="https://kit.fontawesome.com/38e5d75ed7.js" crossorigin="anonymous"></script>
@@ -33,7 +33,7 @@
                 <% end %>
             </div>
         </div>
-        
+
     </div>
 
     <div class="container d-flex">
@@ -80,16 +80,19 @@
 </style>
 
 <script>
-    
+
     var alquileres = document.getElementById("alquileres");
     alquileres.addEventListener("click", function(){
         window.location.href = "/admins/estadisticas/alquileres";
     });
 
     var ganancias = document.getElementById("ganancias");
-    ganancias.addEventListener("click", function(){
-        window.location.href = "/admins/estadisticas/ganancias";
-    });
+    if (ganancias != null){
+            ganancias.addEventListener("click", function(){
+            window.location.href = "/admins/estadisticas/ganancias";
+        });
+    }
+
 
     var enCurso = document.getElementById("en-curso");
     enCurso.addEventListener("click", function(){

@@ -36,11 +36,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
   resources :users, only: [:index]
+  resources :admins, only: [:index]
 
-
-  as :admin do
-    get '/admins', :to => 'admins#estadisticas', :as => :admins_root # Rails 3
-  end
+  # as :admin do
+  #   get '/admins', :to => 'admins#estadisticas', :as => :admins_root # Rails 3
+  # end
 
   as :user do
     # generate route that recives the id of a auto

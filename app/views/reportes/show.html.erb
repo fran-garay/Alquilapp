@@ -34,7 +34,7 @@
         <div class="col">
           <div>
             <label class="h4">Descripción</label>
-            <p><%= @reporte.descripcion %></p>
+            <div style="word-break: break-word;"><%= @reporte.descripcion %></div>
           </div>
         </div>
       </div>
@@ -58,12 +58,12 @@
         </div>
       </div>
       <div class="d-flex justify-content-center mt-4">
-      <% if @reporte.status == "Pendiente" %>
+      <% if @reporte.status == "Pendiente" && !current_admin.is_handling_report %>
         <%# button to atender reporte %>
         <%= button_to "Atender reporte", "/atender_reporte/#{@reporte.id}", method: :put, class: "btn btn-warning" %>
       <% elsif @reporte.status == "Atendido" && @reporte.admin_id ==current_admin.id %>
         <%= button_to "Finalizar reporte", "/finalizar_reporte/#{@reporte.id}", method: :put, class: "btn btn-success" %>
-      <% else %>
+      <% elsif @reporte.status=="Finalizado" %>
         <p>Este reporte fue atendido el <%=Time.now.strftime("%H:%M del %d del mes %m")%> por <%=Admin.find(@reporte.admin_id).first_name%> <%=Admin.find(@reporte.admin_id).last_name%></p>
       <% end %>
       </div>
