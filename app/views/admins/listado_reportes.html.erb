@@ -1,3 +1,74 @@
-<h1>Hola Listado de reportes </h1>
+<h1 class="h1 text-center">Reportes</h1>
 
 <p><%= @reportes.count %></p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row m-4">
+
+        <% for reporte in @reportes %>
+            <div class="col-4">
+
+                <%if reporte.tipo == "Siniestro"%>
+                    <div class="siniestro-red-orange p-3 shadow-lg rounded">
+                <%elsif reporte.tipo == "Estado"%>
+                    <div class="estado-blue p-3 shadow-lg rounded">
+                <%elsif reporte.tipo == "Pagos"%>
+                    <div class="pagos-green p-3 shadow-lg rounded">
+                <%end%>
+
+                    <div class="pt-3">
+                        <h2 class="text-white "><%= reporte.title %></h2>
+                    </div>
+
+                    <div class="pt-3">
+                        <p class="text-white ">Usuario: <%= User.find(reporte.user_id).first_name %> <%= User.find(reporte.user_id).last_name %></p>
+                    </div>
+
+                    
+                </div>
+            </div>
+        <%end%>
+
+    </div>
+</div>
+<style>
+    .login-card-purple {
+        background: linear-gradient(145deg, #673AB7, #9C27B0);
+    }
+
+    .login-card-yellow {
+        background: linear-gradient(145deg, #FFC107, #FFEB3B);
+    }
+
+    .login-card-light {
+        background: linear-gradient(145deg, #eee, #fff);
+    }
+
+    .login-dark {
+        background: linear-gradient(145deg, #575b5d, #252b2d);
+    }
+
+    .estado-blue {
+        background: linear-gradient(145deg, #2196F3, #3F51B5);
+    }
+
+    .login-purple-pink {
+        background: linear-gradient(145deg, #3F51B5, #E91E63);
+    }
+
+    .siniestro-red-orange {
+        background: linear-gradient(145deg, #f01616, #d95300);
+    }
+
+    .pagos-green {
+        background: linear-gradient(145deg, #15d600, #1d7314);
+    }
+
+    body {
+        font-size: 13px;
+    }
+</style>
