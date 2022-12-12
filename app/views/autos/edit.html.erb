@@ -14,7 +14,8 @@
   <%end%>
 
 
-
+<%# button to view history of car %>
+<%= link_to "Historial de uso", "/admins/historial_de_uso/#{@auto.id}", class:"btn btn-info"%>
 <div style="padding-left: 20px">
   <%= form_for (@auto) do |f| %>
     <br>

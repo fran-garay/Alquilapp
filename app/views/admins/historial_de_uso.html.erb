@@ -1,0 +1,31 @@
+<h1 class="h1 text-center">Historial del <%=@auto.modelo%> <%=@auto.anio%> </h1>
+<div class="m-5">
+  <hr>
+  <div class="table-responsive">
+    <table class="table shadow rounded" style="background-color:white;">
+      <tr>
+        <th class="fs-5">Auto</th>
+        <th class="fs-5">Fecha del alquiler</th>
+        <th class="fs-5">Hora del alquiler</th>
+        <th class="fs-5"></th>
+        <%# <th class="fs-5">eMail</th> %>
+      </tr>
+      <%-@alquileres.each do |alquiler|-%>
+          <tr>
+            <td style="font-size: 1rem"><%= @auto.modelo %> <%= @auto.anio %> </td>
+
+            <td style="font-size: 1rem"><%= alquiler.fecha_alquiler %></td>
+
+            <td style="font-size: 1rem"><%= "#{alquiler.hora_alquiler.hour}:#{alquiler.hora_alquiler.min}:#{alquiler.hora_alquiler.sec} Hs" %></td>
+
+
+            <td>
+                <%= link_to "Ver", "/alquiler/show/#{alquiler.id}", class: "btn btn-primary p-2" %>
+            </td>
+
+          </tr>
+
+        <%end%>
+    </table>
+  </div>
+</div>

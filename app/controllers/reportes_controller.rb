@@ -46,6 +46,21 @@ class ReportesController < ApplicationController
         redirect_to root_path
     end
 
+    def atender_reporte
+        @reporte = Reporte.find(params[:id])
+        @reporte.status = "Atendido"
+        @reporte.admin_id = current_admin.id
+        @reporte.save
+        redirect_to "/reportes/#{params[:id]}"
+    end
+
+    def finalizar_reporte
+        @reporte = Reporte.find(params[:id])
+        @reporte.status = "Finalizado"
+        @reporte.save
+        redirect_to "/reportes/#{params[:id]}"
+    end
+
     def reporte_params
         params.require(:reporte).permit(:descripcion)
     end
@@ -55,6 +70,8 @@ class ReportesController < ApplicationController
             "for_users"
         elsif admin_signed_in?
             "for_admins"
+        else
+            "application"
         end
     end
 
@@ -63,6 +80,8 @@ class ReportesController < ApplicationController
             authenticate_user!
         elsif admin_signed_in?
             authenticate_admin!
+        else
+            redirect_to root_path
         end
     end
 

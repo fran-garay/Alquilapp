@@ -341,7 +341,7 @@ class UsersController < ApplicationController
       render "/users/vista_alquiler" and return
     end
 
-    horas_totales = calcular_deferencia_horas_ceil(fecha_devolucion, hora_devolucion, Date.today, Time.now) # redondeadas hacia arriba
+    horas_totales = calcular_deferencia_horas_ceil(fecha_devolucion, hora_devolucion, Date.today, Time.now.utc) # redondeadas hacia arriba
     precio_total = horas_totales * Precio.last.valor
 
     if no_tiene_saldo?(precio_total)
