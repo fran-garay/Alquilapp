@@ -13,8 +13,12 @@ class ReportesController < ApplicationController
     end
 
     def create
-        @reporte = Reporte.new(reporte_params)
+        @reporte = Reporte.new
+        @reporte.descripcion = params[:reporte][:descripcion]
+        @reporte.tipo = params[:reporte][:tipo]
         @reporte.id_usuario = current_user.id
+        @reporte.title = params[:reporte][:title]
+        @reporte.id_alquiler = Alquiler.where(user_id: current_user.id).last.id
         @reporte.save
         redirect_to root_path
     end
