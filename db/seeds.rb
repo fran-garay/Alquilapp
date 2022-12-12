@@ -131,3 +131,18 @@ a = Auto.find(5)
 a.alquiler_id = 301
 a.save
 
+for i in 1..50
+    r = Reporte.new()
+    r.user_id= rand(1..User.count)
+    id_alq = rand(1..300)
+    r.alquiler_id= id_alq
+    r.auto_id= Alquiler.find(id_alq).auto_id
+    r.fecha_reporte = Faker::Date.between(from: '2021-12-12', to: '2022-12-12')
+    r.admin_id = rand(1..Admin.count)
+    r.descripcion = Faker::Lorem.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 4)
+    r.title = Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 6)
+    r.tipo = rand(0..2)
+    r.status = 2
+    r.save
+end
+
