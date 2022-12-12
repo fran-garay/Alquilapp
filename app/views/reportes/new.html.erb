@@ -6,27 +6,30 @@
     <h3 class="text-center p-4"> ¿Desea realizar un reclamo? </h3>
 
     <%= form_for(@reporte, as: :reporte, url: "/users/reportes/create" , html: { method: :post }) do |form| %>
-    <div class="mb-4">
+    <div class="container mt-3" style="width: 95%">
 
-        <div class="form-outline mb-3">
+        <div class="form-outline mb-4">
             <label for="tipo" class="form-label">¿De que se trata el reclamo?</label>
             <%= form.select :tipo, options_for_select([["El estado del vehículo", "Estado"], ["Tuve un problema conduciendo", "Sinietro"], ["Tuve un problema con el pago", "Pagos"]]), {}, class: "form-select", id: "tipo" %>
         </div>
 
-        <div class="form-outline mb-3">
+        <div class="form-outline mb-4">
             <label for="title" class="form-label">Sintetícelo en pocas palabras</label>
-            <%= form.text_field :title, class: "form-control", id: "title", maxlength:"50"%>
+            <%= form.text_field :title, class: "form-control", id: "title", maxlength:"50", required: true %>
             <div class="text-end mt-1 me-1" id="titleLeft" style="font-size: 0.8em">50 caracteres restantes</div>
         </div>
 
-        <div class="form-outline mb-3">
+        <div class="form-outline mb-4">
             <label for="descripcion" class="form-label">Describanos el problema</label>
-            <%= form.text_area :descripcion, class: "form-control", id: "descripcion", style: "height: 100px" %>
+            <%= form.text_area :descripcion, class: "form-control", id: "descripcion", style: "height: 100px", required: true %>
         </div>
 
     </div>
-    <%= form.submit "Enviar", class: "btn btn-lg btn-warning map-bottom rounded-5 shadow text-white" %>
-    <% end %>
+    <div class="d-flex justify-content-evenly bottom ">
+        <button class="btn btnn btn-lg btn-secondary rounded-5 shadow text-white " onclick="window.location.href='/alquiler/resumen'">Cancelar</button>
+        <%= form.submit "Enviar", class: "btn btnn btn-lg btn-warning rounded-5 shadow text-white" %>
+        <% end %>
+    </div>
 
 </div>
 </body>
@@ -40,5 +43,21 @@
         titleLeft.innerHTML = 50 - title.value.length + " caracteres restantes";
     });
 </script>
+
+<style>
+
+    .btnn{
+        width: 35%;
+    }
+
+    .bottom {
+        position: fixed;
+        left: 0;
+        bottom: 5%;
+        width: 100%;
+        color: white;
+        text-align: center;
+    }
+</style>
 
 <html>
