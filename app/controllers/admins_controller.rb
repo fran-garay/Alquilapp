@@ -102,6 +102,19 @@ class AdminsController < ApplicationController
     @alquileres = Alquiler.all
   end
 
+  def estadisticas_reportes
+    @autos = Auto.all
+    @alquileres = Alquiler.all
+    @reportes = Reporte.all
+    @reportes_mes = 0
+    @reportes.each do |reporte|
+      if reporte.created_at.month == Date.today.month
+        @reportes_mes += 1
+      end
+    end
+
+  end
+
   def estadisticas_en_curso
     @alquileres = Alquiler.all
     @autos = Auto.all

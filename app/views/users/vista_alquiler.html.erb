@@ -1,4 +1,10 @@
-<div class="mb-10vh mt-10vh d-flex justify-content-center flex-column align-items-center">
+<head>
+    <script src="https://kit.fontawesome.com/38e5d75ed7.js" crossorigin="anonymous"></script>
+</head>
+
+</body class="text-center">
+
+<div class="mb-11vh mt-10vh d-flex justify-content-center flex-column align-items-center">
     <% if @minutos_restantes > 0 %>
         <% if @minutos_restantes <= 5 %>
             <div class="alert alert-danger alert-dismissible fade show p-2 w-80" role="alert" style="margin-bottom:1px">
@@ -10,6 +16,7 @@
             </div>
         <%end%>
     <%end%>
+    
     <div class="d-flex flex-column " style="width:80%">
          <%= render "users/shared/error_messages", resource: current_user%>
         <h4 class="p-2 align-self-start">Tu alquiler, <%=current_user.first_name %></h4>
@@ -34,96 +41,104 @@
         </div>
 
 
-        <div class="mt-4 align-self-center">
-            <button type="button" class="btn btn-success rounded-5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check me-1 mb-1 ms-2" viewBox="0 0 16 16">
+
+        <div class="d-flex justify-content-around aaa" id="botones-arriba">
+
+            <button type="button" class="btn btn-success shadow d-flex text-white justify-content-evenly bien_redondito" onclick="window.location.href='/users/certificado'" id="btn-cert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-patch-check align-self-center" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
                     <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
                 </svg>
-                <%= link_to "Certificado", "/users/certificado", style: "text-decoration: none; color: white", class: "me-2"%>
             </button>
+
+            <button type="button" class="btn btn-warning shadow d-flex text-white justify-content-evenly bien_redondito" onclick="window.location.href='/abrir_cerrar/<%=@auto.id%>'" id="btn-abrir">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="#FFFFFF" class="bi bi-key align-self-center" viewBox="0 0 16 16">
+                    <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                    <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg>
+            </button>
+
+            <button type="button" class="btn btn-primary shadow d-flex text-white justify-content-evenly bien_redondito" onclick="window.location.href='/users/reportes/new'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-flag align-self-center" viewBox="0 0 16 16">
+                    <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
+                </svg>
+            </button>
+
+        </div>
+
         </div>
 
 
 
-        <div class="container map-bottom text-center" id="botones">
-            <div class="row">
-
-                <div class="col">
-                    <button type="button" class="btn btn-warning rounded-5 shadow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#FFFFFF" class="bi bi-key me-2 mb-1" viewBox="0 0 16 16">
-                            <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
-                            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                        </svg>
-                        <% if @auto.is_open? %>
-                            <%= link_to "Cerrar auto", "/abrir_cerrar/#{@auto.id}/", style: "text-decoration: none; color: white"%>
-                        <% else %>
-                            <%= link_to "Abrir auto", "/abrir_cerrar/#{@auto.id}/", style: "text-decoration: none; color: white"%>
-                        <% end %>
-                    </button>
-                </div>
-
-                <div class="col" >
-                    <% if !@auto.is_open? %>
-                        <button type="button" class="btn btn-danger rounded-5 me-1 shadow" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle me-1 mb-1 ms-4" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                            </svg>
-                            <span class="me-3">Finalizar</span>
-                        </button>
-                    <% else %>
-                        <button disabled type="button" class="btn btn-danger rounded-5 me-1 shadow" id="liveAlertBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle me-1 mb-1 ms-4" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                            </svg>
-                            <span class="me-3">Finalizar</span>
-                        </button>
-                    <% end %>
-                </div>
 
 
+        <div class="d-flex justify-content-evenly bottom">
 
-            </div>
+            <button  id="btn-confirm" class="btn btnn btn-secondary rounded-5 shadow d-flex text-white justify-content-evenly" data-bs-toggle="modal" data-bs-target="#modalProlongar" data-bs-whatever="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock align-self-center me-1" viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                </svg>
+                Prolongar
+            </button>
+
+            <% if !@auto.is_open? %>
+                <button type="button" class="btn btnn btn-danger rounded-5 shadow d-flex text-white justify-content-evenly" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle me-1 align-self-center" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <span class="align-self-center">Finalizar</span>
+                </button>
+            <% else %>
+                <button disabled type="button" class="btn btnn btn-danger rounded-5 shadow d-flex text-white justify-content-evenly" id="liveAlertBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle me-1 align-self-center" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <span class="align-self-center">Finalizar</span>
+                </button>
+            <% end %>
+
         </div>
 
 
     </div>
-    <button  id="btn-confirm" class="btn btn-warning rounded-4 fs-5 p-2 text-white floating_btn" data-bs-toggle="modal" data-bs-target="#modalProlongar" data-bs-whatever="">Prolongar alquiler</button>
-    <div class="modal fade" id="modalProlongar" tabindex="-1" aria-labelledby="modalProlongarLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalProlongarLabel">Prolongar el alquiler</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <% @a = Alquiler.new %>
-                    <%= form_with model: @alquiler, url: "/users/prolongar_alquiler", method: :put do |form| %>
-                    <%= form.label "Fecha de Devolucion", required: true, class:"" %>
-                    <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2122-01-01' %>
-                    <%= form.label "Hora de Devolucion", required: true, class:"" %>
-                    <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00'%>
-                    <div id="current_price" class="text-success text-center p-3 fs-5"></div>
-                    <p class="text-center" id="text-confirm"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes" %>
-                </div>
-                <%end%>
-
-                <div class="ms-2 me-2" id="recordatorio"></div>
-            </div>
-        </div>
-    </div>
-
-
 
 </div>
+</body>
 
-<!--MODAL-->
+<!--MODAL PROLONGAR-->
+<div class="modal fade" id="modalProlongar" tabindex="-1" aria-labelledby="modalProlongarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProlongarLabel">Prolongar el alquiler</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <% @a = Alquiler.new %>
+                <%= form_with model: @alquiler, url: "/users/prolongar_alquiler", method: :put do |form| %>
+                <%= form.label "Fecha de Devolucion", required: true, class:"" %>
+                <%= form.date_field :fecha_devolucion, class: "form-control", required: true, id:"datefield", min:'2022-01-01', max:'2122-01-01' %>
+                <%= form.label "Hora de Devolucion", required: true, class:"" %>
+                <%= form.time_field :hora_devolucion, class: "form-control", required: true, id:"timefield", min:'00:00'%>
+                <div id="current_price" class="text-success text-center p-3 fs-5"></div>
+                <p class="text-center" id="text-confirm"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <%= form.submit "Alquilar", class: "btn btn-success mt-2", id:"btn-yes" %>
+            </div>
+            <%end%>
+
+            <div class="ms-2 me-2" id="recordatorio"></div>
+        </div>
+    </div>
+</div>
+<!--FIN MODAL PROLONGAR-->
+
+<!--MODAL FINALIZAR-->
 <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -144,8 +159,14 @@
     </div>
     </div>
 </div>
+<!--FIN MODAL FINALIZAR-->
 
 <script>
+
+    var abrir = document.getElementById("btn-abrir");
+    abrir.style.transform = "rotate(90deg)";
+
+
     var today = new Date();
     var actual_time = today.getHours() + ":" + today.getMinutes();
 
@@ -317,7 +338,34 @@
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "Tiempo finalizado";
+            document.getElementById("btn-confirm").disabled = true;
+            document.getElementById("btn-cert").disabled = true;
         }
     }, 1000);
 
 </script>
+
+<style>
+
+    .btnn{
+        width: 40%;
+    }
+
+    .aaa{
+        position: fixed;
+        bottom: 12%;
+        left: 0;
+        width: 100%;
+        color: white;
+        text-align: center;
+    }
+
+    .bottom {
+        position: fixed;
+        left: 0;
+        bottom: 3%;
+        width: 100%;
+        color: white;
+        text-align: center;
+    }
+</style>

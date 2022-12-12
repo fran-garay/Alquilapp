@@ -20,6 +20,7 @@ class ReportesController < ApplicationController
         @reporte.title = params[:reporte][:title]
         @reporte.alquiler_id = Alquiler.where(user_id: current_user.id).last.id
         @reporte.auto_id = Alquiler.where(user_id: current_user.id).last.auto_id
+        @reporte.fecha_reporte = Date.today
         @reporte.save
         redirect_to root_path
     end
