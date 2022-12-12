@@ -134,10 +134,14 @@ class AdminsController < ApplicationController
     @autos = Auto.all
     @alquileres = Alquiler.all
     @reportes = Reporte.all
-    @reportes_mes = 0
-    @reportes.each do |reporte|
-      if reporte.fecha_reporte.month == Date.today.month
-        @reportes_mes += 1
+    if @reportes.empty?
+       @reportes_mes = nil
+    else
+      @reportes_mes = 0
+      @reportes.each do |reporte|
+        if reporte.fecha_reporte.month == Date.today.month
+          @reportes_mes += 1
+        end
       end
     end
     @tipos = ["Estado", "Siniestro", "Pagos"]

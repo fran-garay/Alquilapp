@@ -87,62 +87,62 @@ wal.save
 
 # Alquileres
 #Alquiler.destroy_all
-for i in 1..300
-    a = Alquiler.new()
-    a.user_id= rand(1..User.count)
-    a.auto_id= rand(1..Auto.count)
-    d = Faker::Date.between(from: '2021-12-12', to: '2022-12-12')
-    t = Faker::Time.backward(period: :evening)
-    tt = t + rand(1000..10000)
-    a.fecha_alquiler= d
-    a.hora_alquiler= t
-    a.fecha_devolucion= d
-    a.hora_devolucion= tt
-    pp = rand(400..100000)
-    a.precio_total= pp
-    a.duracion= Time.at(tt - t)
-    a.fecha_user_devolucion= d
-    a.hora_user_devolucion= tt - rand(100..1000)
-    a.precio_por_demora= 0
-    a.precio_de_reserva= pp
-    a.save
-end
+# for i in 1..300
+#     a = Alquiler.new()
+#     a.user_id= rand(1..User.count)
+#     a.auto_id= rand(1..Auto.count)
+#     d = Faker::Date.between(from: '2021-12-12', to: '2022-12-12')
+#     t = Faker::Time.backward(period: :evening)
+#     tt = t + rand(1000..10000)
+#     a.fecha_alquiler= d
+#     a.hora_alquiler= t
+#     a.fecha_devolucion= d
+#     a.hora_devolucion= tt
+#     pp = rand(400..100000)
+#     a.precio_total= pp
+#     a.duracion= Time.at(tt - t)
+#     a.fecha_user_devolucion= d
+#     a.hora_user_devolucion= tt - rand(100..1000)
+#     a.precio_por_demora= 0
+#     a.precio_de_reserva= pp
+#     a.save
+# end
 
-al = Alquiler.new()
-al.user_id= 5
-al.auto_id= 5
-d = Date.today
-t = Faker::Time.backward(period: :evening)
-tt = t + rand(1000..10000)
-al.fecha_alquiler= d
-al.hora_alquiler= t
-al.fecha_devolucion= d
-al.hora_devolucion= tt
-pp = rand(400..100000)
-al.duracion= Time.at(tt - t)
-al.precio_de_reserva= pp
-al.precio_total= pp
-al.save
+# al = Alquiler.new()
+# al.user_id= 5
+# al.auto_id= 5
+# d = Date.today
+# t = Faker::Time.backward(period: :evening)
+# tt = t + rand(1000..10000)
+# al.fecha_alquiler= d
+# al.hora_alquiler= t
+# al.fecha_devolucion= d
+# al.hora_devolucion= tt
+# pp = rand(400..100000)
+# al.duracion= Time.at(tt - t)
+# al.precio_de_reserva= pp
+# al.precio_total= pp
+# al.save
 
-u = User.find(5)
-u.alquiler_id = 301
-u.save
-a = Auto.find(5)
-a.alquiler_id = 301
-a.save
+# u = User.find(5)
+# u.alquiler_id = 301
+# u.save
+# a = Auto.find(5)
+# a.alquiler_id = 301
+# a.save
 
-for i in 1..50
-    r = Reporte.new()
-    r.user_id= rand(1..User.count)
-    id_alq = rand(1..300)
-    r.alquiler_id= id_alq
-    r.auto_id= Alquiler.find(id_alq).auto_id
-    r.fecha_reporte = Faker::Date.between(from: '2021-12-12', to: '2022-12-12')
-    r.admin_id = rand(1..Admin.count)
-    r.descripcion = Faker::Lorem.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 4)
-    r.title = Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 6)
-    r.tipo = rand(0..2)
-    r.status = 2
-    r.save
-end
+# for i in 1..50
+#     r = Reporte.new()
+#     r.user_id= rand(1..User.count)
+#     id_alq = rand(1..300)
+#     r.alquiler_id= id_alq
+#     r.auto_id= Alquiler.find(id_alq).auto_id
+#     r.fecha_reporte = Faker::Date.between(from: '2021-12-12', to: '2022-12-12')
+#     r.admin_id = rand(1..Admin.count)
+#     r.descripcion = Faker::Lorem.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 4)
+#     r.title = Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 6)
+#     r.tipo = rand(0..2)
+#     r.status = 2
+#     r.save
+# end
 

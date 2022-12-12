@@ -32,6 +32,17 @@ class ReportesController < ApplicationController
         @reporte.auto_id = Alquiler.where(user_id: current_user.id).last.auto_id
         @reporte.fecha_reporte = Date.today
         @reporte.save
+        if @reporte.tipo == "Estado"
+            auto = Auto.find(@reporte.auto_id)
+            auto.estado = "Necesita Atencion"
+            auto.save
+        end
+        
+        if @reporte.tipo == "Siniestro"
+            auto = Auto.find(@reporte.auto_id)
+            auto.estado = "Necesita Atencion"
+            auto.save
+        end
         redirect_to root_path
     end
 
@@ -66,6 +77,17 @@ class ReportesController < ApplicationController
         @admin.is_handling_report = true
         @admin.save
         @reporte.save
+        if @reporte.tipo == "Estado"
+            auto = Auto.find(@reporte.auto_id)
+            auto.estado = "En mantenimiento"
+            auto.save
+        end
+        
+        if @reporte.tipo == "Siniestro"
+            auto = Auto.find(@reporte.auto_id)
+            auto.estado = "En mantenimiento"
+            auto.save
+        end
         redirect_to "/reportes/#{params[:id]}"
     end
 

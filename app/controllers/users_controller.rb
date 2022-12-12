@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 
     @tiempo_fin = @alquiler.hora_devolucion
     @tiempo_fin = Time.at(@tiempo_fin).strftime("%H:%M:%S")
-    @minutos_restantes = calcular_deferencia_minutos(@alquiler.fecha_user_devolucion, @alquiler.hora_devolucion, Date.today, Time.now)
+    @minutos_restantes = calcular_deferencia_minutos(@alquiler.fecha_user_devolucion, @alquiler.hora_devolucion, Date.today, Time.now.utc)
     logger.debug "\n\n\n\n MINUTOS RESTANTES #{@minutos_restantes}\n\n\n\n"
     # split @tiempo_fin to get hour, minutes and seconds
     # @hora_fin = @tiempo_fin.split(":")[0]
@@ -188,7 +188,9 @@ class UsersController < ApplicationController
 
     @auto = Auto.find(@alquiler.auto_id)
     @auto.alquiler_id = nil
-    @auto.estado = "Disponible"
+    if @auto.estado == "Ocupado"
+      @auto.estado = "Disponible"
+    end
     @auto.save
 
     current_user.alquiler_id = nil

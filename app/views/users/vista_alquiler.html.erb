@@ -5,19 +5,20 @@
 </body class="text-center">
 
 <div class="mb-11vh mt-10vh d-flex justify-content-center flex-column align-items-center">
+    
+    
+    <div class="d-flex flex-column " style="width:80%">
     <% if @minutos_restantes > 0 %>
         <% if @minutos_restantes <= 5 %>
-            <div class="alert alert-danger alert-dismissible fade show p-2 w-80" role="alert" style="margin-bottom:1px">
-                <strong>¡Atención!</strong> Tu tiempo de alquiler ha finalizado, como no has devuelto el vehículo, se te ha cobrado una multa. Puedes devolver el vehiculo ahora o prolongar el alquiler
+            <div class="alert alert-danger  show p-2 w-80" role="alert" style="margin-bottom:1px">
+                <strong>¡Atención!</strong> Te quedan menos de <%=@minutos_restantes%> minutos de alquiler
             </div>
         <% elsif @minutos_restantes <= 15 %>
-            <div class="alert alert-warning alert-dismissible fade show p-2 w-80" role="alert" style="margin-bottom:1px">
+            <div class="alert alert-warning   show p-2 w-80" role="alert" style="margin-bottom:1px">
                 <strong>¡Atención!</strong> Te quedan menos de <%=@minutos_restantes%> minutos de alquiler
             </div>
         <%end%>
     <%end%>
-    
-    <div class="d-flex flex-column " style="width:80%">
          <%= render "users/shared/error_messages", resource: current_user%>
         <h4 class="p-2 align-self-start">Tu alquiler, <%=current_user.first_name %></h4>
 
