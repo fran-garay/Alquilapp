@@ -4,7 +4,7 @@ class ReportesController < ApplicationController
     before_action :authenticate_persona!
 
     def index
-        @reportes = Reporte.all
+        @reportes = Reporte.all.order("created_at DESC")
         render '/admins/listado_reportes' and return
     end
     

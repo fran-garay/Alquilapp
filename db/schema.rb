@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_11_233533) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_034822) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,14 +123,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_233533) do
   end
 
   create_table "reportes", force: :cascade do |t|
-    t.integer "id_usuario"
-    t.integer "id_alquiler"
+    t.integer "user_id"
+    t.integer "alquiler_id"
     t.string "descripcion"
-    t.integer "id_supervisor"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tipo", default: 0
     t.string "title"
+    t.integer "auto_id"
+    t.integer "status", default: 0
+    t.index ["status"], name: "index_reportes_on_status"
     t.index ["tipo"], name: "index_reportes_on_tipo"
   end
 

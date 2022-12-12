@@ -18,6 +18,7 @@ gem 'credit_card_validations'
 gem 'font-awesome-rails'
 gem "chartkick"
 gem "groupdate"
+gem 'faker'
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

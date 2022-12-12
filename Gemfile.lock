@@ -106,6 +106,8 @@ GEM
       warden (~> 1.2.3)
     erubi (1.11.0)
     execjs (2.8.1)
+    faker (3.0.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5-x64-mingw-ucrt)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
@@ -275,6 +277,7 @@ DEPENDENCIES
   credit_card_validations
   debug
   devise
+  faker
   font-awesome-rails
   font-awesome-sass (~> 6.2.1)
   geocoder
