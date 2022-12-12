@@ -3,7 +3,7 @@ class ReportesController < ApplicationController
     before_action :authenticate_admin!
 
     def index
-        @reportes = Reporte.all.order("created_at DESC")
+        @reportes = Reporte.all.order("created_at")
         render '/admins/listado_reportes' and return
     end
 
