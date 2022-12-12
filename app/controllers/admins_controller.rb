@@ -50,7 +50,7 @@ class AdminsController < ApplicationController
       @mas_alquilado_hoy = nil
       @dinero_recaudado_hoy = 0
       @mas_usado_hoy = nil
-      @reportes_hoy = 0
+      @reportes_hoy = nil
 
     else
       @id_mas_alquilado_hoy = @alquileres_hoy.group(:auto_id).count.max_by{|k,v| v}[0]
@@ -63,6 +63,8 @@ class AdminsController < ApplicationController
 
       # @id_mas_usado_hoy = @alquileres_hoy.group(:auto_id).sum(:duracion).max_by{|k,v| v}[0]
       # @mas_usado_hoy = Auto.find(@id_mas_usado_hoy)
+
+      @reportes_hoy = Reporte.all.where(fecha_reporte: Date.today).count
 
     end
 

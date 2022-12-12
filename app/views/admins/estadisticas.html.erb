@@ -49,7 +49,11 @@
             <i class="align-self-center fa-solid fa-flag fa-5x m-3" style="color: #f59e3e"></i>
             <div class="align-self-center text-center m-auto">
                 <h5 class="font"> Reportes hechos hoy </h5>
-                <h2 class="font bold" style="color: #f59e3e"> Ninguno </h2>
+                <% if @reportes_hoy.nil? %>
+                    <h2 class="font bold" style="color: #f59e3e"> Ninguno </h2>
+                <% else %>
+                    <h2 class="font bold" style="color: #f59e3e"> <%= @reportes_hoy  %> </h2>
+                <% end %>
             </div>
         </div>
     </div>

@@ -36,11 +36,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
   resources :users, only: [:index]
-  resources :admins, only: [:index]
 
 
   as :admin do
-    get 'admins', :to => 'admins#index', :as => :admins_root # Rails 3
+    get '/admins', :to => 'admins#estadisticas', :as => :admins_root # Rails 3
   end
 
   as :user do
