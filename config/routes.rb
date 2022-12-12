@@ -84,7 +84,11 @@ Rails.application.routes.draw do
 
   get 'alquiler/resumen', :to => 'users#resumen', :as => 'resumen'
 
-  get '/admins/listado_reportes', :to => 'reportes#index'
+  get '/admins/listado_reportes/pendientes', :to => 'reportes#index_pendientes'
+
+  get '/admins/listado_reportes/atendidos', :to => 'reportes#index_atendidos'
+
+  get '/admins/listado_reportes/finalizados', :to => 'reportes#index_finalizados'
 
   get '/admins/estadisticas', :to => 'admins#estadisticas'
 

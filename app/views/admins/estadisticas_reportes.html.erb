@@ -145,7 +145,7 @@
 
             <div class="d-flex">
 
-                <h3 class=" p-3 align-self-center font bold">Reportes por auto</h3>
+                <h3 class=" p-3 align-self-center font bold">Reportes por tipo</h3>
 
                 <!-- Dropdown -->
                 <div class="dropdown ms-auto p-3 align-self-center">
@@ -153,10 +153,9 @@
                         <b><%=@reportes.first.tipo%></b>
                     </button>
                     <ul class="dropdown-menu" id="eleccion-auto">
-                        <%for @reporte in @reportes do %>
-                            <% patente=@reporte.tipo %>
+                        <%for patente in @tipos do %>
                             <li>
-                                <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=@reporte.tipo%></a>
+                                <a class="dropdown-item" id="<%=patente%>_time" type="button"><%=patente%></a>
                             </li>
                         <% end %>
                     </ul>
@@ -280,7 +279,7 @@
         boldModelo = "<b>" + modelo + "</b>";
 
         var dropdownButton = document.getElementById("dropdown-button");
-        dropdownButton.innerHTML = boldModelo + " - " + patente;
+        dropdownButton.innerHTML = boldModelo;
 
 
         var graficoPorAuto = document.getElementById("grafico-por-auto");

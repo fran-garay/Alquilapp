@@ -64,7 +64,7 @@
       <% elsif @reporte.status == "Atendido" && @reporte.admin_id ==current_admin.id %>
         <%= button_to "Finalizar reporte", "/finalizar_reporte/#{@reporte.id}", method: :put, class: "btn btn-success" %>
       <% else %>
-        <p>Este reporte fue atendido el <%=@reporte.updated_at.strftime("%H:%M del %d del mes %m")%> por <%=Admin.find(@reporte.admin_id).first_name%> <%=Admin.find(@reporte.admin_id).last_name%></p>
+        <p>Este reporte fue atendido el <%=Time.now.strftime("%H:%M del %d del mes %m")%> por <%=Admin.find(@reporte.admin_id).first_name%> <%=Admin.find(@reporte.admin_id).last_name%></p>
       <% end %>
       </div>
 

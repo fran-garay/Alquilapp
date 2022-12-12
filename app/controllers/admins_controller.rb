@@ -51,6 +51,7 @@ class AdminsController < ApplicationController
   # end
 
   def estadisticas
+    @admin = Admin.find(current_admin.id)
     @autos = Auto.all
     @alquileres = Alquiler.all
     @alquileres_hoy = Alquiler.all.where(fecha_alquiler: Date.today)

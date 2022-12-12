@@ -3,9 +3,19 @@ class ReportesController < ApplicationController
     layout :by_resource
     before_action :authenticate_persona!
 
-    def index
-        @reportes = Reporte.all.order("created_at DESC")
-        render '/admins/listado_reportes' and return
+    def index_atendidos
+        @reportes = Reporte.all.where(status: "Atendido").order("fecha_reporte ASC")
+        #render '/admins/listado_reportes' and return
+    end
+
+    def index_pendientes
+        @reportes = Reporte.all.where(status: "Pendiente").order("fecha_reporte ASC")
+        #render '/admins/listado_reportes' and return
+    end
+
+    def index_finalizados
+        @reportes = Reporte.all.where(status: "Finalizado").order("fecha_reporte DESC")
+        #render '/admins/listado_reportes' and return
     end
 
     def new
@@ -52,6 +62,9 @@ class ReportesController < ApplicationController
         @reporte = Reporte.find(params[:id])
         @reporte.status = "Atendido"
         @reporte.admin_id = current_admin.id
+        @admin = Admin.find(current_admin.id)
+        @admin.is_handling_report = true
+        @admin.save
         @reporte.save
         redirect_to "/reportes/#{params[:id]}"
     end
@@ -59,6 +72,8 @@ class ReportesController < ApplicationController
     def finalizar_reporte
         @reporte = Reporte.find(params[:id])
         @reporte.status = "Finalizado"
+        @admin.is_handling_report = false
+        @admin.save
         @reporte.save
         redirect_to "/reportes/#{params[:id]}"
     end

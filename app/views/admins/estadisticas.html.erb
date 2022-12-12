@@ -5,11 +5,14 @@
     <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
 </head>
 
-<h1 class="font bold pt-5 text-center"> Aquí hay un resumen de las estadísticas de hoy </h1>
+<h1 class="font bold pt-5 text-center"> Hola <%= @admin.first_name%>! Aquí hay un resumen del día de hoy </h1>
 
 <div style="height: 80%; justify-content: center; align-items: center; display: flex; flex-direction: column;">
 
     <div class="container d-flex">
+        <% if @admin.is_admin == false %>
+        <span></span>
+        <%else%>
         <div class="btn container d-flex align-items-stretch border shadow m-3" id="ganancias">
             <i class="align-self-center fa-solid fa-dollar-sign fa-5x m-3" style="color: #f59e3e"></i>
             <div class="align-self-center text-center m-auto">
@@ -17,6 +20,7 @@
                 <h2 class="font bold" style="color: #f59e3e"> $ <%= @dinero_recaudado_hoy %> </h2>
             </div>
         </div>
+        <%end%>
 
         <div class="btn container d-flex border shadow m-3" id="en-curso">
             <i class="fa-solid fa-car-side align-self-center fa-5x m-3" style="color: #f59e3e"></i>

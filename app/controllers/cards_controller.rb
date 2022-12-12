@@ -51,7 +51,7 @@ class CardsController < ApplicationController
         #     render "/cards/new"
         # end
 
-        if Card.where(user_id: params[:user_id]).find_by(number: card_params[:number]) != nil
+        if Card.where(user_id: current_user.id, number: card_params[:number]).exists?
             @card.errors.add(:base, "Ya tienes una tarjeta con ese número")
             @wallet = Wallet.find_by(user_id: current_user.id)
             @cards = Card.all
